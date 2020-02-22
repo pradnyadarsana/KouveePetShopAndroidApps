@@ -9,37 +9,36 @@ import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class AdminMainActivity extends AppCompatActivity {
+public class CsMainActivity extends AppCompatActivity {
+    private BottomNavigationView csBottomNavigationView;
 
-    private BottomNavigationView adminBottomNavigationView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_admin_main);
+        setContentView(R.layout.activity_cs_main);
 
-        adminBottomNavigationView = (BottomNavigationView) findViewById(R.id.bn_main_admin);
+        csBottomNavigationView = (BottomNavigationView) findViewById(R.id.bn_main_cs);
 
-        loadFragment(new StockUpdateFragment());
+        loadFragment(new TransactionActivity());
 
-        adminBottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+        csBottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 Fragment fragment = null;
                 switch (item.getItemId()) {
-                    case R.id.admin_stock:
-                        fragment = new StockUpdateFragment();
+                    case R.id.cs_transaksi:
+                        fragment = new TransactionActivity();
                         break;
-                    case R.id.admin_notification:
-                        fragment = new NotificationFragment();
+                    case R.id.cs_hewan:
+                        fragment = new PetActivity();
                         break;
-                    case R.id.admin_manage:
-                        fragment = new AdminManagePage();
+                    case R.id.cs_pelanggan:
+                        fragment = new CustomerActivity();
                         break;
                 }
                 return loadFragment(fragment);
             }
         });
-
     }
 
     private boolean loadFragment(Fragment fragment){

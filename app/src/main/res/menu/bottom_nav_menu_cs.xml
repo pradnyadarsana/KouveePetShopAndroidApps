@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="55dp"
+    android:layout_width="match_parent">
+
+    <item
+        android:id="@+id/cs_transaksi"
+        android:icon="@mipmap/order_supply_logo_foreground"
+        android:title="transaksi" />
+
+    <item
+        android:id="@+id/cs_hewan"
+        android:icon="@drawable/hewan_logo_foreground"
+        android:title="hewan" />
+
+    <item
+        android:id="@+id/cs_pelanggan"
+        android:icon="@drawable/pelanggan_logo_foreground"
+        android:title="pelanggan" />
+
+</menu>

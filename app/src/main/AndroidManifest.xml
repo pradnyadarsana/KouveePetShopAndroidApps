@@ -9,7 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".NotificationFragment"></activity>
+        <activity android:name=".CustomerActivity"></activity>
+        <activity android:name=".PetActivity" />
+        <activity android:name=".TransactionActivity" />
+        <activity android:name=".CsMainActivity" />
+        <activity android:name=".NotificationFragment" />
         <activity android:name=".StockUpdateFragment" />
         <activity android:name=".AdminMainActivity" />
         <activity android:name=".AdminManagePage" />
