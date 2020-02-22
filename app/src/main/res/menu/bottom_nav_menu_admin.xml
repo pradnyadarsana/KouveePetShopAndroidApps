@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="55dp"
+    android:layout_width="match_parent">
+
+    <item
+        android:id="@+id/admin_stock"
+        android:icon="@mipmap/order_supply_logo_foreground"
+        android:title="stok kurang" />
+
+    <item
+        android:id="@+id/admin_notification"
+        android:icon="@mipmap/notification_logo_foreground"
+        android:title="notifikasi" />
+
+    <item
+        android:id="@+id/admin_manage"
+        android:icon="@mipmap/manage_logo_foreground"
+        android:title="kelola data" />
+
+</menu>

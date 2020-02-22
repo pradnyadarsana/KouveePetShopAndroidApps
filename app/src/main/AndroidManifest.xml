@@ -9,7 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".AdminHomePage"></activity>
+        <activity android:name=".NotificationFragment"></activity>
+        <activity android:name=".StockUpdateFragment" />
+        <activity android:name=".AdminMainActivity" />
+        <activity android:name=".AdminManagePage" />
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
