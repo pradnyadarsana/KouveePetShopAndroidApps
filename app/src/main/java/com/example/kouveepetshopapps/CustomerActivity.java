@@ -39,12 +39,12 @@ public class CustomerActivity extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        ListPelanggan = new ArrayList<>();
-        adapterPelanggan = new PelangganAdapter(getContext(), ListPelanggan);
-        mLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
-        recyclerPelanggan.setLayoutManager(mLayoutManager);
-        recyclerPelanggan.setItemAnimator(new DefaultItemAnimator());
-        recyclerPelanggan.setAdapter(adapterPelanggan);
+//        ListPelanggan = new ArrayList<>();
+//        adapterPelanggan = new PelangganAdapter(getContext(), ListPelanggan);
+//        mLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
+//        recyclerPelanggan.setLayoutManager(mLayoutManager);
+//        recyclerPelanggan.setItemAnimator(new DefaultItemAnimator());
+//        recyclerPelanggan.setAdapter(adapterPelanggan);
         //setRecycleView();
     }
 

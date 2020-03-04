@@ -1,18 +1,18 @@
 package com.example.kouveepetshopapps.model;
 
-public class PelangganDAO {
-    int id_pelanggan, aktif;
-    String nama, alamat, tanggal_lahir, telp, created_at, created_by, modified_at, modified_by, delete_at, delete_by;
+public class SupplierDAO {
+    int id_supplier, aktif;
+    String nama, alamat, telp, created_at, created_by, modified_at, modified_by, delete_at, delete_by;
 
-    public PelangganDAO(){}
+    public SupplierDAO(){}
 
-    public PelangganDAO(int id_pelanggan, String nama, String alamat, String tanggal_lahir, String telp,
-                        String created_at, String created_by, String modified_at, String modified_by,
-                        String delete_at, String delete_by, int aktif){
-        this.id_pelanggan = id_pelanggan;
+    public SupplierDAO(int id_supplier, int aktif, String nama, String alamat, String telp,
+                       String created_at, String created_by, String modified_at, String modified_by,
+                       String delete_at, String delete_by) {
+        this.id_supplier = id_supplier;
+        this.aktif = aktif;
         this.nama = nama;
         this.alamat = alamat;
-        this.tanggal_lahir = tanggal_lahir;
         this.telp = telp;
         this.created_at = created_at;
         this.created_by = created_by;
@@ -20,15 +20,14 @@ public class PelangganDAO {
         this.modified_by = modified_by;
         this.delete_at = delete_at;
         this.delete_by = delete_by;
-        this.aktif = aktif;
     }
 
-    public int getId_pelanggan() {
-        return id_pelanggan;
+    public int getId_supplier() {
+        return id_supplier;
     }
 
-    public void setId_pelanggan(int id_pelanggan) {
-        this.id_pelanggan = id_pelanggan;
+    public void setId_supplier(int id_supplier) {
+        this.id_supplier = id_supplier;
     }
 
     public int getAktif() {
@@ -53,14 +52,6 @@ public class PelangganDAO {
 
     public void setAlamat(String alamat) {
         this.alamat = alamat;
-    }
-
-    public String getTanggal_lahir() {
-        return tanggal_lahir;
-    }
-
-    public void setTanggal_lahir(String tanggal_lahir) {
-        this.tanggal_lahir = tanggal_lahir;
     }
 
     public String getTelp() {

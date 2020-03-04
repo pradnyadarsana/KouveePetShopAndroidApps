@@ -1,34 +1,35 @@
 package com.example.kouveepetshopapps.model;
 
-public class PelangganDAO {
-    int id_pelanggan, aktif;
-    String nama, alamat, tanggal_lahir, telp, created_at, created_by, modified_at, modified_by, delete_at, delete_by;
+public class HewanDAO {
+    int id_hewan, aktif;
+    String nama, created_at, created_by, modified_at, modified_by, delete_at, delete_by;
+    PelangganDAO pelanggan;
+    JenisHewanDAO jenis_hewan;
 
-    public PelangganDAO(){}
+    public HewanDAO(){}
 
-    public PelangganDAO(int id_pelanggan, String nama, String alamat, String tanggal_lahir, String telp,
-                        String created_at, String created_by, String modified_at, String modified_by,
-                        String delete_at, String delete_by, int aktif){
-        this.id_pelanggan = id_pelanggan;
+    public HewanDAO(int id_hewan, int aktif, String nama, String created_at, String created_by,
+                    String modified_at, String modified_by, String delete_at, String delete_by,
+                    PelangganDAO pelanggan, JenisHewanDAO jenis_hewan) {
+        this.id_hewan = id_hewan;
+        this.aktif = aktif;
         this.nama = nama;
-        this.alamat = alamat;
-        this.tanggal_lahir = tanggal_lahir;
-        this.telp = telp;
         this.created_at = created_at;
         this.created_by = created_by;
         this.modified_at = modified_at;
         this.modified_by = modified_by;
         this.delete_at = delete_at;
         this.delete_by = delete_by;
-        this.aktif = aktif;
+        this.pelanggan = pelanggan;
+        this.jenis_hewan = jenis_hewan;
     }
 
-    public int getId_pelanggan() {
-        return id_pelanggan;
+    public int getId_hewan() {
+        return id_hewan;
     }
 
-    public void setId_pelanggan(int id_pelanggan) {
-        this.id_pelanggan = id_pelanggan;
+    public void setId_hewan(int id_hewan) {
+        this.id_hewan = id_hewan;
     }
 
     public int getAktif() {
@@ -45,30 +46,6 @@ public class PelangganDAO {
 
     public void setNama(String nama) {
         this.nama = nama;
-    }
-
-    public String getAlamat() {
-        return alamat;
-    }
-
-    public void setAlamat(String alamat) {
-        this.alamat = alamat;
-    }
-
-    public String getTanggal_lahir() {
-        return tanggal_lahir;
-    }
-
-    public void setTanggal_lahir(String tanggal_lahir) {
-        this.tanggal_lahir = tanggal_lahir;
-    }
-
-    public String getTelp() {
-        return telp;
-    }
-
-    public void setTelp(String telp) {
-        this.telp = telp;
     }
 
     public String getCreated_at() {
@@ -117,5 +94,21 @@ public class PelangganDAO {
 
     public void setDelete_by(String delete_by) {
         this.delete_by = delete_by;
+    }
+
+    public PelangganDAO getPelanggan() {
+        return pelanggan;
+    }
+
+    public void setPelanggan(PelangganDAO pelanggan) {
+        this.pelanggan = pelanggan;
+    }
+
+    public JenisHewanDAO getJenis_hewan() {
+        return jenis_hewan;
+    }
+
+    public void setJenis_hewan(JenisHewanDAO jenis_hewan) {
+        this.jenis_hewan = jenis_hewan;
     }
 }
