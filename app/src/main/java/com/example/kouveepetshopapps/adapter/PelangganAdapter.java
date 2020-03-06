@@ -1,15 +1,11 @@
-package com.example.kouveepetshopapps;
+package com.example.kouveepetshopapps.adapter;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,16 +13,18 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.kouveepetshopapps.R;
 import com.example.kouveepetshopapps.model.PelangganDAO;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PelangganAdapter extends RecyclerView.Adapter<PelangganAdapter.MyViewHolder> {
 
     private Context context;
-    private List<PelangganDAO> result;
+    private ArrayList<PelangganDAO> result;
 
-    public PelangganAdapter(Context context, List<PelangganDAO> result){
+    public PelangganAdapter(Context context, ArrayList<PelangganDAO> result){
         this.context = context;
         this.result = result;
     }
@@ -43,8 +41,9 @@ public class PelangganAdapter extends RecyclerView.Adapter<PelangganAdapter.MyVi
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         final PelangganDAO pelanggan = result.get(position);
+        System.out.println(pelanggan.getAlamat());
         holder.nama.setText(pelanggan.getNama());
-        //holder.id.setText(pelanggan.getId());
+        holder.id.setText(pelanggan.getId_pelanggan());
         holder.telp.setText(pelanggan.getTelp());
 //        holder.parent.setOnClickListener(new View.OnClickListener() {
 //            @Override

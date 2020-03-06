@@ -1,8 +1,32 @@
 package com.example.kouveepetshopapps.model;
 
+import com.google.gson.annotations.SerializedName;
+
 public class PelangganDAO {
-    int id_pelanggan, aktif;
-    String nama, alamat, tanggal_lahir, telp, created_at, created_by, modified_at, modified_by, delete_at, delete_by;
+    @SerializedName("id_pelanggan")
+    int id_pelanggan;
+    @SerializedName("nama")
+    String nama;
+    @SerializedName("alamat")
+    String alamat;
+    @SerializedName("tanggal_lahir")
+    String tanggal_lahir;
+    @SerializedName("telp")
+    String telp;
+    @SerializedName("created_at")
+    String created_at;
+    @SerializedName("created_by")
+    String created_by;
+    @SerializedName("modified_at")
+    String modified_at;
+    @SerializedName("modified_by")
+    String modified_by;
+    @SerializedName("delete_at")
+    String delete_at;
+    @SerializedName("delete_by")
+    String delete_by;
+    @SerializedName("aktif")
+    int aktif;
 
     public PelangganDAO(){}
 
