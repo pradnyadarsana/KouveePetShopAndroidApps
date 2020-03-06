@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/textJudulUkuran"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="serif"
+        android:gravity="center"
+        android:text="DATA UKURAN"
+        android:textSize="30dp" />
+
+    <TextView
+        android:id="@+id/textUkuranHewan"
+        android:layout_marginTop="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Ukuran Hewan"/>
+
+    <RadioGroup
+        android:id="@+id/rGroupWho"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_centerHorizontal="true">
+
+        <RadioButton
+            android:id="@+id/rBtnSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Small" />
+
+        <RadioButton
+            android:id="@+id/rBtnMedium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Medium" />
+
+        <RadioButton
+            android:id="@+id/rBtnLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Large" />
+
+        <RadioButton
+            android:id="@+id/rBtnExtraLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Extra Large" />
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/btnSimpanUkuranHewan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_gravity="center"
+        android:text="Simpan"/>
+
+    <Button
+        android:id="@+id/btnBatalUkuranHewan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_gravity="center"
+        android:text="Batal"/>
+
+</LinearLayout>

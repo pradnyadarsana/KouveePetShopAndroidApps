@@ -44,7 +44,7 @@ public class PelangganAdapter extends RecyclerView.Adapter<PelangganAdapter.MyVi
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         final PelangganDAO pelanggan = result.get(position);
         holder.nama.setText(pelanggan.getNama());
-        holder.id.setText(pelanggan.getId());
+        //holder.id.setText(pelanggan.getId());
         holder.telp.setText(pelanggan.getTelp());
 //        holder.parent.setOnClickListener(new View.OnClickListener() {
 //            @Override
