@@ -21,6 +21,7 @@ import com.example.kouveepetshopapps.api.ApiClient;
 import com.example.kouveepetshopapps.api.ApiInterfaceCS;
 import com.example.kouveepetshopapps.model.PelangganDAO;
 import com.example.kouveepetshopapps.pelanggan.TampilDetailPelangganFragment;
+import com.example.kouveepetshopapps.response.PostUpDelPelanggan;
 
 import java.util.List;
 
@@ -127,7 +128,7 @@ public class PelangganAdapter extends RecyclerView.Adapter<PelangganAdapter.MyVi
                 .setNegativeButton("Delete",new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         //delete report
-                        deleteReport(hasil.getId_pelanggan(),"username cs");
+                        deleteReport(hasil.getId_pelanggan(),"pradnyadarsana");
                     }
                 })
                 .setNeutralButton("Cancel", new DialogInterface.OnClickListener() {
@@ -157,17 +158,18 @@ public class PelangganAdapter extends RecyclerView.Adapter<PelangganAdapter.MyVi
 
     private void deleteReport(int id, String delete_by){
             ApiInterfaceCS apiService = ApiClient.getClient().create(ApiInterfaceCS.class);
-            Call<String> pelangganDAOCall = apiService.hapusPelanggan(Integer.toString(id),delete_by);
+            Call<PostUpDelPelanggan> pelangganDAOCall = apiService.hapusPelanggan(Integer.toString(id),delete_by);
 
-            pelangganDAOCall.enqueue(new Callback<String>() {
+            pelangganDAOCall.enqueue(new Callback<PostUpDelPelanggan>() {
                 @Override
-                public void onResponse(Call<String> call, Response<String> response) {
+                public void onResponse(Call<PostUpDelPelanggan> call, Response<PostUpDelPelanggan> response) {
                     //reverse close
+                    System.out.println(response.body().getMessage());
                     Toast.makeText(context, "Success Deleting report", Toast.LENGTH_SHORT).show();
                 }
 
                 @Override
-                public void onFailure(Call<String> call, Throwable t) {
+                public void onFailure(Call<PostUpDelPelanggan> call, Throwable t) {
 
                     Toast.makeText(context, "Fail Deleting report", Toast.LENGTH_SHORT).show();
                 }

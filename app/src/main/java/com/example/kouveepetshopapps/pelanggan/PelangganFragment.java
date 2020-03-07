@@ -18,6 +18,7 @@ import com.example.kouveepetshopapps.api.ApiClient;
 import com.example.kouveepetshopapps.api.ApiInterfaceCS;
 import com.example.kouveepetshopapps.model.PelangganDAO;
 import com.example.kouveepetshopapps.response.GetPelanggan;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,12 +32,15 @@ public class PelangganFragment extends Fragment {
     private RecyclerView recyclerPelanggan;
     private PelangganAdapter adapterPelanggan;
     private RecyclerView.LayoutManager mLayoutManager;
+    private FloatingActionButton addPelangganBtn;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_pelanggan, container, false);
 
         recyclerPelanggan = view.findViewById(R.id.recycler_view_pelanggan);
+        addPelangganBtn = view.findViewById(R.id.addPelangganButton);
 
         return view;
     }
