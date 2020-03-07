@@ -4,24 +4,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AdminMainActivity">
+    tools:context=".navigation.CsMainMenu">
 
     <!--Content Main-->
     <FrameLayout
         android:id="@+id/fl_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/bn_main_admin">
+        android:layout_above="@+id/bn_main_cs">
     </FrameLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bn_main_admin"
+        android:id="@+id/bn_main_cs"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:background="@color/colorPrimary"
         app:itemIconTint="@drawable/color_state"
-        app:menu="@menu/bottom_nav_menu_admin"
+        app:menu="@menu/bottom_nav_menu_cs"
         app:itemTextColor="@color/colorPrimaryDark"/>
 
 </RelativeLayout>

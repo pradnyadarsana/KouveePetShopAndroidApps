@@ -12,15 +12,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".pelanggan.TampilCustomer"></activity>
+        <activity android:name=".pelanggan.TampilDetailPelangganFragment"></activity>
         <activity android:name=".adapter.PelangganAdapter" />
-        <activity android:name=".pelanggan.CustomerActivity" />
+        <activity android:name=".pelanggan.PelangganFragment" />
         <activity android:name=".PetActivity" />
         <activity android:name=".TransactionActivity" />
-        <activity android:name=".CsMainActivity" />
+        <activity android:name=".navigation.CsMainMenu" />
         <activity android:name=".NotificationFragment" />
         <activity android:name=".StockUpdateFragment" />
-        <activity android:name=".AdminMainActivity" />
+        <activity android:name=".navigation.AdminMainMenu" />
         <activity android:name=".AdminManagePage" />
         <activity android:name=".LoginActivity">
             <intent-filter>

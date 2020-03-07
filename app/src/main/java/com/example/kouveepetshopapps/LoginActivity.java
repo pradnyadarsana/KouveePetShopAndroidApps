@@ -8,6 +8,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.example.kouveepetshopapps.navigation.AdminMainMenu;
+import com.example.kouveepetshopapps.navigation.CsMainMenu;
+
 public class LoginActivity extends AppCompatActivity {
     private EditText username, password;
     private Button loginBtn;
@@ -24,10 +27,10 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent login;
                 if (username.getText().toString().equalsIgnoreCase("admin")){
-                    login = new Intent(LoginActivity.this, AdminMainActivity.class);
+                    login = new Intent(LoginActivity.this, AdminMainMenu.class);
                     startActivity(login);
                 }else if (username.getText().toString().equalsIgnoreCase("cs")){
-                    login = new Intent(LoginActivity.this, CsMainActivity.class);
+                    login = new Intent(LoginActivity.this, CsMainMenu.class);
                     startActivity(login);
                 }
 

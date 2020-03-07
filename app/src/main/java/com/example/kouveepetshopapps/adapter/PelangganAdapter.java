@@ -9,12 +9,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,8 +20,8 @@ import com.example.kouveepetshopapps.R;
 import com.example.kouveepetshopapps.api.ApiClient;
 import com.example.kouveepetshopapps.api.ApiInterfaceCS;
 import com.example.kouveepetshopapps.model.PelangganDAO;
+import com.example.kouveepetshopapps.pelanggan.TampilDetailPelangganFragment;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -42,7 +40,7 @@ public class PelangganAdapter extends RecyclerView.Adapter<PelangganAdapter.MyVi
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(context).inflate(R.layout.activity_pelanggan_adapter, parent, false);
+        View v = LayoutInflater.from(context).inflate(R.layout.adapter_pelanggan, parent, false);
         final MyViewHolder holder = new MyViewHolder(v);
 
         return holder;
@@ -57,18 +55,18 @@ public class PelangganAdapter extends RecyclerView.Adapter<PelangganAdapter.MyVi
         holder.parent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Bundle data = new Bundle();
-//                Fragment fragment = new ViewReport();
-//
-//                data.putString("username", report.getUsername());
-//                data.putString("waktu", report.getDatetime());
-//                data.putString("alamat", report.getAddress());
-//                data.putString("gambar", report.getImg());
-//                data.putString("deskripsi", report.getDescription());
-//                data.putString("kategori", report.getKategori());
-//
-//                fragment.setArguments(data);
-//                loadFragment(fragment);
+                Bundle data = new Bundle();
+                Fragment fragment = new TampilDetailPelangganFragment();
+
+                data.putString("id_pelanggan", Integer.toString(pelanggan.getId_pelanggan()));
+                data.putString("nama", pelanggan.getNama());
+                data.putString("alamat", pelanggan.getAlamat());
+                data.putString("tanggal_lahir", pelanggan.getTanggal_lahir());
+                data.putString("telp", pelanggan.getTelp());
+                data.putString("created_at", pelanggan.getCreated_at());
+
+                fragment.setArguments(data);
+                loadFragment(fragment);
             }
         });
         holder.parent.setOnLongClickListener(new View.OnLongClickListener() {

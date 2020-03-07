@@ -1,4 +1,4 @@
-package com.example.kouveepetshopapps;
+package com.example.kouveepetshopapps.navigation;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -7,15 +7,19 @@ import androidx.fragment.app.Fragment;
 import android.os.Bundle;
 import android.view.MenuItem;
 
+import com.example.kouveepetshopapps.AdminManagePage;
+import com.example.kouveepetshopapps.NotificationFragment;
+import com.example.kouveepetshopapps.R;
+import com.example.kouveepetshopapps.StockUpdateFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class AdminMainActivity extends AppCompatActivity {
+public class AdminMainMenu extends AppCompatActivity {
 
     private BottomNavigationView adminBottomNavigationView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_admin_main);
+        setContentView(R.layout.menu_admin_main);
 
         adminBottomNavigationView = (BottomNavigationView) findViewById(R.id.bn_main_admin);
 

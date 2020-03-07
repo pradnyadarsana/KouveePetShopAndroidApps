@@ -1,4 +1,4 @@
-package com.example.kouveepetshopapps;
+package com.example.kouveepetshopapps.navigation;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -7,16 +7,19 @@ import androidx.fragment.app.Fragment;
 import android.os.Bundle;
 import android.view.MenuItem;
 
-import com.example.kouveepetshopapps.pelanggan.CustomerActivity;
+import com.example.kouveepetshopapps.PetActivity;
+import com.example.kouveepetshopapps.R;
+import com.example.kouveepetshopapps.TransactionActivity;
+import com.example.kouveepetshopapps.pelanggan.PelangganFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class CsMainActivity extends AppCompatActivity {
+public class CsMainMenu extends AppCompatActivity {
     private BottomNavigationView csBottomNavigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cs_main);
+        setContentView(R.layout.menu_cs_main);
 
         csBottomNavigationView = (BottomNavigationView) findViewById(R.id.bn_main_cs);
 
@@ -34,7 +37,7 @@ public class CsMainActivity extends AppCompatActivity {
                         fragment = new PetActivity();
                         break;
                     case R.id.cs_pelanggan:
-                        fragment = new CustomerActivity();
+                        fragment = new PelangganFragment();
                         break;
                 }
                 return loadFragment(fragment);
