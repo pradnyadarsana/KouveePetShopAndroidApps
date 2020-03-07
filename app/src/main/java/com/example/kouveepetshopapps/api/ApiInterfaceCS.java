@@ -42,7 +42,7 @@ public interface ApiInterfaceCS {
 
     @POST("pelanggan/delete/{id_pelanggan}")
     @FormUrlEncoded
-    Call<PelangganDAO> hapusPelanggan(@Path("id_pelanggan") String id_pelanggan,
+    Call<String> hapusPelanggan(@Path("id_pelanggan") String id_pelanggan,
                                      @Field("delete_by")String delete_by);
 //    @DELETE("Profile/deleteProfile/{id}")
 //    Call<String> deleteUser(@Path("id") String id);

@@ -21,18 +21,17 @@ import com.example.kouveepetshopapps.model.PelangganDAO;
 import com.example.kouveepetshopapps.response.GetPelanggan;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class CustomerActivity extends Fragment {
-
-    private ArrayList<PelangganDAO> ListPelanggan;
+    private List<PelangganDAO> ListPelanggan;
     private RecyclerView recyclerPelanggan;
     private PelangganAdapter adapterPelanggan;
     private RecyclerView.LayoutManager mLayoutManager;
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -54,7 +53,6 @@ public class CustomerActivity extends Fragment {
         recyclerPelanggan.setItemAnimator(new DefaultItemAnimator());
         recyclerPelanggan.setAdapter(adapterPelanggan);
         setRecycleView();
-
     }
 
     public void setRecycleView(){
@@ -64,25 +62,16 @@ public class CustomerActivity extends Fragment {
         pelangganDAOCall.enqueue(new Callback<GetPelanggan>() {
             @Override
             public void onResponse(Call<GetPelanggan> call, Response<GetPelanggan> response) {
-                System.out.println(response.body().getListDataPelanggan().get(0).getNama());
-                ListPelanggan = response.body().getListDataPelanggan();
-//                for (PelangganDAO pel: ListPelanggan) {
-//                    System.out.println(pel.getNama() + " ");
-//                    System.out.println(pel.getAlamat() + " ");
-//                    System.out.println(pel.getTanggal_lahir() + " ");
-//                    System.out.println(pel.getTelp() + " ");
-//                }
+                ListPelanggan.addAll(response.body().getListDataPelanggan());
+                System.out.println(ListPelanggan.get(0).getNama());
                 adapterPelanggan.notifyDataSetChanged();
-                Toast.makeText(getActivity(), "Data pelanggan loaded", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getActivity(), "Welcome", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onFailure(Call<GetPelanggan> call, Throwable t) {
-                System.out.println(t.getMessage());;
-                Toast.makeText(getActivity(), "Failed to load report", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getContext(), "Failed to load report", Toast.LENGTH_SHORT).show();
             }
         });
     }
-
-
 }

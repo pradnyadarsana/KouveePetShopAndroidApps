@@ -11,11 +11,11 @@ public class GetPelanggan {
     @SerializedName("error")
     String error;
     @SerializedName("message")
-    ArrayList<PelangganDAO> listDataPelanggan;
+    List<PelangganDAO> listDataPelanggan;
 
     public GetPelanggan(){}
 
-    public GetPelanggan(String error, ArrayList<PelangganDAO> listDataPelanggan) {
+    public GetPelanggan(String error, List<PelangganDAO> listDataPelanggan) {
         this.error = error;
         this.listDataPelanggan = listDataPelanggan;
     }
@@ -28,11 +28,11 @@ public class GetPelanggan {
         this.error = error;
     }
 
-    public ArrayList<PelangganDAO> getListDataPelanggan() {
+    public List<PelangganDAO> getListDataPelanggan() {
         return listDataPelanggan;
     }
 
-    public void setListDataPelanggan(ArrayList<PelangganDAO> listDataPelanggan) {
+    public void setListDataPelanggan(List<PelangganDAO> listDataPelanggan) {
         this.listDataPelanggan = listDataPelanggan;
     }
 }
