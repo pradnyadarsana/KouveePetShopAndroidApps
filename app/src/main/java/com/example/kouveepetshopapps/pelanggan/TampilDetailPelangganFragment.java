@@ -30,7 +30,7 @@ public class TampilDetailPelangganFragment extends Fragment {
         telp = (TextView) view.findViewById(R.id.viewTelpPelanggan);
         tanggal_lahir = (TextView) view.findViewById(R.id.viewTanggalLahirPelanggan);
         alamat = (TextView) view.findViewById(R.id.viewAlamatPelanggan);
-        created_at = (TextView) view.findViewById(R.id.viewCreatedAt);
+        created_at = (TextView) view.findViewById(R.id.viewCreatedAtPelanggan);
     }
 
     public void setField(){

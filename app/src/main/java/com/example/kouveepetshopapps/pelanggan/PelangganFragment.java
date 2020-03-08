@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.kouveepetshopapps.R;
 import com.example.kouveepetshopapps.adapter.PelangganAdapter;
@@ -76,12 +77,12 @@ public class PelangganFragment extends Fragment {
                 ListPelanggan.addAll(response.body().getListDataPelanggan());
                 System.out.println(ListPelanggan.get(0).getNama());
                 adapterPelanggan.notifyDataSetChanged();
-//                Toast.makeText(getActivity(), "Welcome", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getActivity(), "Sukses ", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onFailure(Call<GetPelanggan> call, Throwable t) {
-                //Toast.makeText(getContext(), "Failed to load report", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Gagal menampilkan pelanggan", Toast.LENGTH_SHORT).show();
             }
         });
     }

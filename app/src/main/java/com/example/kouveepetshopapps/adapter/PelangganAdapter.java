@@ -21,7 +21,7 @@ import com.example.kouveepetshopapps.api.ApiClient;
 import com.example.kouveepetshopapps.api.ApiInterfaceCS;
 import com.example.kouveepetshopapps.model.PelangganDAO;
 import com.example.kouveepetshopapps.pelanggan.TampilDetailPelangganFragment;
-import com.example.kouveepetshopapps.response.PostUpDelPelanggan;
+import com.example.kouveepetshopapps.response.PostUpdateDelete;
 
 import java.util.List;
 
@@ -48,7 +48,7 @@ public class PelangganAdapter extends RecyclerView.Adapter<PelangganAdapter.MyVi
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull MyViewHolder holder, final int position) {
         final PelangganDAO pelanggan = result.get(position);
         holder.nama.setText(pelanggan.getNama());
         holder.id_pelanggan.setText(Integer.toString(pelanggan.getId_pelanggan()));
@@ -73,7 +73,7 @@ public class PelangganAdapter extends RecyclerView.Adapter<PelangganAdapter.MyVi
         holder.parent.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
-                showDialog(pelanggan);
+                showDialog(pelanggan, position);
                 return false;
             }
         });
@@ -109,7 +109,7 @@ public class PelangganAdapter extends RecyclerView.Adapter<PelangganAdapter.MyVi
         }
     }
 
-    private void showDialog(final PelangganDAO hasil){
+    private void showDialog(final PelangganDAO hasil, final int position){
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
 
         // set title dialog
@@ -128,7 +128,7 @@ public class PelangganAdapter extends RecyclerView.Adapter<PelangganAdapter.MyVi
                 .setNegativeButton("Delete",new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         //delete report
-                        deleteReport(hasil.getId_pelanggan(),"pradnyadarsana");
+                        deletePelanggan(hasil.getId_pelanggan(),"pradnyadarsana", position);
                     }
                 })
                 .setNeutralButton("Cancel", new DialogInterface.OnClickListener() {
@@ -156,23 +156,30 @@ public class PelangganAdapter extends RecyclerView.Adapter<PelangganAdapter.MyVi
 //        context.startActivity(edit);
     }
 
-    private void deleteReport(int id, String delete_by){
+    private void deletePelanggan(int id, String delete_by, final int position){
             ApiInterfaceCS apiService = ApiClient.getClient().create(ApiInterfaceCS.class);
-            Call<PostUpDelPelanggan> pelangganDAOCall = apiService.hapusPelanggan(Integer.toString(id),delete_by);
+            Call<PostUpdateDelete> pelangganDAOCall = apiService.hapusPelanggan(Integer.toString(id),delete_by);
 
-            pelangganDAOCall.enqueue(new Callback<PostUpDelPelanggan>() {
+            pelangganDAOCall.enqueue(new Callback<PostUpdateDelete>() {
                 @Override
-                public void onResponse(Call<PostUpDelPelanggan> call, Response<PostUpDelPelanggan> response) {
+                public void onResponse(Call<PostUpdateDelete> call, Response<PostUpdateDelete> response) {
                     //reverse close
                     System.out.println(response.body().getMessage());
-                    Toast.makeText(context, "Success Deleting report", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "Sukses menghapus pelanggan", Toast.LENGTH_SHORT).show();
+                    delete(position);
                 }
 
                 @Override
-                public void onFailure(Call<PostUpDelPelanggan> call, Throwable t) {
+                public void onFailure(Call<PostUpdateDelete> call, Throwable t) {
 
-                    Toast.makeText(context, "Fail Deleting report", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "Gagal menghapus pelanggan", Toast.LENGTH_SHORT).show();
                 }
             });
+    }
+
+    public void delete(int position) { //removes the row
+        result.remove(position);
+        notifyItemRemoved(position);
+        notifyDataSetChanged();
     }
 }

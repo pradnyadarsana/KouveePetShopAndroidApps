@@ -6,8 +6,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_marginBottom="3dp"
-    tools:context=".adapter.PelangganAdapter"
-    android:id="@+id/ParentPelanggan">
+    tools:context=".adapter.SupplierAdapter"
+    android:id="@+id/ParentSupplier">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -20,7 +20,7 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/tvNamaPelanggan"
+                android:id="@+id/tvNamaSupplier"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Nama Pelanggan"
@@ -29,7 +29,7 @@
                 android:textStyle="bold"/>
 
             <TextView
-                android:id="@+id/tvIdPelanggan"
+                android:id="@+id/tvIdSupplier"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="3dp"
@@ -39,7 +39,7 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/tvTelpPelanggan"
+            android:id="@+id/tvTelpSupplier"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="No Telepon"

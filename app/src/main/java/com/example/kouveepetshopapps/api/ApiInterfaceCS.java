@@ -2,7 +2,7 @@ package com.example.kouveepetshopapps.api;
 
 import com.example.kouveepetshopapps.model.UkuranHewanDAO;
 import com.example.kouveepetshopapps.response.GetPelanggan;
-import com.example.kouveepetshopapps.response.PostUpDelPelanggan;
+import com.example.kouveepetshopapps.response.PostUpdateDelete;
 
 import java.util.List;
 
@@ -18,11 +18,11 @@ public interface ApiInterfaceCS {
     //KELOLA PELANGGAN
     @POST("pelanggan")
     @FormUrlEncoded
-    Call<PostUpDelPelanggan> tambahPelanggan(@Field("nama")String nama,
-                                             @Field("alamat")String alamat,
-                                             @Field("tanggal_lahir")String tanggal_lahir,
-                                             @Field("telp")String telp,
-                                             @Field("created_by")String created_by);
+    Call<PostUpdateDelete> tambahPelanggan(@Field("nama")String nama,
+                                           @Field("alamat")String alamat,
+                                           @Field("tanggal_lahir")String tanggal_lahir,
+                                           @Field("telp")String telp,
+                                           @Field("created_by")String created_by);
 
 //    @GET("viewProfile.php/{email}")
     //   Call<UserDAO> getUser(@Path("email") String email);
@@ -32,17 +32,17 @@ public interface ApiInterfaceCS {
 
     @POST("pelanggan/update/{id_pelanggan}")
     @FormUrlEncoded
-    Call<PostUpDelPelanggan> ubahPelanggan(@Path("id_pelanggan") String id_pelanggan,
-                                           @Field("nama")String nama,
-                                           @Field("alamat")String alamat,
-                                           @Field("tanggal_lahir")String tanggal_lahir,
-                                           @Field("telp")String telp,
-                                           @Field("modified_by")String modified_by);
+    Call<PostUpdateDelete> ubahPelanggan(@Path("id_pelanggan") String id_pelanggan,
+                                         @Field("nama")String nama,
+                                         @Field("alamat")String alamat,
+                                         @Field("tanggal_lahir")String tanggal_lahir,
+                                         @Field("telp")String telp,
+                                         @Field("modified_by")String modified_by);
 
     @POST("pelanggan/delete/{id_pelanggan}")
     @FormUrlEncoded
-    Call<PostUpDelPelanggan> hapusPelanggan(@Path("id_pelanggan") String id_pelanggan,
-                                            @Field("delete_by")String delete_by);
+    Call<PostUpdateDelete> hapusPelanggan(@Path("id_pelanggan") String id_pelanggan,
+                                          @Field("delete_by")String delete_by);
 //    @DELETE("Profile/deleteProfile/{id}")
 //    Call<String> deleteUser(@Path("id") String id);
 

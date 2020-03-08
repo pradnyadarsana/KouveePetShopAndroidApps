@@ -2,13 +2,13 @@ package com.example.kouveepetshopapps.response;
 
 import com.google.gson.annotations.SerializedName;
 
-public class PostUpDelPelanggan {
+public class PostUpdateDelete {
     @SerializedName("error")
     String error;
     @SerializedName("message")
     String message;
 
-    public PostUpDelPelanggan(String error, String message) {
+    public PostUpdateDelete(String error, String message) {
         this.error = error;
         this.message = message;
     }

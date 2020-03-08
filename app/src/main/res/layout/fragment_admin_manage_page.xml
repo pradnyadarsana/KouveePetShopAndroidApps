@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AdminManagePage">
+    tools:context=".navigation.AdminManagePageFragment">
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -21,16 +21,20 @@
                 android:orientation="horizontal"
                 android:layout_gravity="center"
                 android:layout_marginTop="40dp">
-                <ImageButton
+                <Button
+                    android:text="PRODUK"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@mipmap/product_logo_foreground"
-                    android:layout_marginRight="15dp"></ImageButton>
-                <ImageButton
+                    android:drawableTop="@mipmap/product_logo_foreground"
+                    android:layout_marginRight="15dp"
+                    android:id="@+id/btnKelolaProduk"></Button>
+                <Button
+                    android:text="LAYANAN"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@mipmap/service_logo_foreground"
-                    android:layout_marginLeft="15dp"></ImageButton>
+                    android:drawableTop="@mipmap/service_logo_foreground"
+                    android:layout_marginLeft="15dp"
+                    android:id="@+id/btnKelolaLayanan"></Button>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -38,17 +42,21 @@
                 android:orientation="horizontal"
                 android:layout_gravity="center"
                 android:layout_marginTop="30dp">
-                <ImageButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:src="@mipmap/supplier_logo_foreground"
-                    android:layout_marginRight="15dp">
-                </ImageButton>
-                <ImageButton
+                <Button
+                    android:text="SUPPLIER"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@mipmap/pengadaan_logo_foreground"
-                    android:layout_marginLeft="15dp"></ImageButton>
+                    android:drawableTop="@mipmap/supplier_logo_foreground"
+                    android:layout_marginRight="15dp"
+                    android:id="@+id/btnKelolaSupplier">
+                </Button>
+                <Button
+                    android:text="PENGADAAN"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableTop="@mipmap/pengadaan_logo_foreground"
+                    android:layout_marginLeft="15dp"
+                    android:id="@+id/btnKelolaPengadaan"></Button>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -57,17 +65,21 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="30dp"
                 android:layout_marginBottom="40dp">
-                <ImageButton
+                <Button
+                    android:text="JENIS HEWAN"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:src="@mipmap/kind_logo_foreground"
-                    android:layout_marginRight="15dp">
-                </ImageButton>
-                <ImageButton
+                    android:drawableTop="@mipmap/kind_logo_foreground"
+                    android:layout_marginRight="15dp"
+                    android:id="@+id/btnKelolaJenisHewan">
+                </Button>
+                <Button
+                    android:text="UKURAN HEWAN"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@mipmap/size_logo_foreground"
-                    android:layout_marginLeft="15dp"></ImageButton>
+                    android:drawableTop="@mipmap/size_logo_foreground"
+                    android:layout_marginLeft="15dp"
+                    android:id="@+id/btnKelolaUkuranHewan"></Button>
             </LinearLayout>
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>

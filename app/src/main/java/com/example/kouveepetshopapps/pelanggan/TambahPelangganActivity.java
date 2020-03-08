@@ -20,12 +20,9 @@ import android.widget.Toast;
 import com.example.kouveepetshopapps.R;
 import com.example.kouveepetshopapps.api.ApiClient;
 import com.example.kouveepetshopapps.api.ApiInterfaceCS;
-import com.example.kouveepetshopapps.model.PelangganDAO;
 import com.example.kouveepetshopapps.navigation.CsMainMenu;
-import com.example.kouveepetshopapps.response.GetPelanggan;
-import com.example.kouveepetshopapps.response.PostUpDelPelanggan;
+import com.example.kouveepetshopapps.response.PostUpdateDelete;
 
-import java.sql.Date;
 import java.util.Calendar;
 
 import retrofit2.Call;
@@ -116,19 +113,19 @@ public class TambahPelangganActivity extends AppCompatActivity {
 
     public void tambahPelanggan(){
         ApiInterfaceCS apiService = ApiClient.getClient().create(ApiInterfaceCS.class);
-        Call<PostUpDelPelanggan> pelangganDAOCall = apiService.tambahPelanggan(nama.getText().toString(),
+        Call<PostUpdateDelete> pelangganDAOCall = apiService.tambahPelanggan(nama.getText().toString(),
                 alamat.getText().toString(), tanggal_lahir_temp, telp.getText().toString(),
                 "pradnyadarsana");
 
-        pelangganDAOCall.enqueue(new Callback<PostUpDelPelanggan>() {
+        pelangganDAOCall.enqueue(new Callback<PostUpdateDelete>() {
             @Override
-            public void onResponse(Call<PostUpDelPelanggan> call, Response<PostUpDelPelanggan> response) {
+            public void onResponse(Call<PostUpdateDelete> call, Response<PostUpdateDelete> response) {
                 Toast.makeText(TambahPelangganActivity.this, "Sukses menambahkan pelanggan", Toast.LENGTH_SHORT).show();
                 startIntent();
             }
 
             @Override
-            public void onFailure(Call<PostUpDelPelanggan> call, Throwable t) {
+            public void onFailure(Call<PostUpdateDelete> call, Throwable t) {
                 Toast.makeText(TambahPelangganActivity.this, "Gagal menambahkan pelanggan", Toast.LENGTH_SHORT).show();
             }
         });

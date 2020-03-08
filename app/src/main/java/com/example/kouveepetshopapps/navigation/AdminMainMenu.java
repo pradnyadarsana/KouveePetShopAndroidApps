@@ -7,7 +7,6 @@ import androidx.fragment.app.Fragment;
 import android.os.Bundle;
 import android.view.MenuItem;
 
-import com.example.kouveepetshopapps.AdminManagePage;
 import com.example.kouveepetshopapps.NotificationFragment;
 import com.example.kouveepetshopapps.R;
 import com.example.kouveepetshopapps.StockUpdateFragment;
@@ -37,7 +36,7 @@ public class AdminMainMenu extends AppCompatActivity {
                         fragment = new NotificationFragment();
                         break;
                     case R.id.admin_manage:
-                        fragment = new AdminManagePage();
+                        fragment = new AdminManagePageFragment();
                         break;
                 }
                 return loadFragment(fragment);
