@@ -5,7 +5,9 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Toast;
 
 import com.example.kouveepetshopapps.R;
@@ -50,6 +52,14 @@ public class ListSupplierActivity extends AppCompatActivity {
         recyclerSupplier.setItemAnimator(new DefaultItemAnimator());
         recyclerSupplier.setAdapter(adapterSupplier);
         setRecycleView();
+
+        addSupplierBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent add = new Intent(ListSupplierActivity.this, TambahSupplierActivity.class);
+                startActivity(add);
+            }
+        });
     }
 
     public void setRecycleView(){

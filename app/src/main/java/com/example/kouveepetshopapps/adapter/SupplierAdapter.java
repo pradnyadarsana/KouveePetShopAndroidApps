@@ -119,7 +119,7 @@ public class SupplierAdapter extends RecyclerView.Adapter<SupplierAdapter.MyView
                 .setNegativeButton("Delete",new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         //delete report
-                        deleteSupplier(hasil.getId_supplier(),"pradnyadarsana", position);
+                        deleteSupplier(hasil.getId_supplier(),"admin", position);
                     }
                 })
                 .setNeutralButton("Cancel", new DialogInterface.OnClickListener() {

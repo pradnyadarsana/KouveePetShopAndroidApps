@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.kouveepetshopapps" >
+    package="com.example.kouveepetshopapps">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -11,9 +11,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:usesCleartextTraffic="true" >
-        <activity android:name=".supplier.TampilDetailSupplierActivity" >
-        </activity>
+        android:usesCleartextTraffic="true">
+        <activity android:name=".supplier.TambahSupplierActivity"></activity>
+        <activity android:name=".supplier.TampilDetailSupplierActivity"></activity>
         <activity android:name=".adapter.SupplierAdapter" />
         <activity android:name=".supplier.ListSupplierActivity" />
         <activity android:name=".pelanggan.TambahPelangganActivity" />
@@ -27,7 +27,7 @@
         <activity android:name=".StockUpdateFragment" />
         <activity android:name=".navigation.AdminMainMenu" />
         <activity android:name=".navigation.AdminManagePageFragment" />
-        <activity android:name=".LoginActivity" >
+        <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
