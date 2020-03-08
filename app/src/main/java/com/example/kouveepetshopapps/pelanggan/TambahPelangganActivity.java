@@ -110,6 +110,7 @@ public class TambahPelangganActivity extends AppCompatActivity {
     private void startIntent(){
         Intent back = new Intent(TambahPelangganActivity.this, CsMainMenu.class);
         back.putExtra("from", "pelanggan");
+        back.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(back);
     }
 
