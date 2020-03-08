@@ -24,6 +24,21 @@ public class CsMainMenu extends AppCompatActivity {
         csBottomNavigationView = (BottomNavigationView) findViewById(R.id.bn_main_cs);
 
         loadFragment(new TransactionActivity());
+        if (getIntent().getStringExtra("from")!=null){
+            if(getIntent().getStringExtra("from").equalsIgnoreCase("transaksi"))
+            {
+                loadFragment(new TransactionActivity());
+                csBottomNavigationView.setSelectedItemId(R.id.cs_transaksi);
+            }else if(getIntent().getStringExtra("from").equalsIgnoreCase("hewan"))
+            {
+                loadFragment(new PetActivity());
+                csBottomNavigationView.setSelectedItemId(R.id.cs_hewan);
+            } else if(getIntent().getStringExtra("from").equalsIgnoreCase("pelanggan"))
+            {
+                loadFragment(new PelangganFragment());
+                csBottomNavigationView.setSelectedItemId(R.id.cs_pelanggan);
+            }
+        }
 
         csBottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override

@@ -12,7 +12,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".pelanggan.TampilDetailPelangganFragment"></activity>
+        <activity android:name=".pelanggan.TambahPelangganActivity"></activity>
+        <activity android:name=".pelanggan.TampilDetailPelangganFragment" />
         <activity android:name=".adapter.PelangganAdapter" />
         <activity android:name=".pelanggan.PelangganFragment" />
         <activity android:name=".PetActivity" />

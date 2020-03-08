@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    tools:context=".pelanggan.TambahPelangganActivity">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="25dp"
+            android:layout_marginBottom="25dp">
+
+            <ImageView
+                android:id="@+id/logo"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_marginTop="20dp"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/pelanggan_logo_foreground"/>
+
+            <EditText
+                android:id="@+id/etNamaPelanggan"
+                android:layout_width="300dp"
+                android:layout_height="50dp"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/logo"
+                android:layout_marginTop="25dp"
+                android:hint="Nama"/>
+
+            <EditText
+                android:id="@+id/etTelpPelanggan"
+                android:layout_width="300dp"
+                android:layout_height="50dp"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/etNamaPelanggan"
+                android:layout_marginTop="25dp"
+                android:inputType="phone"
+                android:hint="Nomor Telepon"/>
+
+            <EditText
+                android:id="@+id/etAlamatPelanggan"
+                android:layout_marginTop="25dp"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:inputType="textMultiLine"
+                android:lines="8"
+                android:maxLines="10"
+                android:minLines="3"
+                android:scrollbars="vertical"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/etTelpPelanggan"
+                android:hint="Alamat"/>
+
+            <TextView
+                android:id="@+id/etTanggalLahirPelanggan"
+                android:layout_width="300dp"
+                android:layout_height="50dp"
+                android:layout_below="@+id/etAlamatPelanggan"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="25dp"
+                android:background="@color/colorAccent"
+                android:gravity="center"
+                android:hint="Pilih Tanggal Lahir"
+                android:textColor="@color/colorPrimary"
+                android:textSize="20dp" />
+
+            <Button
+                android:layout_width="200dp"
+                android:layout_height="50dp"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/etTanggalLahirPelanggan"
+                android:layout_marginTop="50dp"
+                android:layout_marginBottom="70dp"
+                android:text="TAMBAH"
+                android:id="@+id/btnTambahPelanggan" />
+        </RelativeLayout>
+    </androidx.core.widget.NestedScrollView>
+</RelativeLayout>

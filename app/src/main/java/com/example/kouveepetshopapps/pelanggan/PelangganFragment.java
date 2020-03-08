@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -41,6 +42,13 @@ public class PelangganFragment extends Fragment {
 
         recyclerPelanggan = view.findViewById(R.id.recycler_view_pelanggan);
         addPelangganBtn = view.findViewById(R.id.addPelangganButton);
+        addPelangganBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getActivity(), TambahPelangganActivity.class);
+                startActivity((i));
+            }
+        });
 
         return view;
     }
@@ -77,4 +85,6 @@ public class PelangganFragment extends Fragment {
             }
         });
     }
+
+
 }
