@@ -16,6 +16,7 @@ import android.widget.Button;
 import com.example.kouveepetshopapps.R;
 import com.example.kouveepetshopapps.model.PelangganDAO;
 import com.example.kouveepetshopapps.supplier.ListSupplierActivity;
+import com.example.kouveepetshopapps.ukuran_hewan.ListUkuranHewanActivity;
 
 public class AdminManagePageFragment extends Fragment {
     private Button produk, layanan, supplier, pengadaan, jenis_hewan, ukuran_hewan;
@@ -70,7 +71,7 @@ public class AdminManagePageFragment extends Fragment {
         ukuran_hewan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                startIntent(ListUkuranHewanActivity.class);
             }
         });
         return view;
