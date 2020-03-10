@@ -134,7 +134,7 @@ public class JenisHewanAdapter extends RecyclerView.Adapter<JenisHewanAdapter.My
 
     private void startIntent(JenisHewanDAO hasil, Class nextView){
         Intent view = new Intent(context, nextView);
-        view.putExtra("id_supplier", Integer.toString(hasil.getId_jenis_hewan()));
+        view.putExtra("id_jenis_hewan", Integer.toString(hasil.getId_jenis_hewan()));
         view.putExtra("nama", hasil.getNama());
         view.putExtra("created_at", hasil.getCreated_at());
         view.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -143,7 +143,7 @@ public class JenisHewanAdapter extends RecyclerView.Adapter<JenisHewanAdapter.My
 
     private void deleteJenisHewan(int id, String delete_by, final int position){
         ApiInterfaceAdmin apiService = ApiClient.getClient().create(ApiInterfaceAdmin.class);
-        Call<PostUpdateDelete> jenisHewanDAOCall = apiService.hapusSupplier(Integer.toString(id),delete_by);
+        Call<PostUpdateDelete> jenisHewanDAOCall = apiService.hapusJenisHewan(Integer.toString(id),delete_by);
 
         jenisHewanDAOCall.enqueue(new Callback<PostUpdateDelete>() {
             @Override
