@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.example.kouveepetshopapps.R;
+import com.example.kouveepetshopapps.jenishewan.ListJenisHewanActivity;
 import com.example.kouveepetshopapps.model.PelangganDAO;
 import com.example.kouveepetshopapps.supplier.ListSupplierActivity;
 import com.example.kouveepetshopapps.ukuran_hewan.ListUkuranHewanActivity;
@@ -64,7 +65,7 @@ public class AdminManagePageFragment extends Fragment {
         jenis_hewan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                startIntent(ListJenisHewanActivity.class);
             }
         });
 

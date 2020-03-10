@@ -1,5 +1,6 @@
 package com.example.kouveepetshopapps.api;
 
+import com.example.kouveepetshopapps.response.GetJenisHewan;
 import com.example.kouveepetshopapps.response.GetSupplier;
 import com.example.kouveepetshopapps.response.GetUkuranHewan;
 import com.example.kouveepetshopapps.response.PostUpdateDelete;
@@ -13,9 +14,9 @@ public interface ApiInterfaceAdmin {
     @POST("supplier")
     @FormUrlEncoded
     Call<PostUpdateDelete> tambahSupplier(@Field("nama")String nama,
-                                           @Field("alamat")String alamat,
-                                           @Field("telp")String telp,
-                                           @Field("created_by")String created_by);
+                                          @Field("alamat")String alamat,
+                                          @Field("telp")String telp,
+                                          @Field("created_by")String created_by);
 
 //    @GET("viewProfile.php/{email}")
     //   Call<UserDAO> getUser(@Path("email") String email);
@@ -26,15 +27,39 @@ public interface ApiInterfaceAdmin {
     @POST("supplier/update/{id_supplier}")
     @FormUrlEncoded
     Call<PostUpdateDelete> ubahSupplier(@Path("id_supplier") String id_supplier,
-                                         @Field("nama")String nama,
-                                         @Field("alamat")String alamat,
-                                         @Field("telp")String telp,
-                                         @Field("modified_by")String modified_by);
+                                        @Field("nama")String nama,
+                                        @Field("alamat")String alamat,
+                                        @Field("telp")String telp,
+                                        @Field("modified_by")String modified_by);
 
     @POST("supplier/delete/{id_supplier}")
     @FormUrlEncoded
     Call<PostUpdateDelete> hapusSupplier(@Path("id_supplier") String id_supplier,
-                                          @Field("delete_by")String delete_by);
+                                         @Field("delete_by")String delete_by);
+
+
+    //KELOLA JENIS HEWAN
+    @POST("jenishewan")
+    @FormUrlEncoded
+    Call<PostUpdateDelete> tambahJenisHewan(@Field("nama")String nama,
+                                            @Field("created_by")String created_by);
+
+//    @GET("viewProfile.php/{email}")
+    //   Call<UserDAO> getUser(@Path("email") String email);
+
+    @GET("jenishewan")
+    Call<GetJenisHewan> getAllJenisHewanAktif();
+
+    @POST("jenishewan/update/{id_jenis_hewan}")
+    @FormUrlEncoded
+    Call<PostUpdateDelete> ubahJenisHewan(@Path("id_jenis_hewan") String id_jenis_hewan,
+                                        @Field("nama")String nama,
+                                        @Field("modified_by")String modified_by);
+
+    @POST("supplier/delete/{id_jenis_hewan}")
+    @FormUrlEncoded
+    Call<PostUpdateDelete> hapusJenisHewan(@Path("id_jenis_hewan") String id_jenis_hewan,
+                                         @Field("delete_by")String delete_by);
 //    @DELETE("Profile/deleteProfile/{id}")
 //    Call<String> deleteUser(@Path("id") String id);
 
