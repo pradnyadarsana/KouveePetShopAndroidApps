@@ -3,6 +3,7 @@
     package="com.example.kouveepetshopapps">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -12,10 +13,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".jenishewan.ListJenisHewanActivity"></activity>
-        <activity android:name=".jenishewan.TambahJenisHewanActivity"></activity>
-        <activity android:name=".jenishewan.TampilDetailJenisHewanActivity"></activity>
-        <activity android:name=".ukuran_hewan.TampilDetailUkuranHewanActivity"></activity>
+        <activity android:name=".adapter.LayananAdapter"></activity>
+        <activity android:name=".layanan.ListLayananActivity" />
+        <activity android:name=".produk.TambahProdukActivity" />
+        <activity android:name=".produk.TampilDetailProdukActivity" />
+        <activity android:name=".produk.ListProdukActivity" />
+        <activity android:name=".jenishewan.ListJenisHewanActivity" />
+        <activity android:name=".jenishewan.TambahJenisHewanActivity" />
+        <activity android:name=".jenishewan.TampilDetailJenisHewanActivity" />
+        <activity android:name=".ukuran_hewan.TampilDetailUkuranHewanActivity" />
         <activity android:name=".ukuran_hewan.TambahUkuranHewanActivity" />
         <activity android:name=".adapter.UkuranHewanAdapter" />
         <activity android:name=".ukuran_hewan.ListUkuranHewanActivity" />
