@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent"
+    android:layout_width="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/LayoutTampilProduk">
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/LayoutTampilProduk">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/default_image_foreground"
+                    android:id="@+id/viewGambarProduk">
+                </ImageView>
+
+                <!--        <RelativeLayout-->
+                <!--            android:id="@+id/btnEditProfile"-->
+                <!--            android:layout_width="105dp"-->
+                <!--            android:layout_height="wrap_content"-->
+                <!--            android:layout_marginRight="15dp"-->
+                <!--            android:layout_marginBottom="10dp"-->
+                <!--            android:layout_alignParentRight="true"-->
+                <!--            android:layout_alignParentBottom="true">-->
+                <!--            &lt;!&ndash;            <ImageView&ndash;&gt;-->
+                <!--            &lt;!&ndash;                android:id="@+id/imgEdit"&ndash;&gt;-->
+                <!--            &lt;!&ndash;                android:layout_width="wrap_content"&ndash;&gt;-->
+                <!--            &lt;!&ndash;                android:layout_height="wrap_content"&ndash;&gt;-->
+                <!--            &lt;!&ndash;                android:layout_alignParentRight="true"&ndash;&gt;-->
+                <!--            &lt;!&ndash;                android:background="@drawable/ic_edit" />&ndash;&gt;-->
+
+                <!--            <TextView-->
+                <!--                android:id="@+id/tvEdit"-->
+                <!--                android:layout_width="wrap_content"-->
+                <!--                android:layout_height="wrap_content"-->
+                <!--                android:layout_marginRight="5dp"-->
+                <!--                android:text="Edit Profile"-->
+                <!--                android:textColor="@color/colorPrimary"/>-->
+                <!--            &lt;!&ndash;            android:layout_toLeftOf="@id/imgEdit"&ndash;&gt;-->
+
+                <!--        </RelativeLayout>-->
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:orientation="vertical"
+                    android:layout_marginTop="40dp"
+                    android:layout_marginBottom="40dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingHorizontal="30dp">
+                        <TextView
+                            android:id="@+id/viewIdProduk"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="Id Produk"
+                            android:paddingLeft="20dp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="25dp"
+                        android:paddingHorizontal="30dp">
+                        <TextView
+                            android:id="@+id/viewNamaProduk"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:paddingLeft="20dp"
+                            android:text="Nama Produk"
+                            android:textStyle="bold"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="25dp"
+                        android:orientation="horizontal"
+                        android:paddingHorizontal="30dp">
+
+                        <!--                <ImageView-->
+                        <!--                    android:layout_width="36dp"-->
+                        <!--                    android:layout_height="36dp"-->
+                        <!--                    android:src="@drawable/ic_phone" />-->
+
+                        <TextView
+                            android:id="@+id/viewSatuanProduk"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:paddingLeft="20dp"
+                            android:text="Satuan"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="25dp"
+                        android:orientation="horizontal"
+                        android:paddingHorizontal="30dp">
+
+                        <!--                <ImageView-->
+                        <!--                    android:layout_width="36dp"-->
+                        <!--                    android:layout_height="36dp"-->
+                        <!--                    android:src="@drawable/ic_gender" />-->
+
+                        <TextView
+                            android:id="@+id/viewJumlahStokProduk"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:paddingLeft="20dp"
+                            android:text="jumlah stok"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="25dp"
+                        android:orientation="horizontal"
+                        android:paddingHorizontal="30dp">
+
+                        <!--                <ImageView-->
+                        <!--                    android:layout_width="36dp"-->
+                        <!--                    android:layout_height="36dp"-->
+                        <!--                    android:src="@drawable/ic_gender" />-->
+
+                        <TextView
+                            android:id="@+id/viewMinStokProduk"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:paddingLeft="20dp"
+                            android:text="min stok"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="25dp"
+                        android:orientation="horizontal"
+                        android:paddingHorizontal="30dp">
+
+                        <!--                <ImageView-->
+                        <!--                    android:layout_width="36dp"-->
+                        <!--                    android:layout_height="36dp"-->
+                        <!--                    android:src="@drawable/ic_gender" />-->
+
+                        <TextView
+                            android:id="@+id/viewHargaProduk"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:paddingLeft="20dp"
+                            android:text="harga"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="25dp"
+                        android:orientation="horizontal"
+                        android:paddingHorizontal="30dp">
+
+                        <!--                <ImageView-->
+                        <!--                    android:layout_width="36dp"-->
+                        <!--                    android:layout_height="36dp"-->
+                        <!--                    android:src="@drawable/ic_gender" />-->
+
+                        <TextView
+                            android:id="@+id/viewCreatedAtProduk"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:paddingLeft="20dp"
+                            android:text="created at"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                </LinearLayout>
+            </RelativeLayout>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+
