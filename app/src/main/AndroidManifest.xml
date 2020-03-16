@@ -12,10 +12,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".jenishewan.ListJenisHewanActivity"></activity>
-        <activity android:name=".jenishewan.TambahJenisHewanActivity"></activity>
-        <activity android:name=".jenishewan.TampilDetailJenisHewanActivity"></activity>
-        <activity android:name=".ukuran_hewan.TampilDetailUkuranHewanActivity"></activity>
+        <activity android:name=".jenishewan.ListJenisHewanActivity" />
+        <activity android:name=".jenishewan.TambahJenisHewanActivity" />
+        <activity android:name=".jenishewan.TampilDetailJenisHewanActivity" />
+        <activity android:name=".jenishewan.EditJenisHewanActivity" />
+        <activity android:name=".ukuran_hewan.TampilDetailUkuranHewanActivity" />
         <activity android:name=".ukuran_hewan.TambahUkuranHewanActivity" />
         <activity android:name=".adapter.UkuranHewanAdapter" />
         <activity android:name=".ukuran_hewan.ListUkuranHewanActivity" />
@@ -27,6 +28,10 @@
         <activity android:name=".pelanggan.TampilDetailPelangganFragment" />
         <activity android:name=".adapter.PelangganAdapter" />
         <activity android:name=".pelanggan.PelangganFragment" />
+        <activity android:name=".hewan.TambahHewanActivity" />
+        <activity android:name=".hewan.TampilDetailHewanFragment" />
+        <activity android:name=".adapter.HewanAdapter" />
+        <activity android:name=".hewan.HewanFragment" />
         <activity android:name=".PetActivity" />
         <activity android:name=".TransactionActivity" />
         <activity android:name=".navigation.CsMainMenu" />

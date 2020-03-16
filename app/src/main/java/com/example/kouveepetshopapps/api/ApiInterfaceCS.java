@@ -1,6 +1,7 @@
 package com.example.kouveepetshopapps.api;
 
 import com.example.kouveepetshopapps.model.UkuranHewanDAO;
+import com.example.kouveepetshopapps.response.GetHewan;
 import com.example.kouveepetshopapps.response.GetPelanggan;
 import com.example.kouveepetshopapps.response.PostUpdateDelete;
 
@@ -69,6 +70,33 @@ public interface ApiInterfaceCS {
     @FormUrlEncoded
     Call<UkuranHewanDAO> hapusUkuranHewan(@Path("id_ukuran_hewan") String id_ukuran_hewan,
                                       @Field("delete_by")String delete_by);
+//    @DELETE("Profile/deleteProfile/{id}")
+//    Call<String> deleteUser(@Path("id") String id);
+
+    //KELOLA HEWAN
+    @POST("hewan")
+    @FormUrlEncoded
+    Call<PostUpdateDelete> tambahHewan(@Field("nama")String nama,
+                                       @Field("tanggal_lahir")String tanggal_lahir,
+                                       @Field("created_by")String created_by);
+
+//    @GET("viewProfile.php/{email}")
+    //   Call<UserDAO> getUser(@Path("email") String email);
+
+    @GET("hewan")
+    Call<GetHewan> getAllHewanAktif();
+
+    @POST("hewan/update/{id_hewan}")
+    @FormUrlEncoded
+    Call<PostUpdateDelete> ubahHewan(@Path("id_pelanggan") String id_hewan,
+                                         @Field("nama")String nama,
+                                         @Field("tanggal_lahir")String tanggal_lahir,
+                                         @Field("modified_by")String modified_by);
+
+    @POST("hewan/delete/{id_hewan}")
+    @FormUrlEncoded
+    Call<PostUpdateDelete> hapusHewan(@Path("id_hewan") String id_hewan,
+                                          @Field("delete_by")String delete_by);
 //    @DELETE("Profile/deleteProfile/{id}")
 //    Call<String> deleteUser(@Path("id") String id);
 }

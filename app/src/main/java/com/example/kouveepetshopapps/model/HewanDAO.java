@@ -1,19 +1,23 @@
 package com.example.kouveepetshopapps.model;
 
+import com.google.gson.annotations.SerializedName;
+
 public class HewanDAO {
     int id_hewan, aktif;
-    String nama, created_at, created_by, modified_at, modified_by, delete_at, delete_by;
+    String nama, tanggal_lahir, created_at, created_by, modified_at, modified_by, delete_at, delete_by;
+
     PelangganDAO pelanggan;
     JenisHewanDAO jenis_hewan;
 
     public HewanDAO(){}
 
-    public HewanDAO(int id_hewan, int aktif, String nama, String created_at, String created_by,
+    public HewanDAO(int id_hewan, int aktif, String nama, String tanggal_lahir, String created_at, String created_by,
                     String modified_at, String modified_by, String delete_at, String delete_by,
                     PelangganDAO pelanggan, JenisHewanDAO jenis_hewan) {
         this.id_hewan = id_hewan;
         this.aktif = aktif;
         this.nama = nama;
+        this.tanggal_lahir = tanggal_lahir;
         this.created_at = created_at;
         this.created_by = created_by;
         this.modified_at = modified_at;
@@ -46,6 +50,14 @@ public class HewanDAO {
 
     public void setNama(String nama) {
         this.nama = nama;
+    }
+
+    public String getTanggal_lahir() {
+        return tanggal_lahir;
+    }
+
+    public void setTanggal_lahir(String tanggal_lahir) {
+        this.tanggal_lahir = tanggal_lahir;
     }
 
     public String getCreated_at() {

@@ -7,9 +7,9 @@ import androidx.fragment.app.Fragment;
 import android.os.Bundle;
 import android.view.MenuItem;
 
-import com.example.kouveepetshopapps.PetActivity;
 import com.example.kouveepetshopapps.R;
 import com.example.kouveepetshopapps.TransactionActivity;
+import com.example.kouveepetshopapps.hewan.HewanFragment;
 import com.example.kouveepetshopapps.pelanggan.PelangganFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -31,7 +31,7 @@ public class CsMainMenu extends AppCompatActivity {
                 csBottomNavigationView.setSelectedItemId(R.id.cs_transaksi);
             }else if(getIntent().getStringExtra("from").equalsIgnoreCase("hewan"))
             {
-                loadFragment(new PetActivity());
+                loadFragment(new HewanFragment());
                 csBottomNavigationView.setSelectedItemId(R.id.cs_hewan);
             } else if(getIntent().getStringExtra("from").equalsIgnoreCase("pelanggan"))
             {
@@ -49,7 +49,7 @@ public class CsMainMenu extends AppCompatActivity {
                         fragment = new TransactionActivity();
                         break;
                     case R.id.cs_hewan:
-                        fragment = new PetActivity();
+                        fragment = new HewanFragment();
                         break;
                     case R.id.cs_pelanggan:
                         fragment = new PelangganFragment();

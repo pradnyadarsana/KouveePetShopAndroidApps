@@ -9,7 +9,8 @@ import com.example.kouveepetshopapps.R;
 
 public class TampilDetailJenisHewanActivity extends AppCompatActivity {
 
-    private TextView nama, id_jenis_hewan, created_at;
+    private TextView nama, id_jenis_hewan, created_at, modified_by;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,7 +19,6 @@ public class TampilDetailJenisHewanActivity extends AppCompatActivity {
         nama = findViewById(R.id.viewNamaJenisHewan);
         id_jenis_hewan = findViewById(R.id.viewIdJenisHewan);
         created_at = findViewById(R.id.viewCreatedAtJenisHewan);
-
         setData();
     }
 

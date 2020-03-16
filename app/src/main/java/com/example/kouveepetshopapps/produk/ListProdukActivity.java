@@ -11,6 +11,6 @@ public class ListProdukActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_list_produk);
+       // setContentView(R.layout.activity_list_produk);
     }
 }

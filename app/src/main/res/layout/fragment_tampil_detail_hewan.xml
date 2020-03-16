@@ -11,7 +11,7 @@
         android:paddingHorizontal="30dp">
 
         <RelativeLayout
-            android:id="@+id/btnEditJenisHewan"
+            android:id="@+id/btnEditHewan"
             android:layout_width="105dp"
             android:layout_height="wrap_content"
             android:layout_marginRight="15dp"
@@ -31,13 +31,13 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="5dp"
                 android:text="Edit Data"
-                android:textColor="@color/colorPrimary" />
+                android:textColor="@color/colorPrimary"/>
             <!--            android:layout_toLeftOf="@id/imgEdit"-->
 
         </RelativeLayout>
 
         <TextView
-            android:id="@+id/viewNamaJenisHewan"
+            android:id="@+id/viewNamaHewan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
@@ -45,19 +45,20 @@
             android:textColor="@color/colorPrimary"
             android:textColorHighlight="@color/colorAccent"
             android:textSize="25dp"
-            android:text="Nama Jenis Hewan"
+            android:text="Nama Hewan"
             android:textStyle="bold"/>
         <TextView
-            android:id="@+id/viewIdJenisHewan"
+            android:id="@+id/viewIdHewan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/viewNamaJenisHewan"
+            android:layout_below="@id/viewNamaHewan"
             android:layout_centerHorizontal="true"
-            android:text="Id Jenis Hewan"
+            android:text="Id hewan"
             android:textColor="@color/colorPrimary"/>
 
 
     </RelativeLayout>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -73,25 +74,38 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="25dp"
-                android:orientation="vertical"
+                android:orientation="horizontal"
+                android:paddingHorizontal="30dp">
+
+                <!--                <ImageView-->
+                <!--                    android:layout_width="36dp"-->
+                <!--                    android:layout_height="36dp"-->
+                <!--                    android:src="@drawable/ic_date" />-->
+
+                <TextView
+                    android:id="@+id/viewTanggalLahirHewan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:paddingLeft="20dp"
+                    android:text="10-10-1999"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:orientation="horizontal"
                 android:paddingHorizontal="30dp">
 
                 <!--                <ImageView-->
                 <!--                    android:layout_width="36dp"-->
                 <!--                    android:layout_height="36dp"-->
                 <!--                    android:src="@drawable/ic_gender" />-->
-                <TextView
-                    android:id="@+id/TitleCreatedAt"
-                    android:justificationMode="inter_word"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:paddingLeft="20dp"
-                    android:text="Created At:"
-                    android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/viewCreatedAtJenisHewan"
+                    android:id="@+id/viewCreatedAtHewan"
                     android:justificationMode="inter_word"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

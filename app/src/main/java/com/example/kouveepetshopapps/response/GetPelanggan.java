@@ -3,6 +3,7 @@ package com.example.kouveepetshopapps.response;
 import com.example.kouveepetshopapps.model.PelangganDAO;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.List;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +16,7 @@ public class GetPelanggan {
 
     public GetPelanggan(){}
 
-    public GetPelanggan(String error, List<PelangganDAO> listDataPelanggan) {
+    public GetPelanggan(String error, List<PelangganDAO> listDataHewan) {
         this.error = error;
         this.listDataPelanggan = listDataPelanggan;
     }
@@ -32,7 +33,8 @@ public class GetPelanggan {
         return listDataPelanggan;
     }
 
-    public void setListDataPelanggan(List<PelangganDAO> listDataPelanggan) {
+    public void setListDataHewan(List<PelangganDAO> listDataPelanggan) {
         this.listDataPelanggan = listDataPelanggan;
     }
 }
+
