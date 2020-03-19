@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.kouveepetshopapps.R;
@@ -55,8 +56,12 @@ public class ListLayananActivity extends AppCompatActivity {
         addLayananBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent add = new Intent(ListLayananActivity.this, TambahProdukActivity.class);
-                startActivity(add);
+//                Intent add = new Intent(ListLayananActivity.this, TambahProdukActivity.class);
+//                startActivity(add);
+
+                //get text from adapter
+                TextView nama_layanan = recyclerLayanan.findViewHolderForAdapterPosition(2).itemView.findViewById(R.id.tvNamaLayanan);
+                System.out.println(nama_layanan.getText());
             }
         });
     }
@@ -71,6 +76,7 @@ public class ListLayananActivity extends AppCompatActivity {
                 ListLayanan.addAll(response.body().getListDataLayanan());
                 System.out.println(ListLayanan.get(0).getNama());
                 adapterLayanan.notifyDataSetChanged();
+
 //                Toast.makeText(getActivity(), "Welcome", Toast.LENGTH_SHORT).show();
             }
 
