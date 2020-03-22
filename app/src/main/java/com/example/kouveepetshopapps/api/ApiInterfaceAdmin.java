@@ -1,5 +1,6 @@
 package com.example.kouveepetshopapps.api;
 
+import com.example.kouveepetshopapps.model.HargaLayananDAO;
 import com.example.kouveepetshopapps.response.GetHargaLayanan;
 import com.example.kouveepetshopapps.response.GetJenisHewan;
 import com.example.kouveepetshopapps.response.GetLayanan;
@@ -7,6 +8,9 @@ import com.example.kouveepetshopapps.response.GetProduk;
 import com.example.kouveepetshopapps.response.GetSupplier;
 import com.example.kouveepetshopapps.response.GetUkuranHewan;
 import com.example.kouveepetshopapps.response.PostUpdateDelete;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -155,16 +159,17 @@ public interface ApiInterfaceAdmin {
     @FormUrlEncoded
     Call<PostUpdateDelete> hapusLayanan(@Path("id_layanan") String id_layanan,
                                             @Field("delete_by")String delete_by);
-//    @DELETE("Profile/deleteProfile/{id}")
-//    Call<String> deleteUser(@Path("id") String id);
+
+    @DELETE("layanan/{id}")
+    Call<PostUpdateDelete> hapusPermanentLayanan(@Path("id_layanan") String id_layanan);
 
     //KELOLA HARGA LAYANAN
     @POST("hargaLayanan")
     @FormUrlEncoded
     Call<PostUpdateDelete> tambahHargaLayanan(@Field("id_layanan")String id_layanan,
-                                         @Field("id_ukuran_hewan") String id_ukuran_hewan,
-                                         @Field("harga") String harga,
-                                         @Field("created_by")String created_by);
+                                              @Field("id_ukuran_hewan") String id_ukuran_hewan,
+                                              @Field("harga") String harga,
+                                              @Field("created_by") String created_by);
 
 //    @GET("viewProfile.php/{email}")
     //   Call<UserDAO> getUser(@Path("email") String email);
@@ -185,6 +190,7 @@ public interface ApiInterfaceAdmin {
     @FormUrlEncoded
     Call<PostUpdateDelete> hapusHargaLayanan(@Path("id_harga_layanan") String id_harga_layanan,
                                         @Field("delete_by")String delete_by);
-//    @DELETE("Profile/deleteProfile/{id}")
-//    Call<String> deleteUser(@Path("id") String id);
+
+    @DELETE("hargaLayanan/{id}")
+    Call<PostUpdateDelete> hapusPermanentHargaLayanan(@Path("id_layanan") String id_layanan);
 }

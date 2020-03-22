@@ -56,12 +56,8 @@ public class ListLayananActivity extends AppCompatActivity {
         addLayananBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent add = new Intent(ListLayananActivity.this, TambahProdukActivity.class);
-//                startActivity(add);
-
-                //get text from adapter
-                TextView nama_layanan = recyclerLayanan.findViewHolderForAdapterPosition(2).itemView.findViewById(R.id.tvNamaLayanan);
-                System.out.println(nama_layanan.getText());
+                Intent add = new Intent(ListLayananActivity.this, TambahLayananActivity.class);
+                startActivity(add);
             }
         });
     }

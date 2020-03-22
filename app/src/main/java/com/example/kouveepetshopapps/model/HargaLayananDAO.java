@@ -1,8 +1,30 @@
 package com.example.kouveepetshopapps.model;
 
+import com.google.gson.annotations.SerializedName;
+
 public class HargaLayananDAO {
-    int id_harga_layanan, id_layanan, id_ukuran_hewan, harga, aktif;
-    String created_at, created_by, modified_at, modified_by, delete_at, delete_by;
+    @SerializedName("id_harga_layanan")
+    int id_harga_layanan;
+    @SerializedName("id_layanan")
+    int id_layanan;
+    @SerializedName("id_ukuran_hewan")
+    int id_ukuran_hewan;
+    @SerializedName("harga")
+    int harga;
+    @SerializedName("created_at")
+    String created_at;
+    @SerializedName("created_by")
+    String created_by;
+    @SerializedName("modified_at")
+    String modified_at;
+    @SerializedName("modified_by")
+    String modified_by;
+    @SerializedName("delete_at")
+    String delete_at;
+    @SerializedName("delete_by")
+    String delete_by;
+    @SerializedName("aktif")
+    int aktif;
 
     public HargaLayananDAO(){}
 
