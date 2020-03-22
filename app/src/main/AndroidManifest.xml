@@ -22,8 +22,13 @@
         <activity android:name=".produk.TambahProdukActivity" />
         <activity android:name=".produk.TampilDetailProdukActivity" />
         <activity android:name=".produk.ListProdukActivity" />
+        <activity android:name=".adapter.HewanAdapter" />
+        <activity android:name=".hewan.TambahHewanActivity"/>
+        <activity android:name=".hewan.TampilDetailHewanFragment" />
+        <activity android:name=".hewan.HewanFragment"/>
         <activity android:name=".jenishewan.ListJenisHewanActivity" />
         <activity android:name=".jenishewan.TambahJenisHewanActivity" />
+        <activity android:name=".jenishewan.EditJenisHewanActivity" />
         <activity android:name=".jenishewan.TampilDetailJenisHewanActivity" />
         <activity android:name=".ukuran_hewan.TampilDetailUkuranHewanActivity" />
         <activity android:name=".ukuran_hewan.TambahUkuranHewanActivity" />
