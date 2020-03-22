@@ -37,7 +37,7 @@ public class TampilDetailProdukActivity extends AppCompatActivity {
         harga.setText(getIntent().getStringExtra("harga"));
         created_at.setText(getIntent().getStringExtra("created_at"));
 
-        String photo_url = "http://kouveepetshopapi.smithdev.tech/upload/produk/"+getIntent().getStringExtra("gambar");
+        String photo_url = "http://kouveepetshopapi.smithdev.xyz/upload/produk/"+getIntent().getStringExtra("gambar");
         Glide.with(TampilDetailProdukActivity.this).load(photo_url).into(gambar);
     }
 }

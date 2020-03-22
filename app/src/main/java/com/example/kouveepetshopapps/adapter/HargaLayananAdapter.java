@@ -20,10 +20,11 @@ import com.example.kouveepetshopapps.R;
 import com.example.kouveepetshopapps.api.ApiClient;
 import com.example.kouveepetshopapps.api.ApiInterfaceAdmin;
 import com.example.kouveepetshopapps.layanan.TampilDetailLayananActivity;
+import com.example.kouveepetshopapps.model.HargaLayananDAO;
 import com.example.kouveepetshopapps.model.LayananDAO;
 import com.example.kouveepetshopapps.model.UkuranHewanDAO;
+import com.example.kouveepetshopapps.response.GetUkuranHewan;
 import com.example.kouveepetshopapps.response.PostUpdateDelete;
-import com.example.kouveepetshopapps.ukuran_hewan.TampilDetailUkuranHewanActivity;
 
 import java.util.List;
 
@@ -31,11 +32,11 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class LayananAdapter extends RecyclerView.Adapter<LayananAdapter.MyViewHolder> {
+public class HargaLayananAdapter extends RecyclerView.Adapter<HargaLayananAdapter.MyViewHolder> {
     private Context context;
-    private List<LayananDAO> result;
+    private List<HargaLayananDAO> result;
 
-    public LayananAdapter(Context context, List<LayananDAO> result) {
+    public HargaLayananAdapter(Context context, List<HargaLayananDAO> result) {
         this.context = context;
         this.result = result;
     }
@@ -43,7 +44,7 @@ public class LayananAdapter extends RecyclerView.Adapter<LayananAdapter.MyViewHo
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(context).inflate(R.layout.adapter_layanan, parent, false);
+        View v = LayoutInflater.from(context).inflate(R.layout.adapter_harga_layanan, parent, false);
         final MyViewHolder holder = new MyViewHolder(v);
 
         return holder;
@@ -51,20 +52,21 @@ public class LayananAdapter extends RecyclerView.Adapter<LayananAdapter.MyViewHo
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, final int position) {
-        final LayananDAO layanan = result.get(position);
-        System.out.println(result.get(position).getNama() + " " + position);
-        holder.nama.setText(layanan.getNama());
-        holder.id_layanan.setText(Integer.toString(layanan.getId_layanan()));
-        holder.parent.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startIntent(layanan, TampilDetailLayananActivity.class);
-            }
-        });
+        final HargaLayananDAO harga_layanan = result.get(position);
+        System.out.println(result.get(position).getHarga() + " " + position);
+
+        setNamaUkuran(holder, harga_layanan.getId_ukuran_hewan());
+        holder.harga.setText(Integer.toString(harga_layanan.getHarga()));
+//        holder.parent.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                startIntent(layanan, TampilDetailLayananActivity.class);
+//            }
+//        });
         holder.parent.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
-                showDialog(layanan, position);
+                showDialog(harga_layanan, position);
                 return false;
             }
         });
@@ -86,14 +88,14 @@ public class LayananAdapter extends RecyclerView.Adapter<LayananAdapter.MyViewHo
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        private TextView nama, id_layanan;
+        private TextView nama_ukuran_hewan, harga;
         private CardView parent;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            id_layanan = itemView.findViewById(R.id.tvIdLayanan);
-            nama = itemView.findViewById(R.id.tvNamaLayanan);
-            parent = itemView.findViewById(R.id.ParentLayanan);
+            nama_ukuran_hewan = itemView.findViewById(R.id.tvNamaUkuranLayanan);
+            harga = itemView.findViewById(R.id.tvHargaLayanan);
+            parent = itemView.findViewById(R.id.ParentHargaLayanan);
         }
 
         public void onClick(View view) {
@@ -101,7 +103,7 @@ public class LayananAdapter extends RecyclerView.Adapter<LayananAdapter.MyViewHo
         }
     }
 
-    private void showDialog(final LayananDAO hasil, final int position) {
+    private void showDialog(final HargaLayananDAO hasil, final int position) {
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
 
         // set title dialog
@@ -120,7 +122,7 @@ public class LayananAdapter extends RecyclerView.Adapter<LayananAdapter.MyViewHo
                 .setNegativeButton("Delete", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         //delete report
-                        deleteLayanan(hasil.getId_layanan(), "admin", position);
+                        deleteHargaLayanan(hasil.getId_harga_layanan(), "admin", position);
                     }
                 })
                 .setNeutralButton("Cancel", new DialogInterface.OnClickListener() {
@@ -137,33 +139,57 @@ public class LayananAdapter extends RecyclerView.Adapter<LayananAdapter.MyViewHo
         alertDialog.show();
     }
 
-    private void startIntent(LayananDAO hasil, Class nextView) {
-        Intent view = new Intent(context, nextView);
-        view.putExtra("id_layanan", Integer.toString(hasil.getId_layanan()));
-        view.putExtra("nama_layanan", hasil.getNama());
-        view.putExtra("created_at", hasil.getCreated_at());
-        view.putExtra("created_by", hasil.getCreated_by());
-        view.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        context.startActivity(view);
-    }
+//    private void startIntent(HargaLayananDAO hasil, Class nextView) {
+//        Intent view = new Intent(context, nextView);
+//        view.putExtra("id_layanan", Integer.toString(hasil.getId_layanan()));
+//        view.putExtra("nama_layanan", hasil.getNama());
+//        view.putExtra("created_at", hasil.getCreated_at());
+//        view.putExtra("created_by", hasil.getCreated_by());
+//        view.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//        context.startActivity(view);
+//    }
 
-    private void deleteLayanan(int id, String delete_by, final int position) {
+    private void deleteHargaLayanan(int id, String delete_by, final int position) {
         ApiInterfaceAdmin apiService = ApiClient.getClient().create(ApiInterfaceAdmin.class);
-        Call<PostUpdateDelete> layananDAOCall = apiService.hapusLayanan(Integer.toString(id), delete_by);
+        Call<PostUpdateDelete> hargalayananDAOCall = apiService.hapusLayanan(Integer.toString(id), delete_by);
 
-        layananDAOCall.enqueue(new Callback<PostUpdateDelete>() {
+        hargalayananDAOCall.enqueue(new Callback<PostUpdateDelete>() {
             @Override
             public void onResponse(Call<PostUpdateDelete> call, Response<PostUpdateDelete> response) {
                 //reverse close
                 System.out.println(response.body().getMessage());
-                Toast.makeText(context, "Sukses menghapus layanan", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Sukses menghapus harga layanan", Toast.LENGTH_SHORT).show();
                 delete(position);
             }
 
             @Override
             public void onFailure(Call<PostUpdateDelete> call, Throwable t) {
 
-                Toast.makeText(context, "Gagal menghapus layanan", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Gagal menghapus harga layanan", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    public void setNamaUkuran(final MyViewHolder holder, final int id_ukuran_hewan){
+        ApiInterfaceAdmin apiService = ApiClient.getClient().create(ApiInterfaceAdmin.class);
+        Call<GetUkuranHewan> ukuranDAOCall = apiService.searchUkuran(Integer.toString(id_ukuran_hewan));
+
+        ukuranDAOCall.enqueue(new Callback<GetUkuranHewan>() {
+            @Override
+            public void onResponse(Call<GetUkuranHewan> call, Response<GetUkuranHewan> response) {
+                List<UkuranHewanDAO> ListUkuranHewan = response.body().getListDataUkuranHewan();
+                UkuranHewanDAO ukuran = new UkuranHewanDAO();
+                for (UkuranHewanDAO tempUkuran: ListUkuranHewan) {
+                    if(tempUkuran.getId_ukuran_hewan()==id_ukuran_hewan){
+                        ukuran = tempUkuran;
+                    }
+                }
+                holder.nama_ukuran_hewan.setText(ukuran.getNama());
+            }
+
+            @Override
+            public void onFailure(Call<GetUkuranHewan> call, Throwable t) {
+                holder.nama_ukuran_hewan.setText(id_ukuran_hewan);
             }
         });
     }

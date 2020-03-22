@@ -77,7 +77,7 @@ public class ListProdukActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<GetProduk> call, Throwable t) {
-                Toast.makeText(ListProdukActivity.this, "Gagal menampilkan Supplier", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ListProdukActivity.this, "Gagal menampilkan Produk", Toast.LENGTH_SHORT).show();
             }
         });
     }

@@ -77,7 +77,7 @@ public class ListUkuranHewanActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<GetUkuranHewan> call, Throwable t) {
-                Toast.makeText(ListUkuranHewanActivity.this, "Gagal menampilkan Supplier", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ListUkuranHewanActivity.this, "Gagal menampilkan ukuran hewan", Toast.LENGTH_SHORT).show();
             }
         });
     }

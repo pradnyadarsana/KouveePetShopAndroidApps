@@ -13,7 +13,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".adapter.LayananAdapter"></activity>
+        <activity android:name=".adapter.TambahLayananAdapter"></activity>
+        <activity android:name=".layanan.TambahLayananActivity" />
+        <activity android:name=".adapter.HargaLayananAdapter" />
+        <activity android:name=".layanan.TampilDetailLayananActivity" />
+        <activity android:name=".adapter.LayananAdapter" />
         <activity android:name=".layanan.ListLayananActivity" />
         <activity android:name=".produk.TambahProdukActivity" />
         <activity android:name=".produk.TampilDetailProdukActivity" />

@@ -1,17 +1,39 @@
 package com.example.kouveepetshopapps.model;
 
+import com.google.gson.annotations.SerializedName;
+
 public class HargaLayananDAO {
-    int id_harga_layanan, harga, aktif;
-    String created_at, created_by, modified_at, modified_by, delete_at, delete_by;
-    LayananDAO layanan;
-    UkuranHewanDAO ukuran_hewan;
+    @SerializedName("id_harga_layanan")
+    int id_harga_layanan;
+    @SerializedName("id_layanan")
+    int id_layanan;
+    @SerializedName("id_ukuran_hewan")
+    int id_ukuran_hewan;
+    @SerializedName("harga")
+    int harga;
+    @SerializedName("created_at")
+    String created_at;
+    @SerializedName("created_by")
+    String created_by;
+    @SerializedName("modified_at")
+    String modified_at;
+    @SerializedName("modified_by")
+    String modified_by;
+    @SerializedName("delete_at")
+    String delete_at;
+    @SerializedName("delete_by")
+    String delete_by;
+    @SerializedName("aktif")
+    int aktif;
 
     public HargaLayananDAO(){}
 
-    public HargaLayananDAO(int id_harga_layanan, int harga, int aktif, String created_at,
-                           String created_by, String modified_at, String modified_by, String delete_at,
-                           String delete_by, LayananDAO layanan, UkuranHewanDAO ukuran_hewan) {
+    public HargaLayananDAO(int id_harga_layanan, int id_layanan, int id_ukuran_hewan, int harga,
+                           int aktif, String created_at, String created_by, String modified_at,
+                           String modified_by, String delete_at, String delete_by) {
         this.id_harga_layanan = id_harga_layanan;
+        this.id_layanan = id_layanan;
+        this.id_ukuran_hewan = id_ukuran_hewan;
         this.harga = harga;
         this.aktif = aktif;
         this.created_at = created_at;
@@ -20,8 +42,6 @@ public class HargaLayananDAO {
         this.modified_by = modified_by;
         this.delete_at = delete_at;
         this.delete_by = delete_by;
-        this.layanan = layanan;
-        this.ukuran_hewan = ukuran_hewan;
     }
 
     public int getId_harga_layanan() {
@@ -30,6 +50,22 @@ public class HargaLayananDAO {
 
     public void setId_harga_layanan(int id_harga_layanan) {
         this.id_harga_layanan = id_harga_layanan;
+    }
+
+    public int getId_layanan() {
+        return id_layanan;
+    }
+
+    public void setId_layanan(int id_layanan) {
+        this.id_layanan = id_layanan;
+    }
+
+    public int getId_ukuran_hewan() {
+        return id_ukuran_hewan;
+    }
+
+    public void setId_ukuran_hewan(int id_ukuran_hewan) {
+        this.id_ukuran_hewan = id_ukuran_hewan;
     }
 
     public int getHarga() {
@@ -94,21 +130,5 @@ public class HargaLayananDAO {
 
     public void setDelete_by(String delete_by) {
         this.delete_by = delete_by;
-    }
-
-    public LayananDAO getLayanan() {
-        return layanan;
-    }
-
-    public void setLayanan(LayananDAO layanan) {
-        this.layanan = layanan;
-    }
-
-    public UkuranHewanDAO getUkuran_hewan() {
-        return ukuran_hewan;
-    }
-
-    public void setUkuran_hewan(UkuranHewanDAO ukuran_hewan) {
-        this.ukuran_hewan = ukuran_hewan;
     }
 }
