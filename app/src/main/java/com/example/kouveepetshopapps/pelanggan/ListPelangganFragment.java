@@ -29,7 +29,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class PelangganFragment extends Fragment {
+public class ListPelangganFragment extends Fragment {
     private List<PelangganDAO> ListPelanggan;
     private RecyclerView recyclerPelanggan;
     private PelangganAdapter adapterPelanggan;
@@ -39,7 +39,7 @@ public class PelangganFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_pelanggan, container, false);
+        View view = inflater.inflate(R.layout.fragment_list_pelanggan, container, false);
 
         recyclerPelanggan = view.findViewById(R.id.recycler_view_pelanggan);
         addPelangganBtn = view.findViewById(R.id.addPelangganButton);

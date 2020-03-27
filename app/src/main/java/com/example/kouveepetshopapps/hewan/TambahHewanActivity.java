@@ -11,19 +11,31 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.kouveepetshopapps.R;
 import com.example.kouveepetshopapps.api.ApiClient;
+import com.example.kouveepetshopapps.api.ApiInterfaceAdmin;
 import com.example.kouveepetshopapps.api.ApiInterfaceCS;
+import com.example.kouveepetshopapps.model.JenisHewanDAO;
+import com.example.kouveepetshopapps.model.PelangganDAO;
 import com.example.kouveepetshopapps.navigation.CsMainMenu;
+import com.example.kouveepetshopapps.response.GetJenisHewan;
+import com.example.kouveepetshopapps.response.GetPelanggan;
 import com.example.kouveepetshopapps.response.PostUpdateDelete;
 
+import java.io.IOException;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -32,6 +44,10 @@ import retrofit2.Response;
 public class TambahHewanActivity extends AppCompatActivity {
 
     private EditText nama;
+    private AutoCompleteTextView nama_pemilik;
+    private Spinner jenis_hewan;
+    public List<PelangganDAO> ListPelanggan;
+    public List<JenisHewanDAO> ListJenisHewan;
     private TextView tanggal_lahir;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
     String TAG = "TambahHewanActivity";
@@ -42,7 +58,19 @@ public class TambahHewanActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tambah_hewan);
+
+        ListPelanggan = new ArrayList<>();
+        ListJenisHewan = new ArrayList<>();
+
         nama = (EditText) findViewById(R.id.etNamaHewan);
+        jenis_hewan = findViewById(R.id.spinJenisHewan);
+        //Getting the instance of AutoCompleteTextView
+        nama_pemilik = (AutoCompleteTextView) findViewById(R.id.etNamaPemilik);
+        nama_pemilik.setThreshold(1);//will start working from first character
+
+        getListJenisHewan();
+        getListPelanggan();
+
         tanggal_lahir = (TextView) findViewById(R.id.etTanggalLahirHewan);
         datepicker();
         btnTambah = (Button) findViewById(R.id.btnTambahHewan);
@@ -53,13 +81,16 @@ public class TambahHewanActivity extends AppCompatActivity {
                 if(nama.getText().toString().isEmpty())
                 {
                     showDialog("Kolom nama kosong");
+                }else if (jenis_hewan.getSelectedItem().toString().isEmpty()){
+                    showDialog("Kolom jenis hewan kosong");
+                }else if (nama_pemilik.getText().toString().isEmpty()){
+                    showDialog("Kolom nama pemilik hewan kosong");
                 }else if (tanggal_lahir.getText().toString().isEmpty()){
-                    showDialog("Kolom tanggal lahir kosong");
+                    showDialog("Kolom tanggal lahir hewan kosong");
                 }else
                 {
                     tambahHewan();
                 }
-
             }
         });
     }
@@ -97,6 +128,73 @@ public class TambahHewanActivity extends AppCompatActivity {
         };
     }
 
+    public void getListPelanggan(){
+        ApiInterfaceCS apiService = ApiClient.getClient().create(ApiInterfaceCS.class);
+        Call<GetPelanggan> pelangganDAOCall = apiService.getAllPelangganAktif();
+
+        pelangganDAOCall.enqueue(new Callback<GetPelanggan>() {
+            @Override
+            public void onResponse(Call<GetPelanggan> call, Response<GetPelanggan> response) {
+                TambahHewanActivity.this.ListPelanggan.addAll(response.body().getListDataPelanggan());
+                System.out.println(ListPelanggan.get(0).getNama());
+                String[] arrName = new String[ListPelanggan.size()];
+                int i = 0;
+                for (PelangganDAO pel: ListPelanggan
+                ) {
+                    arrName[i] = pel.getNama();
+                    i++;
+                }
+
+                //Creating the instance of ArrayAdapter containing list of fruit names
+                ArrayAdapter<String> adapter = new ArrayAdapter<>
+                        (TambahHewanActivity.this, android.R.layout.select_dialog_item, arrName);
+
+                nama_pemilik.setAdapter(adapter);//setting the adapter data into the AutoCompleteTextView
+
+                //Toast.makeText(getActivity(), "Sukses ", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFailure(Call<GetPelanggan> call, Throwable t) {
+                //Toast.makeText(getContext(), "Gagal menampilkan pelanggan", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+    }
+
+    public void getListJenisHewan(){
+        ApiInterfaceAdmin apiService = ApiClient.getClient().create(ApiInterfaceAdmin.class);
+        Call<GetJenisHewan> jenishewanDAOCall = apiService.getAllJenisHewanAktif();
+
+        jenishewanDAOCall.enqueue(new Callback<GetJenisHewan>() {
+            @Override
+            public void onResponse(Call<GetJenisHewan> call, Response<GetJenisHewan> response) {
+                ListJenisHewan.addAll(response.body().getListDataJenisHewan());
+                System.out.println(ListJenisHewan.get(0).getNama());
+                String[] arrName = new String[ListJenisHewan.size()];
+                int i = 0;
+                for (JenisHewanDAO jenis: ListJenisHewan
+                ) {
+                    arrName[i] = jenis.getNama();
+                    i++;
+                }
+
+                //Creating the instance of ArrayAdapter containing list of fruit names
+                ArrayAdapter<String> adapter = new ArrayAdapter<>
+                        (TambahHewanActivity.this, android.R.layout.simple_spinner_dropdown_item, arrName);
+                jenis_hewan.setAdapter(adapter);//setting the adapter data into the AutoCompleteTextView
+
+                //Toast.makeText(getActivity(), "Sukses ", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFailure(Call<GetJenisHewan> call, Throwable t) {
+                //Toast.makeText(getContext(), "Gagal menampilkan pelanggan", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+    }
+
     private void startIntent(){
         Intent back = new Intent(TambahHewanActivity.this, CsMainMenu.class);
         back.putExtra("from", "hewan");
@@ -104,23 +202,56 @@ public class TambahHewanActivity extends AppCompatActivity {
         startActivity(back);
     }
 
+    public int getIdPelanggan(String nama)
+    {
+        for (PelangganDAO pel:ListPelanggan
+             ) {
+            if(pel.getNama().equalsIgnoreCase(nama)){
+                return pel.getId_pelanggan();
+            }
+        }
+        return -1;
+    }
+
+    public int getIdJenisHewan(String nama)
+    {
+        for (JenisHewanDAO jenis:ListJenisHewan
+        ) {
+            if(jenis.getNama().equalsIgnoreCase(nama)){
+                return jenis.getId_jenis_hewan();
+            }
+        }
+        return -1;
+    }
+
     public void tambahHewan(){
-        ApiInterfaceCS apiService = ApiClient.getClient().create(ApiInterfaceCS.class);
-        Call<PostUpdateDelete> hewanDAOCall = apiService.tambahHewan(nama.getText().toString(),
-                tanggal_lahir_temp,"kadekharyadi");
+        int id_pemilik = getIdPelanggan(nama_pemilik.getText().toString());
+        int id_jenis_hewan = getIdJenisHewan(jenis_hewan.getSelectedItem().toString());
 
-        hewanDAOCall.enqueue(new Callback<PostUpdateDelete>() {
-            @Override
-            public void onResponse(Call<PostUpdateDelete> call, Response<PostUpdateDelete> response) {
-                Toast.makeText(TambahHewanActivity.this, "Sukses menambahkan hewan", Toast.LENGTH_SHORT).show();
-                startIntent();
-            }
+        if(id_pemilik==-1){
+            showDialog("Pemilik belum terdaftar, daftar member terlebih dahulu");
+        }else if(id_jenis_hewan==-1){
+            showDialog("Jenis hewan tidak tersedia");
+        }else {
+            ApiInterfaceCS apiService = ApiClient.getClient().create(ApiInterfaceCS.class);
+            Call<PostUpdateDelete> hewanDAOCall = apiService.tambahHewan(Integer.toString(id_pemilik),
+                    Integer.toString(id_jenis_hewan),nama.getText().toString(), tanggal_lahir_temp,
+                    "kadekharyadi");
 
-            @Override
-            public void onFailure(Call<PostUpdateDelete> call, Throwable t) {
-                Toast.makeText(TambahHewanActivity.this, "Gagal menambahkan hewan", Toast.LENGTH_SHORT).show();
-            }
-        });
+            hewanDAOCall.enqueue(new Callback<PostUpdateDelete>() {
+                @Override
+                public void onResponse(Call<PostUpdateDelete> call, Response<PostUpdateDelete> response) {
+                    Toast.makeText(TambahHewanActivity.this, "Sukses menambahkan hewan", Toast.LENGTH_SHORT).show();
+                    startIntent();
+                }
+
+                @Override
+                public void onFailure(Call<PostUpdateDelete> call, Throwable t) {
+                    Toast.makeText(TambahHewanActivity.this, "Gagal menambahkan hewan", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+
     }
 
     private void showDialog(String rules){
@@ -147,4 +278,6 @@ public class TambahHewanActivity extends AppCompatActivity {
         // menampilkan alert dialog
         alertDialog.show();
     }
+
+
 }

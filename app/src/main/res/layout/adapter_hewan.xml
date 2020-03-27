@@ -21,22 +21,30 @@
 
             <TextView
                 android:id="@+id/tvNamaHewan"
-                android:layout_width="wrap_content"
+                android:layout_width="285dp"
                 android:layout_height="wrap_content"
+                android:layout_marginRight="6dp"
                 android:text="Nama Hewan"
                 android:textSize="14dp"
-                android:layout_weight="7"
                 android:textStyle="bold"/>
 
             <TextView
-                android:id="@+id/tvIdHewan"
-                android:layout_width="wrap_content"
+                android:id="@+id/tvJenisHewan"
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="3dp"
-                android:text="Id"
-                android:textSize="12dp"
-                android:layout_weight="1"/>
+                android:textAlignment="textEnd"
+                android:text="Anjing"
+                android:textSize="12dp"/>
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/tvNamaPemilikHewan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nama Pemilik"
+            android:textSize="12dp"
+            android:layout_marginTop="5dp"
+            android:textColor="#858585"/>
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>

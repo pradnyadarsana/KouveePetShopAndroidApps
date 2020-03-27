@@ -11,7 +11,7 @@
         android:paddingHorizontal="30dp">
 
         <RelativeLayout
-            android:id="@+id/btnEditHewan"
+            android:id="@+id/btnEditProfile"
             android:layout_width="105dp"
             android:layout_height="wrap_content"
             android:layout_marginRight="15dp"
@@ -30,7 +30,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="5dp"
-                android:text="Edit Data"
+                android:text="Edit Profile"
                 android:textColor="@color/colorPrimary"/>
             <!--            android:layout_toLeftOf="@id/imgEdit"-->
 
@@ -45,20 +45,27 @@
             android:textColor="@color/colorPrimary"
             android:textColorHighlight="@color/colorAccent"
             android:textSize="25dp"
-            android:text="Nama Hewan"
+            android:text="Full Name"
             android:textStyle="bold"/>
+        <TextView
+            android:id="@+id/viewJenisHewanPelanggan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/viewNamaHewan"
+            android:layout_centerHorizontal="true"
+            android:text="Jenis Hewan"
+            android:textColor="@color/colorPrimary"/>
         <TextView
             android:id="@+id/viewIdHewan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/viewNamaHewan"
+            android:layout_below="@id/viewJenisHewanPelanggan"
             android:layout_centerHorizontal="true"
             android:text="Id hewan"
             android:textColor="@color/colorPrimary"/>
 
 
     </RelativeLayout>
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -69,6 +76,28 @@
             android:layout_gravity="center"
             android:orientation="vertical"
             android:layout_marginTop="20dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:orientation="horizontal"
+                android:paddingHorizontal="30dp">
+
+                <!--                <ImageView-->
+                <!--                    android:layout_width="36dp"-->
+                <!--                    android:layout_height="36dp"-->
+                <!--                    android:src="@drawable/ic_phone" />-->
+
+                <TextView
+                    android:id="@+id/viewNamaPemilik"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:paddingLeft="20dp"
+                    android:text="Nama Pemilik"
+                    android:textStyle="bold" />
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -91,7 +120,6 @@
                     android:text="10-10-1999"
                     android:textStyle="bold" />
             </LinearLayout>
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -112,6 +140,28 @@
                     android:layout_gravity="center_vertical"
                     android:paddingLeft="20dp"
                     android:text="03-04-2019 01:01:55"
+                    android:textStyle="bold" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:orientation="horizontal"
+                android:paddingHorizontal="30dp">
+
+                <!--                <ImageView-->
+                <!--                    android:layout_width="36dp"-->
+                <!--                    android:layout_height="36dp"-->
+                <!--                    android:src="@drawable/ic_gender" />-->
+
+                <TextView
+                    android:id="@+id/viewCreatedByHewan"
+                    android:justificationMode="inter_word"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:paddingLeft="20dp"
+                    android:text="Admin"
                     android:textStyle="bold" />
             </LinearLayout>
         </LinearLayout>

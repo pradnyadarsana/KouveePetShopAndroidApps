@@ -18,9 +18,16 @@ import android.widget.Toast;
 
 import com.example.kouveepetshopapps.R;
 import com.example.kouveepetshopapps.api.ApiClient;
+import com.example.kouveepetshopapps.api.ApiInterfaceAdmin;
 import com.example.kouveepetshopapps.api.ApiInterfaceCS;
 import com.example.kouveepetshopapps.hewan.TampilDetailHewanFragment;
 import com.example.kouveepetshopapps.model.HewanDAO;
+import com.example.kouveepetshopapps.model.JenisHewanDAO;
+import com.example.kouveepetshopapps.model.PelangganDAO;
+import com.example.kouveepetshopapps.model.UkuranHewanDAO;
+import com.example.kouveepetshopapps.response.GetJenisHewan;
+import com.example.kouveepetshopapps.response.GetPelanggan;
+import com.example.kouveepetshopapps.response.GetUkuranHewan;
 import com.example.kouveepetshopapps.response.PostUpdateDelete;
 
 import java.util.List;
@@ -48,10 +55,11 @@ public class HewanAdapter extends RecyclerView.Adapter<HewanAdapter.MyViewHolder
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull final MyViewHolder holder, final int position) {
         final HewanDAO hewan = result.get(position);
         holder.nama.setText(hewan.getNama());
-        holder.id_hewan.setText(Integer.toString(hewan.getId_hewan()));
+        setNamaJenisHewan(holder, hewan.getId_jenis_hewan());
+        setNamaPelanggan(holder, hewan.getId_pelanggan());
         holder.parent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -60,8 +68,13 @@ public class HewanAdapter extends RecyclerView.Adapter<HewanAdapter.MyViewHolder
 
                 data.putString("id_hewan", Integer.toString(hewan.getId_hewan()));
                 data.putString("nama", hewan.getNama());
+                data.putString("id_pelanggan", Integer.toString(hewan.getId_pelanggan()));
+                data.putString("nama_pelanggan", holder.nama_pemilik.getText().toString());
+                data.putString("id_jenis_hewan", Integer.toString(hewan.getId_jenis_hewan()));
+                data.putString("nama_jenis_hewan", holder.nama_jenis_hewan.getText().toString());
                 data.putString("tanggal_lahir", hewan.getTanggal_lahir());
                 data.putString("created_at", hewan.getCreated_at());
+                data.putString("created_by", hewan.getCreated_by());
 
                 fragment.setArguments(data);
                 loadFragment(fragment);
@@ -91,13 +104,14 @@ public class HewanAdapter extends RecyclerView.Adapter<HewanAdapter.MyViewHolder
         return result.size();
     }
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-        private TextView nama, id_hewan;
+        private TextView nama, nama_jenis_hewan, nama_pemilik;
         private CardView parent;
 
         public MyViewHolder(@NonNull View itemView){
             super(itemView);
             nama = itemView.findViewById(R.id.tvNamaHewan);
-            id_hewan = itemView.findViewById(R.id.tvIdHewan);
+            nama_jenis_hewan = itemView.findViewById(R.id.tvJenisHewan);
+            nama_pemilik = itemView.findViewById(R.id.tvNamaPemilikHewan);
             parent = itemView.findViewById(R.id.ParentHewan);
         }
         public void onClick(View view) {
@@ -150,6 +164,54 @@ public class HewanAdapter extends RecyclerView.Adapter<HewanAdapter.MyViewHolder
 //        edit.putExtra("deskripsi", hasil.getDescription());
 //        edit.putExtra("kategori", hasil.getKategori());
 //        context.startActivity(edit);
+    }
+
+    public void setNamaJenisHewan(final HewanAdapter.MyViewHolder holder, final int id_jenis_hewan){
+        ApiInterfaceAdmin apiService = ApiClient.getClient().create(ApiInterfaceAdmin.class);
+        Call<GetJenisHewan> jenishewanDAOCall = apiService.searchJenisHewan(Integer.toString(id_jenis_hewan));
+
+        jenishewanDAOCall.enqueue(new Callback<GetJenisHewan>() {
+            @Override
+            public void onResponse(Call<GetJenisHewan> call, Response<GetJenisHewan> response) {
+                List<JenisHewanDAO> ListJenisHewan = response.body().getListDataJenisHewan();
+                JenisHewanDAO jenishewan = new JenisHewanDAO();
+                for (JenisHewanDAO tempUkuran: ListJenisHewan) {
+                    if(tempUkuran.getId_jenis_hewan()==id_jenis_hewan){
+                        jenishewan = tempUkuran;
+                    }
+                }
+                holder.nama_jenis_hewan.setText(jenishewan.getNama());
+            }
+
+            @Override
+            public void onFailure(Call<GetJenisHewan> call, Throwable t) {
+                holder.nama_jenis_hewan.setText(id_jenis_hewan);
+            }
+        });
+    }
+
+    public void setNamaPelanggan(final HewanAdapter.MyViewHolder holder, final int id_pelanggan){
+        ApiInterfaceCS apiService = ApiClient.getClient().create(ApiInterfaceCS.class);
+        Call<GetPelanggan> pelangganDAOCall = apiService.searchPelanggan(Integer.toString(id_pelanggan));
+
+        pelangganDAOCall.enqueue(new Callback<GetPelanggan>() {
+            @Override
+            public void onResponse(Call<GetPelanggan> call, Response<GetPelanggan> response) {
+                List<PelangganDAO> ListPelanggan = response.body().getListDataPelanggan();
+                PelangganDAO pelanggan = new PelangganDAO();
+                for (PelangganDAO tempPelanggan: ListPelanggan) {
+                    if(tempPelanggan.getId_pelanggan()==id_pelanggan){
+                        pelanggan = tempPelanggan;
+                    }
+                }
+                holder.nama_pemilik.setText(pelanggan.getNama());
+            }
+
+            @Override
+            public void onFailure(Call<GetPelanggan> call, Throwable t) {
+                holder.nama_pemilik.setText(id_pelanggan);
+            }
+        });
     }
 
     private void deleteHewan(int id, String delete_by, final int position){

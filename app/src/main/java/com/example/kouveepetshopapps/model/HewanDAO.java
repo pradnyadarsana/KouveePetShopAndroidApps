@@ -3,18 +3,17 @@ package com.example.kouveepetshopapps.model;
 import com.google.gson.annotations.SerializedName;
 
 public class HewanDAO {
-    int id_hewan, aktif;
+    int id_hewan, id_pelanggan, id_jenis_hewan, aktif;
     String nama, tanggal_lahir, created_at, created_by, modified_at, modified_by, delete_at, delete_by;
-
-    PelangganDAO pelanggan;
-    JenisHewanDAO jenis_hewan;
 
     public HewanDAO(){}
 
-    public HewanDAO(int id_hewan, int aktif, String nama, String tanggal_lahir, String created_at, String created_by,
-                    String modified_at, String modified_by, String delete_at, String delete_by,
-                    PelangganDAO pelanggan, JenisHewanDAO jenis_hewan) {
+    public HewanDAO(int id_hewan, int id_pelanggan, int id_jenis_hewan, int aktif, String nama,
+                    String tanggal_lahir, String created_at, String created_by, String modified_at,
+                    String modified_by, String delete_at, String delete_by) {
         this.id_hewan = id_hewan;
+        this.id_pelanggan = id_pelanggan;
+        this.id_jenis_hewan = id_jenis_hewan;
         this.aktif = aktif;
         this.nama = nama;
         this.tanggal_lahir = tanggal_lahir;
@@ -24,8 +23,6 @@ public class HewanDAO {
         this.modified_by = modified_by;
         this.delete_at = delete_at;
         this.delete_by = delete_by;
-        this.pelanggan = pelanggan;
-        this.jenis_hewan = jenis_hewan;
     }
 
     public int getId_hewan() {
@@ -34,6 +31,22 @@ public class HewanDAO {
 
     public void setId_hewan(int id_hewan) {
         this.id_hewan = id_hewan;
+    }
+
+    public int getId_pelanggan() {
+        return id_pelanggan;
+    }
+
+    public void setId_pelanggan(int id_pelanggan) {
+        this.id_pelanggan = id_pelanggan;
+    }
+
+    public int getId_jenis_hewan() {
+        return id_jenis_hewan;
+    }
+
+    public void setId_jenis_hewan(int id_jenis_hewan) {
+        this.id_jenis_hewan = id_jenis_hewan;
     }
 
     public int getAktif() {
@@ -106,21 +119,5 @@ public class HewanDAO {
 
     public void setDelete_by(String delete_by) {
         this.delete_by = delete_by;
-    }
-
-    public PelangganDAO getPelanggan() {
-        return pelanggan;
-    }
-
-    public void setPelanggan(PelangganDAO pelanggan) {
-        this.pelanggan = pelanggan;
-    }
-
-    public JenisHewanDAO getJenis_hewan() {
-        return jenis_hewan;
-    }
-
-    public void setJenis_hewan(JenisHewanDAO jenis_hewan) {
-        this.jenis_hewan = jenis_hewan;
     }
 }

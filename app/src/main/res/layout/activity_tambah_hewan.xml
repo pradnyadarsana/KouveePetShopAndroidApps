@@ -35,11 +35,30 @@
                 android:layout_marginTop="25dp"
                 android:hint="Nama Hewan"/>
 
+            <Spinner
+                android:id="@+id/spinJenisHewan"
+                android:layout_width="300dp"
+                android:layout_height="50dp"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@id/etNamaHewan"
+                android:layout_marginTop="25dp">
+            </Spinner>
+
+            <AutoCompleteTextView
+                android:id="@+id/etNamaPemilik"
+                android:layout_width="300dp"
+                android:layout_height="50dp"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/spinJenisHewan"
+                android:layout_marginTop="25dp"
+                android:ems="10"
+                android:hint="Nama Pemilik"/>
+
             <TextView
                 android:id="@+id/etTanggalLahirHewan"
                 android:layout_width="300dp"
                 android:layout_height="50dp"
-                android:layout_below="@+id/etNamaHewan"
+                android:layout_below="@+id/etNamaPemilik"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="25dp"
                 android:background="@color/colorAccent"

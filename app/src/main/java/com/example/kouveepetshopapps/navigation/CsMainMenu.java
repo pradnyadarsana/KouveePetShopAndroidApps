@@ -9,8 +9,8 @@ import android.view.MenuItem;
 
 import com.example.kouveepetshopapps.R;
 import com.example.kouveepetshopapps.TransactionActivity;
-import com.example.kouveepetshopapps.hewan.HewanFragment;
-import com.example.kouveepetshopapps.pelanggan.PelangganFragment;
+import com.example.kouveepetshopapps.hewan.ListHewanFragment;
+import com.example.kouveepetshopapps.pelanggan.ListPelangganFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class CsMainMenu extends AppCompatActivity {
@@ -31,11 +31,11 @@ public class CsMainMenu extends AppCompatActivity {
                 csBottomNavigationView.setSelectedItemId(R.id.cs_transaksi);
             }else if(getIntent().getStringExtra("from").equalsIgnoreCase("hewan"))
             {
-                loadFragment(new HewanFragment());
+                loadFragment(new ListHewanFragment());
                 csBottomNavigationView.setSelectedItemId(R.id.cs_hewan);
             } else if(getIntent().getStringExtra("from").equalsIgnoreCase("pelanggan"))
             {
-                loadFragment(new PelangganFragment());
+                loadFragment(new ListPelangganFragment());
                 csBottomNavigationView.setSelectedItemId(R.id.cs_pelanggan);
             }
         }
@@ -49,10 +49,10 @@ public class CsMainMenu extends AppCompatActivity {
                         fragment = new TransactionActivity();
                         break;
                     case R.id.cs_hewan:
-                        fragment = new HewanFragment();
+                        fragment = new ListHewanFragment();
                         break;
                     case R.id.cs_pelanggan:
-                        fragment = new PelangganFragment();
+                        fragment = new ListPelangganFragment();
                         break;
                 }
                 return loadFragment(fragment);
