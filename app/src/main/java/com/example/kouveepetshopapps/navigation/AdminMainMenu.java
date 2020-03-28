@@ -5,7 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.example.kouveepetshopapps.NotificationFragment;
 import com.example.kouveepetshopapps.R;
@@ -18,6 +20,9 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 public class AdminMainMenu extends AppCompatActivity {
 
     private BottomNavigationView adminBottomNavigationView;
+
+    boolean doubleBackToExitPressedOnce = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,5 +76,25 @@ public class AdminMainMenu extends AppCompatActivity {
             return true;
         }
         return false;
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        if (doubleBackToExitPressedOnce) {
+            super.onBackPressed();
+            return;
+        }
+
+        this.doubleBackToExitPressedOnce = true;
+        Toast.makeText(this, "Klik sekali lagi untuk keluar", Toast.LENGTH_SHORT).show();
+
+        new Handler().postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                doubleBackToExitPressedOnce=false;
+            }
+        }, 2000);
     }
 }

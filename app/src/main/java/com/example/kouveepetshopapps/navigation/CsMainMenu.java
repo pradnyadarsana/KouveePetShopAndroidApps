@@ -5,7 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.example.kouveepetshopapps.R;
 import com.example.kouveepetshopapps.TransactionActivity;
@@ -15,6 +17,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class CsMainMenu extends AppCompatActivity {
     private BottomNavigationView csBottomNavigationView;
+
+    boolean doubleBackToExitPressedOnce = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +41,10 @@ public class CsMainMenu extends AppCompatActivity {
             {
                 loadFragment(new ListPelangganFragment());
                 csBottomNavigationView.setSelectedItemId(R.id.cs_pelanggan);
+            } else if(getIntent().getStringExtra("from").equalsIgnoreCase("profil"))
+            {
+                loadFragment(new ProfilCsFragment());
+                csBottomNavigationView.setSelectedItemId(R.id.cs_profil);
             }
         }
 
@@ -54,6 +62,9 @@ public class CsMainMenu extends AppCompatActivity {
                     case R.id.cs_pelanggan:
                         fragment = new ListPelangganFragment();
                         break;
+                    case R.id.cs_profil:
+                        fragment = new ProfilCsFragment();
+                        break;
                 }
                 return loadFragment(fragment);
             }
@@ -68,5 +79,24 @@ public class CsMainMenu extends AppCompatActivity {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (doubleBackToExitPressedOnce) {
+            super.onBackPressed();
+            return;
+        }
+
+        this.doubleBackToExitPressedOnce = true;
+        Toast.makeText(this, "Klik sekali lagi untuk keluar", Toast.LENGTH_SHORT).show();
+
+        new Handler().postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                doubleBackToExitPressedOnce=false;
+            }
+        }, 2000);
     }
 }

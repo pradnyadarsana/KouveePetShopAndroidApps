@@ -17,28 +17,41 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="25dp">
+                <ImageView
+                    android:id="@+id/adminLogo"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/account_logo"
+                    android:layout_alignParentStart="true"
+                    android:tint="@color/colorAccentWhite">
+                </ImageView>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/adminLogo"
+                    android:layout_marginLeft="10dp"
                     android:text="My Dashboard"
                     android:textSize="20dp"
                     android:id="@+id/txtmydashboard"
                     android:textColor="@color/colorPrimaryWhite">
                 </TextView>
                 <TextView
+                    android:id="@+id/viewNamaAdmin"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Administrator"
+                    android:layout_marginLeft="10dp"
                     android:layout_below="@+id/txtmydashboard"
+                    android:layout_toRightOf="@+id/adminLogo"
+                    android:text="Administrator"
                     android:textColor="@color/colorAccentWhite">
                 </TextView>
                 <ImageView
+                    android:id="@+id/btnLogoutAdmin"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:src="@drawable/account_logo"
+                    android:src="@drawable/ic_logout"
                     android:layout_alignParentEnd="true"
-                    android:tint="@color/colorAccentWhite">
-                </ImageView>
+                    android:tint="@color/colorPrimaryWhite"/>
             </RelativeLayout>
             <GridLayout
                 android:layout_width="match_parent"

@@ -6,6 +6,7 @@ import com.example.kouveepetshopapps.response.GetHewan;
 import com.example.kouveepetshopapps.response.GetJenisHewan;
 import com.example.kouveepetshopapps.response.GetPelanggan;
 import com.example.kouveepetshopapps.response.PostUpdateDelete;
+import com.example.kouveepetshopapps.response.SearchPegawai;
 
 import java.util.List;
 
@@ -83,4 +84,11 @@ public interface ApiInterfaceCS {
                                       @Field("delete_by")String delete_by);
 //    @DELETE("Profile/deleteProfile/{id}")
 //    Call<String> deleteUser(@Path("id") String id);
+
+    //AUTHENTICATION
+    @POST("pegawai/auth")
+    @FormUrlEncoded
+    Call<SearchPegawai> authPegawai(@Field("username") String username,
+                                    @Field("password") String password);
+
 }

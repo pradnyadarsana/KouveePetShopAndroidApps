@@ -18,4 +18,9 @@
         android:icon="@drawable/pelanggan_logo_foreground"
         android:title="pelanggan" />
 
+    <item
+        android:id="@+id/cs_profil"
+        android:icon="@drawable/account_logo"
+        android:title="profil" />
+
 </menu>

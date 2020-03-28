@@ -13,7 +13,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".adapter.HewanAdapter"></activity>
+        <activity android:name=".navigation.ProfilCsFragment"></activity>
+        <activity android:name=".adapter.HewanAdapter" />
         <activity android:name=".hewan.ListHewanFragment" />
         <activity android:name=".adapter.TambahLayananAdapter" />
         <activity android:name=".layanan.TambahLayananActivity" />
@@ -23,15 +24,16 @@
         <activity android:name=".layanan.ListLayananActivity" />
         <activity android:name=".produk.TambahProdukActivity" />
         <activity android:name=".produk.TampilDetailProdukActivity" />
-        <activity android:name=".produk.ListProdukActivity" >
+        <activity android:name=".produk.ListProdukActivity">
             <meta-data
                 android:name="android.app.searchable"
                 android:resource="@xml/searchable" />
+
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
         </activity>
-        <activity android:name=".hewan.TambahHewanActivity"/>
+        <activity android:name=".hewan.TambahHewanActivity" />
         <activity android:name=".hewan.TampilDetailHewanFragment" />
         <activity android:name=".jenishewan.ListJenisHewanActivity" />
         <activity android:name=".jenishewan.TambahJenisHewanActivity" />
