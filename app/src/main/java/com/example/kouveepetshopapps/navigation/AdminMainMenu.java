@@ -10,6 +10,9 @@ import android.view.MenuItem;
 import com.example.kouveepetshopapps.NotificationFragment;
 import com.example.kouveepetshopapps.R;
 import com.example.kouveepetshopapps.StockUpdateFragment;
+import com.example.kouveepetshopapps.TransactionActivity;
+import com.example.kouveepetshopapps.hewan.ListHewanFragment;
+import com.example.kouveepetshopapps.pelanggan.ListPelangganFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class AdminMainMenu extends AppCompatActivity {
@@ -23,6 +26,21 @@ public class AdminMainMenu extends AppCompatActivity {
         adminBottomNavigationView = (BottomNavigationView) findViewById(R.id.bn_main_admin);
 
         loadFragment(new StockUpdateFragment());
+        if (getIntent().getStringExtra("from")!=null){
+            if(getIntent().getStringExtra("from").equalsIgnoreCase("stok"))
+            {
+                loadFragment(new StockUpdateFragment());
+                adminBottomNavigationView.setSelectedItemId(R.id.admin_stock);
+            }else if(getIntent().getStringExtra("from").equalsIgnoreCase("notifikasi"))
+            {
+                loadFragment(new NotificationFragment());
+                adminBottomNavigationView.setSelectedItemId(R.id.admin_notification);
+            } else if(getIntent().getStringExtra("from").equalsIgnoreCase("kelola_data"))
+            {
+                loadFragment(new AdminManagePageFragment());
+                adminBottomNavigationView.setSelectedItemId(R.id.admin_manage);
+            }
+        }
 
         adminBottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override

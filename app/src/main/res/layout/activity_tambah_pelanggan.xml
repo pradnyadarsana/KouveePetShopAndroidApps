@@ -66,10 +66,10 @@
                 android:layout_below="@+id/etAlamatPelanggan"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="25dp"
-                android:background="@color/colorAccent"
+                android:background="@color/colorAccentBeige"
                 android:gravity="center"
                 android:hint="Pilih Tanggal Lahir"
-                android:textColor="@color/colorPrimary"
+                android:textColor="@color/colorPrimaryBrown"
                 android:textSize="20dp" />
 
             <Button

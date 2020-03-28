@@ -2,6 +2,7 @@ package com.example.kouveepetshopapps.navigation;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
 import android.app.Activity;
@@ -22,19 +23,19 @@ import com.example.kouveepetshopapps.supplier.ListSupplierActivity;
 import com.example.kouveepetshopapps.ukuran_hewan.ListUkuranHewanActivity;
 
 public class AdminManagePageFragment extends Fragment {
-    private Button produk, layanan, supplier, pengadaan, jenis_hewan, ukuran_hewan;
+    private CardView produk, layanan, supplier, pengadaan, jenis_hewan, ukuran_hewan;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_admin_manage_page, container, false);
 
-        produk = (Button) view.findViewById(R.id.btnKelolaProduk);
-        layanan = (Button) view.findViewById(R.id.btnKelolaLayanan);
-        supplier = (Button) view.findViewById(R.id.btnKelolaSupplier);
-        pengadaan = (Button) view.findViewById(R.id.btnKelolaPengadaan);
-        jenis_hewan = (Button) view.findViewById(R.id.btnKelolaJenisHewan);
-        ukuran_hewan = (Button) view.findViewById(R.id.btnKelolaUkuranHewan);
+        produk = (CardView) view.findViewById(R.id.btnKelolaProduk);
+        layanan = (CardView) view.findViewById(R.id.btnKelolaLayanan);
+        supplier = (CardView) view.findViewById(R.id.btnKelolaSupplier);
+        pengadaan = (CardView) view.findViewById(R.id.btnKelolaPengadaan);
+        jenis_hewan = (CardView) view.findViewById(R.id.btnKelolaJenisHewan);
+        ukuran_hewan = (CardView) view.findViewById(R.id.btnKelolaUkuranHewan);
 
         produk.setOnClickListener(new View.OnClickListener() {
             @Override

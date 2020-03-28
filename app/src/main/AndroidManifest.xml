@@ -23,7 +23,14 @@
         <activity android:name=".layanan.ListLayananActivity" />
         <activity android:name=".produk.TambahProdukActivity" />
         <activity android:name=".produk.TampilDetailProdukActivity" />
-        <activity android:name=".produk.ListProdukActivity" />
+        <activity android:name=".produk.ListProdukActivity" >
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/searchable" />
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
+        </activity>
         <activity android:name=".hewan.TambahHewanActivity"/>
         <activity android:name=".hewan.TampilDetailHewanFragment" />
         <activity android:name=".jenishewan.ListJenisHewanActivity" />

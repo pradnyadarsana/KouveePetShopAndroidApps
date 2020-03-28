@@ -23,7 +23,7 @@
         app:fabSize="normal"
         app:borderWidth="0dp"
         app:elevation="6dp"
-        android:backgroundTint="@color/colorPrimary"
+        android:backgroundTint="@color/colorPrimaryBeige"
         android:src="@drawable/pelanggan_add_foreground"
         android:id="@+id/addSupplierButton"
         tools:ignore="MissingConstraints" />

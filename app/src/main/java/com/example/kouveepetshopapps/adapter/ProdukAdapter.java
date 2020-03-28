@@ -11,6 +11,8 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,19 +26,23 @@ import com.example.kouveepetshopapps.produk.TampilDetailProdukActivity;
 import com.example.kouveepetshopapps.response.PostUpdateDelete;
 import com.example.kouveepetshopapps.supplier.TampilDetailSupplierActivity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ProdukAdapter extends RecyclerView.Adapter<ProdukAdapter.MyViewHolder> {
+public class ProdukAdapter extends RecyclerView.Adapter<ProdukAdapter.MyViewHolder> implements Filterable {
     private Context context;
     private List<ProdukDAO> result;
+    private List<ProdukDAO> resultFiltered;
+    //private ProdukAdapterListener listener;
 
     public ProdukAdapter(Context context, List<ProdukDAO> result){
         this.context = context;
         this.result = result;
+        this.resultFiltered = result;
     }
 
     @NonNull
@@ -50,8 +56,8 @@ public class ProdukAdapter extends RecyclerView.Adapter<ProdukAdapter.MyViewHold
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, final int position) {
-        final ProdukDAO produk = result.get(position);
-        System.out.println(result.get(position).getNama()+" "+position);
+        final ProdukDAO produk = resultFiltered.get(position);
+        System.out.println(resultFiltered.get(position).getNama()+" "+position);
         holder.nama.setText(produk.getNama());
         //holder.id_supplier.setText(Integer.toString(produk.getId_produk()));
         holder.satuan.setText(produk.getSatuan());
@@ -90,8 +96,43 @@ public class ProdukAdapter extends RecyclerView.Adapter<ProdukAdapter.MyViewHold
 
     @Override
     public int getItemCount() {
-        return result.size();
+        return resultFiltered.size();
     }
+
+    @Override
+    public Filter getFilter() {
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence charSequence) {
+                String charString = charSequence.toString();
+                if (charString.isEmpty()) {
+                    resultFiltered = result;
+                } else {
+                    List<ProdukDAO> filteredList = new ArrayList<>();
+                    for (ProdukDAO row : result) {
+
+                        // name match condition. this might differ depending on your requirement
+                        // here we are looking for name or phone number match
+                        if (row.getNama().toLowerCase().contains(charString.toLowerCase()) || Integer.toString(row.getHarga()).contains(charSequence)) {
+                            filteredList.add(row);
+                        }
+                    }
+                    resultFiltered = filteredList;
+                }
+
+                FilterResults filterResults = new FilterResults();
+                filterResults.values = resultFiltered;
+                return filterResults;
+            }
+
+            @Override
+            protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+                resultFiltered = (ArrayList<ProdukDAO>) filterResults.values;
+                notifyDataSetChanged();
+            }
+        };
+    }
+
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         private TextView id_produk, nama, satuan, jumlah_stok, min_stok, harga;
         private ImageView gambar;
@@ -132,7 +173,7 @@ public class ProdukAdapter extends RecyclerView.Adapter<ProdukAdapter.MyViewHold
                 .setNegativeButton("Delete",new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         //delete report
-                        deleteSupplier(hasil.getId_produk(),"admin", position);
+                        deleteProduk(hasil.getId_produk(),"admin", position);
                     }
                 })
                 .setNeutralButton("Cancel", new DialogInterface.OnClickListener() {
@@ -163,7 +204,7 @@ public class ProdukAdapter extends RecyclerView.Adapter<ProdukAdapter.MyViewHold
         context.startActivity(view);
     }
 
-    private void deleteSupplier(int id, String delete_by, final int position){
+    private void deleteProduk(int id, String delete_by, final int position){
         ApiInterfaceAdmin apiService = ApiClient.getClient().create(ApiInterfaceAdmin.class);
         Call<PostUpdateDelete> supplierDAOCall = apiService.hapusProduk(Integer.toString(id),delete_by);
 
@@ -189,4 +230,7 @@ public class ProdukAdapter extends RecyclerView.Adapter<ProdukAdapter.MyViewHold
         notifyItemRemoved(position);
         notifyDataSetChanged();
     }
+//    public interface ContactsAdapterListener {
+//        void onContactSelected(ProdukDAO produk);
+//    }
 }

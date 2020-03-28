@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bgdashboard"
     tools:context=".navigation.AdminManagePageFragment">
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -11,76 +12,216 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_gravity="center_vertical">
-            <LinearLayout
-                android:layout_width="wrap_content"
+            android:orientation="vertical">
+            <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:baselineAligned="false"
-                android:nestedScrollingEnabled="false"
-                android:orientation="horizontal"
-                android:layout_gravity="center"
-                android:layout_marginTop="40dp">
-                <Button
-                    android:text="PRODUK"
+                android:padding="25dp">
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:drawableTop="@mipmap/product_logo_foreground"
-                    android:layout_marginRight="15dp"
-                    android:id="@+id/btnKelolaProduk"></Button>
-                <Button
-                    android:text="LAYANAN"
+                    android:text="My Dashboard"
+                    android:textSize="20dp"
+                    android:id="@+id/txtmydashboard"
+                    android:textColor="@color/colorPrimaryWhite">
+                </TextView>
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:drawableTop="@mipmap/service_logo_foreground"
-                    android:layout_marginLeft="15dp"
-                    android:id="@+id/btnKelolaLayanan"></Button>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="wrap_content"
+                    android:text="Administrator"
+                    android:layout_below="@+id/txtmydashboard"
+                    android:textColor="@color/colorAccentWhite">
+                </TextView>
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/account_logo"
+                    android:layout_alignParentEnd="true"
+                    android:tint="@color/colorAccentWhite">
+                </ImageView>
+            </RelativeLayout>
+            <GridLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_gravity="center"
-                android:layout_marginTop="30dp">
-                <Button
-                    android:text="SUPPLIER"
+                android:columnCount="2"
+                android:rowCount="3"
+                android:alignmentMode="alignMargins"
+                android:columnOrderPreserved="false">
+                <androidx.cardview.widget.CardView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:drawableTop="@mipmap/supplier_logo_foreground"
-                    android:layout_marginRight="15dp"
+                    android:layout_columnWeight="1"
+                    android:layout_rowWeight="1"
+                    app:cardElevation="5dp"
+                    app:cardCornerRadius="12dp"
+                    android:layout_margin="12dp"
+                    android:id="@+id/btnKelolaProduk">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:padding="16dp"
+                        android:gravity="center">
+                        <ImageView
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:src="@mipmap/product_logo_foreground">
+                        </ImageView>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="12dp"
+                            android:textColor="@color/colorPrimaryGrey"
+                            android:textSize="18dp"
+                            android:text="Produk"></TextView>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+                <androidx.cardview.widget.CardView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:layout_rowWeight="1"
+                    app:cardElevation="5dp"
+                    app:cardCornerRadius="12dp"
+                    android:layout_margin="12dp"
+                    android:id="@+id/btnKelolaLayanan">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:padding="16dp"
+                        android:gravity="center">
+                        <ImageView
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:src="@mipmap/service_logo_foreground">
+                        </ImageView>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="12dp"
+                            android:textColor="@color/colorPrimaryGrey"
+                            android:textSize="18dp"
+                            android:text="Layanan"></TextView>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+                <androidx.cardview.widget.CardView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:layout_rowWeight="1"
+                    app:cardElevation="5dp"
+                    app:cardCornerRadius="12dp"
+                    android:layout_margin="12dp"
                     android:id="@+id/btnKelolaSupplier">
-                </Button>
-                <Button
-                    android:text="PENGADAAN"
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:padding="16dp"
+                        android:gravity="center">
+                        <ImageView
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:src="@mipmap/supplier_logo_foreground">
+                        </ImageView>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="12dp"
+                            android:textColor="@color/colorPrimaryGrey"
+                            android:textSize="18dp"
+                            android:text="Supplier"></TextView>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+                <androidx.cardview.widget.CardView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:drawableTop="@mipmap/pengadaan_logo_foreground"
-                    android:layout_marginLeft="15dp"
-                    android:id="@+id/btnKelolaPengadaan"></Button>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_gravity="center"
-                android:layout_marginTop="30dp"
-                android:layout_marginBottom="40dp">
-                <Button
-                    android:text="JENIS HEWAN"
+                    android:layout_columnWeight="1"
+                    android:layout_rowWeight="1"
+                    app:cardElevation="5dp"
+                    app:cardCornerRadius="12dp"
+                    android:layout_margin="12dp"
+                    android:id="@+id/btnKelolaPengadaan">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:padding="16dp"
+                        android:gravity="center">
+                        <ImageView
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:src="@mipmap/pengadaan_logo_foreground">
+                        </ImageView>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="12dp"
+                            android:textColor="@color/colorPrimaryGrey"
+                            android:textSize="18dp"
+                            android:text="Pengadaan"></TextView>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+                <androidx.cardview.widget.CardView
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:drawableTop="@mipmap/kind_logo_foreground"
-                    android:layout_marginRight="15dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:layout_rowWeight="1"
+                    app:cardElevation="5dp"
+                    app:cardCornerRadius="12dp"
+                    android:layout_margin="12dp"
                     android:id="@+id/btnKelolaJenisHewan">
-                </Button>
-                <Button
-                    android:text="UKURAN HEWAN"
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:padding="16dp"
+                        android:gravity="center">
+                        <ImageView
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:src="@mipmap/kind_logo_foreground">
+                        </ImageView>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="12dp"
+                            android:textColor="@color/colorPrimaryGrey"
+                            android:textSize="18dp"
+                            android:text="Jenis Hewan"></TextView>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+                <androidx.cardview.widget.CardView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:drawableTop="@mipmap/size_logo_foreground"
-                    android:layout_marginLeft="15dp"
-                    android:id="@+id/btnKelolaUkuranHewan"></Button>
-            </LinearLayout>
+                    android:layout_columnWeight="1"
+                    android:layout_rowWeight="1"
+                    app:cardElevation="4dp"
+                    app:cardCornerRadius="12dp"
+                    android:layout_margin="12dp"
+                    android:id="@+id/btnKelolaUkuranHewan">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:padding="16dp"
+                        android:gravity="center">
+                        <ImageView
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:src="@mipmap/size_logo_foreground">
+                        </ImageView>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="12dp"
+                            android:textColor="@color/colorPrimaryGrey"
+                            android:textSize="18dp"
+                            android:text="Ukuran Hewan"></TextView>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+            </GridLayout>
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

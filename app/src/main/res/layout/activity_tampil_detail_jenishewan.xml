@@ -7,7 +7,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="270dp"
-        android:background="@color/colorAccent"
+        android:background="@color/colorPrimaryOrange"
         android:paddingHorizontal="30dp">
 
         <RelativeLayout
@@ -31,7 +31,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="5dp"
                 android:text="Edit Data"
-                android:textColor="@color/colorPrimary" />
+                android:textColor="@color/colorPrimaryWhite" />
             <!--            android:layout_toLeftOf="@id/imgEdit"-->
 
         </RelativeLayout>
@@ -42,8 +42,8 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:layout_marginTop="8dp"
-            android:textColor="@color/colorPrimary"
-            android:textColorHighlight="@color/colorAccent"
+            android:textColor="@color/colorPrimaryWhite"
+            android:textColorHighlight="@color/colorAccentWhite"
             android:textSize="25dp"
             android:text="Nama Jenis Hewan"
             android:textStyle="bold"/>
@@ -54,7 +54,7 @@
             android:layout_below="@id/viewNamaJenisHewan"
             android:layout_centerHorizontal="true"
             android:text="Id Jenis Hewan"
-            android:textColor="@color/colorPrimary"/>
+            android:textColor="@color/colorPrimaryWhite"/>
 
 
     </RelativeLayout>
