@@ -65,7 +65,7 @@ public class ProdukAdapter extends RecyclerView.Adapter<ProdukAdapter.MyViewHold
         holder.harga.setText(Integer.toString(produk.getHarga()));
         holder.min_stok.setText(Integer.toString(produk.getMin_stok()));
 
-        String photo_url = "http://kouveepetshopapi.smithdev.tech/upload/produk/"+produk.getGambar();
+        String photo_url = "http://kouveepetshopapi.smithdev.xyz/upload/produk/"+produk.getGambar();
         System.out.println(photo_url);
         Glide.with(context).load(photo_url).into(holder.gambar);
 
