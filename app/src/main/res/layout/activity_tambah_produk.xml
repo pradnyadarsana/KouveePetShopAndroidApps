@@ -84,19 +84,17 @@
                 android:layout_marginTop="25dp"
                 android:orientation="horizontal"
                 android:id="@+id/layoutgambar">
-                <androidx.cardview.widget.CardView
-                    android:layout_width="320dp"
-                    android:layout_height="135dp"
-                    app:cardElevation="1dp"
-                    app:cardBackgroundColor="#EEEEEE">
-                    <LinearLayout
+                    <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:background="#EEEEEE"
+                        android:elevation="1dp"
                         android:padding="10dp">
                         <TextView
                             android:id="@+id/etGambar"
                             android:layout_width="190dp"
                             android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
                             android:layout_marginRight="5dp"
                             android:textSize="17dp"
                             android:inputType="textMultiLine"
@@ -106,12 +104,13 @@
                             android:id="@+id/addGambarProduk"
                             android:layout_width="100dp"
                             android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_toRightOf="@+id/etGambar"
                             android:maxHeight="100dp"
                             android:layout_marginLeft="5dp"
                             android:src="@drawable/default_image_foreground">
                         </ImageView>
-                    </LinearLayout>
-                </androidx.cardview.widget.CardView>
+                    </RelativeLayout>
             </LinearLayout>
 
             <Button
@@ -121,8 +120,12 @@
                 android:layout_below="@+id/layoutgambar"
                 android:layout_marginTop="50dp"
                 android:layout_marginBottom="70dp"
-                android:text="TAMBAH"
-                android:id="@+id/btnTambahProduk" />
+                android:background="@drawable/custom_round_button"
+                android:backgroundTint="@color/colorAccentBeige"
+                android:text="Tambah"
+                android:textSize="17sp"
+                android:id="@+id/btnTambahProduk"
+                android:textAllCaps="false"/>
         </RelativeLayout>
     </androidx.core.widget.NestedScrollView>
 </RelativeLayout>

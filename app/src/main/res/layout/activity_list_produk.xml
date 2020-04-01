@@ -40,7 +40,7 @@
         app:borderWidth="0dp"
         app:elevation="6dp"
         android:backgroundTint="@color/colorPrimaryBeige"
-        android:src="@drawable/pelanggan_add_foreground"
+        android:src="@drawable/ic_add_black_24dp"
         android:id="@+id/addProdukButton"
         tools:ignore="MissingConstraints" />
 </androidx.constraintlayout.widget.ConstraintLayout>

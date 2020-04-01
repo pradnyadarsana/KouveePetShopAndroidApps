@@ -17,9 +17,11 @@ import com.example.kouveepetshopapps.api.ApiClient;
 import com.example.kouveepetshopapps.api.ApiInterfaceAdmin;
 import com.example.kouveepetshopapps.model.HargaLayananDAO;
 import com.example.kouveepetshopapps.model.LayananDAO;
+import com.example.kouveepetshopapps.model.ProdukDAO;
 import com.example.kouveepetshopapps.response.GetHargaLayanan;
 import com.example.kouveepetshopapps.response.GetLayanan;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,24 +31,33 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class TampilDetailLayananActivity extends AppCompatActivity {
-    private TextView nama_layanan, id_layanan, created_at, created_by;
+    private TextView nama_layanan, id_layanan, created_at, created_by, modified_at, modified_by,
+            delete_at, delete_by;
 
     //recyclerview
     private List<HargaLayananDAO> ListHargaLayanan;
     private RecyclerView recyclerHargaLayanan;
     private HargaLayananAdapter adapterHargaLayanan;
     private RecyclerView.LayoutManager mLayoutManager;
-    //private FloatingActionButton addLayananBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tampil_detail_layanan);
 
+        Gson gson = new Gson();
+        String json = getIntent().getStringExtra("layanan");
+        System.out.println(json);
+        LayananDAO layanan = gson.fromJson(json, LayananDAO.class);
+
         nama_layanan = findViewById(R.id.viewNamaLayanan);
         id_layanan = findViewById(R.id.viewIdLayanan);
         created_at = findViewById(R.id.viewCreatedAtLayanan);
         created_by = findViewById(R.id.viewCreatedByLayanan);
+        modified_at = findViewById(R.id.viewModifiedAtLayanan);
+        modified_by = findViewById(R.id.viewModifiedByLayanan);
+        delete_at = findViewById(R.id.viewDeleteAtLayanan);
+        delete_by = findViewById(R.id.viewDeleteByLayanan);
 
         recyclerHargaLayanan = findViewById(R.id.recycler_view_harga_layanan);
         //addLayananBtn = findViewById(R.id.addLayananButton);
@@ -57,8 +68,8 @@ public class TampilDetailLayananActivity extends AppCompatActivity {
         recyclerHargaLayanan.setLayoutManager(mLayoutManager);
         recyclerHargaLayanan.setItemAnimator(new DefaultItemAnimator());
         recyclerHargaLayanan.setAdapter(adapterHargaLayanan);
-        setData();
-        setRecycleView();
+        setData(layanan);
+        setRecycleView(layanan);
 
 //        addLayananBtn.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -71,16 +82,20 @@ public class TampilDetailLayananActivity extends AppCompatActivity {
 
     }
 
-    public void setData(){
-        id_layanan.setText(getIntent().getStringExtra("id_layanan"));
-        nama_layanan.setText(getIntent().getStringExtra("nama_layanan"));
-        created_at.setText(getIntent().getStringExtra("created_at"));
-        created_by.setText(getIntent().getStringExtra("created_by"));
+    public void setData(LayananDAO layanan){
+        id_layanan.setText(Integer.toString(layanan.getId_layanan()));
+        nama_layanan.setText(layanan.getNama());
+        created_at.setText(layanan.getCreated_at());
+        created_by.setText(layanan.getCreated_by());
+        modified_at.setText(layanan.getModified_at());
+        modified_by.setText(layanan.getModified_by());
+        delete_at.setText(layanan.getDelete_at());
+        delete_by.setText(layanan.getDelete_by());
     }
 
-    public void setRecycleView(){
+    public void setRecycleView(LayananDAO layanan){
         ApiInterfaceAdmin apiService = ApiClient.getClient().create(ApiInterfaceAdmin.class);
-        Call<GetHargaLayanan> hargalayananDAOCall = apiService.searchHargaLayananByIdLayanan(getIntent().getStringExtra("id_layanan"));
+        Call<GetHargaLayanan> hargalayananDAOCall = apiService.searchHargaLayananByIdLayanan(Integer.toString(layanan.getId_layanan()));
 
         hargalayananDAOCall.enqueue(new Callback<GetHargaLayanan>() {
             @Override

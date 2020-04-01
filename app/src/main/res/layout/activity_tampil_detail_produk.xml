@@ -19,75 +19,98 @@
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="15dp"
+                    android:layout_marginVertical="15dp"
                     android:src="@drawable/default_image_foreground"
                     android:id="@+id/viewGambarProduk">
                 </ImageView>
-
-                <!--        <RelativeLayout-->
-                <!--            android:id="@+id/btnEditProfile"-->
-                <!--            android:layout_width="105dp"-->
-                <!--            android:layout_height="wrap_content"-->
-                <!--            android:layout_marginRight="15dp"-->
-                <!--            android:layout_marginBottom="10dp"-->
-                <!--            android:layout_alignParentRight="true"-->
-                <!--            android:layout_alignParentBottom="true">-->
-                <!--            &lt;!&ndash;            <ImageView&ndash;&gt;-->
-                <!--            &lt;!&ndash;                android:id="@+id/imgEdit"&ndash;&gt;-->
-                <!--            &lt;!&ndash;                android:layout_width="wrap_content"&ndash;&gt;-->
-                <!--            &lt;!&ndash;                android:layout_height="wrap_content"&ndash;&gt;-->
-                <!--            &lt;!&ndash;                android:layout_alignParentRight="true"&ndash;&gt;-->
-                <!--            &lt;!&ndash;                android:background="@drawable/ic_edit" />&ndash;&gt;-->
-
-                <!--            <TextView-->
-                <!--                android:id="@+id/tvEdit"-->
-                <!--                android:layout_width="wrap_content"-->
-                <!--                android:layout_height="wrap_content"-->
-                <!--                android:layout_marginRight="5dp"-->
-                <!--                android:text="Edit Profile"-->
-                <!--                android:textColor="@color/colorPrimary"/>-->
-                <!--            &lt;!&ndash;            android:layout_toLeftOf="@id/imgEdit"&ndash;&gt;-->
-
-                <!--        </RelativeLayout>-->
-
             </RelativeLayout>
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="30dp">
+                <RelativeLayout
+                    android:id="@+id/btnEditSupplier"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentBottom="true">
+                    <ImageView
+                        android:id="@+id/imgEdit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:background="@drawable/ic_settings_black_24dp"
+                        android:backgroundTint="@color/colorAccentGrey"/>
 
+                    <TextView
+                        android:id="@+id/tvEdit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="5dp"
+                        android:layout_toLeftOf="@id/imgEdit"
+                        android:layout_centerVertical="true"
+                        android:text="Ubah Supplier"
+                        android:textColor="@color/colorAccentGrey"/>
+                </RelativeLayout>
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingHorizontal="50dp"
+                android:paddingVertical="40dp">
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:orientation="vertical"
-                    android:layout_marginTop="40dp"
-                    android:layout_marginBottom="40dp">
-
+                    android:orientation="vertical">
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:paddingHorizontal="30dp">
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="90dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="ID"
+                            android:textStyle="bold" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text=": "
+                            android:textStyle="bold" />
                         <TextView
                             android:id="@+id/viewIdProduk"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
                             android:text="Id Produk"
-                            android:paddingLeft="20dp"
                             android:textStyle="bold" />
                     </LinearLayout>
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        android:layout_marginTop="25dp"
-                        android:paddingHorizontal="30dp">
+                        android:layout_marginTop="25dp">
+                        <TextView
+                            android:layout_width="90dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="Nama"
+                            android:textStyle="bold" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text=": "
+                            android:textStyle="bold" />
                         <TextView
                             android:id="@+id/viewNamaProduk"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
-                            android:paddingLeft="20dp"
                             android:text="Nama Produk"
                             android:textStyle="bold"/>
                     </LinearLayout>
@@ -96,20 +119,24 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="25dp"
-                        android:orientation="horizontal"
-                        android:paddingHorizontal="30dp">
-
-                        <!--                <ImageView-->
-                        <!--                    android:layout_width="36dp"-->
-                        <!--                    android:layout_height="36dp"-->
-                        <!--                    android:src="@drawable/ic_phone" />-->
-
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="90dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="Satuan"
+                            android:textStyle="bold" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text=": "
+                            android:textStyle="bold" />
                         <TextView
                             android:id="@+id/viewSatuanProduk"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
-                            android:paddingLeft="20dp"
                             android:text="Satuan"
                             android:textStyle="bold" />
                     </LinearLayout>
@@ -118,20 +145,24 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="25dp"
-                        android:orientation="horizontal"
-                        android:paddingHorizontal="30dp">
-
-                        <!--                <ImageView-->
-                        <!--                    android:layout_width="36dp"-->
-                        <!--                    android:layout_height="36dp"-->
-                        <!--                    android:src="@drawable/ic_gender" />-->
-
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="90dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="Jumlah Stok"
+                            android:textStyle="bold" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text=": "
+                            android:textStyle="bold" />
                         <TextView
                             android:id="@+id/viewJumlahStokProduk"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
-                            android:paddingLeft="20dp"
                             android:text="jumlah stok"
                             android:textStyle="bold" />
                     </LinearLayout>
@@ -139,20 +170,24 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="25dp"
-                        android:orientation="horizontal"
-                        android:paddingHorizontal="30dp">
-
-                        <!--                <ImageView-->
-                        <!--                    android:layout_width="36dp"-->
-                        <!--                    android:layout_height="36dp"-->
-                        <!--                    android:src="@drawable/ic_gender" />-->
-
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="90dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="Min. Stok"
+                            android:textStyle="bold" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text=": "
+                            android:textStyle="bold" />
                         <TextView
                             android:id="@+id/viewMinStokProduk"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
-                            android:paddingLeft="20dp"
                             android:text="min stok"
                             android:textStyle="bold" />
                     </LinearLayout>
@@ -160,20 +195,24 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="25dp"
-                        android:orientation="horizontal"
-                        android:paddingHorizontal="30dp">
-
-                        <!--                <ImageView-->
-                        <!--                    android:layout_width="36dp"-->
-                        <!--                    android:layout_height="36dp"-->
-                        <!--                    android:src="@drawable/ic_gender" />-->
-
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="90dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="Harga"
+                            android:textStyle="bold" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text=": Rp."
+                            android:textStyle="bold" />
                         <TextView
                             android:id="@+id/viewHargaProduk"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
-                            android:paddingLeft="20dp"
                             android:text="harga"
                             android:textStyle="bold" />
                     </LinearLayout>
@@ -181,21 +220,150 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="25dp"
-                        android:orientation="horizontal"
-                        android:paddingHorizontal="30dp">
-
-                        <!--                <ImageView-->
-                        <!--                    android:layout_width="36dp"-->
-                        <!--                    android:layout_height="36dp"-->
-                        <!--                    android:src="@drawable/ic_gender" />-->
-
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="90dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="Created At"
+                            android:textStyle="bold" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text=": "
+                            android:textStyle="bold" />
                         <TextView
                             android:id="@+id/viewCreatedAtProduk"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
-                            android:paddingLeft="20dp"
                             android:text="created at"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="25dp"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="90dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="Created By"
+                            android:textStyle="bold" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text=": "
+                            android:textStyle="bold" />
+                        <TextView
+                            android:id="@+id/viewCreatedByProduk"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="created by"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="25dp"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="90dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="Modified At"
+                            android:textStyle="bold" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text=": "
+                            android:textStyle="bold" />
+                        <TextView
+                            android:id="@+id/viewModifiedAtProduk"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="modified at"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="25dp"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="90dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="Modified By"
+                            android:textStyle="bold" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text=": "
+                            android:textStyle="bold" />
+                        <TextView
+                            android:id="@+id/viewModifiedByProduk"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="modified by"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="25dp"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="90dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="Delete At"
+                            android:textStyle="bold" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text=": "
+                            android:textStyle="bold" />
+                        <TextView
+                            android:id="@+id/viewDeleteAtProduk"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="delete at"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="25dp"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="90dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="Delete By"
+                            android:textStyle="bold" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text=": "
+                            android:textStyle="bold" />
+                        <TextView
+                            android:id="@+id/viewDeleteByProduk"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="delete by"
                             android:textStyle="bold" />
                     </LinearLayout>
                 </LinearLayout>

@@ -60,7 +60,11 @@
                 android:layout_below="@+id/tambahLayananLayout"
                 android:layout_marginTop="50dp"
                 android:layout_marginBottom="70dp"
-                android:text="TAMBAH"
+                android:background="@drawable/custom_round_button"
+                android:backgroundTint="@color/colorAccentBeige"
+                android:textAllCaps="false"
+                android:text="Tambah"
+                android:textSize="17sp"
                 android:id="@+id/btnTambahLayanan" />
         </RelativeLayout>
     </androidx.core.widget.NestedScrollView>

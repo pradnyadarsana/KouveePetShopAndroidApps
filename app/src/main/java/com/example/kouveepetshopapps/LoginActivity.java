@@ -76,7 +76,7 @@ public class LoginActivity extends AppCompatActivity {
                             editor.putString("user", json);
                             editor.apply();
 
-                            Toast.makeText(LoginActivity.this, "Welcome "+pegawai.getNama(), Toast.LENGTH_LONG).show();
+                            Toast.makeText(LoginActivity.this, "Welcome "+pegawai.getNama(), Toast.LENGTH_SHORT).show();
                             startIntent(AdminMainMenu.class);
 
                         }

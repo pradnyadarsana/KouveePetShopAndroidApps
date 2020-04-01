@@ -62,7 +62,12 @@ public class ListProdukActivity extends AppCompatActivity {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startIntent(AdminMainMenu.class);
+                if (!searchView.isIconified()) {
+                    searchView.setIconified(true);
+                    return;
+                }else{
+                    startIntent(AdminMainMenu.class);
+                }
             }
         });
 
@@ -87,7 +92,7 @@ public class ListProdukActivity extends AppCompatActivity {
     }
 
     private void startIntent(Class nextClass){
-        Intent back = new Intent(ListProdukActivity.this, nextClass);
+        Intent back = new Intent(getApplicationContext(), nextClass);
         back.putExtra("from", "kelola_data");
         back.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(back);
@@ -124,7 +129,7 @@ public class ListProdukActivity extends AppCompatActivity {
         searchView.setSearchableInfo(searchManager
                 .getSearchableInfo(getComponentName()));
         searchView.setMaxWidth(Integer.MAX_VALUE);
-        searchView.setQueryHint("Nama Produk");
+        searchView.setQueryHint("ID / Nama Produk");
 
         // listening to search query text change
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {

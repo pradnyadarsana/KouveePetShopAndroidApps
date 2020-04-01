@@ -5,9 +5,11 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,10 +23,12 @@ import com.bumptech.glide.Glide;
 import com.example.kouveepetshopapps.R;
 import com.example.kouveepetshopapps.api.ApiClient;
 import com.example.kouveepetshopapps.api.ApiInterfaceAdmin;
+import com.example.kouveepetshopapps.model.PegawaiDAO;
 import com.example.kouveepetshopapps.model.ProdukDAO;
 import com.example.kouveepetshopapps.produk.TampilDetailProdukActivity;
 import com.example.kouveepetshopapps.response.PostUpdateDelete;
 import com.example.kouveepetshopapps.supplier.TampilDetailSupplierActivity;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +41,8 @@ public class ProdukAdapter extends RecyclerView.Adapter<ProdukAdapter.MyViewHold
     private Context context;
     private List<ProdukDAO> result;
     private List<ProdukDAO> resultFiltered;
-    //private ProdukAdapterListener listener;
+    SharedPreferences loggedUser;
+    PegawaiDAO admin;
 
     public ProdukAdapter(Context context, List<ProdukDAO> result){
         this.context = context;
@@ -51,6 +56,12 @@ public class ProdukAdapter extends RecyclerView.Adapter<ProdukAdapter.MyViewHold
         View v = LayoutInflater.from(context).inflate(R.layout.adapter_produk, parent, false);
         final MyViewHolder holder = new MyViewHolder(v);
 
+        loggedUser = context.getSharedPreferences("logged_user", Context.MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = loggedUser.getString("user", "missing");
+        admin = gson.fromJson(json, PegawaiDAO.class);
+        System.out.println(json);
+
         return holder;
     }
 
@@ -59,7 +70,7 @@ public class ProdukAdapter extends RecyclerView.Adapter<ProdukAdapter.MyViewHold
         final ProdukDAO produk = resultFiltered.get(position);
         System.out.println(resultFiltered.get(position).getNama()+" "+position);
         holder.nama.setText(produk.getNama());
-        //holder.id_supplier.setText(Integer.toString(produk.getId_produk()));
+        holder.id_produk.setText(Integer.toString(produk.getId_produk()));
         holder.satuan.setText(produk.getSatuan());
         holder.jumlah_stok.setText(Integer.toString(produk.getJumlah_stok()));
         holder.harga.setText(Integer.toString(produk.getHarga()));
@@ -84,16 +95,6 @@ public class ProdukAdapter extends RecyclerView.Adapter<ProdukAdapter.MyViewHold
         });
     }
 
-//    private boolean loadFragment(Fragment fragment) {
-//        if (fragment != null) {
-//            ((AppCompatActivity) context).getSupportFragmentManager().beginTransaction()
-//                    .replace(R.id.fl_container, fragment)
-//                    .commit();
-//            return true;
-//        }
-//        return false;
-//    }
-
     @Override
     public int getItemCount() {
         return resultFiltered.size();
@@ -113,7 +114,7 @@ public class ProdukAdapter extends RecyclerView.Adapter<ProdukAdapter.MyViewHold
 
                         // name match condition. this might differ depending on your requirement
                         // here we are looking for name or phone number match
-                        if (row.getNama().toLowerCase().contains(charString.toLowerCase()) || Integer.toString(row.getHarga()).contains(charSequence)) {
+                        if (row.getNama().toLowerCase().contains(charString.toLowerCase()) || Integer.toString(row.getId_produk()).contains(charSequence)) {
                             filteredList.add(row);
                         }
                     }
@@ -140,7 +141,7 @@ public class ProdukAdapter extends RecyclerView.Adapter<ProdukAdapter.MyViewHold
 
         public MyViewHolder(@NonNull View itemView){
             super(itemView);
-            //id_produk = itemView.findViewById(R.)
+            id_produk = itemView.findViewById(R.id.tvIdProduk);
             nama = itemView.findViewById(R.id.tvNamaProduk);
             satuan = itemView.findViewById(R.id.tvSatuanProduk);
             jumlah_stok = itemView.findViewById(R.id.tvJumlahStokProduk);
@@ -158,30 +159,29 @@ public class ProdukAdapter extends RecyclerView.Adapter<ProdukAdapter.MyViewHold
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
 
         // set title dialog
-        alertDialogBuilder.setTitle("What's next?");
+        alertDialogBuilder.setTitle(hasil.getNama());
 
-        // set pesan dari dialog
-        alertDialogBuilder
-                .setIcon(R.mipmap.ic_launcher)
-                .setCancelable(false)
-                .setPositiveButton("Edit",new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog,int id) {
+        // set pesan dan pilihan dari dialog
+        String[] option = {"Ubah","Hapus","Batal"};
+        alertDialogBuilder.setItems(option, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                // The 'which' argument contains the index position
+                // of the selected item
+                switch (which) {
+                    case 0:
                         // update report
                         //startIntent(hasil);
-                    }
-                })
-                .setNegativeButton("Delete",new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
+                        break;
+                    case 1:
                         //delete report
-                        deleteProduk(hasil.getId_produk(),"admin", position);
-                    }
-                })
-                .setNeutralButton("Cancel", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int i) {
+                        deleteProduk(hasil.getId_produk(), admin.getUsername(), position);
+                        break;
+                    case 2:
                         dialog.cancel();
-                    }
-                });
+                        break;
+                }
+            }
+        });
 
         // membuat alert dialog dari builder
         AlertDialog alertDialog = alertDialogBuilder.create();
@@ -192,14 +192,9 @@ public class ProdukAdapter extends RecyclerView.Adapter<ProdukAdapter.MyViewHold
 
     private void startIntent(ProdukDAO hasil, Class nextView){
         Intent view = new Intent(context, nextView);
-        view.putExtra("id_produk", Integer.toString(hasil.getId_produk()));
-        view.putExtra("nama", hasil.getNama());
-        view.putExtra("satuan", hasil.getSatuan());
-        view.putExtra("jumlah_stok", Integer.toString(hasil.getJumlah_stok()));
-        view.putExtra("min_stok", Integer.toString(hasil.getMin_stok()));
-        view.putExtra("harga", Integer.toString(hasil.getHarga()));
-        view.putExtra("gambar", hasil.getGambar());
-        view.putExtra("created_at", hasil.getCreated_at());
+        Gson gson = new Gson();
+        String json = gson.toJson(hasil);
+        view.putExtra("produk", json);
         view.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(view);
     }
@@ -226,11 +221,10 @@ public class ProdukAdapter extends RecyclerView.Adapter<ProdukAdapter.MyViewHold
     }
 
     public void delete(int position) { //removes the row
-        result.remove(position);
+        int index = result.indexOf(resultFiltered.get(position));
+        result.remove(index);
+        resultFiltered.remove(position);
         notifyItemRemoved(position);
         notifyDataSetChanged();
     }
-//    public interface ContactsAdapterListener {
-//        void onContactSelected(ProdukDAO produk);
-//    }
 }

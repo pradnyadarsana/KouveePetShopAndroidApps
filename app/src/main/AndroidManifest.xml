@@ -7,9 +7,9 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/kouveepetshoplogo"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/kouveepetshoplogo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
@@ -21,32 +21,59 @@
         <activity android:name=".adapter.HargaLayananAdapter" />
         <activity android:name=".layanan.TampilDetailLayananActivity" />
         <activity android:name=".adapter.LayananAdapter" />
-        <activity android:name=".layanan.ListLayananActivity" />
+        <activity android:name=".layanan.ListLayananActivity" >
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/searchable" />
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
+        </activity>
         <activity android:name=".produk.TambahProdukActivity" />
         <activity android:name=".produk.TampilDetailProdukActivity" />
         <activity android:name=".produk.ListProdukActivity">
             <meta-data
                 android:name="android.app.searchable"
                 android:resource="@xml/searchable" />
-
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
         </activity>
         <activity android:name=".hewan.TambahHewanActivity" />
         <activity android:name=".hewan.TampilDetailHewanFragment" />
-        <activity android:name=".jenishewan.ListJenisHewanActivity" />
+        <activity android:name=".jenishewan.ListJenisHewanActivity">
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/searchable" />
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
+        </activity>
         <activity android:name=".jenishewan.TambahJenisHewanActivity" />
         <activity android:name=".jenishewan.EditJenisHewanActivity" />
         <activity android:name=".jenishewan.TampilDetailJenisHewanActivity" />
         <activity android:name=".ukuran_hewan.TampilDetailUkuranHewanActivity" />
         <activity android:name=".ukuran_hewan.TambahUkuranHewanActivity" />
         <activity android:name=".adapter.UkuranHewanAdapter" />
-        <activity android:name=".ukuran_hewan.ListUkuranHewanActivity" />
+        <activity android:name=".ukuran_hewan.ListUkuranHewanActivity">
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/searchable" />
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
+        </activity>
         <activity android:name=".supplier.TambahSupplierActivity" />
         <activity android:name=".supplier.TampilDetailSupplierActivity" />
         <activity android:name=".adapter.SupplierAdapter" />
-        <activity android:name=".supplier.ListSupplierActivity" />
+        <activity android:name=".supplier.ListSupplierActivity">
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/searchable" />
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
+        </activity>
         <activity android:name=".pelanggan.TambahPelangganActivity" />
         <activity android:name=".pelanggan.TampilDetailPelangganFragment" />
         <activity android:name=".adapter.PelangganAdapter" />

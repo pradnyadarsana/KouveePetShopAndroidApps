@@ -1,172 +1,269 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical">
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="130dp"
-        android:background="@color/colorPrimaryOrange"
-        android:paddingHorizontal="30dp">
-
-        <RelativeLayout
-            android:id="@+id/btnEditProfile"
-            android:layout_width="105dp"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="15dp"
-            android:layout_marginBottom="10dp"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentBottom="true">
-            <!--            <ImageView-->
-            <!--                android:id="@+id/imgEdit"-->
-            <!--                android:layout_width="wrap_content"-->
-            <!--                android:layout_height="wrap_content"-->
-            <!--                android:layout_alignParentRight="true"-->
-            <!--                android:background="@drawable/ic_edit" />-->
-
-            <TextView
-                android:id="@+id/tvEdit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="5dp"
-                android:text="Edit Profile"
-                android:textColor="@color/colorPrimaryWhite"/>
-            <!--            android:layout_toLeftOf="@id/imgEdit"-->
-
-        </RelativeLayout>
-
-        <TextView
-            android:id="@+id/viewNamaLayanan"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:layout_marginTop="8dp"
-            android:textColor="@color/colorPrimaryWhite"
-            android:textColorHighlight="@color/colorAccentWhite"
-            android:textSize="25dp"
-            android:text="Nama Layanan"
-            android:textStyle="bold"/>
-        <TextView
-            android:id="@+id/viewIdLayanan"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/viewNamaLayanan"
-            android:layout_centerHorizontal="true"
-            android:text="Id Layanan"
-            android:textColor="@color/colorAccentWhite"/>
-
-
-    </RelativeLayout>
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:padding="25dp"
-        android:background="@color/colorPrimaryWhite">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:orientation="vertical">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <!--                <ImageView-->
-                <!--                    android:layout_width="36dp"-->
-                <!--                    android:layout_height="36dp"-->
-                <!--                    android:src="@drawable/ic_phone" />-->
-
-                <TextView
-                    android:id="@+id/viewCreatedAtLayanan"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:paddingLeft="20dp"
-                    android:text="01-03-2011 01:10:10"
-                    android:textStyle="bold" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:orientation="horizontal">
-
-                <!--                <ImageView-->
-                <!--                    android:layout_width="36dp"-->
-                <!--                    android:layout_height="36dp"-->
-                <!--                    android:src="@drawable/ic_gender" />-->
-
-                <TextView
-                    android:id="@+id/viewCreatedByLayanan"
-                    android:justificationMode="inter_word"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:paddingLeft="20dp"
-                    android:text="Admin"
-                    android:textStyle="bold" />
-            </LinearLayout>
-<!--            <LinearLayout-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginTop="15dp"-->
-<!--                android:orientation="horizontal"-->
-<!--                android:paddingHorizontal="30dp">-->
-
-<!--                &lt;!&ndash;                <ImageView&ndash;&gt;-->
-<!--                &lt;!&ndash;                    android:layout_width="36dp"&ndash;&gt;-->
-<!--                &lt;!&ndash;                    android:layout_height="36dp"&ndash;&gt;-->
-<!--                &lt;!&ndash;                    android:src="@drawable/ic_gender" />&ndash;&gt;-->
-
-<!--                <TextView-->
-<!--                    android:id="@+id/viewModified"-->
-<!--                    android:justificationMode="inter_word"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_gravity="center_vertical"-->
-<!--                    android:paddingLeft="20dp"-->
-<!--                    android:text="03-04-2019 01:01:55"-->
-<!--                    android:textStyle="bold" />-->
-<!--            </LinearLayout>-->
-        </LinearLayout>
-    </RelativeLayout>
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:orientation="horizontal"
-        android:background="@color/colorAccentWhite"
-        android:layout_marginBottom="3dp"
-        android:elevation="3dp">
-        <TextView
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:background="@color/colorPrimaryOrange"
+            android:paddingHorizontal="30dp">
+
+            <TextView
+                android:id="@+id/viewNamaLayanan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginTop="8dp"
+                android:textColor="@color/colorPrimaryWhite"
+                android:textColorHighlight="@color/colorAccentWhite"
+                android:textSize="25dp"
+                android:text="Nama Layanan"
+                android:textStyle="bold"/>
+            <TextView
+                android:id="@+id/viewIdLayanan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/viewNamaLayanan"
+                android:layout_centerHorizontal="true"
+                android:text="Id Layanan"
+                android:textColor="@color/colorAccentWhite"/>
+
+            <RelativeLayout
+                android:id="@+id/btnEditLayanan"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true">
+                <ImageView
+                    android:id="@+id/imgEdit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:background="@drawable/ic_settings_black_24dp"
+                    android:backgroundTint="@color/colorPrimaryWhite"/>
+
+                <TextView
+                    android:id="@+id/tvEdit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="5dp"
+                    android:layout_toLeftOf="@id/imgEdit"
+                    android:layout_centerVertical="true"
+                    android:text="Ubah Layanan"
+                    android:textColor="@color/colorPrimaryWhite"/>
+            </RelativeLayout>
+        </RelativeLayout>
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:textSize="18dp"
-            android:textAlignment="center"
-            android:text="Pricelist">
-        </TextView>
-    </LinearLayout>
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/detailLayananLayout"
-        tools:context=".layanan.ListHargaLayananActivity">
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_view_harga_layanan"
+            android:padding="25dp"
+            android:background="@color/colorPrimaryWhite">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="20dp">
+                    <TextView
+                        android:layout_width="90dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="Created At"
+                        android:textStyle="bold" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text=": "
+                        android:textStyle="bold" />
+                    <TextView
+                        android:id="@+id/viewCreatedAtLayanan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="01-03-2011 01:10:10"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="20dp">
+                    <TextView
+                        android:layout_width="90dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="Created By"
+                        android:textStyle="bold" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text=": "
+                        android:textStyle="bold" />
+                    <TextView
+                        android:id="@+id/viewCreatedByLayanan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="Admin"
+                        android:textStyle="bold" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="20dp">
+                    <TextView
+                        android:layout_width="90dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="Modified At"
+                        android:textStyle="bold" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text=": "
+                        android:textStyle="bold" />
+                    <TextView
+                        android:id="@+id/viewModifiedAtLayanan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="Admin"
+                        android:textStyle="bold" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="20dp">
+                    <TextView
+                        android:layout_width="90dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="Modified By"
+                        android:textStyle="bold" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text=": "
+                        android:textStyle="bold" />
+                    <TextView
+                        android:id="@+id/viewModifiedByLayanan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="Admin"
+                        android:textStyle="bold" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="20dp">
+                    <TextView
+                        android:layout_width="90dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="Delete At"
+                        android:textStyle="bold" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text=": "
+                        android:textStyle="bold" />
+                    <TextView
+                        android:id="@+id/viewDeleteAtLayanan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="Admin"
+                        android:textStyle="bold" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="20dp">
+                    <TextView
+                        android:layout_width="90dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="Delete By"
+                        android:textStyle="bold" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text=": "
+                        android:textStyle="bold" />
+                    <TextView
+                        android:id="@+id/viewDeleteByLayanan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="Admin"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </LinearLayout>
+        </RelativeLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:orientation="horizontal"
+            android:background="@color/colorAccentWhite"
+            android:layout_marginBottom="3dp"
+            android:elevation="3dp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:textSize="18dp"
+                android:textAlignment="center"
+                android:text="Pricelist">
+            </TextView>
+        </LinearLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-        </androidx.recyclerview.widget.RecyclerView>
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</LinearLayout>
+            android:layout_marginBottom="25dp"
+            android:id="@+id/detailLayananLayout"
+            tools:context=".layanan.ListHargaLayananActivity">
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view_harga_layanan"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+            </androidx.recyclerview.widget.RecyclerView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
+</ScrollView>
+
 
