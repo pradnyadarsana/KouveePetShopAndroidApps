@@ -2,162 +2,313 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
-
-    <RelativeLayout
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="270dp"
-        android:background="@color/colorAccent"
-        android:paddingHorizontal="30dp">
-
-        <RelativeLayout
-            android:id="@+id/btnEditProfile"
-            android:layout_width="105dp"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="15dp"
-            android:layout_marginBottom="10dp"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentBottom="true">
-<!--            <ImageView-->
-<!--                android:id="@+id/imgEdit"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_alignParentRight="true"-->
-<!--                android:background="@drawable/ic_edit" />-->
-
-            <TextView
-                android:id="@+id/tvEdit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="5dp"
-                android:text="Edit Profile"
-                android:textColor="@color/colorPrimary"/>
-<!--            android:layout_toLeftOf="@id/imgEdit"-->
-
-        </RelativeLayout>
-
-        <TextView
-            android:id="@+id/viewNamaPelanggan"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:layout_marginTop="8dp"
-            android:textColor="@color/colorPrimary"
-            android:textColorHighlight="@color/colorAccent"
-            android:textSize="25dp"
-            android:text="Full Name"
-            android:textStyle="bold"/>
-        <TextView
-            android:id="@+id/viewIdPelanggan"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/viewNamaPelanggan"
-            android:layout_centerHorizontal="true"
-            android:text="Id pelanggan"
-            android:textColor="@color/colorPrimary"/>
-
-
-    </RelativeLayout>
-    <RelativeLayout
+        android:layout_height="wrap_content"
+        android:id="@+id/detailPelangganToolbar"
+        android:theme="@style/AppTheme.AppBarOverlay">
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/searchDetailPelangganToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
+    </com.google.android.material.appbar.AppBarLayout>
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:orientation="vertical"
-            android:layout_marginTop="20dp">
-
-            <LinearLayout
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="25dp"
-                android:orientation="horizontal"
+                android:layout_height="230dp"
+                android:background="@color/colorPrimaryOrange"
                 android:paddingHorizontal="30dp">
-
-<!--                <ImageView-->
-<!--                    android:layout_width="36dp"-->
-<!--                    android:layout_height="36dp"-->
-<!--                    android:src="@drawable/ic_phone" />-->
-
                 <TextView
-                    android:id="@+id/viewTelpPelanggan"
+                    android:id="@+id/viewNamaPelanggan"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:paddingLeft="20dp"
-                    android:text="081236475826"
-                    android:textStyle="bold" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="25dp"
-                android:orientation="horizontal"
-                android:paddingHorizontal="30dp">
-
-<!--                <ImageView-->
-<!--                    android:layout_width="36dp"-->
-<!--                    android:layout_height="36dp"-->
-<!--                    android:src="@drawable/ic_date" />-->
-
+                    android:layout_centerInParent="true"
+                    android:layout_marginTop="8dp"
+                    android:textColor="@color/colorPrimaryWhite"
+                    android:textColorHighlight="@color/colorAccentBlack"
+                    android:textSize="25dp"
+                    android:text="Full Name"
+                    android:textStyle="bold"/>
                 <TextView
-                    android:id="@+id/viewTanggalLahirPelanggan"
+                    android:id="@+id/viewIdPelanggan"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:paddingLeft="20dp"
-                    android:text="10-10-1999"
-                    android:textStyle="bold" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="25dp"
-                android:orientation="horizontal"
-                android:paddingHorizontal="30dp">
-
-<!--                <ImageView-->
-<!--                    android:layout_width="36dp"-->
-<!--                    android:layout_height="36dp"-->
-<!--                    android:src="@drawable/ic_gender" />-->
-
-                <TextView
-                    android:id="@+id/viewAlamatPelanggan"
-                    android:justificationMode="inter_word"
-                    android:layout_width="wrap_content"
+                    android:layout_below="@id/viewNamaPelanggan"
+                    android:layout_centerHorizontal="true"
+                    android:text="Id pelanggan"
+                    android:textColor="@color/colorAccentWhite"/>
+                <RelativeLayout
+                    android:id="@+id/btnEditPelanggan"
+                    android:layout_width="140dp"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:paddingLeft="20dp"
-                    android:text="Jalan Kaswari 20 gang 3A no 2B Yogyakarta jashddasdhjasd"
-                    android:textStyle="bold" />
-            </LinearLayout>
-            <LinearLayout
+                    android:layout_marginBottom="10dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentBottom="true">
+                    <ImageView
+                        android:id="@+id/imgEdit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:background="@drawable/ic_settings_black_24dp"
+                        android:backgroundTint="@color/colorPrimaryWhite"/>
+
+                    <TextView
+                        android:id="@+id/tvEdit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="5dp"
+                        android:layout_toLeftOf="@id/imgEdit"
+                        android:layout_centerVertical="true"
+                        android:text="Ubah Pelanggan"
+                        android:textColor="@color/colorPrimaryWhite"/>
+                </RelativeLayout>
+            </RelativeLayout>
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="25dp"
-                android:orientation="horizontal"
-                android:paddingHorizontal="30dp">
+                android:layout_height="match_parent"
+                android:paddingHorizontal="50dp"
+                android:paddingVertical="40dp">
 
-                <!--                <ImageView-->
-                <!--                    android:layout_width="36dp"-->
-                <!--                    android:layout_height="36dp"-->
-                <!--                    android:src="@drawable/ic_gender" />-->
-
-                <TextView
-                    android:id="@+id/viewCreatedAtPelanggan"
-                    android:justificationMode="inter_word"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:paddingLeft="20dp"
-                    android:text="03-04-2019 01:01:55"
-                    android:textStyle="bold" />
-            </LinearLayout>
+                    android:layout_gravity="center"
+                    android:orientation="vertical">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="95dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="No. Telepon"
+                            android:textStyle="bold" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text=": "
+                            android:textStyle="bold" />
+                        <TextView
+                            android:id="@+id/viewTelpPelanggan"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="081236475826"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="25dp">
+                        <TextView
+                            android:layout_width="95dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="Tanggal Lahir"
+                            android:textStyle="bold" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text=": "
+                            android:textStyle="bold" />
+                        <TextView
+                            android:id="@+id/viewTanggalLahirPelanggan"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="10-10-1999"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="25dp">
+                        <TextView
+                            android:layout_width="95dp"
+                            android:layout_height="wrap_content"
+                            android:text="Alamat"
+                            android:textStyle="bold" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=": "
+                            android:textStyle="bold" />
+                        <TextView
+                            android:id="@+id/viewAlamatPelanggan"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="Jalan Kaswari 20 gang 3A no 2B Yogyakarta jashddasdhjasd"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="25dp">
+                        <TextView
+                            android:layout_width="95dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="Created At"
+                            android:textStyle="bold" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text=": "
+                            android:textStyle="bold" />
+                        <TextView
+                            android:id="@+id/viewCreatedAtPelanggan"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="03-04-2019 01:01:55"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="25dp">
+                        <TextView
+                            android:layout_width="95dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="Created By"
+                            android:textStyle="bold" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text=": "
+                            android:textStyle="bold" />
+                        <TextView
+                            android:id="@+id/viewCreatedByPelanggan"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="admin"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="25dp">
+                        <TextView
+                            android:layout_width="95dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="Modified At"
+                            android:textStyle="bold" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text=": "
+                            android:textStyle="bold" />
+                        <TextView
+                            android:id="@+id/viewModifiedAtPelanggan"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="03-04-2019 01:01:55"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="25dp">
+                        <TextView
+                            android:layout_width="95dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="Modified By"
+                            android:textStyle="bold" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text=": "
+                            android:textStyle="bold" />
+                        <TextView
+                            android:id="@+id/viewModifiedByPelanggan"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="admin"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="25dp">
+                        <TextView
+                            android:layout_width="95dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="Delete At"
+                            android:textStyle="bold" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text=": "
+                            android:textStyle="bold" />
+                        <TextView
+                            android:id="@+id/viewDeleteAtPelanggan"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="03-04-2019 01:01:55"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="25dp">
+                        <TextView
+                            android:layout_width="95dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="Delete By"
+                            android:textStyle="bold" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text=": "
+                            android:textStyle="bold" />
+                        <TextView
+                            android:id="@+id/viewDeleteByPelanggan"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="admin"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                </LinearLayout>
+            </RelativeLayout>
         </LinearLayout>
-    </RelativeLayout>
+    </androidx.core.widget.NestedScrollView>
 </LinearLayout>
+
 

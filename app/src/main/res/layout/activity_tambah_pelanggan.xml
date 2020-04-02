@@ -79,7 +79,10 @@
                 android:layout_below="@+id/etTanggalLahirPelanggan"
                 android:layout_marginTop="50dp"
                 android:layout_marginBottom="70dp"
-                android:text="TAMBAH"
+                android:background="@drawable/custom_round_button"
+                android:textAllCaps="false"
+                android:text="Tambah"
+                android:textSize="17sp"
                 android:id="@+id/btnTambahPelanggan" />
         </RelativeLayout>
     </androidx.core.widget.NestedScrollView>

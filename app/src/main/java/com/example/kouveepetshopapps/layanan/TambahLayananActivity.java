@@ -6,8 +6,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -21,6 +23,7 @@ import com.example.kouveepetshopapps.adapter.UkuranHewanAdapter;
 import com.example.kouveepetshopapps.api.ApiClient;
 import com.example.kouveepetshopapps.api.ApiInterfaceAdmin;
 import com.example.kouveepetshopapps.model.HargaLayananDAO;
+import com.example.kouveepetshopapps.model.PegawaiDAO;
 import com.example.kouveepetshopapps.model.UkuranHewanDAO;
 import com.example.kouveepetshopapps.response.GetUkuranHewan;
 import com.example.kouveepetshopapps.response.PostUpdateDelete;
@@ -47,10 +50,19 @@ public class TambahLayananActivity extends AppCompatActivity {
     private TambahLayananAdapter adapterUkuranHewan;
     private RecyclerView.LayoutManager mLayoutManager;
 
+    SharedPreferences loggedUser;
+    PegawaiDAO admin;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tambah_layanan);
+
+        loggedUser = getSharedPreferences("logged_user", Context.MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = loggedUser.getString("user", "missing");
+        admin = gson.fromJson(json, PegawaiDAO.class);
+        System.out.println(json);
 
         nama = findViewById(R.id.etNamaLayanan);
         btnTambahLayanan = findViewById(R.id.btnTambahLayanan);
@@ -89,7 +101,7 @@ public class TambahLayananActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<GetUkuranHewan> call, Throwable t) {
-                Toast.makeText(TambahLayananActivity.this, "Gagal menampilkan Supplier", Toast.LENGTH_SHORT).show();
+                Toast.makeText(TambahLayananActivity.this, "Gagal menampilkan Ukuran Hewan", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -103,7 +115,7 @@ public class TambahLayananActivity extends AppCompatActivity {
     public void tambahLayanan(){
         ApiInterfaceAdmin apiService = ApiClient.getClient().create(ApiInterfaceAdmin.class);
         Call<PostUpdateDelete> layananDAOCall = apiService.tambahLayanan(nama.getText().toString(),
-                "admin");
+                admin.getUsername());
 
         layananDAOCall.enqueue(new Callback<PostUpdateDelete>() {
             @Override
@@ -121,7 +133,7 @@ public class TambahLayananActivity extends AppCompatActivity {
 
                     ApiInterfaceAdmin apiService = ApiClient.getClient().create(ApiInterfaceAdmin.class);
                     Call<PostUpdateDelete> hargalayananDAOCall = apiService.tambahHargaLayanan(id_layanan,
-                            id_ukuran_hewan.getText().toString(), harga.getText().toString(), "admin");
+                            id_ukuran_hewan.getText().toString(), harga.getText().toString(), admin.getUsername());
                     hargalayananDAOCall.enqueue(new Callback<PostUpdateDelete>() {
                         @Override
                         public void onResponse(Call<PostUpdateDelete> call, Response<PostUpdateDelete> response) {

@@ -3,8 +3,10 @@ package com.example.kouveepetshopapps.ukuran_hewan;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -14,9 +16,11 @@ import android.widget.Toast;
 import com.example.kouveepetshopapps.R;
 import com.example.kouveepetshopapps.api.ApiClient;
 import com.example.kouveepetshopapps.api.ApiInterfaceAdmin;
+import com.example.kouveepetshopapps.model.PegawaiDAO;
 import com.example.kouveepetshopapps.response.PostUpdateDelete;
 import com.example.kouveepetshopapps.supplier.ListSupplierActivity;
 import com.example.kouveepetshopapps.supplier.TambahSupplierActivity;
+import com.google.gson.Gson;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -26,10 +30,20 @@ public class TambahUkuranHewanActivity extends AppCompatActivity {
     private EditText nama;
     private Button btnTambah;
 
+    SharedPreferences loggedUser;
+    PegawaiDAO admin;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tambah_ukuran_hewan);
+
+        loggedUser = getSharedPreferences("logged_user", Context.MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = loggedUser.getString("user", "missing");
+        admin = gson.fromJson(json, PegawaiDAO.class);
+        System.out.println(json);
+
         nama = (EditText) findViewById(R.id.etNamaUkuranHewan);
         btnTambah = (Button) findViewById(R.id.btnTambahUkuranHewan);
 
@@ -56,7 +70,7 @@ public class TambahUkuranHewanActivity extends AppCompatActivity {
     public void tambahUkuranHewan(){
         ApiInterfaceAdmin apiService = ApiClient.getClient().create(ApiInterfaceAdmin.class);
         Call<PostUpdateDelete> ukuranHewanDAOCall = apiService.tambahUkuranHewan(nama.getText().toString(),
-                "admin");
+                admin.getUsername());
 
         ukuranHewanDAOCall.enqueue(new Callback<PostUpdateDelete>() {
             @Override

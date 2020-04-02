@@ -9,10 +9,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,26 +26,34 @@ import com.example.kouveepetshopapps.api.ApiInterfaceCS;
 import com.example.kouveepetshopapps.hewan.TampilDetailHewanFragment;
 import com.example.kouveepetshopapps.model.HewanDAO;
 import com.example.kouveepetshopapps.model.JenisHewanDAO;
+import com.example.kouveepetshopapps.model.PegawaiDAO;
 import com.example.kouveepetshopapps.model.PelangganDAO;
+import com.example.kouveepetshopapps.model.ProdukDAO;
 import com.example.kouveepetshopapps.model.UkuranHewanDAO;
 import com.example.kouveepetshopapps.response.GetJenisHewan;
 import com.example.kouveepetshopapps.response.GetPelanggan;
 import com.example.kouveepetshopapps.response.GetUkuranHewan;
 import com.example.kouveepetshopapps.response.PostUpdateDelete;
+import com.google.gson.Gson;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class HewanAdapter extends RecyclerView.Adapter<HewanAdapter.MyViewHolder> {
+public class HewanAdapter extends RecyclerView.Adapter<HewanAdapter.MyViewHolder> implements Filterable {
     private Context context;
     private List<HewanDAO> result;
+    private List<HewanDAO> resultFiltered;
+    SharedPreferences loggedUser;
+    PegawaiDAO pegawai;
 
     public HewanAdapter(Context context, List<HewanDAO> result){
         this.context = context;
         this.result = result;
+        this.resultFiltered = result;
     }
 
     @NonNull
@@ -51,33 +62,26 @@ public class HewanAdapter extends RecyclerView.Adapter<HewanAdapter.MyViewHolder
         View v = LayoutInflater.from(context).inflate(R.layout.adapter_hewan, parent, false);
         final MyViewHolder holder = new MyViewHolder(v);
 
+        loggedUser = context.getSharedPreferences("logged_user", Context.MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = loggedUser.getString("user", "missing");
+        pegawai = gson.fromJson(json, PegawaiDAO.class);
+        System.out.println(json);
+
         return holder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull final MyViewHolder holder, final int position) {
-        final HewanDAO hewan = result.get(position);
+        final HewanDAO hewan = resultFiltered.get(position);
         holder.nama.setText(hewan.getNama());
+        holder.id_hewan.setText(Integer.toString(hewan.getId_hewan()));
         setNamaJenisHewan(holder, hewan.getId_jenis_hewan());
         setNamaPelanggan(holder, hewan.getId_pelanggan());
         holder.parent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Bundle data = new Bundle();
-                Fragment fragment = new TampilDetailHewanFragment();
-
-                data.putString("id_hewan", Integer.toString(hewan.getId_hewan()));
-                data.putString("nama", hewan.getNama());
-                data.putString("id_pelanggan", Integer.toString(hewan.getId_pelanggan()));
-                data.putString("nama_pelanggan", holder.nama_pemilik.getText().toString());
-                data.putString("id_jenis_hewan", Integer.toString(hewan.getId_jenis_hewan()));
-                data.putString("nama_jenis_hewan", holder.nama_jenis_hewan.getText().toString());
-                data.putString("tanggal_lahir", hewan.getTanggal_lahir());
-                data.putString("created_at", hewan.getCreated_at());
-                data.putString("created_by", hewan.getCreated_by());
-
-                fragment.setArguments(data);
-                loadFragment(fragment);
+                startFragment(hewan, holder);
             }
         });
         holder.parent.setOnLongClickListener(new View.OnLongClickListener() {
@@ -87,6 +91,20 @@ public class HewanAdapter extends RecyclerView.Adapter<HewanAdapter.MyViewHolder
                 return false;
             }
         });
+    }
+
+    private void startFragment(HewanDAO hasil, MyViewHolder holder){
+        Bundle data = new Bundle();
+        Fragment fragment = new TampilDetailHewanFragment();
+
+        Gson gson = new Gson();
+        String json = gson.toJson(hasil);
+        data.putString("hewan", json);
+        data.putString("nama_jenis_hewan", holder.nama_jenis_hewan.getText().toString());
+        data.putString("nama_pelanggan", holder.nama_pemilik.getText().toString());
+
+        fragment.setArguments(data);
+        loadFragment(fragment);
     }
 
     private boolean loadFragment(Fragment fragment) {
@@ -101,15 +119,51 @@ public class HewanAdapter extends RecyclerView.Adapter<HewanAdapter.MyViewHolder
 
     @Override
     public int getItemCount() {
-        return result.size();
+        return resultFiltered.size();
     }
+
+    @Override
+    public Filter getFilter() {
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence charSequence) {
+                String charString = charSequence.toString();
+                if (charString.isEmpty()) {
+                    resultFiltered = result;
+                } else {
+                    List<HewanDAO> filteredList = new ArrayList<>();
+                    for (HewanDAO row : result) {
+
+                        // name match condition. this might differ depending on your requirement
+                        // here we are looking for name or phone number match
+                        if (row.getNama().toLowerCase().contains(charString.toLowerCase()) || Integer.toString(row.getId_hewan()).contains(charSequence)) {
+                            filteredList.add(row);
+                        }
+                    }
+                    resultFiltered = filteredList;
+                }
+
+                FilterResults filterResults = new FilterResults();
+                filterResults.values = resultFiltered;
+                return filterResults;
+            }
+
+            @Override
+            protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+                resultFiltered = (ArrayList<HewanDAO>) filterResults.values;
+                notifyDataSetChanged();
+            }
+        };
+    }
+
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-        private TextView nama, nama_jenis_hewan, nama_pemilik;
+        private TextView id_hewan, nama, nama_jenis_hewan, nama_pemilik;
         private CardView parent;
 
         public MyViewHolder(@NonNull View itemView){
             super(itemView);
             nama = itemView.findViewById(R.id.tvNamaHewan);
+            id_hewan = itemView.findViewById(R.id.tvIdHewan);
             nama_jenis_hewan = itemView.findViewById(R.id.tvJenisHewan);
             nama_pemilik = itemView.findViewById(R.id.tvNamaPemilikHewan);
             parent = itemView.findViewById(R.id.ParentHewan);
@@ -123,47 +177,35 @@ public class HewanAdapter extends RecyclerView.Adapter<HewanAdapter.MyViewHolder
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
 
         // set title dialog
-        alertDialogBuilder.setTitle("What's next?");
+        alertDialogBuilder.setTitle(hasil.getNama());
 
-        // set pesan dari dialog
-        alertDialogBuilder
-                .setIcon(R.mipmap.ic_launcher)
-                .setCancelable(false)
-                .setPositiveButton("Edit",new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog,int id) {
+        // set pesan dan pilihan dari dialog
+        String[] option = {"Ubah","Hapus","Batal"};
+        alertDialogBuilder.setItems(option, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                // The 'which' argument contains the index position
+                // of the selected item
+                switch (which) {
+                    case 0:
                         // update report
                         //startIntent(hasil);
-                    }
-                })
-                .setNegativeButton("Delete",new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
+                        break;
+                    case 1:
                         //delete report
-                        deleteHewan(hasil.getId_hewan(),"pradnyadarsana", position);
-                    }
-                })
-                .setNeutralButton("Cancel", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int i) {
+                        deleteHewan(hasil.getId_hewan(), pegawai.getUsername(), position);
+                        break;
+                    case 2:
                         dialog.cancel();
-                    }
-                });
+                        break;
+                }
+            }
+        });
 
         // membuat alert dialog dari builder
         AlertDialog alertDialog = alertDialogBuilder.create();
 
         // menampilkan alert dialog
         alertDialog.show();
-    }
-
-    private void startIntent(HewanDAO hasil){
-//        Intent edit = new Intent(context, EditReport.class);
-//        edit.putExtra("id", hasil.getId());
-//        edit.putExtra("username", hasil.getUsername());
-//        edit.putExtra("waktu", hasil.getDatetime());
-//        edit.putExtra("alamat", hasil.getAddress());
-//        edit.putExtra("deskripsi", hasil.getDescription());
-//        edit.putExtra("kategori", hasil.getKategori());
-//        context.startActivity(edit);
     }
 
     public void setNamaJenisHewan(final HewanAdapter.MyViewHolder holder, final int id_jenis_hewan){
@@ -226,7 +268,6 @@ public class HewanAdapter extends RecyclerView.Adapter<HewanAdapter.MyViewHolder
                 Toast.makeText(context, "Sukses menghapus data hewan", Toast.LENGTH_SHORT).show();
                 delete(position);
             }
-
             @Override
             public void onFailure(Call<PostUpdateDelete> call, Throwable t) {
 
@@ -236,7 +277,9 @@ public class HewanAdapter extends RecyclerView.Adapter<HewanAdapter.MyViewHolder
     }
 
     public void delete(int position) { //removes the row
-        result.remove(position);
+        int index = result.indexOf(resultFiltered.get(position));
+        result.remove(index);
+        resultFiltered.remove(position);
         notifyItemRemoved(position);
         notifyDataSetChanged();
     }

@@ -68,7 +68,9 @@ public class LoginActivity extends AppCompatActivity {
                     if (username.getText().toString().equalsIgnoreCase("admin")){
                         if(password.getText().toString().equalsIgnoreCase("admin123")) {
                             pegawai = new PegawaiDAO(-1,"Administrator","Jalan Babarsari No 43, Yogyakarta",
-                                    "2020-02-11","082219273849","admin","admin123","admin",null,null,null,null,null,null,1);
+                                    "2020-02-11","082219273849","admin",
+                                    "admin123","admin",null,null,
+                                    null,null,null,null,1);
                             //Save Logged User into SharedPreferences
                             SharedPreferences.Editor editor = loggedUser.edit();
                             Gson gson = new Gson();

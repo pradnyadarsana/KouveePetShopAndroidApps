@@ -3,8 +3,10 @@ package com.example.kouveepetshopapps.supplier;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -14,7 +16,9 @@ import android.widget.Toast;
 import com.example.kouveepetshopapps.R;
 import com.example.kouveepetshopapps.api.ApiClient;
 import com.example.kouveepetshopapps.api.ApiInterfaceAdmin;
+import com.example.kouveepetshopapps.model.PegawaiDAO;
 import com.example.kouveepetshopapps.response.PostUpdateDelete;
+import com.google.gson.Gson;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -25,10 +29,20 @@ public class TambahSupplierActivity extends AppCompatActivity {
     private EditText nama, telp, alamat;
     private Button btnTambah;
 
+    SharedPreferences loggedUser;
+    PegawaiDAO admin;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tambah_supplier);
+
+        loggedUser = getSharedPreferences("logged_user", Context.MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = loggedUser.getString("user", "missing");
+        admin = gson.fromJson(json, PegawaiDAO.class);
+        System.out.println(json);
+
         nama = (EditText) findViewById(R.id.etNamaSupplier);
         telp = (EditText) findViewById(R.id.etTelpSupplier);
         alamat = (EditText) findViewById(R.id.etAlamatSupplier);
@@ -61,8 +75,7 @@ public class TambahSupplierActivity extends AppCompatActivity {
     public void tambahSupplier(){
         ApiInterfaceAdmin apiService = ApiClient.getClient().create(ApiInterfaceAdmin.class);
         Call<PostUpdateDelete> supplierDAOCall = apiService.tambahSupplier(nama.getText().toString(),
-                alamat.getText().toString(), telp.getText().toString(),
-                "admin");
+                alamat.getText().toString(), telp.getText().toString(), admin.getUsername());
 
         supplierDAOCall.enqueue(new Callback<PostUpdateDelete>() {
             @Override

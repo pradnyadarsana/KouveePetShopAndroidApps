@@ -1,173 +1,351 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="270dp"
-        android:background="@color/colorPrimaryBrown"
-        android:paddingHorizontal="30dp">
-
-        <RelativeLayout
-            android:id="@+id/btnLogoutPegawai"
-            android:layout_width="95dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_marginTop="15dp">
-            <TextView
-                android:id="@+id/tvLogoutPegawai"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toLeftOf="@id/imgLogoutPegawai"
-                android:layout_marginTop="12dp"
-                android:text="Logout"
-                android:textColor="@color/colorPrimary"/>
-            <ImageButton
-                android:id="@+id/imgLogoutPegawai"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_margin="10dp"
-                android:background="@drawable/ic_logout" />
-        </RelativeLayout>
-        <TextView
-            android:id="@+id/viewNamaPegawai"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:layout_marginTop="8dp"
-            android:textColor="@color/colorPrimary"
-            android:textColorHighlight="@color/colorAccent"
-            android:textSize="25dp"
-            android:text="Full Name"
-            android:textStyle="bold"/>
-
-
-    </RelativeLayout>
-    <RelativeLayout
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+     android:layout_height="match_parent" android:layout_width="match_parent">
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:orientation="vertical"
-            android:layout_marginTop="20dp">
-
-            <LinearLayout
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="25dp"
-                android:orientation="horizontal"
+                android:layout_height="270dp"
+                android:background="@color/colorPrimaryOrange"
                 android:paddingHorizontal="30dp">
-
-                <!--                <ImageView-->
-                <!--                    android:layout_width="36dp"-->
-                <!--                    android:layout_height="36dp"-->
-                <!--                    android:src="@drawable/ic_phone" />-->
-
+                <RelativeLayout
+                    android:id="@+id/btnLogoutPegawai"
+                    android:layout_width="95dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="15dp">
+                    <TextView
+                        android:id="@+id/tvLogoutPegawai"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toLeftOf="@id/imgLogoutPegawai"
+                        android:layout_marginTop="12dp"
+                        android:text="Logout"
+                        android:textColor="@color/colorPrimaryWhite"/>
+                    <ImageButton
+                        android:id="@+id/imgLogoutPegawai"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_margin="10dp"
+                        android:background="@drawable/ic_logout"
+                        android:backgroundTint="@color/colorPrimaryWhite"/>
+                </RelativeLayout>
                 <TextView
-                    android:id="@+id/viewUsernamePegawai"
+                    android:id="@+id/viewNamaPegawai"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:paddingLeft="20dp"
-                    android:text="username"
-                    android:textStyle="bold" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="25dp"
-                android:orientation="horizontal"
-                android:paddingHorizontal="30dp">
-
-                <!--                <ImageView-->
-                <!--                    android:layout_width="36dp"-->
-                <!--                    android:layout_height="36dp"-->
-                <!--                    android:src="@drawable/ic_date" />-->
-
+                    android:layout_centerInParent="true"
+                    android:layout_marginTop="8dp"
+                    android:textColor="@color/colorPrimaryWhite"
+                    android:textColorHighlight="@color/colorAccentWhite"
+                    android:textSize="25dp"
+                    android:text="Full Name"
+                    android:textStyle="bold"/>
                 <TextView
-                    android:id="@+id/viewAlamatPegawai"
+                    android:id="@+id/viewIdPegawai"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:paddingLeft="20dp"
-                    android:text="Jalan Kaswari 20 gang 3A no 2B Yogyakarta jashddasdhjasd"
-                    android:textStyle="bold" />
-            </LinearLayout>
-
-            <LinearLayout
+                    android:layout_below="@id/viewNamaPegawai"
+                    android:layout_centerHorizontal="true"
+                    android:text="Id hewan"
+                    android:textColor="@color/colorAccentWhite"/>
+            </RelativeLayout>
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="25dp"
-                android:orientation="horizontal"
-                android:paddingHorizontal="30dp">
+                android:layout_height="match_parent"
+                android:paddingHorizontal="50dp"
+                android:paddingVertical="40dp">
 
-                <!--                <ImageView-->
-                <!--                    android:layout_width="36dp"-->
-                <!--                    android:layout_height="36dp"-->
-                <!--                    android:src="@drawable/ic_gender" />-->
-
-                <TextView
-                    android:id="@+id/viewTanggalLahirPegawai"
-                    android:justificationMode="inter_word"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:paddingLeft="20dp"
-                    android:text="10-10-1999"
-                    android:textStyle="bold" />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="25dp"
-                android:orientation="horizontal"
-                android:paddingHorizontal="30dp">
+                    android:layout_gravity="center"
+                    android:orientation="vertical">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="95dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="Username"
+                            android:textStyle="bold" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text=": "
+                            android:textStyle="bold" />
+                        <TextView
+                            android:id="@+id/viewUsernamePegawai"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="user"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="25dp">
+                        <TextView
+                            android:layout_width="95dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="Tanggal Lahir"
+                            android:textStyle="bold" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text=": "
+                            android:textStyle="bold" />
+                        <TextView
+                            android:id="@+id/viewTanggalLahirPegawai"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="10-10-1999"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="25dp">
+                        <TextView
+                            android:layout_width="95dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="No. Telepon"
+                            android:textStyle="bold" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text=": "
+                            android:textStyle="bold" />
+                        <TextView
+                            android:id="@+id/viewTelpPegawai"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="083261819283"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="25dp">
+                        <TextView
+                            android:layout_width="95dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="Role"
+                            android:textStyle="bold" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text=": "
+                            android:textStyle="bold" />
+                        <TextView
+                            android:id="@+id/viewRolePegawai"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="cs"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="25dp">
+                        <TextView
+                            android:layout_width="95dp"
+                            android:layout_height="wrap_content"
+                            android:text="Alamat"
+                            android:textStyle="bold" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=": "
+                            android:textStyle="bold" />
+                        <TextView
+                            android:id="@+id/viewAlamatPegawai"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="Jalan Kaswari 20 gang 3A no 2B Yogyakarta jashddasdhjasd"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="25dp">
+                        <TextView
+                            android:layout_width="95dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="Created At"
+                            android:textStyle="bold" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text=": "
+                            android:textStyle="bold" />
+                        <TextView
+                            android:id="@+id/viewCreatedAtPegawai"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="2019-02-10 09:09"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="25dp">
+                        <TextView
+                            android:layout_width="95dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="Created By"
+                            android:textStyle="bold" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text=": "
+                            android:textStyle="bold" />
+                        <TextView
+                            android:id="@+id/viewCreatedByPegawai"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="admin"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="25dp">
+                        <TextView
+                            android:layout_width="95dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="Modified At"
+                            android:textStyle="bold" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text=": "
+                            android:textStyle="bold" />
+                        <TextView
+                            android:id="@+id/viewModifiedAtPegawai"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="2019-02-10 09:09"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="25dp">
 
-                <!--                <ImageView-->
-                <!--                    android:layout_width="36dp"-->
-                <!--                    android:layout_height="36dp"-->
-                <!--                    android:src="@drawable/ic_gender" />-->
+                        <TextView
+                            android:layout_width="95dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="Modified By"
+                            android:textStyle="bold" />
 
-                <TextView
-                    android:id="@+id/viewTelpPegawai"
-                    android:justificationMode="inter_word"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:paddingLeft="20dp"
-                    android:text="083261819283"
-                    android:textStyle="bold" />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="25dp"
-                android:orientation="horizontal"
-                android:paddingHorizontal="30dp">
-
-                <!--                <ImageView-->
-                <!--                    android:layout_width="36dp"-->
-                <!--                    android:layout_height="36dp"-->
-                <!--                    android:src="@drawable/ic_gender" />-->
-
-                <TextView
-                    android:id="@+id/viewRolePegawai"
-                    android:justificationMode="inter_word"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:paddingLeft="20dp"
-                    android:text="cs"
-                    android:textStyle="bold" />
-            </LinearLayout>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text=": "
+                            android:textStyle="bold" />
+                        <TextView
+                            android:id="@+id/viewModifiedByPegawai"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="admin"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="25dp">
+                        <TextView
+                            android:layout_width="95dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="Delete At"
+                            android:textStyle="bold" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text=": "
+                            android:textStyle="bold" />
+                        <TextView
+                            android:id="@+id/viewDeleteAtPegawai"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="2019-02-10 09:09"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="25dp">
+                        <TextView
+                            android:layout_width="95dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="Delete By"
+                            android:textStyle="bold" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text=": "
+                            android:textStyle="bold" />
+                        <TextView
+                            android:id="@+id/viewDeleteByPegawai"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="admin"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                </LinearLayout>
+            </RelativeLayout>
         </LinearLayout>
-    </RelativeLayout>
-</LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
+
 

@@ -22,7 +22,8 @@ import com.example.kouveepetshopapps.model.PegawaiDAO;
 import com.google.gson.Gson;
 
 public class ProfilCsFragment extends Fragment {
-    private TextView nama, username, alamat, tanggal_lahir, telp, role;
+    private TextView id_pegawai, nama, username, alamat, tanggal_lahir, telp, role, created_at, created_by,
+            modified_at, modified_by, delete_at, delete_by;
     private RelativeLayout btnLogout;
     SharedPreferences loggedUser;
     PegawaiDAO pegawai;
@@ -38,12 +39,20 @@ public class ProfilCsFragment extends Fragment {
         pegawai = gson.fromJson(json, PegawaiDAO.class);
         System.out.println(json);
 
+        id_pegawai = view.findViewById(R.id.viewIdPegawai);
         nama = view.findViewById(R.id.viewNamaPegawai);
         username = view.findViewById(R.id.viewUsernamePegawai);
         alamat = view.findViewById(R.id.viewAlamatPegawai);
         tanggal_lahir = view.findViewById(R.id.viewTanggalLahirPegawai);
         telp = view.findViewById(R.id.viewTelpPegawai);
         role = view.findViewById(R.id.viewRolePegawai);
+        created_at = view.findViewById(R.id.viewCreatedAtPegawai);
+        created_by = view.findViewById(R.id.viewCreatedByPegawai);
+        modified_at = view.findViewById(R.id.viewModifiedAtPegawai);
+        modified_by = view.findViewById(R.id.viewModifiedByPegawai);
+        delete_at = view.findViewById(R.id.viewDeleteAtPegawai);
+        delete_by = view.findViewById(R.id.viewDeleteByPegawai);
+
         btnLogout = view.findViewById(R.id.btnLogoutPegawai);
 
         setField(pegawai);
@@ -58,12 +67,19 @@ public class ProfilCsFragment extends Fragment {
     }
 
     public void setField(PegawaiDAO pegawai){
+        id_pegawai.setText(Integer.toString(pegawai.getId_pegawai()));
         nama.setText(pegawai.getNama());
         username.setText(pegawai.getUsername());
         alamat.setText(pegawai.getAlamat());
         tanggal_lahir.setText(pegawai.getTanggal_lahir());
         telp.setText(pegawai.getTelp());
         role.setText(pegawai.getRole());
+        created_at.setText(pegawai.getCreated_at());
+        created_by.setText(pegawai.getCreated_by());
+        modified_at.setText(pegawai.getModified_at());
+        modified_by.setText(pegawai.getModified_by());
+        delete_at.setText(pegawai.getDelete_at());
+        delete_by.setText(pegawai.getDelete_by());
     }
 
     private void showLogoutDialog(){
@@ -74,7 +90,7 @@ public class ProfilCsFragment extends Fragment {
 
         // set pesan dari dialog
         alertDialogBuilder
-                .setIcon(R.mipmap.ic_launcher)
+                .setIcon(R.drawable.ic_error_outline_black_24dp)
                 .setCancelable(false)
                 .setPositiveButton("Keluar",new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog,int id) {

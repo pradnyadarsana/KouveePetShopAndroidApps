@@ -9,33 +9,45 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.kouveepetshopapps.R;
 import com.example.kouveepetshopapps.api.ApiClient;
 import com.example.kouveepetshopapps.api.ApiInterfaceCS;
+import com.example.kouveepetshopapps.hewan.TampilDetailHewanFragment;
+import com.example.kouveepetshopapps.model.PegawaiDAO;
 import com.example.kouveepetshopapps.model.PelangganDAO;
+import com.example.kouveepetshopapps.model.ProdukDAO;
 import com.example.kouveepetshopapps.pelanggan.TampilDetailPelangganFragment;
 import com.example.kouveepetshopapps.response.PostUpdateDelete;
+import com.google.gson.Gson;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class PelangganAdapter extends RecyclerView.Adapter<PelangganAdapter.MyViewHolder> {
+public class PelangganAdapter extends RecyclerView.Adapter<PelangganAdapter.MyViewHolder> implements Filterable {
     private Context context;
     private List<PelangganDAO> result;
+    private List<PelangganDAO> resultFiltered;
+    SharedPreferences loggedUser;
+    PegawaiDAO pegawai;
 
     public PelangganAdapter(Context context, List<PelangganDAO> result){
         this.context = context;
         this.result = result;
+        this.resultFiltered = result;
     }
 
     @NonNull
@@ -44,30 +56,25 @@ public class PelangganAdapter extends RecyclerView.Adapter<PelangganAdapter.MyVi
         View v = LayoutInflater.from(context).inflate(R.layout.adapter_pelanggan, parent, false);
         final MyViewHolder holder = new MyViewHolder(v);
 
+        loggedUser = context.getSharedPreferences("logged_user", Context.MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = loggedUser.getString("user", "missing");
+        pegawai = gson.fromJson(json, PegawaiDAO.class);
+        System.out.println(json);
+
         return holder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, final int position) {
-        final PelangganDAO pelanggan = result.get(position);
+        final PelangganDAO pelanggan = resultFiltered.get(position);
         holder.nama.setText(pelanggan.getNama());
         holder.id_pelanggan.setText(Integer.toString(pelanggan.getId_pelanggan()));
         holder.telp.setText(pelanggan.getTelp());
         holder.parent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Bundle data = new Bundle();
-                Fragment fragment = new TampilDetailPelangganFragment();
-
-                data.putString("id_pelanggan", Integer.toString(pelanggan.getId_pelanggan()));
-                data.putString("nama", pelanggan.getNama());
-                data.putString("alamat", pelanggan.getAlamat());
-                data.putString("tanggal_lahir", pelanggan.getTanggal_lahir());
-                data.putString("telp", pelanggan.getTelp());
-                data.putString("created_at", pelanggan.getCreated_at());
-
-                fragment.setArguments(data);
-                loadFragment(fragment);
+                startFragment(pelanggan);
             }
         });
         holder.parent.setOnLongClickListener(new View.OnLongClickListener() {
@@ -89,10 +96,57 @@ public class PelangganAdapter extends RecyclerView.Adapter<PelangganAdapter.MyVi
         return false;
     }
 
+    private void startFragment(PelangganDAO hasil){
+        Bundle data = new Bundle();
+        Fragment fragment = new TampilDetailPelangganFragment();
+
+        Gson gson = new Gson();
+        String json = gson.toJson(hasil);
+        data.putString("pelanggan", json);
+
+        fragment.setArguments(data);
+        loadFragment(fragment);
+    }
+
     @Override
     public int getItemCount() {
-        return result.size();
+        return resultFiltered.size();
     }
+
+    @Override
+    public Filter getFilter() {
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence charSequence) {
+                String charString = charSequence.toString();
+                if (charString.isEmpty()) {
+                    resultFiltered = result;
+                } else {
+                    List<PelangganDAO> filteredList = new ArrayList<>();
+                    for (PelangganDAO row : result) {
+
+                        // name match condition. this might differ depending on your requirement
+                        // here we are looking for name or phone number match
+                        if (row.getNama().toLowerCase().contains(charString.toLowerCase()) || Integer.toString(row.getId_pelanggan()).contains(charSequence)) {
+                            filteredList.add(row);
+                        }
+                    }
+                    resultFiltered = filteredList;
+                }
+
+                FilterResults filterResults = new FilterResults();
+                filterResults.values = resultFiltered;
+                return filterResults;
+            }
+
+            @Override
+            protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+                resultFiltered = (ArrayList<PelangganDAO>) filterResults.values;
+                notifyDataSetChanged();
+            }
+        };
+    }
+
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         private TextView nama, id_pelanggan, telp;
         private CardView parent;
@@ -113,30 +167,29 @@ public class PelangganAdapter extends RecyclerView.Adapter<PelangganAdapter.MyVi
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
 
         // set title dialog
-        alertDialogBuilder.setTitle("What's next?");
+        alertDialogBuilder.setTitle(hasil.getNama());
 
-        // set pesan dari dialog
-        alertDialogBuilder
-                .setIcon(R.mipmap.ic_launcher)
-                .setCancelable(false)
-                .setPositiveButton("Edit",new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog,int id) {
+        // set pesan dan pilihan dari dialog
+        String[] option = {"Ubah","Hapus","Batal"};
+        alertDialogBuilder.setItems(option, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                // The 'which' argument contains the index position
+                // of the selected item
+                switch (which) {
+                    case 0:
                         // update report
-                        startIntent(hasil);
-                    }
-                })
-                .setNegativeButton("Delete",new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
+                        //startIntent(hasil);
+                        break;
+                    case 1:
                         //delete report
-                        deletePelanggan(hasil.getId_pelanggan(),"pradnyadarsana", position);
-                    }
-                })
-                .setNeutralButton("Cancel", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int i) {
+                        deletePelanggan(hasil.getId_pelanggan(), pegawai.getUsername(), position);
+                        break;
+                    case 2:
                         dialog.cancel();
-                    }
-                });
+                        break;
+                }
+            }
+        });
 
         // membuat alert dialog dari builder
         AlertDialog alertDialog = alertDialogBuilder.create();
@@ -145,16 +198,7 @@ public class PelangganAdapter extends RecyclerView.Adapter<PelangganAdapter.MyVi
         alertDialog.show();
     }
 
-    private void startIntent(PelangganDAO hasil){
-//        Intent edit = new Intent(context, EditReport.class);
-//        edit.putExtra("id", hasil.getId());
-//        edit.putExtra("username", hasil.getUsername());
-//        edit.putExtra("waktu", hasil.getDatetime());
-//        edit.putExtra("alamat", hasil.getAddress());
-//        edit.putExtra("deskripsi", hasil.getDescription());
-//        edit.putExtra("kategori", hasil.getKategori());
-//        context.startActivity(edit);
-    }
+
 
     private void deletePelanggan(int id, String delete_by, final int position){
             ApiInterfaceCS apiService = ApiClient.getClient().create(ApiInterfaceCS.class);
@@ -178,7 +222,9 @@ public class PelangganAdapter extends RecyclerView.Adapter<PelangganAdapter.MyVi
     }
 
     public void delete(int position) { //removes the row
-        result.remove(position);
+        int index = result.indexOf(resultFiltered.get(position));
+        result.remove(index);
+        resultFiltered.remove(position);
         notifyItemRemoved(position);
         notifyDataSetChanged();
     }

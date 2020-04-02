@@ -6,13 +6,27 @@
     android:layout_height="match_parent"
     android:id="@+id/pelangganLayout"
     tools:context=".pelanggan.ListPelangganFragment">
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/listPelangganToolbar"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:theme="@style/AppTheme.AppBarOverlay">
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/searchPelangganToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
+    </com.google.android.material.appbar.AppBarLayout>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view_pelanggan"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@+id/listPelangganToolbar"/>
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -23,8 +37,8 @@
         app:fabSize="normal"
         app:borderWidth="0dp"
         app:elevation="6dp"
-        android:backgroundTint="@color/colorPrimary"
-        android:src="@drawable/pelanggan_add_foreground"
+        android:backgroundTint="@color/colorPrimaryBeige"
+        android:src="@drawable/ic_add_black_24dp"
         android:id="@+id/addPelangganButton"
         tools:ignore="MissingConstraints" />
 </androidx.constraintlayout.widget.ConstraintLayout>

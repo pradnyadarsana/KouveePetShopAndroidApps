@@ -4,8 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -20,8 +22,10 @@ import android.widget.Toast;
 import com.example.kouveepetshopapps.R;
 import com.example.kouveepetshopapps.api.ApiClient;
 import com.example.kouveepetshopapps.api.ApiInterfaceCS;
+import com.example.kouveepetshopapps.model.PegawaiDAO;
 import com.example.kouveepetshopapps.navigation.CsMainMenu;
 import com.example.kouveepetshopapps.response.PostUpdateDelete;
+import com.google.gson.Gson;
 
 import java.util.Calendar;
 
@@ -37,11 +41,20 @@ public class TambahPelangganActivity extends AppCompatActivity {
     String TAG = "TambahPelangganActivity";
     private Button btnTambah;
     String tanggal_lahir_temp;
+    SharedPreferences loggedUser;
+    PegawaiDAO pegawai;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tambah_pelanggan);
+
+        loggedUser = getSharedPreferences("logged_user", Context.MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = loggedUser.getString("user", "missing");
+        pegawai = gson.fromJson(json, PegawaiDAO.class);
+        System.out.println(json);
+
         nama = (EditText) findViewById(R.id.etNamaPelanggan);
         telp = (EditText) findViewById(R.id.etTelpPelanggan);
         alamat = (EditText) findViewById(R.id.etAlamatPelanggan);
@@ -115,7 +128,7 @@ public class TambahPelangganActivity extends AppCompatActivity {
         ApiInterfaceCS apiService = ApiClient.getClient().create(ApiInterfaceCS.class);
         Call<PostUpdateDelete> pelangganDAOCall = apiService.tambahPelanggan(nama.getText().toString(),
                 alamat.getText().toString(), tanggal_lahir_temp, telp.getText().toString(),
-                "pradnyadarsana");
+                pegawai.getUsername());
 
         pelangganDAOCall.enqueue(new Callback<PostUpdateDelete>() {
             @Override
@@ -140,7 +153,7 @@ public class TambahPelangganActivity extends AppCompatActivity {
 
         // set pesan dari dialog
         alertDialogBuilder
-                .setIcon(R.mipmap.ic_launcher)
+                .setIcon(R.drawable.ic_error_outline_black_24dp)
                 .setCancelable(false)
                 .setPositiveButton("SIAP!",new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog,int id) {

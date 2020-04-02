@@ -7,8 +7,10 @@ import androidx.core.content.ContextCompat;
 
 import android.Manifest;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -27,7 +29,9 @@ import android.widget.Toast;
 import com.example.kouveepetshopapps.R;
 import com.example.kouveepetshopapps.api.ApiClient;
 import com.example.kouveepetshopapps.api.ApiInterfaceAdmin;
+import com.example.kouveepetshopapps.model.PegawaiDAO;
 import com.example.kouveepetshopapps.response.PostUpdateDelete;
+import com.google.gson.Gson;
 
 import java.io.File;
 
@@ -59,10 +63,20 @@ public class TambahProdukActivity extends AppCompatActivity {
 
     int USER_PERMISSIONS_REQUEST;
 
+    SharedPreferences loggedUser;
+    PegawaiDAO admin;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tambah_produk);
+
+        loggedUser = getSharedPreferences("logged_user", Context.MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = loggedUser.getString("user", "missing");
+        admin = gson.fromJson(json, PegawaiDAO.class);
+        System.out.println(json);
+
         nama = findViewById(R.id.etNamaProduk);
         satuan = findViewById(R.id.etSatuanProduk);
         jumlah_stok = findViewById(R.id.etJumlahStokProduk);
@@ -210,7 +224,7 @@ public class TambahProdukActivity extends AppCompatActivity {
         RequestBody jumlah_stokForm = RequestBody.create(MediaType.parse("text/plain"), jumlah_stok.getText().toString());
         RequestBody hargaForm = RequestBody.create(MediaType.parse("text/plain"), harga.getText().toString());
         RequestBody min_stokForm = RequestBody.create(MediaType.parse("text/plain"), min_stok.getText().toString());
-        RequestBody created_byForm = RequestBody.create(MediaType.parse("text/plain"), "admin");
+        RequestBody created_byForm = RequestBody.create(MediaType.parse("text/plain"), admin.getUsername());
 
         ApiInterfaceAdmin apiService = ApiClient.getClient().create(ApiInterfaceAdmin.class);
         Call<PostUpdateDelete> produkDAOCall = apiService.tambahProduk(namaForm, satuanForm,
