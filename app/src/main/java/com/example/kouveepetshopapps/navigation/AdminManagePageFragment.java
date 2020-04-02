@@ -129,7 +129,7 @@ public class AdminManagePageFragment extends Fragment {
 
         // set pesan dari dialog
         alertDialogBuilder
-                .setIcon(R.mipmap.ic_launcher)
+                .setIcon(R.drawable.ic_logout)
                 .setCancelable(false)
                 .setPositiveButton("Keluar",new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog,int id) {

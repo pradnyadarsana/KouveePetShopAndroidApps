@@ -5,17 +5,17 @@
 
     <item
         android:id="@+id/cs_transaksi"
-        android:icon="@mipmap/order_supply_logo_foreground"
+        android:icon="@drawable/ic_shopping_cart_black_24dp"
         android:title="transaksi" />
 
     <item
         android:id="@+id/cs_hewan"
-        android:icon="@drawable/hewan_logo_foreground"
+        android:icon="@drawable/ic_pets_black_24dp"
         android:title="hewan" />
 
     <item
         android:id="@+id/cs_pelanggan"
-        android:icon="@drawable/pelanggan_logo_foreground"
+        android:icon="@drawable/ic_people_black_24dp"
         android:title="pelanggan" />
 
     <item

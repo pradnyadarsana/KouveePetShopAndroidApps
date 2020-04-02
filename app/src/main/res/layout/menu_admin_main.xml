@@ -22,6 +22,7 @@
         android:background="@color/colorPrimaryWhite"
         app:itemIconTint="@drawable/color_state"
         app:menu="@menu/bottom_nav_menu_admin"
-        app:itemTextColor="@drawable/color_state" />
+        app:itemTextColor="@drawable/color_state"
+        app:labelVisibilityMode="labeled"/>
 
 </RelativeLayout>
