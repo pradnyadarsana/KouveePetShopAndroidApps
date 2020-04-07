@@ -28,13 +28,11 @@ import com.example.kouveepetshopapps.model.HewanDAO;
 import com.example.kouveepetshopapps.model.JenisHewanDAO;
 import com.example.kouveepetshopapps.model.PegawaiDAO;
 import com.example.kouveepetshopapps.model.PelangganDAO;
-import com.example.kouveepetshopapps.model.ProdukDAO;
-import com.example.kouveepetshopapps.model.UkuranHewanDAO;
+import com.example.kouveepetshopapps.model.TransaksiProdukDAO;
 import com.example.kouveepetshopapps.response.GetJenisHewan;
 import com.example.kouveepetshopapps.response.GetPelanggan;
-import com.example.kouveepetshopapps.response.GetUkuranHewan;
 import com.example.kouveepetshopapps.response.PostUpdateDelete;
-import com.example.kouveepetshopapps.response.SearchJenisHewan;
+import com.example.kouveepetshopapps.response.SearchHewan;
 import com.example.kouveepetshopapps.response.SearchPelanggan;
 import com.google.gson.Gson;
 
@@ -45,14 +43,14 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class HewanAdapter extends RecyclerView.Adapter<HewanAdapter.MyViewHolder> implements Filterable {
+public class TransaksiProdukAdapter extends RecyclerView.Adapter<TransaksiProdukAdapter.MyViewHolder> implements Filterable {
     private Context context;
-    private List<HewanDAO> result;
-    private List<HewanDAO> resultFiltered;
+    private List<TransaksiProdukDAO> result;
+    private List<TransaksiProdukDAO> resultFiltered;
     SharedPreferences loggedUser;
     PegawaiDAO pegawai;
 
-    public HewanAdapter(Context context, List<HewanDAO> result){
+    public TransaksiProdukAdapter(Context context, List<TransaksiProdukDAO> result){
         this.context = context;
         this.result = result;
         this.resultFiltered = result;
@@ -61,7 +59,7 @@ public class HewanAdapter extends RecyclerView.Adapter<HewanAdapter.MyViewHolder
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(context).inflate(R.layout.adapter_hewan, parent, false);
+        View v = LayoutInflater.from(context).inflate(R.layout.adapter_transaksi_produk, parent, false);
         final MyViewHolder holder = new MyViewHolder(v);
 
         loggedUser = context.getSharedPreferences("logged_user", Context.MODE_PRIVATE);
@@ -74,39 +72,38 @@ public class HewanAdapter extends RecyclerView.Adapter<HewanAdapter.MyViewHolder
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final MyViewHolder holder, final int position) {
-        final HewanDAO hewan = resultFiltered.get(position);
-        holder.nama.setText(hewan.getNama());
-        holder.id_hewan.setText(Integer.toString(hewan.getId_hewan()));
-        setNamaJenisHewan(holder, hewan.getId_jenis_hewan());
-        setNamaPelanggan(holder, hewan.getId_pelanggan());
+    public void onBindViewHolder(@NonNull final TransaksiProdukAdapter.MyViewHolder holder, final int position) {
+        final TransaksiProdukDAO transaksi = resultFiltered.get(position);
+        holder.id_transaksi_produk.setText(transaksi.getId_transaksi_produk());
+        holder.total.setText(Integer.toString(transaksi.getTotal()));
+        setNamaHewan(holder, transaksi.getId_hewan());
         holder.parent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startFragment(hewan, holder);
+                startFragment(transaksi, holder);
             }
         });
         holder.parent.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
-                showDialog(hewan, position);
+                showDialog(transaksi, position);
                 return false;
             }
         });
     }
 
-    private void startFragment(HewanDAO hasil, MyViewHolder holder){
-        Bundle data = new Bundle();
-        Fragment fragment = new TampilDetailHewanFragment();
-
-        Gson gson = new Gson();
-        String json = gson.toJson(hasil);
-        data.putString("hewan", json);
-        data.putString("nama_jenis_hewan", holder.nama_jenis_hewan.getText().toString());
-        data.putString("nama_pelanggan", holder.nama_pemilik.getText().toString());
-
-        fragment.setArguments(data);
-        loadFragment(fragment);
+    private void startFragment(TransaksiProdukDAO hasil, TransaksiProdukAdapter.MyViewHolder holder){
+//        Bundle data = new Bundle();
+//        Fragment fragment = new TampilDetailHewanFragment();
+//
+//        Gson gson = new Gson();
+//        String json = gson.toJson(hasil);
+//        data.putString("hewan", json);
+////        data.putString("nama_jenis_hewan", holder.nama_jenis_hewan.getText().toString());
+////        data.putString("nama_pelanggan", holder.nama_pemilik.getText().toString());
+//
+//        fragment.setArguments(data);
+//        loadFragment(fragment);
     }
 
     private boolean loadFragment(Fragment fragment) {
@@ -133,12 +130,12 @@ public class HewanAdapter extends RecyclerView.Adapter<HewanAdapter.MyViewHolder
                 if (charString.isEmpty()) {
                     resultFiltered = result;
                 } else {
-                    List<HewanDAO> filteredList = new ArrayList<>();
-                    for (HewanDAO row : result) {
+                    List<TransaksiProdukDAO> filteredList = new ArrayList<>();
+                    for (TransaksiProdukDAO row : result) {
 
                         // name match condition. this might differ depending on your requirement
                         // here we are looking for name or phone number match
-                        if (row.getNama().toLowerCase().contains(charString.toLowerCase()) || Integer.toString(row.getId_hewan()).contains(charSequence)) {
+                        if (row.getId_transaksi_produk().toLowerCase().contains(charString.toLowerCase())) {
                             filteredList.add(row);
                         }
                     }
@@ -152,34 +149,34 @@ public class HewanAdapter extends RecyclerView.Adapter<HewanAdapter.MyViewHolder
 
             @Override
             protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
-                resultFiltered = (ArrayList<HewanDAO>) filterResults.values;
+                resultFiltered = (ArrayList<TransaksiProdukDAO>) filterResults.values;
                 notifyDataSetChanged();
             }
         };
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-        private TextView id_hewan, nama, nama_jenis_hewan, nama_pemilik;
+        private TextView id_transaksi_produk, total, nama_hewan, nama_pemilik;
         private CardView parent;
 
         public MyViewHolder(@NonNull View itemView){
             super(itemView);
-            nama = itemView.findViewById(R.id.tvNamaHewan);
-            id_hewan = itemView.findViewById(R.id.tvIdHewan);
-            nama_jenis_hewan = itemView.findViewById(R.id.tvJenisHewan);
-            nama_pemilik = itemView.findViewById(R.id.tvNamaPemilikHewan);
-            parent = itemView.findViewById(R.id.ParentHewan);
+            id_transaksi_produk = itemView.findViewById(R.id.tvIdTransaksiProduk);
+            total = itemView.findViewById(R.id.tvTotalTransaksiProduk);
+            nama_hewan = itemView.findViewById(R.id.tvNamaHewanTransaksiProduk);
+            nama_pemilik = itemView.findViewById(R.id.tvNamaPemilikTransaksiProduk);
+            parent = itemView.findViewById(R.id.ParentTransaksiProduk);
         }
         public void onClick(View view) {
             Toast.makeText(context, "You touch me?", Toast.LENGTH_SHORT).show();
         }
     }
 
-    private void showDialog(final HewanDAO hasil, final int position){
+    private void showDialog(final TransaksiProdukDAO hasil, final int position){
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
 
         // set title dialog
-        alertDialogBuilder.setTitle(hasil.getNama());
+        alertDialogBuilder.setTitle(hasil.getId_transaksi_produk());
 
         // set pesan dan pilihan dari dialog
         String[] option = {"Ubah","Hapus","Batal"};
@@ -194,7 +191,7 @@ public class HewanAdapter extends RecyclerView.Adapter<HewanAdapter.MyViewHolder
                         break;
                     case 1:
                         //delete report
-                        deleteHewan(hasil.getId_hewan(), pegawai.getUsername(), position);
+                        deleteHewan(hasil.getId_transaksi_produk(), pegawai.getUsername(), position);
                         break;
                     case 2:
                         dialog.cancel();
@@ -210,31 +207,26 @@ public class HewanAdapter extends RecyclerView.Adapter<HewanAdapter.MyViewHolder
         alertDialog.show();
     }
 
-    public void setNamaJenisHewan(final HewanAdapter.MyViewHolder holder, final int id_jenis_hewan){
-        ApiInterfaceAdmin apiService = ApiClient.getClient().create(ApiInterfaceAdmin.class);
-        Call<SearchJenisHewan> jenishewanDAOCall = apiService.searchJenisHewan(Integer.toString(id_jenis_hewan));
+    public void setNamaHewan(final TransaksiProdukAdapter.MyViewHolder holder, final int id_hewan){
+        ApiInterfaceCS apiService = ApiClient.getClient().create(ApiInterfaceCS.class);
+        Call<SearchHewan> hewanDAOCall = apiService.searchHewan(Integer.toString(id_hewan));
 
-        jenishewanDAOCall.enqueue(new Callback<SearchJenisHewan>() {
+        hewanDAOCall.enqueue(new Callback<SearchHewan>() {
             @Override
-            public void onResponse(Call<SearchJenisHewan> call, Response<SearchJenisHewan> response) {
-                JenisHewanDAO jenishewan = response.body().getJenishewan();
-                if(jenishewan.getNama()!=null){
-                    System.out.println(jenishewan.getNama());
-                    holder.nama_jenis_hewan.setText(jenishewan.getNama());
-                }else{
-                    holder.nama_jenis_hewan.setText(Integer.toString(id_jenis_hewan));
-                }
-
+            public void onResponse(Call<SearchHewan> call, Response<SearchHewan> response) {
+                HewanDAO hewan = response.body().getHewan();
+                holder.nama_hewan.setText(hewan.getNama());
+                setNamaPelanggan(holder, hewan.getId_pelanggan());
             }
 
             @Override
-            public void onFailure(Call<SearchJenisHewan> call, Throwable t) {
-                holder.nama_jenis_hewan.setText(Integer.toString(id_jenis_hewan));
+            public void onFailure(Call<SearchHewan> call, Throwable t) {
+                holder.nama_hewan.setText(id_hewan);
             }
         });
     }
 
-    public void setNamaPelanggan(final HewanAdapter.MyViewHolder holder, final int id_pelanggan){
+    public void setNamaPelanggan(final TransaksiProdukAdapter.MyViewHolder holder, final int id_pelanggan){
         ApiInterfaceCS apiService = ApiClient.getClient().create(ApiInterfaceCS.class);
         Call<SearchPelanggan> pelangganDAOCall = apiService.searchPelanggan(Integer.toString(id_pelanggan));
 
@@ -242,27 +234,21 @@ public class HewanAdapter extends RecyclerView.Adapter<HewanAdapter.MyViewHolder
             @Override
             public void onResponse(Call<SearchPelanggan> call, Response<SearchPelanggan> response) {
                 PelangganDAO pelanggan = response.body().getPelanggan();
-                if(pelanggan.getNama()!=null){
-                    System.out.println(pelanggan.getNama());
-                    holder.nama_pemilik.setText(pelanggan.getNama());
-                }else{
-                    holder.nama_pemilik.setText(Integer.toString(id_pelanggan));
-                }
-
+                holder.nama_pemilik.setText(pelanggan.getNama());
             }
 
             @Override
             public void onFailure(Call<SearchPelanggan> call, Throwable t) {
-                holder.nama_pemilik.setText(Integer.toString(id_pelanggan));
+                holder.nama_pemilik.setText(id_pelanggan);
             }
         });
     }
 
-    private void deleteHewan(int id, String delete_by, final int position){
+    private void deleteHewan(String id, String delete_by, final int position){
         ApiInterfaceCS apiService = ApiClient.getClient().create(ApiInterfaceCS.class);
-        Call<PostUpdateDelete> hewanDAOCall = apiService.hapusHewan(Integer.toString(id),delete_by);
+        Call<PostUpdateDelete> transaksiProdukDAOCall = apiService.hapusTransaksiProduk(id);
 
-        hewanDAOCall.enqueue(new Callback<PostUpdateDelete>() {
+        transaksiProdukDAOCall.enqueue(new Callback<PostUpdateDelete>() {
             @Override
             public void onResponse(Call<PostUpdateDelete> call, Response<PostUpdateDelete> response) {
                 //reverse close
@@ -272,7 +258,7 @@ public class HewanAdapter extends RecyclerView.Adapter<HewanAdapter.MyViewHolder
             }
             @Override
             public void onFailure(Call<PostUpdateDelete> call, Throwable t) {
-
+                System.out.println(t.getMessage());
                 Toast.makeText(context, "Gagal menghapus data hewan", Toast.LENGTH_SHORT).show();
             }
         });

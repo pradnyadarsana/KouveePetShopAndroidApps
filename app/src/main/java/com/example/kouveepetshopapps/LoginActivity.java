@@ -131,7 +131,7 @@ public class LoginActivity extends AppCompatActivity {
 
         // set pesan dari dialog
         alertDialogBuilder
-                .setIcon(R.mipmap.ic_launcher)
+                .setIcon(R.drawable.ic_error_outline_black_24dp)
                 .setCancelable(false)
                 .setPositiveButton("SIAP!",new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog,int id) {

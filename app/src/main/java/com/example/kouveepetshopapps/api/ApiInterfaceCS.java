@@ -2,15 +2,20 @@ package com.example.kouveepetshopapps.api;
 
 import com.example.kouveepetshopapps.model.HewanDAO;
 import com.example.kouveepetshopapps.model.UkuranHewanDAO;
+import com.example.kouveepetshopapps.response.GetDetailTransaksiProduk;
 import com.example.kouveepetshopapps.response.GetHewan;
 import com.example.kouveepetshopapps.response.GetJenisHewan;
 import com.example.kouveepetshopapps.response.GetPelanggan;
+import com.example.kouveepetshopapps.response.GetTransaksiProduk;
 import com.example.kouveepetshopapps.response.PostUpdateDelete;
+import com.example.kouveepetshopapps.response.SearchHewan;
 import com.example.kouveepetshopapps.response.SearchPegawai;
+import com.example.kouveepetshopapps.response.SearchPelanggan;
 
 import java.util.List;
 
 import retrofit2.Call;
+import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -28,14 +33,11 @@ public interface ApiInterfaceCS {
                                            @Field("telp")String telp,
                                            @Field("created_by")String created_by);
 
-//    @GET("viewProfile.php/{email}")
-    //   Call<UserDAO> getUser(@Path("email") String email);
-
     @GET("pelanggan")
     Call<GetPelanggan> getAllPelangganAktif();
 
     @GET("pelanggan/search/{id_pelanggan}")
-    Call<GetPelanggan> searchPelanggan(@Path("id_pelanggan")String id_pelanggan);
+    Call<SearchPelanggan> searchPelanggan(@Path("id_pelanggan")String id_pelanggan);
 
     @POST("pelanggan/update/{id_pelanggan}")
     @FormUrlEncoded
@@ -50,9 +52,6 @@ public interface ApiInterfaceCS {
     @FormUrlEncoded
     Call<PostUpdateDelete> hapusPelanggan(@Path("id_pelanggan") String id_pelanggan,
                                           @Field("delete_by")String delete_by);
-//    @DELETE("Profile/deleteProfile/{id}")
-//    Call<String> deleteUser(@Path("id") String id);
-
 
     //KELOLA HEWAN
     @POST("hewan")
@@ -63,11 +62,11 @@ public interface ApiInterfaceCS {
                                      @Field("tanggal_lahir") String tanggal_lahir,
                                      @Field("created_by")String created_by);
 
-//    @GET("viewProfile.php/{email}")
-    //   Call<UserDAO> getUser(@Path("email") String email);
-
     @GET("hewan")
     Call<GetHewan> getAllHewanAktif();
+
+    @GET("hewan/search/{id_hewan}")
+    Call<SearchHewan> searchHewan(@Path("id_hewan")String id_hewan);
 
     @POST("hewan/update/{id_hewan}")
     @FormUrlEncoded
@@ -82,8 +81,6 @@ public interface ApiInterfaceCS {
     @FormUrlEncoded
     Call<PostUpdateDelete> hapusHewan(@Path("id_hewan") String id_hewan,
                                       @Field("delete_by")String delete_by);
-//    @DELETE("Profile/deleteProfile/{id}")
-//    Call<String> deleteUser(@Path("id") String id);
 
     //AUTHENTICATION
     @POST("pegawai/auth")
@@ -91,4 +88,54 @@ public interface ApiInterfaceCS {
     Call<SearchPegawai> authPegawai(@Field("username") String username,
                                     @Field("password") String password);
 
+    //TRANSAKSI PRODUK
+    @POST("transaksiProduk")
+    @FormUrlEncoded
+    Call<PostUpdateDelete> tambahTransaksiProduk(@Field("id_customer_service") String id_customer_service,
+                                                 @Field("id_hewan") String id_hewan,
+                                                 @Field("subtotal") String subtotal,
+                                                 @Field("diskon") String diskon,
+                                                 @Field("total")String total,
+                                                 @Field("created_by") String created_by);
+
+    @GET("transaksiProduk/waitingPayment")
+    Call<GetTransaksiProduk> getTransaksiProdukMenungguPembayaran();
+
+    @POST("transaksiProduk/update/{id_transaksi_produk}")
+    @FormUrlEncoded
+    Call<PostUpdateDelete> ubahTransaksiProduk(@Path("id_transaksi_produk") String id_transaksi_produk,
+                                               @Field("id_hewan") String id_hewan,
+                                               @Field("subtotal") String subtotal,
+                                               @Field("diskon") String diskon,
+                                               @Field("total")String total,
+                                               @Field("modified_by") String modified_by);
+
+    @DELETE("transaksiProduk/{id_transaksi_produk}")
+    Call<PostUpdateDelete> hapusTransaksiProduk(@Path("id_transaksi_produk") String id_transaksi_produk);
+
+    //DETAIL TRANSAKSI PRODUK
+    @POST("detailTransaksiProduk")
+    @FormUrlEncoded
+    Call<PostUpdateDelete> tambahDetailTransaksiProduk(@Field("id_transaksi_produk") String id_transaksi_produk,
+                                                       @Field("id_produk") String id_produk,
+                                                       @Field("jumlah") String jumlah,
+                                                       @Field("total_harga") String total_harga,
+                                                       @Field("created_by") String created_by);
+
+    @GET("detailTransaksiProduk")
+    Call<GetDetailTransaksiProduk> getAllDetailTransaksiProduk();
+
+    @GET("detailTransaksiProduk/getByTransactionId/{id_transaksi_produk}")
+    Call<GetDetailTransaksiProduk> getDetailTransaksiProdukByIdTransaksi(@Path("id_transaksi_produk") String id_transaksi_produk);
+
+    @POST("detailTransaksiProduk/update/{id_detail_transaksi_produk}")
+    @FormUrlEncoded
+    Call<PostUpdateDelete> ubahDetailTransaksiProduk(@Path("id_detail_transaksi_produk") String id_detail_transaksi_produk,
+                                                     @Field("id_produk") String id_produk,
+                                                     @Field("jumlah") String jumlah,
+                                                     @Field("total_harga") String total_harga,
+                                                     @Field("modified_by") String modified_by);
+
+    @DELETE("detailTransaksiProduk/{id_detail_transaksi_produk}")
+    Call<PostUpdateDelete> hapusDetailTransaksiProduk(@Path("id_detail_transaksi_produk") String id_detail_transaksi_produk);
 }

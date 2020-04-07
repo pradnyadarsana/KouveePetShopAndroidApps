@@ -16,7 +16,7 @@
             android:layout_centerInParent="true"
             android:layout_marginTop="8dp"
             android:textColor="@color/colorPrimaryWhite"
-            android:textColorHighlight="@color/colorAccent"
+            android:textColorHighlight="@color/colorAccentWhite"
             android:textSize="25dp"
             android:text="Nama Ukuran Hewan"
             android:textStyle="bold"/>

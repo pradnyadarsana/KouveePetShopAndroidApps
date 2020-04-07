@@ -18,8 +18,8 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:layout_marginTop="8dp"
-                android:textColor="@color/colorPrimary"
-                android:textColorHighlight="@color/colorAccent"
+                android:textColor="@color/colorPrimaryWhite"
+                android:textColorHighlight="@color/colorAccentWhite"
                 android:textSize="25dp"
                 android:text="Nama Supplier"
                 android:textStyle="bold"/>
@@ -30,7 +30,7 @@
                 android:layout_below="@id/viewNamaSupplier"
                 android:layout_centerHorizontal="true"
                 android:text="Id Supplier"
-                android:textColor="@color/colorPrimary"/>
+                android:textColor="@color/colorPrimaryWhite"/>
             <RelativeLayout
                 android:id="@+id/btnEditSupplier"
                 android:layout_width="120dp"

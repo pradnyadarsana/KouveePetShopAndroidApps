@@ -13,12 +13,18 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".navigation.ProfilCsFragment"></activity>
+        <activity android:name=".adapter.TransaksiProdukAdapter"></activity>
+        <activity android:name=".transaksi.TransaksiLayananDiprosesFragment" />
+        <activity android:name=".transaksi.TransaksiLayananSelesaiFragment" />
+        <activity android:name=".transaksi.TransaksiLayananFragment" />
+        <activity android:name=".transaksi.TransaksiProdukFragment" />
+        <activity android:name=".navigation.ProfilCsFragment" />
         <activity android:name=".adapter.HewanAdapter" />
         <activity android:name=".hewan.ListHewanFragment">
             <meta-data
                 android:name="android.app.searchable"
                 android:resource="@xml/searchable" />
+
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
@@ -28,10 +34,11 @@
         <activity android:name=".adapter.HargaLayananAdapter" />
         <activity android:name=".layanan.TampilDetailLayananActivity" />
         <activity android:name=".adapter.LayananAdapter" />
-        <activity android:name=".layanan.ListLayananActivity" >
+        <activity android:name=".layanan.ListLayananActivity">
             <meta-data
                 android:name="android.app.searchable"
                 android:resource="@xml/searchable" />
+
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
@@ -42,6 +49,7 @@
             <meta-data
                 android:name="android.app.searchable"
                 android:resource="@xml/searchable" />
+
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
@@ -52,6 +60,7 @@
             <meta-data
                 android:name="android.app.searchable"
                 android:resource="@xml/searchable" />
+
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
@@ -66,6 +75,7 @@
             <meta-data
                 android:name="android.app.searchable"
                 android:resource="@xml/searchable" />
+
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
@@ -77,6 +87,7 @@
             <meta-data
                 android:name="android.app.searchable"
                 android:resource="@xml/searchable" />
+
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
@@ -85,7 +96,7 @@
         <activity android:name=".pelanggan.TampilDetailPelangganFragment" />
         <activity android:name=".adapter.PelangganAdapter" />
         <activity android:name=".pelanggan.ListPelangganFragment" />
-        <activity android:name=".TransactionActivity" />
+        <activity android:name=".transaksi.TransaksiFragment" />
         <activity android:name=".navigation.CsMainMenu" />
         <activity android:name=".NotificationFragment" />
         <activity android:name=".StockUpdateFragment" />

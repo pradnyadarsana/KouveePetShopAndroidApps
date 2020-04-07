@@ -25,6 +25,7 @@ import com.example.kouveepetshopapps.model.LayananDAO;
 import com.example.kouveepetshopapps.model.UkuranHewanDAO;
 import com.example.kouveepetshopapps.response.GetUkuranHewan;
 import com.example.kouveepetshopapps.response.PostUpdateDelete;
+import com.example.kouveepetshopapps.response.SearchUkuranHewan;
 
 import java.util.List;
 
@@ -172,24 +173,23 @@ public class HargaLayananAdapter extends RecyclerView.Adapter<HargaLayananAdapte
 
     public void setNamaUkuran(final MyViewHolder holder, final int id_ukuran_hewan){
         ApiInterfaceAdmin apiService = ApiClient.getClient().create(ApiInterfaceAdmin.class);
-        Call<GetUkuranHewan> ukuranDAOCall = apiService.searchUkuran(Integer.toString(id_ukuran_hewan));
+        Call<SearchUkuranHewan> ukuranDAOCall = apiService.searchUkuran(Integer.toString(id_ukuran_hewan));
 
-        ukuranDAOCall.enqueue(new Callback<GetUkuranHewan>() {
+        ukuranDAOCall.enqueue(new Callback<SearchUkuranHewan>() {
             @Override
-            public void onResponse(Call<GetUkuranHewan> call, Response<GetUkuranHewan> response) {
-                List<UkuranHewanDAO> ListUkuranHewan = response.body().getListDataUkuranHewan();
-                UkuranHewanDAO ukuran = new UkuranHewanDAO();
-                for (UkuranHewanDAO tempUkuran: ListUkuranHewan) {
-                    if(tempUkuran.getId_ukuran_hewan()==id_ukuran_hewan){
-                        ukuran = tempUkuran;
-                    }
+            public void onResponse(Call<SearchUkuranHewan> call, Response<SearchUkuranHewan> response) {
+                UkuranHewanDAO ukuran = response.body().getUkuranhewan();
+                if(ukuran.getNama()!=null){
+                    holder.nama_ukuran_hewan.setText(ukuran.getNama());
+                }else{
+                    holder.nama_ukuran_hewan.setText(Integer.toString(id_ukuran_hewan));
                 }
-                holder.nama_ukuran_hewan.setText(ukuran.getNama());
+
             }
 
             @Override
-            public void onFailure(Call<GetUkuranHewan> call, Throwable t) {
-                holder.nama_ukuran_hewan.setText(id_ukuran_hewan);
+            public void onFailure(Call<SearchUkuranHewan> call, Throwable t) {
+                holder.nama_ukuran_hewan.setText(Integer.toString(id_ukuran_hewan));
             }
         });
     }

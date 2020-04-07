@@ -8,6 +8,8 @@ import com.example.kouveepetshopapps.response.GetProduk;
 import com.example.kouveepetshopapps.response.GetSupplier;
 import com.example.kouveepetshopapps.response.GetUkuranHewan;
 import com.example.kouveepetshopapps.response.PostUpdateDelete;
+import com.example.kouveepetshopapps.response.SearchJenisHewan;
+import com.example.kouveepetshopapps.response.SearchUkuranHewan;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,7 +65,7 @@ public interface ApiInterfaceAdmin {
     Call<GetJenisHewan> getAllJenisHewanAktif();
 
     @GET("JenisHewan/search/{id_jenis_hewan}")
-    Call<GetJenisHewan> searchJenisHewan(@Path("id_jenis_hewan")String id_jenis_hewan);
+    Call<SearchJenisHewan> searchJenisHewan(@Path("id_jenis_hewan")String id_jenis_hewan);
 
     @POST("JenisHewan/update/{id_jenis_hewan}")
     @FormUrlEncoded
@@ -93,7 +95,7 @@ public interface ApiInterfaceAdmin {
     Call<GetUkuranHewan> getAllUkuranHewanAktif();
 
     @GET("UkuranHewan/search/{id_ukuran_hewan}")
-    Call<GetUkuranHewan> searchUkuran(@Path("id_ukuran_hewan")String id_ukuran_hewan);
+    Call<SearchUkuranHewan> searchUkuran(@Path("id_ukuran_hewan")String id_ukuran_hewan);
 
     @POST("UkuranHewan/update/{id_ukuran_hewan}")
     @FormUrlEncoded

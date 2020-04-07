@@ -12,9 +12,6 @@ import android.widget.Toast;
 import com.example.kouveepetshopapps.NotificationFragment;
 import com.example.kouveepetshopapps.R;
 import com.example.kouveepetshopapps.StockUpdateFragment;
-import com.example.kouveepetshopapps.TransactionActivity;
-import com.example.kouveepetshopapps.hewan.ListHewanFragment;
-import com.example.kouveepetshopapps.pelanggan.ListPelangganFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class AdminMainMenu extends AppCompatActivity {

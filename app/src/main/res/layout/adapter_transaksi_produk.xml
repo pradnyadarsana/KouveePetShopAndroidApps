@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_marginBottom="3dp"
+    tools:context=".adapter.HewanAdapter"
+    android:id="@+id/ParentTransaksiProduk">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="10dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tvIdTransaksiProduk"
+                android:layout_width="280dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="7dp"
+                android:text="id transaksi"
+                android:textSize="14dp"
+                android:textStyle="bold"/>
+            <RelativeLayout
+                android:layout_width="105dp"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/textRp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toLeftOf="@+id/tvTotalTransaksiProduk"
+                    android:textAlignment="textEnd"
+                    android:text="Rp. "
+                    android:textSize="12dp"/>
+                <TextView
+                    android:id="@+id/tvTotalTransaksiProduk"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:textAlignment="textEnd"
+                    android:text="80000000"
+                    android:textSize="12dp"/>
+            </RelativeLayout>
+        </LinearLayout>
+        <TextView
+            android:id="@+id/tvNamaPemilikTransaksiProduk"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:text="nama pemilik"
+            android:textSize="12dp"/>
+
+        <TextView
+            android:id="@+id/tvNamaHewanTransaksiProduk"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="7dp"
+            android:text="nama hewan"
+            android:textSize="12dp"/>
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

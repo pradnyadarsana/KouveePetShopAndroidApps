@@ -1,20 +1,18 @@
 package com.example.kouveepetshopapps.response;
 
-import com.example.kouveepetshopapps.model.HargaLayananDAO;
+import com.example.kouveepetshopapps.model.HewanDAO;
 import com.example.kouveepetshopapps.model.PegawaiDAO;
 import com.google.gson.annotations.SerializedName;
 
-import java.util.List;
-
-public class SearchPegawai {
+public class SearchHewan {
     @SerializedName("error")
     String error;
     @SerializedName("message")
-    PegawaiDAO pegawai;
+    HewanDAO hewan;
 
-    public SearchPegawai(String error, PegawaiDAO pegawai) {
+    public SearchHewan(String error, HewanDAO hewan) {
         this.error = error;
-        this.pegawai = pegawai;
+        this.hewan = hewan;
     }
 
     public String getError() {
@@ -25,11 +23,11 @@ public class SearchPegawai {
         this.error = error;
     }
 
-    public PegawaiDAO getPegawai() {
-        return pegawai;
+    public HewanDAO getHewan() {
+        return hewan;
     }
 
-    public void setPegawai(PegawaiDAO pegawai) {
-        this.pegawai = pegawai;
+    public void setHewan(HewanDAO hewan) {
+        this.hewan = hewan;
     }
 }
