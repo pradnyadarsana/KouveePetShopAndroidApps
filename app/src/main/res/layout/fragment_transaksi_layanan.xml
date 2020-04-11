@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/transaksiLayananLayout"
-    tools:context=".transaksi.TransaksiLayananFragment">
+    tools:context=".transaksi.layanan.TransaksiLayananFragment">
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabLayananLayout"
         android:layout_width="match_parent"

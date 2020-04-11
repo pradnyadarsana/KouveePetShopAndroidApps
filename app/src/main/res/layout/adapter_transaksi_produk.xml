@@ -8,7 +8,6 @@
     android:layout_marginBottom="3dp"
     tools:context=".adapter.HewanAdapter"
     android:id="@+id/ParentTransaksiProduk">
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -18,17 +17,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
-
             <TextView
                 android:id="@+id/tvIdTransaksiProduk"
-                android:layout_width="280dp"
+                android:layout_width="270dp"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="7dp"
                 android:text="id transaksi"
-                android:textSize="14dp"
+                android:textSize="18dp"
                 android:textStyle="bold"/>
             <RelativeLayout
-                android:layout_width="105dp"
+                android:layout_width="115dp"
                 android:layout_height="wrap_content">
                 <TextView
                     android:id="@+id/textRp"
@@ -37,7 +35,7 @@
                     android:layout_toLeftOf="@+id/tvTotalTransaksiProduk"
                     android:textAlignment="textEnd"
                     android:text="Rp. "
-                    android:textSize="12dp"/>
+                    android:textSize="14dp"/>
                 <TextView
                     android:id="@+id/tvTotalTransaksiProduk"
                     android:layout_width="wrap_content"
@@ -45,24 +43,42 @@
                     android:layout_alignParentEnd="true"
                     android:textAlignment="textEnd"
                     android:text="80000000"
-                    android:textSize="12dp"/>
+                    android:textSize="14dp"/>
             </RelativeLayout>
         </LinearLayout>
-        <TextView
-            android:id="@+id/tvNamaPemilikTransaksiProduk"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
-            android:text="nama pemilik"
-            android:textSize="12dp"/>
-
-        <TextView
-            android:id="@+id/tvNamaHewanTransaksiProduk"
+            android:orientation="horizontal"
+            android:layout_marginTop="2dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Pelanggan : "
+                android:textSize="12dp"/>
+            <TextView
+                android:id="@+id/tvNamaPemilikTransaksiProduk"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="nama pemilik"
+                android:textSize="12dp"/>
+        </LinearLayout>
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="7dp"
-            android:text="nama hewan"
-            android:textSize="12dp"/>
+            android:orientation="horizontal"
+            android:layout_marginTop="2dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Hewan : "
+                android:textSize="12dp"/>
+            <TextView
+                android:id="@+id/tvNamaHewanTransaksiProduk"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="nama hewan"
+                android:textSize="12dp"/>
+        </LinearLayout>
     </LinearLayout>
-
 </androidx.cardview.widget.CardView>

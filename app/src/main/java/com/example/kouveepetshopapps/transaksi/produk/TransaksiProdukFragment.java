@@ -1,4 +1,4 @@
-package com.example.kouveepetshopapps.transaksi;
+package com.example.kouveepetshopapps.transaksi.produk;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -53,8 +53,8 @@ public class TransaksiProdukFragment extends Fragment {
         addTransaksiProdukBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent i = new Intent(getActivity(), TambahHewanActivity.class);
-//                startActivity((i));
+                Intent i = new Intent(getActivity(), TambahTransaksiProdukActivity.class);
+                startActivity(i);
             }
         });
         return view;

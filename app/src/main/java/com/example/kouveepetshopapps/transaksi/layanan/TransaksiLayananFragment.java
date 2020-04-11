@@ -1,4 +1,4 @@
-package com.example.kouveepetshopapps.transaksi;
+package com.example.kouveepetshopapps.transaksi.layanan;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.SearchView;
 
 import com.example.kouveepetshopapps.R;
+import com.example.kouveepetshopapps.transaksi.TransaksiFragment;
 import com.google.android.material.tabs.TabLayout;
 
 public class TransaksiLayananFragment extends Fragment {

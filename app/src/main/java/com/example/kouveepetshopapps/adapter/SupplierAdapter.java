@@ -208,10 +208,17 @@ public class SupplierAdapter extends RecyclerView.Adapter<SupplierAdapter.MyView
     }
 
     public void delete(int position) { //removes the row
-        int index = result.indexOf(resultFiltered.get(position));
-        result.remove(index);
-        resultFiltered.remove(position);
-        notifyItemRemoved(position);
-        notifyDataSetChanged();
+        if(result.size()!=resultFiltered.size()){
+            int index = result.indexOf(resultFiltered.get(position));
+            result.remove(index);
+            resultFiltered.remove(position);
+            notifyItemRemoved(position);
+            notifyDataSetChanged();
+        }else{
+            result.remove(position);
+            resultFiltered = result;
+            notifyItemRemoved(position);
+            notifyDataSetChanged();
+        }
     }
 }

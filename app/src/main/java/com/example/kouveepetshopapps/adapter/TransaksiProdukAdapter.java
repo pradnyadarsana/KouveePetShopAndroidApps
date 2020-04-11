@@ -76,6 +76,7 @@ public class TransaksiProdukAdapter extends RecyclerView.Adapter<TransaksiProduk
         final TransaksiProdukDAO transaksi = resultFiltered.get(position);
         holder.id_transaksi_produk.setText(transaksi.getId_transaksi_produk());
         holder.total.setText(Integer.toString(transaksi.getTotal()));
+        System.out.println("id hewan "+transaksi.getId_hewan());
         setNamaHewan(holder, transaksi.getId_hewan());
         holder.parent.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -211,24 +212,38 @@ public class TransaksiProdukAdapter extends RecyclerView.Adapter<TransaksiProduk
         ApiInterfaceCS apiService = ApiClient.getClient().create(ApiInterfaceCS.class);
         Call<SearchHewan> hewanDAOCall = apiService.searchHewan(Integer.toString(id_hewan));
 
-        hewanDAOCall.enqueue(new Callback<SearchHewan>() {
-            @Override
-            public void onResponse(Call<SearchHewan> call, Response<SearchHewan> response) {
-                HewanDAO hewan = response.body().getHewan();
-                holder.nama_hewan.setText(hewan.getNama());
-                setNamaPelanggan(holder, hewan.getId_pelanggan());
-            }
+        if(id_hewan==0){
+            holder.nama_hewan.setText("Guest");
+            holder.nama_pemilik.setText("Guest");
+        }else{
+            hewanDAOCall.enqueue(new Callback<SearchHewan>() {
+                @Override
+                public void onResponse(Call<SearchHewan> call, Response<SearchHewan> response) {
+                    HewanDAO hewan = response.body().getHewan();
+                    //if(hewan!=null){
+                        holder.nama_hewan.setText(hewan.getNama());
+                        setNamaPelanggan(holder, hewan.getId_pelanggan());
+//                    }else{
+//                        holder.nama_hewan.setText(Integer.toString(id_hewan));
+//                    }
 
-            @Override
-            public void onFailure(Call<SearchHewan> call, Throwable t) {
-                holder.nama_hewan.setText(id_hewan);
-            }
-        });
+                }
+
+                @Override
+                public void onFailure(Call<SearchHewan> call, Throwable t) {
+                    holder.nama_hewan.setText(Integer.toString(id_hewan));
+                }
+            });
+        }
+
+
     }
 
     public void setNamaPelanggan(final TransaksiProdukAdapter.MyViewHolder holder, final int id_pelanggan){
         ApiInterfaceCS apiService = ApiClient.getClient().create(ApiInterfaceCS.class);
         Call<SearchPelanggan> pelangganDAOCall = apiService.searchPelanggan(Integer.toString(id_pelanggan));
+
+        System.out.println("id pelanggan/pemilik = "+id_pelanggan);
 
         pelangganDAOCall.enqueue(new Callback<SearchPelanggan>() {
             @Override
@@ -239,9 +254,10 @@ public class TransaksiProdukAdapter extends RecyclerView.Adapter<TransaksiProduk
 
             @Override
             public void onFailure(Call<SearchPelanggan> call, Throwable t) {
-                holder.nama_pemilik.setText(id_pelanggan);
+                holder.nama_pemilik.setText(Integer.toString(id_pelanggan));
             }
         });
+        //System.out.println(pelangganDAOCall.isExecuted());
     }
 
     private void deleteHewan(String id, String delete_by, final int position){

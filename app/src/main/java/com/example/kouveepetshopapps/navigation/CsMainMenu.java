@@ -27,7 +27,6 @@ public class CsMainMenu extends AppCompatActivity {
 
         csBottomNavigationView = (BottomNavigationView) findViewById(R.id.bn_main_cs);
 
-        loadFragment(new TransaksiFragment());
         if (getIntent().getStringExtra("from")!=null){
             if(getIntent().getStringExtra("from").equalsIgnoreCase("transaksi"))
             {
@@ -46,6 +45,8 @@ public class CsMainMenu extends AppCompatActivity {
                 loadFragment(new ProfilCsFragment());
                 csBottomNavigationView.setSelectedItemId(R.id.cs_profil);
             }
+        }else{
+            loadFragment(new TransaksiFragment());
         }
 
         csBottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {

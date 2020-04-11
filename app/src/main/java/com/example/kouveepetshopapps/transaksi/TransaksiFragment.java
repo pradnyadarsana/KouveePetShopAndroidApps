@@ -18,7 +18,8 @@ import android.view.ViewGroup;
 import android.widget.SearchView;
 
 import com.example.kouveepetshopapps.R;
-import com.example.kouveepetshopapps.hewan.ListHewanFragment;
+import com.example.kouveepetshopapps.transaksi.layanan.TransaksiLayananFragment;
+import com.example.kouveepetshopapps.transaksi.produk.TransaksiProdukFragment;
 
 public class TransaksiFragment extends Fragment {
     public SearchView searchView;

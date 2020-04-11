@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".transaksi.TransaksiLayananDiprosesFragment">
+    tools:context=".transaksi.layanan.TransaksiLayananDiprosesFragment">
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view_transaksi_layanan_diproses"
         android:layout_width="match_parent"
