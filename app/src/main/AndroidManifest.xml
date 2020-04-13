@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".adapter.TambahTransaksiProdukAdapter"></activity>
+        <activity android:name=".adapter.TambahTransaksiProdukAdapter" />
         <activity android:name=".transaksi.produk.TambahTransaksiProdukActivity" />
         <activity android:name=".adapter.TransaksiProdukAdapter" />
         <activity android:name=".transaksi.layanan.TransaksiLayananDiprosesFragment" />
@@ -72,6 +72,7 @@
         <activity android:name=".jenishewan.TampilDetailJenisHewanActivity" />
         <activity android:name=".ukuran_hewan.TampilDetailUkuranHewanActivity" />
         <activity android:name=".ukuran_hewan.TambahUkuranHewanActivity" />
+        <activity android:name=".ukuran_hewan.EditUkuranHewanActivity" />
         <activity android:name=".adapter.UkuranHewanAdapter" />
         <activity android:name=".ukuran_hewan.ListUkuranHewanActivity">
             <meta-data
@@ -83,6 +84,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".supplier.TambahSupplierActivity" />
+        <activity android:name=".supplier.EditSupplierActivity" />
         <activity android:name=".supplier.TampilDetailSupplierActivity" />
         <activity android:name=".adapter.SupplierAdapter" />
         <activity android:name=".supplier.ListSupplierActivity">

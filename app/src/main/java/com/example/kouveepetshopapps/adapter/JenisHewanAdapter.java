@@ -156,6 +156,7 @@ public class JenisHewanAdapter extends RecyclerView.Adapter<JenisHewanAdapter.My
                     case 0:
                         // update report
                         //startIntent(hasil);
+                        startIntent(hasil, EditJenisHewanActivity.class);
                         break;
                     case 1:
                         //delete report

@@ -50,7 +50,7 @@ public class TambahJenisHewanActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if(nama.getText().toString().isEmpty())
                 {
-                    showDialog("Kolom nama kosong");
+                    showDialog("Kolom nama jenis hewan kosong");
                 }else
                 {
                     tambahJenisHewan();

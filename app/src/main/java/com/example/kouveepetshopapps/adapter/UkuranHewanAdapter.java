@@ -22,12 +22,14 @@ import android.widget.Toast;
 import com.example.kouveepetshopapps.R;
 import com.example.kouveepetshopapps.api.ApiClient;
 import com.example.kouveepetshopapps.api.ApiInterfaceAdmin;
+import com.example.kouveepetshopapps.jenishewan.EditJenisHewanActivity;
 import com.example.kouveepetshopapps.model.PegawaiDAO;
 import com.example.kouveepetshopapps.model.ProdukDAO;
 import com.example.kouveepetshopapps.model.SupplierDAO;
 import com.example.kouveepetshopapps.model.UkuranHewanDAO;
 import com.example.kouveepetshopapps.response.PostUpdateDelete;
 import com.example.kouveepetshopapps.supplier.TampilDetailSupplierActivity;
+import com.example.kouveepetshopapps.ukuran_hewan.EditUkuranHewanActivity;
 import com.example.kouveepetshopapps.ukuran_hewan.TampilDetailUkuranHewanActivity;
 import com.google.gson.Gson;
 
@@ -157,6 +159,7 @@ public class UkuranHewanAdapter extends RecyclerView.Adapter<UkuranHewanAdapter.
                     case 0:
                         // update report
                         //startIntent(hasil);
+                        startIntent(hasil, EditUkuranHewanActivity.class);
                         break;
                     case 1:
                         //delete report

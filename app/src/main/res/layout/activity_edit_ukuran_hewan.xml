@@ -4,51 +4,45 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
-    tools:context=".jenishewan.EditJenisHewanActivity">
-
+    tools:context=".ukuran_hewan.EditUkuranHewanActivity">
     <androidx.core.widget.NestedScrollView
         android:layout_height="match_parent"
         android:layout_width="match_parent"
         android:layout_marginLeft="25dp"
         android:layout_marginRight="25dp">
-
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="25dp"
             android:layout_marginBottom="25dp">
-
             <ImageView
-                android:id="@+id/logo_jenis_hewan"
+                android:id="@+id/logo"
                 android:layout_width="150dp"
                 android:layout_height="150dp"
                 android:layout_marginTop="20dp"
                 android:layout_centerHorizontal="true"
-                android:src="@mipmap/kind_logo_foreground"/>
-
+                android:src="@mipmap/size_logo_foreground"/>
             <EditText
-                android:id="@+id/etNamaJenisHewanUpdate"
+                android:id="@+id/etNamaUkuranHewanUpdate"
                 android:layout_width="300dp"
                 android:layout_height="50dp"
                 android:layout_centerHorizontal="true"
-                android:layout_below="@+id/logo_jenis_hewan"
+                android:layout_below="@+id/logo"
                 android:layout_marginTop="25dp"
-                android:hint="Nama jenis hewan"/>
-
+                android:hint="Nama Ukuran Hewan"/>
             <Button
                 android:layout_width="200dp"
                 android:layout_height="50dp"
                 android:layout_centerHorizontal="true"
-                android:layout_below="@+id/etNamaJenisHewanUpdate"
+                android:layout_below="@+id/etNamaUkuranHewanUpdate"
                 android:layout_marginTop="50dp"
                 android:layout_marginBottom="70dp"
                 android:background="@drawable/custom_round_button"
                 android:backgroundTint="@color/colorAccentBeige"
                 android:textAllCaps="false"
-                android:textSize="17sp"
                 android:text="Update"
-                android:id="@+id/btnUpdateJenisHewan" />
-
+                android:textSize="17sp"
+                android:id="@+id/btnUpdateUkuranHewan" />
         </RelativeLayout>
     </androidx.core.widget.NestedScrollView>
 </RelativeLayout>

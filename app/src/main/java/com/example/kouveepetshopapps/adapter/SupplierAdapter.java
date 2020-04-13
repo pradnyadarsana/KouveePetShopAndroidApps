@@ -9,7 +9,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,12 +20,10 @@ import android.widget.Toast;
 import com.example.kouveepetshopapps.R;
 import com.example.kouveepetshopapps.api.ApiClient;
 import com.example.kouveepetshopapps.api.ApiInterfaceAdmin;
-import com.example.kouveepetshopapps.api.ApiInterfaceCS;
 import com.example.kouveepetshopapps.model.PegawaiDAO;
-import com.example.kouveepetshopapps.model.ProdukDAO;
 import com.example.kouveepetshopapps.model.SupplierDAO;
 import com.example.kouveepetshopapps.response.PostUpdateDelete;
-import com.example.kouveepetshopapps.supplier.ListSupplierActivity;
+import com.example.kouveepetshopapps.supplier.EditSupplierActivity;
 import com.example.kouveepetshopapps.supplier.TampilDetailSupplierActivity;
 import com.google.gson.Gson;
 
@@ -158,6 +155,7 @@ public class SupplierAdapter extends RecyclerView.Adapter<SupplierAdapter.MyView
                     case 0:
                         // update report
                         //startIntent(hasil);
+                        startIntent(hasil, EditSupplierActivity.class);
                         break;
                     case 1:
                         //delete report
