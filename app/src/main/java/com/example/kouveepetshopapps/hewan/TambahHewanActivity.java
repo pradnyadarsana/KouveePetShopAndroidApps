@@ -33,6 +33,7 @@ import com.example.kouveepetshopapps.navigation.CsMainMenu;
 import com.example.kouveepetshopapps.response.GetJenisHewan;
 import com.example.kouveepetshopapps.response.GetPelanggan;
 import com.example.kouveepetshopapps.response.PostUpdateDelete;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.gson.Gson;
 
 import java.io.IOException;
@@ -47,7 +48,7 @@ import retrofit2.Response;
 
 public class TambahHewanActivity extends AppCompatActivity {
 
-    private EditText nama;
+    private TextInputEditText nama;
     private AutoCompleteTextView nama_pemilik;
     private Spinner jenis_hewan;
     public List<PelangganDAO> ListPelanggan;
@@ -57,6 +58,7 @@ public class TambahHewanActivity extends AppCompatActivity {
     String TAG = "TambahHewanActivity";
     private Button btnTambah;
     String tanggal_lahir_temp;
+
     SharedPreferences loggedUser;
     PegawaiDAO pegawai;
 
@@ -74,7 +76,7 @@ public class TambahHewanActivity extends AppCompatActivity {
         ListPelanggan = new ArrayList<>();
         ListJenisHewan = new ArrayList<>();
 
-        nama = (EditText) findViewById(R.id.etNamaHewan);
+        nama = findViewById(R.id.etNamaHewan);
         jenis_hewan = findViewById(R.id.spinJenisHewan);
         //Getting the instance of AutoCompleteTextView
         nama_pemilik = (AutoCompleteTextView) findViewById(R.id.etNamaPemilik);

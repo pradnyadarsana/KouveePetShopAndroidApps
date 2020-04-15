@@ -1,240 +1,258 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_height="match_parent"
-    android:layout_width="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".produk.TambahProdukActivity">
-
-    <androidx.core.widget.NestedScrollView
+<layout>
+    <data>
+        <import type="android.view.View"/>
+        <variable
+            name="pegawai"
+            type="com.example.kouveepetshopapps.model.PegawaiDAO" />
+        <variable
+            name="transaksi_produk"
+            type="com.example.kouveepetshopapps.model.TransaksiProdukDAO" />
+        <variable
+            name="nama_hewan_bind"
+            type="com.example.kouveepetshopapps.model.HewanDAO" />
+    </data>
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_height="match_parent"
         android:layout_width="match_parent"
-        android:layout_marginHorizontal="18dp">
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        tools:context=".produk.TambahProdukActivity">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
+        <androidx.core.widget.NestedScrollView
             android:layout_height="match_parent"
-            android:layout_marginTop="25dp"
-            android:layout_marginBottom="25dp">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:id="@+id/layoutTitle">
-                <TextView
-                    android:id="@+id/textTitle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Tambah Transaksi"
-                    android:textAlignment="center"
-                    android:textSize="20dp"
-                    android:textColor="@color/colorPrimaryOrange">
-                </TextView>
+            android:layout_width="match_parent"
+            android:layout_marginHorizontal="18dp">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="20dp">
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="start"
-                        android:orientation="vertical"
-                        android:id="@+id/parentKategoriTransaksi">
-                        <TextView
-                            android:id="@+id/textKategoriTransaksi"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Kategori"
-                            android:textAlignment="textStart"
-                            android:textSize="15dp">
-                        </TextView>
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="PRODUK"
-                            android:textStyle="bold"
-                            android:textSize="16dp">
-                        </TextView>
-                    </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="end"
-                        android:orientation="vertical"
-                        android:id="@+id/parentCS">
-                        <TextView
-                            android:id="@+id/textKategoriPegawai"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Customer Service"
-                            android:textSize="15dp">
-                        </TextView>
-                        <TextView
-                            android:id="@+id/tvNamaPegawaiTransaksiProduk"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="nama pegawai"
-                            android:textSize="16dp">
-                        </TextView>
-                    </LinearLayout>
-                </LinearLayout>
-            </LinearLayout>
-            <AutoCompleteTextView
-                android:id="@+id/etNamaHewanTransaksiProduk"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_centerHorizontal="true"
-                android:layout_below="@+id/layoutTitle"
+                android:layout_height="match_parent"
                 android:layout_marginTop="25dp"
-                android:hint="Nama Hewan"
-                android:ems="10" />
-            <androidx.constraintlayout.widget.ConstraintLayout
-                xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:app="http://schemas.android.com/apk/res-auto"
-                xmlns:tools="http://schemas.android.com/tools"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/etNamaHewanTransaksiProduk"
-                android:layout_marginTop="30dp"
-                android:id="@+id/tambahLayananLayout"
-                tools:context=".layanan.TambahLayananActivity">
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recycler_view_tambah_produk_transaksi"
+                android:layout_marginBottom="25dp">
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"/>
-            </androidx.constraintlayout.widget.ConstraintLayout>
-            <Button
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_centerHorizontal="true"
-                android:layout_below="@+id/tambahLayananLayout"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/custom_round_button"
-                android:backgroundTint="@color/colorPrimaryWhite"
-                android:text="+"
-                android:textSize="25sp"
-                android:textColor="@color/colorPrimaryOrange"
-                android:id="@+id/btnTambahItemTransaksiProduk" />
-            <LinearLayout
-                android:id="@+id/detailHargaTransaksiProduk"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"
-                android:gravity="end"
-                android:layout_alignParentRight="true"
-                android:layout_below="@+id/btnTambahItemTransaksiProduk"
-                android:orientation="vertical">
-                <TextView
-                    android:layout_width="wrap_content"
+                    android:orientation="vertical"
+                    android:id="@+id/layoutTitle">
+                    <TextView
+                        android:id="@+id/textTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Tambah Transaksi"
+                        android:textAlignment="center"
+                        android:textSize="20dp"
+                        android:textColor="@color/colorPrimaryOrange">
+                    </TextView>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="20dp">
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="start"
+                            android:orientation="vertical"
+                            android:id="@+id/parentKategoriTransaksi">
+                            <TextView
+                                android:id="@+id/textKategoriTransaksi"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Kategori"
+                                android:textAlignment="textStart"
+                                android:textSize="15dp">
+                            </TextView>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="PRODUK"
+                                android:textStyle="bold"
+                                android:textSize="16dp">
+                            </TextView>
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="end"
+                            android:orientation="vertical"
+                            android:id="@+id/parentCS">
+                            <TextView
+                                android:id="@+id/textKategoriPegawai"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Customer Service"
+                                android:textSize="15dp">
+                            </TextView>
+                            <TextView
+                                android:id="@+id/tvNamaPegawaiTransaksiProduk"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@{pegawai.nama}"
+                                android:textSize="16dp">
+                            </TextView>
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+                <AutoCompleteTextView
+                    android:id="@+id/etNamaHewanTransaksiProduk"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@+id/layoutTitle"
+                    android:layout_marginTop="25dp"
+                    android:hint="Nama Hewan"
+                    android:ems="10"
+                    android:text="@={nama_hewan_bind.nama}"/>
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    xmlns:android="http://schemas.android.com/apk/res/android"
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    xmlns:tools="http://schemas.android.com/tools"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textAllCaps="true"
-                    android:textSize="18dp"
-                    android:textStyle="bold"
-                    android:hint="SUBTOTAL">
-                </TextView>
+                    android:layout_below="@+id/etNamaHewanTransaksiProduk"
+                    android:layout_marginTop="30dp"
+                    android:id="@+id/tambahLayananLayout"
+                    tools:context=".layanan.TambahLayananActivity">
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recycler_view_tambah_produk_transaksi"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+                <Button
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@+id/tambahLayananLayout"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/custom_round_button"
+                    android:backgroundTint="@color/colorPrimaryWhite"
+                    android:text="+"
+                    android:textSize="25sp"
+                    android:textColor="@color/colorPrimaryOrange"
+                    android:id="@+id/btnTambahItemTransaksiProduk" />
                 <LinearLayout
+                    android:id="@+id/detailHargaTransaksiProduk"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:layout_marginTop="50dp"
+                    android:gravity="end"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@+id/btnTambahItemTransaksiProduk"
+                    android:orientation="vertical">
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAllCaps="true"
-                        android:textSize="20dp"
-                        android:hint="Rp. ">
+                        android:textSize="18dp"
+                        android:textStyle="bold"
+                        android:hint="SUBTOTAL">
                     </TextView>
-                    <TextView
-                        android:id="@+id/etSubtotalTransaksiProduk"
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAllCaps="true"
+                            android:textSize="20dp"
+                            android:hint="Rp. ">
+                        </TextView>
+                        <TextView
+                            android:id="@+id/etSubtotalTransaksiProduk"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAllCaps="true"
+                            android:textSize="20dp"
+                            android:hint="0"
+                            android:text="@={transaksi_produk.stringSubtotal}">
+                        </TextView>
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
                         android:textAllCaps="true"
-                        android:textSize="20dp"
-                        android:hint="0">
+                        android:textSize="18dp"
+                        android:textStyle="bold"
+                        android:hint="DISKON">
                     </TextView>
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAllCaps="true"
+                            android:textSize="20dp"
+                            android:hint="Rp. ">
+                        </TextView>
+                        <EditText
+                            android:id="@+id/etDiskonTransaksiProduk"
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            android:layout_below="@+id/btnTambahItemProduk"
+                            android:textAlignment="textEnd"
+                            android:textSize="20dp"
+                            android:enabled="@{transaksi_produk.haveDiskon}"
+                            android:hint="Diskon"
+                            android:text="@={transaksi_produk.stringDiskon}">
+                        </EditText>
+                    </LinearLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:textAllCaps="true"
+                        android:textSize="18dp"
+                        android:textStyle="bold"
+                        android:hint="TOTAL">
+                    </TextView>
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAllCaps="true"
+                            android:textSize="20dp"
+                            android:hint="Rp. ">
+                        </TextView>
+                        <TextView
+                            android:id="@+id/etTotalTransaksiProduk"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAllCaps="true"
+                            android:textSize="20dp"
+                            android:hint="0"
+                            android:text="@={transaksi_produk.stringTotal}">
+                        </TextView>
+                    </LinearLayout>
                 </LinearLayout>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:textAllCaps="true"
-                    android:textSize="18dp"
-                    android:textStyle="bold"
-                    android:hint="DISKON">
-                </TextView>
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textAllCaps="true"
-                        android:textSize="20dp"
-                        android:hint="Rp. ">
-                    </TextView>
-                    <EditText
-                        android:id="@+id/etDiskonTransaksiProduk"
-                        android:layout_width="100dp"
-                        android:layout_height="wrap_content"
-                        android:layout_centerHorizontal="true"
-                        android:layout_below="@+id/btnTambahItemProduk"
-                        android:textAlignment="textEnd"
-                        android:textSize="20dp"
-                        android:enabled="false"
-                        android:hint="Diskon">
-                    </EditText>
-                </LinearLayout>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:textAllCaps="true"
-                    android:textSize="18dp"
-                    android:textStyle="bold"
-                    android:hint="TOTAL">
-                </TextView>
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textAllCaps="true"
-                        android:textSize="20dp"
-                        android:hint="Rp. ">
-                    </TextView>
-                    <TextView
-                        android:id="@+id/etTotalTransaksiProduk"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textAllCaps="true"
-                        android:textSize="20dp"
-                        android:hint="0">
-                    </TextView>
-                </LinearLayout>
-            </LinearLayout>
-
-            <Button
-                android:layout_width="200dp"
-                android:layout_height="50dp"
-                android:layout_centerHorizontal="true"
-                android:layout_below="@+id/detailHargaTransaksiProduk"
-                android:layout_marginTop="50dp"
-                android:layout_marginBottom="70dp"
-                android:background="@drawable/custom_round_button"
-                android:backgroundTint="@color/colorAccentBeige"
-                android:textAllCaps="false"
-                android:text="Selesai"
-                android:textSize="17sp"
-                android:id="@+id/btnTambahTransaksiProduk" />
-        </RelativeLayout>
-    </androidx.core.widget.NestedScrollView>
-</RelativeLayout>
+                <Button
+                    android:layout_width="200dp"
+                    android:layout_height="50dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@+id/detailHargaTransaksiProduk"
+                    android:layout_marginTop="50dp"
+                    android:layout_marginBottom="70dp"
+                    android:background="@drawable/custom_round_button"
+                    android:backgroundTint="@color/colorAccentBeige"
+                    android:textAllCaps="false"
+                    android:text="Selesai"
+                    android:textSize="17sp"
+                    android:id="@+id/btnTambahTransaksiProduk" />
+            </RelativeLayout>
+        </androidx.core.widget.NestedScrollView>
+    </RelativeLayout>
+</layout>

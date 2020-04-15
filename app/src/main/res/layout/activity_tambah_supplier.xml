@@ -26,44 +26,65 @@
                 android:layout_centerHorizontal="true"
                 android:src="@mipmap/supplier_logo_foreground"/>
 
-            <EditText
-                android:id="@+id/etNamaSupplier"
-                android:layout_width="300dp"
-                android:layout_height="50dp"
-                android:layout_centerHorizontal="true"
-                android:layout_below="@+id/logo"
-                android:layout_marginTop="25dp"
-                android:hint="Nama"/>
-
-            <EditText
-                android:id="@+id/etTelpSupplier"
-                android:layout_width="300dp"
-                android:layout_height="50dp"
-                android:layout_centerHorizontal="true"
-                android:layout_below="@+id/etNamaSupplier"
-                android:layout_marginTop="25dp"
-                android:inputType="phone"
-                android:hint="Nomor Telepon"/>
-
-            <EditText
-                android:id="@+id/etAlamatSupplier"
-                android:layout_marginTop="25dp"
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
-                android:inputType="textMultiLine"
-                android:lines="8"
-                android:maxLines="10"
-                android:minLines="3"
-                android:scrollbars="vertical"
                 android:layout_centerHorizontal="true"
-                android:layout_below="@+id/etTelpSupplier"
-                android:hint="Alamat"/>
+                android:layout_marginTop="25dp"
+                android:layout_below="@+id/logo"
+                android:id="@+id/etNamaSupplierLayout">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etNamaSupplier"
+                    android:layout_width="300dp"
+                    android:layout_height="50dp"
+                    android:layout_centerHorizontal="true"
+                    android:hint="Nama"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="25dp"
+                android:layout_below="@+id/etNamaSupplierLayout"
+                android:id="@+id/etTelpSupplierLayout">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etTelpSupplier"
+                    android:layout_width="300dp"
+                    android:layout_height="50dp"
+                    android:layout_centerHorizontal="true"
+                    android:inputType="phone"
+                    android:hint="Nomor Telepon"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="25dp"
+                android:layout_below="@+id/etTelpSupplierLayout"
+                android:id="@+id/etAlamatSupplierLayout">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etAlamatSupplier"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:inputType="textMultiLine"
+                    android:lines="8"
+                    android:maxLines="10"
+                    android:minLines="3"
+                    android:scrollbars="vertical"
+                    android:layout_centerHorizontal="true"
+                    android:hint="Alamat"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
 
             <Button
                 android:layout_width="200dp"
                 android:layout_height="50dp"
                 android:layout_centerHorizontal="true"
-                android:layout_below="@+id/etAlamatSupplier"
+                android:layout_below="@+id/etAlamatSupplierLayout"
                 android:layout_marginTop="50dp"
                 android:layout_marginBottom="70dp"
                 android:background="@drawable/custom_round_button"

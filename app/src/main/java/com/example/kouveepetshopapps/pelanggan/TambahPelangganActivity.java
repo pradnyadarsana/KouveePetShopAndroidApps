@@ -25,6 +25,7 @@ import com.example.kouveepetshopapps.api.ApiInterfaceCS;
 import com.example.kouveepetshopapps.model.PegawaiDAO;
 import com.example.kouveepetshopapps.navigation.CsMainMenu;
 import com.example.kouveepetshopapps.response.PostUpdateDelete;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.gson.Gson;
 
 import java.util.Calendar;
@@ -35,7 +36,7 @@ import retrofit2.Response;
 
 public class TambahPelangganActivity extends AppCompatActivity {
 
-    private EditText nama, telp, alamat;
+    private TextInputEditText nama, telp, alamat;
     private TextView tanggal_lahir;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
     String TAG = "TambahPelangganActivity";
@@ -55,9 +56,9 @@ public class TambahPelangganActivity extends AppCompatActivity {
         pegawai = gson.fromJson(json, PegawaiDAO.class);
         System.out.println(json);
 
-        nama = (EditText) findViewById(R.id.etNamaPelanggan);
-        telp = (EditText) findViewById(R.id.etTelpPelanggan);
-        alamat = (EditText) findViewById(R.id.etAlamatPelanggan);
+        nama = findViewById(R.id.etNamaPelanggan);
+        telp = findViewById(R.id.etTelpPelanggan);
+        alamat = findViewById(R.id.etAlamatPelanggan);
         tanggal_lahir = (TextView) findViewById(R.id.etTanggalLahirPelanggan);
         datepicker();
         btnTambah = (Button) findViewById(R.id.btnTambahPelanggan);

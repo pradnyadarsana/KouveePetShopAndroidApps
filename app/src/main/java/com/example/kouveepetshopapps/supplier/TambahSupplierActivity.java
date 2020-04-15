@@ -18,6 +18,7 @@ import com.example.kouveepetshopapps.api.ApiClient;
 import com.example.kouveepetshopapps.api.ApiInterfaceAdmin;
 import com.example.kouveepetshopapps.model.PegawaiDAO;
 import com.example.kouveepetshopapps.response.PostUpdateDelete;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.gson.Gson;
 
 import retrofit2.Call;
@@ -26,7 +27,7 @@ import retrofit2.Response;
 
 public class TambahSupplierActivity extends AppCompatActivity {
 
-    private EditText nama, telp, alamat;
+    private TextInputEditText nama, telp, alamat;
     private Button btnTambah;
 
     SharedPreferences loggedUser;
@@ -43,9 +44,9 @@ public class TambahSupplierActivity extends AppCompatActivity {
         admin = gson.fromJson(json, PegawaiDAO.class);
         System.out.println(json);
 
-        nama = (EditText) findViewById(R.id.etNamaSupplier);
-        telp = (EditText) findViewById(R.id.etTelpSupplier);
-        alamat = (EditText) findViewById(R.id.etAlamatSupplier);
+        nama = findViewById(R.id.etNamaSupplier);
+        telp = findViewById(R.id.etTelpSupplier);
+        alamat = findViewById(R.id.etAlamatSupplier);
         btnTambah = (Button) findViewById(R.id.btnTambahSupplier);
 
         btnTambah.setOnClickListener(new View.OnClickListener() {

@@ -23,6 +23,7 @@ import com.example.kouveepetshopapps.api.ApiInterfaceAdmin;
 import com.example.kouveepetshopapps.model.UkuranHewanDAO;
 import com.example.kouveepetshopapps.response.PostUpdateDelete;
 import com.example.kouveepetshopapps.ukuran_hewan.TampilDetailUkuranHewanActivity;
+import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.List;
 
@@ -63,7 +64,7 @@ public class TambahLayananAdapter extends RecyclerView.Adapter<TambahLayananAdap
 
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         private TextView nama, id_ukuran_hewan;
-        private EditText harga_layanan;
+        private TextInputEditText harga_layanan;
         private CardView parent;
 
         public MyViewHolder(@NonNull View itemView){

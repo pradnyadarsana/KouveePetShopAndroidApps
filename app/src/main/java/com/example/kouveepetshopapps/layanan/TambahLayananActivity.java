@@ -30,6 +30,7 @@ import com.example.kouveepetshopapps.response.PostUpdateDelete;
 import com.example.kouveepetshopapps.ukuran_hewan.ListUkuranHewanActivity;
 import com.example.kouveepetshopapps.ukuran_hewan.TambahUkuranHewanActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 
@@ -42,7 +43,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class TambahLayananActivity extends AppCompatActivity {
-    private EditText nama;
+    private TextInputEditText nama;
     private Button btnTambahLayanan;
 
     private List<UkuranHewanDAO> ListUkuranHewan;

@@ -26,46 +26,76 @@
                 android:layout_centerHorizontal="true"
                 android:src="@drawable/pelanggan_logo_foreground"/>
 
-            <EditText
-                android:id="@+id/etNamaPelanggan"
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="300dp"
-                android:layout_height="50dp"
+                android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_below="@+id/logo"
                 android:layout_marginTop="25dp"
-                android:hint="Nama"/>
+                android:id="@+id/etNamaPelangganLayout">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etNamaPelanggan"
+                    android:layout_width="300dp"
+                    android:layout_height="50dp"
+                    android:layout_centerHorizontal="true"
+                    android:hint="Nama"/>
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <EditText
-                android:id="@+id/etTelpPelanggan"
-                android:layout_width="300dp"
-                android:layout_height="50dp"
-                android:layout_centerHorizontal="true"
-                android:layout_below="@+id/etNamaPelanggan"
-                android:layout_marginTop="25dp"
-                android:inputType="phone"
-                android:hint="Nomor Telepon"/>
 
-            <EditText
-                android:id="@+id/etAlamatPelanggan"
-                android:layout_marginTop="25dp"
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
-                android:inputType="textMultiLine"
-                android:lines="8"
-                android:maxLines="10"
-                android:minLines="3"
-                android:scrollbars="vertical"
                 android:layout_centerHorizontal="true"
-                android:layout_below="@+id/etTelpPelanggan"
-                android:hint="Alamat"/>
+                android:layout_below="@+id/etNamaPelangganLayout"
+                android:layout_marginTop="25dp"
+                android:id="@+id/etTelpPelangganLayout">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etTelpPelanggan"
+                    android:layout_width="300dp"
+                    android:layout_height="50dp"
+                    android:layout_centerHorizontal="true"
+                    android:inputType="phone"
+                    android:hint="Nomor Telepon"/>
+            </com.google.android.material.textfield.TextInputLayout>
 
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/etTelpPelangganLayout"
+                android:layout_marginTop="25dp"
+                android:id="@+id/etAlamatPelangganLayout">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etAlamatPelanggan"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:inputType="textMultiLine"
+                    android:lines="8"
+                    android:maxLines="10"
+                    android:minLines="3"
+                    android:scrollbars="vertical"
+                    android:layout_centerHorizontal="true"
+                    android:hint="Alamat"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@id/etAlamatPelangganLayout"
+                android:layout_marginTop="25dp"
+                android:text="Tanggal Lahir"
+                android:textSize="12dp"
+                android:textAlignment="center"
+                android:id="@+id/etTanggalLahirPelangganLabel">
+            </TextView>
             <TextView
                 android:id="@+id/etTanggalLahirPelanggan"
                 android:layout_width="300dp"
                 android:layout_height="50dp"
-                android:layout_below="@+id/etAlamatPelanggan"
+                android:layout_below="@+id/etTanggalLahirPelangganLabel"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="25dp"
+                android:layout_marginTop="10dp"
                 android:background="@color/colorAccentBeige"
                 android:gravity="center"
                 android:hint="Pilih Tanggal Lahir"

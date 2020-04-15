@@ -20,6 +20,7 @@ import com.example.kouveepetshopapps.model.PegawaiDAO;
 import com.example.kouveepetshopapps.response.PostUpdateDelete;
 import com.example.kouveepetshopapps.supplier.ListSupplierActivity;
 import com.example.kouveepetshopapps.supplier.TambahSupplierActivity;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.gson.Gson;
 
 import retrofit2.Call;
@@ -27,7 +28,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class TambahUkuranHewanActivity extends AppCompatActivity {
-    private EditText nama;
+    private TextInputEditText nama;
     private Button btnTambah;
 
     SharedPreferences loggedUser;
@@ -44,7 +45,7 @@ public class TambahUkuranHewanActivity extends AppCompatActivity {
         admin = gson.fromJson(json, PegawaiDAO.class);
         System.out.println(json);
 
-        nama = (EditText) findViewById(R.id.etNamaUkuranHewan);
+        nama = findViewById(R.id.etNamaUkuranHewan);
         btnTambah = (Button) findViewById(R.id.btnTambahUkuranHewan);
 
         btnTambah.setOnClickListener(new View.OnClickListener() {

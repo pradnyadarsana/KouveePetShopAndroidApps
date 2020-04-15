@@ -34,14 +34,20 @@
                 android:textSize="16dp"
                 android:textStyle="bold"/>
 
-            <EditText
-                android:id="@+id/etHargaLayanan"
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                android:textSize="16dp"
-                android:hint="Harga"></EditText>
+                app:layout_constraintRight_toRightOf="parent">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/etHargaLayanan"
+                    android:textSize="16dp"
+                    android:inputType="number"
+                    android:hint="Harga"></com.google.android.material.textfield.TextInputEditText>
+            </com.google.android.material.textfield.TextInputLayout>
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

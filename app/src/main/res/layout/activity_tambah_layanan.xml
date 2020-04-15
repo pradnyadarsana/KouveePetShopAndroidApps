@@ -26,22 +26,40 @@
                 android:layout_centerHorizontal="true"
                 android:src="@mipmap/service_logo_foreground"/>
 
-            <EditText
-                android:id="@+id/etNamaLayanan"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="300dp"
+                android:layout_height="70dp"
                 android:layout_centerHorizontal="true"
                 android:layout_below="@+id/logo"
                 android:layout_marginTop="25dp"
-                android:hint="Nama Layanan"/>
+                android:id="@+id/etNamaLayananLayout">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etNamaLayanan"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="25dp"
+                    android:hint="Nama Layanan"/>
+            </com.google.android.material.textfield.TextInputLayout>
 
+            <TextView
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@id/etNamaLayananLayout"
+                android:layout_marginTop="25dp"
+                android:id="@+id/recyclerHargaLayananLabel"
+                android:text="Harga Layanan"
+                android:textSize="12dp"
+                android:textAlignment="center">
+            </TextView>
             <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:app="http://schemas.android.com/apk/res-auto"
                 xmlns:tools="http://schemas.android.com/tools"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_below="@+id/etNamaLayanan"
-                android:layout_marginTop="30dp"
+                android:layout_below="@+id/recyclerHargaLayananLabel"
+                android:layout_marginTop="10dp"
                 android:id="@+id/tambahLayananLayout"
                 tools:context=".layanan.TambahLayananActivity">
                 <androidx.recyclerview.widget.RecyclerView
