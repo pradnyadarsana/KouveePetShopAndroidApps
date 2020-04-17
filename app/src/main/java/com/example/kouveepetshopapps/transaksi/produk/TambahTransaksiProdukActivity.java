@@ -6,7 +6,9 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
@@ -23,6 +25,7 @@ import com.example.kouveepetshopapps.api.ApiClient;
 import com.example.kouveepetshopapps.api.ApiInterfaceAdmin;
 import com.example.kouveepetshopapps.api.ApiInterfaceCS;
 import com.example.kouveepetshopapps.databinding.ActivityTambahTransaksiProdukBinding;
+import com.example.kouveepetshopapps.hewan.TambahHewanActivity;
 import com.example.kouveepetshopapps.model.DetailTransaksiProdukDAO;
 import com.example.kouveepetshopapps.model.HewanDAO;
 import com.example.kouveepetshopapps.model.PegawaiDAO;
@@ -60,6 +63,8 @@ public class TambahTransaksiProdukActivity extends AppCompatActivity {
 
     SharedPreferences loggedUser;
     PegawaiDAO pegawai;
+
+    int formCheckCount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -128,6 +133,7 @@ public class TambahTransaksiProdukActivity extends AppCompatActivity {
         //DATA BINDING SECTION
         transaksiProdukData = new TransaksiProdukDAO();
         transaksiProdukData.setId_customer_service(pegawai.getId_pegawai());
+        transaksiProdukData.setId_hewan(-1);
         transaksiProdukBinding.setPegawai(pegawai);
         transaksiProdukBinding.setNamaHewanBind(nama_hewan_bind);
         transaksiProdukBinding.setTransaksiProduk(transaksiProdukData);
@@ -184,6 +190,20 @@ public class TambahTransaksiProdukActivity extends AppCompatActivity {
                     System.out.println("total harga: "+detail.getTotal_harga());
                 }
                 System.out.println("==========================");
+
+                if(isEmptyCart()){
+                    showStandardDialog("Tidak ada produk yang terdaftar pada transaksi ini, mohon tambahkan produk terlebih dahulu");
+                }else{
+                    if(transaksiProdukData.getId_hewan()==-1){
+                        showDialogHewanNotFound();
+                    }else if(isAnyWrongProduct()){
+                        showDialogAnyWrongProduct();
+                    }else{
+                        //fungsi tambah transaksi
+                        System.out.println("TRANSAKSI DITAMBAHKAN");
+                    }
+                }
+
             }
         });
     }
@@ -277,5 +297,124 @@ public class TambahTransaksiProdukActivity extends AppCompatActivity {
         System.out.println("diskon: "+transaksiProdukData.getDiskon());
         System.out.println("total: "+transaksiProdukData.getTotal());
         transaksiProdukBinding.setTransaksiProduk(transaksiProdukData);
+    }
+
+    private void showStandardDialog(String rules){
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(TambahTransaksiProdukActivity.this);
+
+        // set title dialog
+        alertDialogBuilder.setTitle("Isi form transaksi dengan benar!");
+        alertDialogBuilder.setMessage(rules);
+
+        // set pesan dari dialog
+        alertDialogBuilder
+                .setIcon(R.drawable.ic_error_outline_black_24dp)
+                .setCancelable(false)
+                .setPositiveButton("Siap!",new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog,int id) {
+                        // close dialog
+                        dialog.cancel();
+                    }
+                });
+
+        // membuat alert dialog dari builder
+        AlertDialog alertDialog = alertDialogBuilder.create();
+
+        // menampilkan alert dialog
+        alertDialog.show();
+    }
+
+    private void showDialogHewanNotFound(){
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(TambahTransaksiProdukActivity.this);
+
+        // set title dialog
+        //alertDialogBuilder.setTitle("Isi form transaksi dengan benar!");
+        alertDialogBuilder.setMessage("Data hewan pelanggan tidak ditemukan, tetap lanjutkan bukan sebagai member?");
+
+        // set pesan dari dialog
+        alertDialogBuilder
+                .setIcon(R.drawable.ic_error_outline_black_24dp)
+                .setCancelable(false)
+                .setNeutralButton("Batal", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                })
+                .setPositiveButton("Lanjut",new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog,int id) {
+                        // close dialog
+                        dialog.cancel();
+                        if(isAnyWrongProduct()) {
+                            showDialogAnyWrongProduct();
+                        }else {
+                            //fungsi tambah transaksi
+                            System.out.println("TRANSAKSI DITAMBAHKAN");
+                        }
+                    }
+                });
+
+        // membuat alert dialog dari builder
+        AlertDialog alertDialog = alertDialogBuilder.create();
+
+        // menampilkan alert dialog
+        alertDialog.show();
+    }
+
+    private void showDialogAnyWrongProduct(){
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(TambahTransaksiProdukActivity.this);
+
+        // set title dialog
+        //alertDialogBuilder.setTitle("Isi form transaksi dengan benar!");
+        alertDialogBuilder.setMessage("Ada produk yang belum terdaftar di database, tetap lanjutkan dengan menghapus produk tersebut?");
+
+        // set pesan dari dialog
+        alertDialogBuilder
+                .setIcon(R.drawable.ic_error_outline_black_24dp)
+                .setCancelable(false)
+                .setNeutralButton("Batal", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                })
+                .setPositiveButton("Lanjut",new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog,int id) {
+                        // close dialog
+                        dialog.cancel();
+                        //fungsi tambah transaksi
+                        System.out.println("TRANSAKSI DITAMBAHKAN");
+                    }
+                });
+
+        // membuat alert dialog dari builder
+        AlertDialog alertDialog = alertDialogBuilder.create();
+
+        // menampilkan alert dialog
+        alertDialog.show();
+    }
+
+    private boolean isAnyWrongProduct(){
+        for (DetailTransaksiProdukDAO detail: ListDetailTransaksiProduk
+        ) {
+            if(detail.getId_produk()==0){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean isEmptyCart(){
+        int count = 0;
+        for (DetailTransaksiProdukDAO detail: ListDetailTransaksiProduk
+        ) {
+            if(detail.getId_produk()!=0){
+                count++;
+            }
+        }
+        if(count==0){
+            return true;
+        }
+        return false;
     }
 }
