@@ -95,23 +95,29 @@
                         </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
-                <AutoCompleteTextView
-                    android:id="@+id/etNamaHewanTransaksiProduk"
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:layout_below="@+id/layoutTitle"
                     android:layout_marginTop="25dp"
-                    android:hint="Nama Hewan"
-                    android:ems="10"
-                    android:text="@={nama_hewan_bind.nama}"/>
+                    android:id="@+id/etNamaHewanTransaksiProdukLayout">
+                    <AutoCompleteTextView
+                        android:id="@+id/etNamaHewanTransaksiProduk"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:hint="Nama Hewan"
+                        android:ems="10"
+                        android:text="@={nama_hewan_bind.nama}"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
                 <androidx.constraintlayout.widget.ConstraintLayout
                     xmlns:android="http://schemas.android.com/apk/res/android"
                     xmlns:app="http://schemas.android.com/apk/res-auto"
                     xmlns:tools="http://schemas.android.com/tools"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/etNamaHewanTransaksiProduk"
+                    android:layout_below="@+id/etNamaHewanTransaksiProdukLayout"
                     android:layout_marginTop="30dp"
                     android:id="@+id/tambahLayananLayout"
                     tools:context=".layanan.TambahLayananActivity">

@@ -34,7 +34,7 @@
             <AutoCompleteTextView
                 android:id="@+id/etNamaProdukTransaksi"
                 android:layout_width="265dp"
-                android:layout_height="35dp"
+                android:layout_height="37dp"
                 android:ems="10"
                 android:hint="Nama Produk"
                 android:textSize="15dp"

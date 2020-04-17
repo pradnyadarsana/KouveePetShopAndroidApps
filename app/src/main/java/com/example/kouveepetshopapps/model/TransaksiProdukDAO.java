@@ -126,7 +126,6 @@ public class TransaksiProdukDAO extends BaseObservable {
             this.subtotal = 0;
         }
         notifyPropertyChanged(BR.subtotal);
-        System.out.println(this.subtotal);
     }
 
     @Bindable
@@ -151,7 +150,6 @@ public class TransaksiProdukDAO extends BaseObservable {
             this.diskon = 0;
         }
         notifyPropertyChanged(BR.diskon);
-        System.out.println(this.diskon);
     }
 
     @Bindable
@@ -166,7 +164,7 @@ public class TransaksiProdukDAO extends BaseObservable {
 
     @Bindable
     public String getStringTotal() {
-        return String.valueOf(diskon);
+        return String.valueOf(total);
     }
 
     public void setStringTotal(String stringTotal) {
@@ -176,7 +174,6 @@ public class TransaksiProdukDAO extends BaseObservable {
             this.total = 0;
         }
         notifyPropertyChanged(BR.total);
-        System.out.println(this.total);
     }
 
     @Bindable
