@@ -55,6 +55,13 @@ public class TransaksiProdukDAO extends BaseObservable {
         this.modified_by = modified_by;
     }
 
+    public boolean isHaveHewan(){
+        if(id_hewan==0){
+            return false;
+        }
+        return true;
+    }
+
     public boolean isHaveDiskon(){
         if(id_hewan!=-1 && id_hewan!=0) {
             return true;

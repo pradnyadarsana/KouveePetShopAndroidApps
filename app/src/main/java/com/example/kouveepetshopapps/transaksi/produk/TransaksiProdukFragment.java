@@ -20,12 +20,21 @@ import com.example.kouveepetshopapps.R;
 import com.example.kouveepetshopapps.adapter.HewanAdapter;
 import com.example.kouveepetshopapps.adapter.TransaksiProdukAdapter;
 import com.example.kouveepetshopapps.api.ApiClient;
+import com.example.kouveepetshopapps.api.ApiInterfaceAdmin;
 import com.example.kouveepetshopapps.api.ApiInterfaceCS;
 import com.example.kouveepetshopapps.hewan.ListHewanFragment;
 import com.example.kouveepetshopapps.hewan.TambahHewanActivity;
 import com.example.kouveepetshopapps.model.HewanDAO;
+import com.example.kouveepetshopapps.model.JenisHewanDAO;
+import com.example.kouveepetshopapps.model.PegawaiDAO;
+import com.example.kouveepetshopapps.model.PelangganDAO;
+import com.example.kouveepetshopapps.model.ProdukDAO;
 import com.example.kouveepetshopapps.model.TransaksiProdukDAO;
 import com.example.kouveepetshopapps.response.GetHewan;
+import com.example.kouveepetshopapps.response.GetJenisHewan;
+import com.example.kouveepetshopapps.response.GetPegawai;
+import com.example.kouveepetshopapps.response.GetPelanggan;
+import com.example.kouveepetshopapps.response.GetProduk;
 import com.example.kouveepetshopapps.response.GetTransaksiProduk;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -42,6 +51,12 @@ public class TransaksiProdukFragment extends Fragment {
     public TransaksiProdukAdapter adapterTransaksiProduk;
     private RecyclerView.LayoutManager mLayoutManager;
     private FloatingActionButton addTransaksiProdukBtn;
+
+    public List<HewanDAO> ListHewan;
+    public List<JenisHewanDAO> ListJenisHewan;
+    public List<PelangganDAO> ListPelanggan;
+    public List<PegawaiDAO> ListPegawai;
+    public List<ProdukDAO> ListProduk;
 
     @Nullable
     @Override
@@ -64,13 +79,26 @@ public class TransaksiProdukFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
+        ListHewan = new ArrayList<>();
+        ListJenisHewan = new ArrayList<>();
+        ListPelanggan = new ArrayList<>();
+        ListPegawai = new ArrayList<>();
+        ListProduk = new ArrayList<>();
+
         ListTransaksiProduk = new ArrayList<>();
-        adapterTransaksiProduk = new TransaksiProdukAdapter(getContext(), ListTransaksiProduk);
+        adapterTransaksiProduk = new TransaksiProdukAdapter(getContext(), ListTransaksiProduk,
+                ListHewan, ListJenisHewan, ListPelanggan, ListPegawai, ListProduk);
         mLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
         recyclerTransaksiProduk.setLayoutManager(mLayoutManager);
         recyclerTransaksiProduk.setItemAnimator(new DefaultItemAnimator());
         recyclerTransaksiProduk.setAdapter(adapterTransaksiProduk);
+
         setRecycleView();
+        getHewan();
+        getJenisHewan();
+        getPelanggan();
+        getPegawai();
+        getProduk();
     }
 
     public void setRecycleView(){
@@ -93,6 +121,116 @@ public class TransaksiProdukFragment extends Fragment {
             @Override
             public void onFailure(Call<GetTransaksiProduk> call, Throwable t) {
                 Toast.makeText(getContext(), "Gagal menampilkan hewan", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    public void getHewan(){
+        ApiInterfaceCS apiService = ApiClient.getClient().create(ApiInterfaceCS.class);
+        Call<GetHewan> hewanDAOCall = apiService.getAllHewan();
+
+        hewanDAOCall.enqueue(new Callback<GetHewan>() {
+            @Override
+            public void onResponse(Call<GetHewan> call, Response<GetHewan> response) {
+                ListHewan.addAll(response.body().getListDataHewan());
+                if(!ListHewan.isEmpty()){
+                    System.out.println(ListHewan.get(0).getNama());
+                    adapterTransaksiProduk.notifyDataSetChanged();
+                    //Toast.makeText(getActivity(), "Sukses ", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<GetHewan> call, Throwable t) {
+                //Toast.makeText(getContext(), "Gagal menampilkan hewan", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    public void getJenisHewan(){
+        ApiInterfaceAdmin apiService = ApiClient.getClient().create(ApiInterfaceAdmin.class);
+        Call<GetJenisHewan> jenishewanDAOCall = apiService.getAllJenisHewan();
+
+        jenishewanDAOCall.enqueue(new Callback<GetJenisHewan>() {
+            @Override
+            public void onResponse(Call<GetJenisHewan> call, Response<GetJenisHewan> response) {
+                ListJenisHewan.addAll(response.body().getListDataJenisHewan());
+                if(!ListJenisHewan.isEmpty()){
+                    System.out.println(ListJenisHewan.get(0).getNama());
+                    adapterTransaksiProduk.notifyDataSetChanged();
+                    //Toast.makeText(getActivity(), "Sukses ", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<GetJenisHewan> call, Throwable t) {
+                //Toast.makeText(getContext(), "Gagal menampilkan hewan", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    public void getPelanggan(){
+        ApiInterfaceCS apiService = ApiClient.getClient().create(ApiInterfaceCS.class);
+        Call<GetPelanggan> pelangganDAOCall = apiService.getAllPelanggan();
+
+        pelangganDAOCall.enqueue(new Callback<GetPelanggan>() {
+            @Override
+            public void onResponse(Call<GetPelanggan> call, Response<GetPelanggan> response) {
+                ListPelanggan.addAll(response.body().getListDataPelanggan());
+                if(!ListPelanggan.isEmpty()){
+                    System.out.println(ListPelanggan.get(0).getNama());
+                    adapterTransaksiProduk.notifyDataSetChanged();
+                    //Toast.makeText(getActivity(), "Sukses ", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<GetPelanggan> call, Throwable t) {
+                //Toast.makeText(getContext(), "Gagal menampilkan hewan", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    public void getPegawai(){
+        ApiInterfaceCS apiService = ApiClient.getClient().create(ApiInterfaceCS.class);
+        Call<GetPegawai> pegawaiDAOCall = apiService.getAllPegawai();
+
+        pegawaiDAOCall.enqueue(new Callback<GetPegawai>() {
+            @Override
+            public void onResponse(Call<GetPegawai> call, Response<GetPegawai> response) {
+                ListPegawai.addAll(response.body().getListDataPegawai());
+                if(!ListPegawai.isEmpty()){
+                    System.out.println(ListPegawai.get(0).getNama());
+                    adapterTransaksiProduk.notifyDataSetChanged();
+                    //Toast.makeText(getActivity(), "Sukses ", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<GetPegawai> call, Throwable t) {
+                //Toast.makeText(getContext(), "Gagal menampilkan hewan", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    public void getProduk(){
+        ApiInterfaceAdmin apiService = ApiClient.getClient().create(ApiInterfaceAdmin.class);
+        Call<GetProduk> produkDAOCall = apiService.getAllProduk();
+
+        produkDAOCall.enqueue(new Callback<GetProduk>() {
+            @Override
+            public void onResponse(Call<GetProduk> call, Response<GetProduk> response) {
+                ListProduk.addAll(response.body().getListDataProduk());
+                if(!ListProduk.isEmpty()){
+                    System.out.println(ListProduk.get(0).getNama());
+                    adapterTransaksiProduk.notifyDataSetChanged();
+                    //Toast.makeText(getActivity(), "Sukses ", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<GetProduk> call, Throwable t) {
+                //Toast.makeText(getContext(), "Gagal menampilkan hewan", Toast.LENGTH_SHORT).show();
             }
         });
     }

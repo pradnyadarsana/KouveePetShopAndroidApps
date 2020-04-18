@@ -64,6 +64,9 @@ public interface ApiInterfaceAdmin {
     @GET("JenisHewan")
     Call<GetJenisHewan> getAllJenisHewanAktif();
 
+    @GET("JenisHewan/all")
+    Call<GetJenisHewan> getAllJenisHewan();
+
     @GET("JenisHewan/search/{id_jenis_hewan}")
     Call<SearchJenisHewan> searchJenisHewan(@Path("id_jenis_hewan")String id_jenis_hewan);
 
@@ -127,6 +130,9 @@ public interface ApiInterfaceAdmin {
 
     @GET("produk")
     Call<GetProduk> getAllProdukAktif();
+
+    @GET("produk/all")
+    Call<GetProduk> getAllProduk();
 
     @POST("produk/update/{id_produk}")
     @FormUrlEncoded

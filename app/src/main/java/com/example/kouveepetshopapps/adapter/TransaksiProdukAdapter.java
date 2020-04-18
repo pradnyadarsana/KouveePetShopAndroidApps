@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -28,12 +29,14 @@ import com.example.kouveepetshopapps.model.HewanDAO;
 import com.example.kouveepetshopapps.model.JenisHewanDAO;
 import com.example.kouveepetshopapps.model.PegawaiDAO;
 import com.example.kouveepetshopapps.model.PelangganDAO;
+import com.example.kouveepetshopapps.model.ProdukDAO;
 import com.example.kouveepetshopapps.model.TransaksiProdukDAO;
 import com.example.kouveepetshopapps.response.GetJenisHewan;
 import com.example.kouveepetshopapps.response.GetPelanggan;
 import com.example.kouveepetshopapps.response.PostUpdateDelete;
 import com.example.kouveepetshopapps.response.SearchHewan;
 import com.example.kouveepetshopapps.response.SearchPelanggan;
+import com.example.kouveepetshopapps.transaksi.produk.TampilDetailTransaksiProdukActivity;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
@@ -50,10 +53,23 @@ public class TransaksiProdukAdapter extends RecyclerView.Adapter<TransaksiProduk
     SharedPreferences loggedUser;
     PegawaiDAO pegawai;
 
-    public TransaksiProdukAdapter(Context context, List<TransaksiProdukDAO> result){
+    private List<HewanDAO> listHewan;
+    private List<JenisHewanDAO> listJenisHewan;
+    private List<PelangganDAO> listPelanggan;
+    private List<PegawaiDAO> listPegawai;
+    private List<ProdukDAO> listProduk;
+
+    public TransaksiProdukAdapter(Context context, List<TransaksiProdukDAO> result, List<HewanDAO> listHewan,
+                                  List<JenisHewanDAO> listJenisHewan, List<PelangganDAO> listPelanggan,
+                                  List<PegawaiDAO> listPegawai, List<ProdukDAO> listProduk){
         this.context = context;
         this.result = result;
         this.resultFiltered = result;
+        this.listHewan = listHewan;
+        this.listJenisHewan = listJenisHewan;
+        this.listPelanggan = listPelanggan;
+        this.listPegawai = listPegawai;
+        this.listProduk = listProduk;
     }
 
     @NonNull
@@ -74,6 +90,7 @@ public class TransaksiProdukAdapter extends RecyclerView.Adapter<TransaksiProduk
     @Override
     public void onBindViewHolder(@NonNull final TransaksiProdukAdapter.MyViewHolder holder, final int position) {
         final TransaksiProdukDAO transaksi = resultFiltered.get(position);
+        System.out.println("id_cust_service: "+transaksi.getId_customer_service());
         holder.id_transaksi_produk.setText(transaksi.getId_transaksi_produk());
         holder.total.setText(Integer.toString(transaksi.getTotal()));
         System.out.println("id hewan "+transaksi.getId_hewan());
@@ -81,7 +98,7 @@ public class TransaksiProdukAdapter extends RecyclerView.Adapter<TransaksiProduk
         holder.parent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startFragment(transaksi, holder);
+                startIntent(transaksi);
             }
         });
         holder.parent.setOnLongClickListener(new View.OnLongClickListener() {
@@ -93,18 +110,35 @@ public class TransaksiProdukAdapter extends RecyclerView.Adapter<TransaksiProduk
         });
     }
 
-    private void startFragment(TransaksiProdukDAO hasil, TransaksiProdukAdapter.MyViewHolder holder){
-//        Bundle data = new Bundle();
-//        Fragment fragment = new TampilDetailHewanFragment();
-//
-//        Gson gson = new Gson();
-//        String json = gson.toJson(hasil);
-//        data.putString("hewan", json);
-////        data.putString("nama_jenis_hewan", holder.nama_jenis_hewan.getText().toString());
-////        data.putString("nama_pelanggan", holder.nama_pemilik.getText().toString());
-//
-//        fragment.setArguments(data);
-//        loadFragment(fragment);
+    private void startIntent(TransaksiProdukDAO hasil){
+        PegawaiDAO cs = findPegawai(hasil.getId_customer_service());
+        PegawaiDAO kasir = findPegawai(hasil.getId_kasir());
+        HewanDAO hewan = findHewan(hasil.getId_hewan());
+        PelangganDAO pelanggan = null;
+        JenisHewanDAO jenis_hewan = null;
+        if(hewan!=null)
+        {
+            pelanggan = findPelanggan(hewan.getId_pelanggan());
+            jenis_hewan = findJenisHewan(hewan.getId_jenis_hewan());
+        }
+        Gson gson = new Gson();
+        String jsonResult = gson.toJson(hasil);
+        String jsonCust_Service = gson.toJson(cs);
+        String jsonKasir = gson.toJson(kasir);
+        String jsonHewan = gson.toJson(hewan);
+        String jsonPelanggan = gson.toJson(pelanggan);
+        String jsonJenisHewan = gson.toJson(jenis_hewan);
+        String jsonProduk = gson.toJson(listProduk);
+
+        Intent detail = new Intent(context, TampilDetailTransaksiProdukActivity.class);
+        detail.putExtra("transaksi_produk",jsonResult);
+        detail.putExtra("cust_service", jsonCust_Service);
+        detail.putExtra("kasir",jsonKasir);
+        detail.putExtra("hewan", jsonHewan);
+        detail.putExtra("pelanggan", jsonPelanggan);
+        detail.putExtra("jenis_hewan",jsonJenisHewan);
+        detail.putExtra("produk",jsonProduk);
+        context.startActivity(detail);
     }
 
     private boolean loadFragment(Fragment fragment) {
@@ -281,10 +315,57 @@ public class TransaksiProdukAdapter extends RecyclerView.Adapter<TransaksiProduk
     }
 
     public void delete(int position) { //removes the row
-        int index = result.indexOf(resultFiltered.get(position));
-        result.remove(index);
-        resultFiltered.remove(position);
-        notifyItemRemoved(position);
-        notifyDataSetChanged();
+        if(result.size()!=resultFiltered.size()){
+            int index = result.indexOf(resultFiltered.get(position));
+            result.remove(index);
+            resultFiltered.remove(position);
+            notifyItemRemoved(position);
+            notifyDataSetChanged();
+        }else{
+            result.remove(position);
+            resultFiltered = result;
+            notifyItemRemoved(position);
+            notifyDataSetChanged();
+        }
+    }
+
+    public HewanDAO findHewan(int id_hewan){
+        for (HewanDAO hewan:listHewan
+             ) {
+            if(hewan.getId_hewan()==id_hewan){
+                return hewan;
+            }
+        }
+        return null;
+    }
+
+    public JenisHewanDAO findJenisHewan(int id_jenis_hewan){
+        for (JenisHewanDAO jenishewan:listJenisHewan
+        ) {
+            if(jenishewan.getId_jenis_hewan()==id_jenis_hewan){
+                return jenishewan;
+            }
+        }
+        return null;
+    }
+
+    public PelangganDAO findPelanggan(int id_pelanggan){
+        for (PelangganDAO pelanggan:listPelanggan
+        ) {
+            if(pelanggan.getId_pelanggan()==id_pelanggan){
+                return pelanggan;
+            }
+        }
+        return null;
+    }
+
+    public PegawaiDAO findPegawai(int id_pegawai){
+        for (PegawaiDAO pegawai:listPegawai
+        ) {
+            if(pegawai.getId_pegawai()==id_pegawai){
+                return pegawai;
+            }
+        }
+        return null;
     }
 }

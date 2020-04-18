@@ -1,10 +1,12 @@
 package com.example.kouveepetshopapps.api;
 
+import com.example.kouveepetshopapps.model.DetailTransaksiProdukDAO;
 import com.example.kouveepetshopapps.model.HewanDAO;
 import com.example.kouveepetshopapps.model.UkuranHewanDAO;
 import com.example.kouveepetshopapps.response.GetDetailTransaksiProduk;
 import com.example.kouveepetshopapps.response.GetHewan;
 import com.example.kouveepetshopapps.response.GetJenisHewan;
+import com.example.kouveepetshopapps.response.GetPegawai;
 import com.example.kouveepetshopapps.response.GetPelanggan;
 import com.example.kouveepetshopapps.response.GetTransaksiProduk;
 import com.example.kouveepetshopapps.response.PostUpdateDelete;
@@ -36,6 +38,9 @@ public interface ApiInterfaceCS {
     @GET("pelanggan")
     Call<GetPelanggan> getAllPelangganAktif();
 
+    @GET("pelanggan/all")
+    Call<GetPelanggan> getAllPelanggan();
+
     @GET("pelanggan/search/{id_pelanggan}")
     Call<SearchPelanggan> searchPelanggan(@Path("id_pelanggan")String id_pelanggan);
 
@@ -65,6 +70,9 @@ public interface ApiInterfaceCS {
     @GET("hewan")
     Call<GetHewan> getAllHewanAktif();
 
+    @GET("hewan/all")
+    Call<GetHewan> getAllHewan();
+
     @GET("hewan/search/{id_hewan}")
     Call<SearchHewan> searchHewan(@Path("id_hewan")String id_hewan);
 
@@ -87,6 +95,10 @@ public interface ApiInterfaceCS {
     @FormUrlEncoded
     Call<SearchPegawai> authPegawai(@Field("username") String username,
                                     @Field("password") String password);
+
+    //PEGAWAI
+    @GET("pegawai/all")
+    Call<GetPegawai> getAllPegawai();
 
     //TRANSAKSI PRODUK
     @POST("transaksiProduk")
@@ -121,6 +133,10 @@ public interface ApiInterfaceCS {
                                                        @Field("jumlah") String jumlah,
                                                        @Field("total_harga") String total_harga,
                                                        @Field("created_by") String created_by);
+
+    @POST("detailTransaksiProduk/insertMultiple")
+    @FormUrlEncoded
+    Call<PostUpdateDelete> tambahDetailTransaksiProdukMultiple(@Field("detail_transaksi_produk") String detail_transaksi_produk);
 
     @GET("detailTransaksiProduk")
     Call<GetDetailTransaksiProduk> getAllDetailTransaksiProduk();

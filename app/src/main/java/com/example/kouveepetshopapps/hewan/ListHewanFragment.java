@@ -112,7 +112,7 @@ public class ListHewanFragment extends Fragment {
 
             @Override
             public void onFailure(Call<GetHewan> call, Throwable t) {
-                Toast.makeText(getContext(), "Gagal menampilkan hewan", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Gagal menampilkan hewan", Toast.LENGTH_SHORT).show();
             }
         });
     }

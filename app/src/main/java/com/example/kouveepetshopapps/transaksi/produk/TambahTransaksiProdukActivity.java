@@ -18,6 +18,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.kouveepetshopapps.R;
 import com.example.kouveepetshopapps.adapter.TambahTransaksiProdukAdapter;
@@ -33,6 +34,7 @@ import com.example.kouveepetshopapps.model.ProdukDAO;
 import com.example.kouveepetshopapps.model.TransaksiProdukDAO;
 import com.example.kouveepetshopapps.response.GetHewan;
 import com.example.kouveepetshopapps.response.GetProduk;
+import com.example.kouveepetshopapps.response.PostUpdateDelete;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
@@ -154,6 +156,7 @@ public class TambahTransaksiProdukActivity extends AppCompatActivity {
             public void onClick(View v) {
                 DetailTransaksiProdukDAO detailtransaksiproduk = new DetailTransaksiProdukDAO();
                 detailtransaksiproduk.setJumlah(1);
+                detailtransaksiproduk.setCreated_by(pegawai.getUsername());
                 ProdukDAO produk = new ProdukDAO();
                 ListDetailTransaksiProduk.add(detailtransaksiproduk);
                 ListProdukPilihan.add(produk);
@@ -201,6 +204,7 @@ public class TambahTransaksiProdukActivity extends AppCompatActivity {
                     }else{
                         //fungsi tambah transaksi
                         System.out.println("TRANSAKSI DITAMBAHKAN");
+                        tambahTransaksiProduk();
                     }
                 }
 
@@ -350,6 +354,7 @@ public class TambahTransaksiProdukActivity extends AppCompatActivity {
                         }else {
                             //fungsi tambah transaksi
                             System.out.println("TRANSAKSI DITAMBAHKAN");
+                            tambahTransaksiProduk();
                         }
                     }
                 });
@@ -384,6 +389,7 @@ public class TambahTransaksiProdukActivity extends AppCompatActivity {
                         dialog.cancel();
                         //fungsi tambah transaksi
                         System.out.println("TRANSAKSI DITAMBAHKAN");
+                        tambahTransaksiProduk();
                     }
                 });
 
@@ -416,5 +422,76 @@ public class TambahTransaksiProdukActivity extends AppCompatActivity {
             return true;
         }
         return false;
+    }
+
+    public void tambahTransaksiProduk(){
+        String id_hewan = String.valueOf(transaksiProdukData.getId_hewan());
+        String diskon = transaksiProdukData.getStringDiskon();
+        if(id_hewan.equalsIgnoreCase("-1")){
+            id_hewan = null;
+            diskon = null;
+        }
+        ApiInterfaceCS apiService = ApiClient.getClient().create(ApiInterfaceCS.class);
+        Call<PostUpdateDelete> transaksiProdukDAOCall = apiService.tambahTransaksiProduk(String.valueOf(pegawai.getId_pegawai()),
+                id_hewan,transaksiProdukData.getStringSubtotal(), diskon, transaksiProdukData.getStringTotal(),
+                pegawai.getUsername());
+
+        transaksiProdukDAOCall.enqueue(new Callback<PostUpdateDelete>() {
+            @Override
+            public void onResponse(Call<PostUpdateDelete> call, Response<PostUpdateDelete> response) {
+                String id_transaksi_produk = response.body().getMessage();
+                System.out.println(id_transaksi_produk);
+                tambahDetailTransaksiProduk(id_transaksi_produk);
+            }
+
+            @Override
+            public void onFailure(Call<PostUpdateDelete> call, Throwable t) {
+                Toast.makeText(TambahTransaksiProdukActivity.this, "Transaksi Produk Gagal", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    public void tambahDetailTransaksiProduk(final String id_transaksi_produk){
+        for(int i=0;i<ListDetailTransaksiProduk.size();i++){
+            ListDetailTransaksiProduk.get(i).setId_transaksi_produk(id_transaksi_produk);
+        }
+
+        Gson gson = new Gson();
+        String detail_transaksi_produk = gson.toJson(ListDetailTransaksiProduk);
+
+        ApiInterfaceCS apiService = ApiClient.getClient().create(ApiInterfaceCS.class);
+        Call<PostUpdateDelete> transaksiProdukDAOCall = apiService.tambahDetailTransaksiProdukMultiple(detail_transaksi_produk);
+
+        transaksiProdukDAOCall.enqueue(new Callback<PostUpdateDelete>() {
+            @Override
+            public void onResponse(Call<PostUpdateDelete> call, Response<PostUpdateDelete> response) {
+                System.out.println(response.body().getMessage());
+                Toast.makeText(TambahTransaksiProdukActivity.this, "Transaksi Produk Berhasil Ditambahkan", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFailure(Call<PostUpdateDelete> call, Throwable t) {
+                hapusTransaksiProduk(id_transaksi_produk);
+                Toast.makeText(TambahTransaksiProdukActivity.this, "Transaksi Produk Gagal", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+    }
+
+    public void hapusTransaksiProduk(String id_transaksi_produk){
+        ApiInterfaceCS apiService = ApiClient.getClient().create(ApiInterfaceCS.class);
+        Call<PostUpdateDelete> transaksiProdukDAOCall = apiService.hapusTransaksiProduk(id_transaksi_produk);
+
+        transaksiProdukDAOCall.enqueue(new Callback<PostUpdateDelete>() {
+            @Override
+            public void onResponse(Call<PostUpdateDelete> call, Response<PostUpdateDelete> response) {
+                System.out.println("transaksi produk terhapus");
+            }
+
+            @Override
+            public void onFailure(Call<PostUpdateDelete> call, Throwable t) {
+                System.out.println("gagal menghapus transaksi produk");
+            }
+        });
     }
 }
