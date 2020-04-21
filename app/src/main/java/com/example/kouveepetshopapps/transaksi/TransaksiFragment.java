@@ -19,7 +19,7 @@ import android.widget.SearchView;
 
 import com.example.kouveepetshopapps.R;
 import com.example.kouveepetshopapps.transaksi.layanan.TransaksiLayananFragment;
-import com.example.kouveepetshopapps.transaksi.produk.TransaksiProdukFragment;
+import com.example.kouveepetshopapps.transaksi.produk.ListTransaksiProdukFragment;
 
 public class TransaksiFragment extends Fragment {
     public SearchView searchView;
@@ -31,7 +31,7 @@ public class TransaksiFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_transaksi, container, false);
 
-        loadFragment(new TransaksiProdukFragment());
+        loadFragment(new ListTransaksiProdukFragment());
 
         toolbar = view.findViewById(R.id.searchTransaksiToolbar);
         toolbar.setBackgroundResource(R.color.colorAccentOrange);
@@ -93,7 +93,7 @@ public class TransaksiFragment extends Fragment {
         if (item.getItemId()==R.id.transaksi_produk){
             toolbar.setTitle("Transaksi Produk");
             ID = 0;
-            loadFragment(new TransaksiProdukFragment());
+            loadFragment(new ListTransaksiProdukFragment());
             return true;
         } else if (item.getItemId() == R.id.transaksi_layanan) {
             toolbar.setTitle("Transaksi Layanan");

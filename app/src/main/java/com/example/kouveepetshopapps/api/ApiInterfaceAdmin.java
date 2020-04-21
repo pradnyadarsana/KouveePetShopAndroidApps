@@ -9,6 +9,7 @@ import com.example.kouveepetshopapps.response.GetSupplier;
 import com.example.kouveepetshopapps.response.GetUkuranHewan;
 import com.example.kouveepetshopapps.response.PostUpdateDelete;
 import com.example.kouveepetshopapps.response.SearchJenisHewan;
+import com.example.kouveepetshopapps.response.SearchProduk;
 import com.example.kouveepetshopapps.response.SearchUkuranHewan;
 
 import java.util.ArrayList;
@@ -134,6 +135,9 @@ public interface ApiInterfaceAdmin {
     @GET("produk/all")
     Call<GetProduk> getAllProduk();
 
+    @GET("produk/search/{id_produk}")
+    Call<SearchProduk> searchProduk(@Path("id_produk") String id_produk);
+
     @POST("produk/update/{id_produk}")
     @FormUrlEncoded
     Call<PostUpdateDelete> ubahProduk(@Path("id_supplier") String id_supplier,
@@ -206,4 +210,6 @@ public interface ApiInterfaceAdmin {
 
     @DELETE("hargaLayanan/{id}")
     Call<PostUpdateDelete> hapusPermanentHargaLayanan(@Path("id_layanan") String id_layanan);
+
+
 }

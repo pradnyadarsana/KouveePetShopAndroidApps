@@ -27,6 +27,11 @@ import com.example.kouveepetshopapps.model.ProdukDAO;
 import com.example.kouveepetshopapps.model.TransaksiProdukDAO;
 import com.example.kouveepetshopapps.response.GetDetailTransaksiProduk;
 import com.example.kouveepetshopapps.response.GetHargaLayanan;
+import com.example.kouveepetshopapps.response.GetProduk;
+import com.example.kouveepetshopapps.response.SearchHewan;
+import com.example.kouveepetshopapps.response.SearchJenisHewan;
+import com.example.kouveepetshopapps.response.SearchPegawai;
+import com.example.kouveepetshopapps.response.SearchPelanggan;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -39,8 +44,6 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class TampilDetailTransaksiProdukActivity extends AppCompatActivity {
-    Type produkListType = new TypeToken<ArrayList<ProdukDAO>>(){}.getType();
-
     ActivityTampilDetailTransaksiProdukBinding detailTransaksiBinding;
 
     private TransaksiProdukDAO transaksi_produk;
@@ -52,7 +55,6 @@ public class TampilDetailTransaksiProdukActivity extends AppCompatActivity {
     private String[] tempVar = {"-", "Guest"};
 
     //RECYCLERVIEW DETAIL TRANSAKSI PRODUK
-    private List<ProdukDAO> ListProduk;
     private List<DetailTransaksiProdukDAO> ListDetailTransaksiProduk;
     private RecyclerView recyclerDetailTransaksiProduk;
     private DetailTransaksiProdukAdapter adapterDetailTransaksiProduk;
@@ -65,26 +67,20 @@ public class TampilDetailTransaksiProdukActivity extends AppCompatActivity {
 
         Gson gson = new Gson();
         transaksi_produk = gson.fromJson(getIntent().getStringExtra("transaksi_produk"), TransaksiProdukDAO.class);
-        hewan = gson.fromJson(getIntent().getStringExtra("hewan"), HewanDAO.class);
-        jenis_hewan = gson.fromJson(getIntent().getStringExtra("jenis_hewan"), JenisHewanDAO.class);
-        pelanggan = gson.fromJson(getIntent().getStringExtra("pelanggan"), PelangganDAO.class);
-        cust_service = gson.fromJson(getIntent().getStringExtra("cust_service"), PegawaiDAO.class);
-        kasir = gson.fromJson(getIntent().getStringExtra("kasir"), PegawaiDAO.class);
-        ListProduk = gson.fromJson(getIntent().getStringExtra("produk"), produkListType);
 
-        System.out.println("cust service : "+cust_service.getId_pegawai());
         detailTransaksiBinding.setTempVar(tempVar);
         detailTransaksiBinding.setTransaksiProduk(transaksi_produk);
-        detailTransaksiBinding.setPelanggan(pelanggan);
-        detailTransaksiBinding.setHewan(hewan);
-        detailTransaksiBinding.setJenisHewan(jenis_hewan);
-        detailTransaksiBinding.setCustService(cust_service);
-        detailTransaksiBinding.setKasir(kasir);
+
+        if(transaksi_produk.getId_hewan()!=0){
+            searchHewan(transaksi_produk.getId_hewan());
+        }
+        searchCustService(transaksi_produk.getId_customer_service());
+        searchKasir(transaksi_produk.getId_kasir());
 
         recyclerDetailTransaksiProduk = findViewById(R.id.recycler_view_tampil_detail_transaksi_produk);
         ListDetailTransaksiProduk = new ArrayList<>();
         adapterDetailTransaksiProduk = new DetailTransaksiProdukAdapter(TampilDetailTransaksiProdukActivity.this,
-                ListDetailTransaksiProduk, ListProduk);
+                ListDetailTransaksiProduk);
         mLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerDetailTransaksiProduk.setLayoutManager(mLayoutManager);
         recyclerDetailTransaksiProduk.setItemAnimator(new DefaultItemAnimator());
@@ -112,6 +108,98 @@ public class TampilDetailTransaksiProdukActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<GetDetailTransaksiProduk> call, Throwable t) {
                 Toast.makeText(TampilDetailTransaksiProdukActivity.this, "Gagal menampilkan detail transaksi produk", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    public void searchHewan(int id_hewan){
+        ApiInterfaceCS apiService = ApiClient.getClient().create(ApiInterfaceCS.class);
+        Call<SearchHewan> hewanDAOCall = apiService.searchHewan(Integer.toString(id_hewan));
+        hewanDAOCall.enqueue(new Callback<SearchHewan>() {
+            @Override
+            public void onResponse(Call<SearchHewan> call, Response<SearchHewan> response) {
+                hewan = response.body().getHewan();
+                detailTransaksiBinding.setHewan(hewan);
+                searchPelanggan(hewan.getId_pelanggan());
+                searchJenisHewan(hewan.getId_jenis_hewan());
+            }
+
+            @Override
+            public void onFailure(Call<SearchHewan> call, Throwable t) {
+                //holder.nama_hewan.setText(Integer.toString(id_hewan));
+            }
+        });
+
+    }
+
+    public void searchPelanggan(int id_pelanggan){
+        ApiInterfaceCS apiService = ApiClient.getClient().create(ApiInterfaceCS.class);
+        Call<SearchPelanggan> pelangganDAOCall = apiService.searchPelanggan(Integer.toString(id_pelanggan));
+
+        pelangganDAOCall.enqueue(new Callback<SearchPelanggan>() {
+            @Override
+            public void onResponse(Call<SearchPelanggan> call, Response<SearchPelanggan> response) {
+                pelanggan = response.body().getPelanggan();
+                detailTransaksiBinding.setPelanggan(pelanggan);
+            }
+
+            @Override
+            public void onFailure(Call<SearchPelanggan> call, Throwable t) {
+                //holder.nama_pemilik.setText(Integer.toString(id_pelanggan));
+            }
+        });
+    }
+
+    public void searchCustService(int id_customer_service){
+        ApiInterfaceCS apiService = ApiClient.getClient().create(ApiInterfaceCS.class);
+        Call<SearchPegawai> pegawaiDAOCall = apiService.searchPegawai(Integer.toString(id_customer_service));
+
+        pegawaiDAOCall.enqueue(new Callback<SearchPegawai>() {
+            @Override
+            public void onResponse(Call<SearchPegawai> call, Response<SearchPegawai> response) {
+                cust_service = response.body().getPegawai();
+                detailTransaksiBinding.setCustService(cust_service);
+            }
+
+            @Override
+            public void onFailure(Call<SearchPegawai> call, Throwable t) {
+                //holder.nama_pemilik.setText(Integer.toString(id_pelanggan));
+            }
+        });
+    }
+
+    public void searchKasir(int id_kasir){
+        ApiInterfaceCS apiService = ApiClient.getClient().create(ApiInterfaceCS.class);
+        Call<SearchPegawai> pegawaiDAOCall = apiService.searchPegawai(Integer.toString(id_kasir));
+
+        pegawaiDAOCall.enqueue(new Callback<SearchPegawai>() {
+            @Override
+            public void onResponse(Call<SearchPegawai> call, Response<SearchPegawai> response) {
+                kasir = response.body().getPegawai();
+                detailTransaksiBinding.setKasir(kasir);
+            }
+
+            @Override
+            public void onFailure(Call<SearchPegawai> call, Throwable t) {
+                //holder.nama_pemilik.setText(Integer.toString(id_pelanggan));
+            }
+        });
+    }
+
+    public void searchJenisHewan(int id_jenis_hewan){
+        ApiInterfaceAdmin apiService = ApiClient.getClient().create(ApiInterfaceAdmin.class);
+        Call<SearchJenisHewan> jenishewanDAOCall = apiService.searchJenisHewan(Integer.toString(id_jenis_hewan));
+
+        jenishewanDAOCall.enqueue(new Callback<SearchJenisHewan>() {
+            @Override
+            public void onResponse(Call<SearchJenisHewan> call, Response<SearchJenisHewan> response) {
+                jenis_hewan = response.body().getJenishewan();
+                detailTransaksiBinding.setJenisHewan(jenis_hewan);
+            }
+
+            @Override
+            public void onFailure(Call<SearchJenisHewan> call, Throwable t) {
+                //holder.nama_pemilik.setText(Integer.toString(id_pelanggan));
             }
         });
     }

@@ -2,7 +2,6 @@ package com.example.kouveepetshopapps.transaksi.produk;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -13,17 +12,13 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.example.kouveepetshopapps.R;
-import com.example.kouveepetshopapps.adapter.HewanAdapter;
 import com.example.kouveepetshopapps.adapter.TransaksiProdukAdapter;
 import com.example.kouveepetshopapps.api.ApiClient;
 import com.example.kouveepetshopapps.api.ApiInterfaceAdmin;
 import com.example.kouveepetshopapps.api.ApiInterfaceCS;
-import com.example.kouveepetshopapps.hewan.ListHewanFragment;
-import com.example.kouveepetshopapps.hewan.TambahHewanActivity;
 import com.example.kouveepetshopapps.model.HewanDAO;
 import com.example.kouveepetshopapps.model.JenisHewanDAO;
 import com.example.kouveepetshopapps.model.PegawaiDAO;
@@ -45,7 +40,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class TransaksiProdukFragment extends Fragment {
+public class ListTransaksiProdukFragment extends Fragment {
     private List<TransaksiProdukDAO> ListTransaksiProduk;
     private RecyclerView recyclerTransaksiProduk;
     public TransaksiProdukAdapter adapterTransaksiProduk;
@@ -56,12 +51,11 @@ public class TransaksiProdukFragment extends Fragment {
     public List<JenisHewanDAO> ListJenisHewan;
     public List<PelangganDAO> ListPelanggan;
     public List<PegawaiDAO> ListPegawai;
-    public List<ProdukDAO> ListProduk;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_transaksi_produk, container, false);
+        View view = inflater.inflate(R.layout.fragment_list_transaksi_produk, container, false);
 
         recyclerTransaksiProduk = view.findViewById(R.id.recycler_view_transaksi_produk);
         addTransaksiProdukBtn = view.findViewById(R.id.addTransaksiProdukButton);
@@ -83,22 +77,15 @@ public class TransaksiProdukFragment extends Fragment {
         ListJenisHewan = new ArrayList<>();
         ListPelanggan = new ArrayList<>();
         ListPegawai = new ArrayList<>();
-        ListProduk = new ArrayList<>();
 
         ListTransaksiProduk = new ArrayList<>();
-        adapterTransaksiProduk = new TransaksiProdukAdapter(getContext(), ListTransaksiProduk,
-                ListHewan, ListJenisHewan, ListPelanggan, ListPegawai, ListProduk);
+        adapterTransaksiProduk = new TransaksiProdukAdapter(getContext(), ListTransaksiProduk);
         mLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
         recyclerTransaksiProduk.setLayoutManager(mLayoutManager);
         recyclerTransaksiProduk.setItemAnimator(new DefaultItemAnimator());
         recyclerTransaksiProduk.setAdapter(adapterTransaksiProduk);
 
         setRecycleView();
-        getHewan();
-        getJenisHewan();
-        getPelanggan();
-        getPegawai();
-        getProduk();
     }
 
     public void setRecycleView(){
@@ -120,7 +107,7 @@ public class TransaksiProdukFragment extends Fragment {
 
             @Override
             public void onFailure(Call<GetTransaksiProduk> call, Throwable t) {
-                Toast.makeText(getContext(), "Gagal menampilkan hewan", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Gagal menampilkan transaksi produk", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -135,7 +122,7 @@ public class TransaksiProdukFragment extends Fragment {
                 ListHewan.addAll(response.body().getListDataHewan());
                 if(!ListHewan.isEmpty()){
                     System.out.println(ListHewan.get(0).getNama());
-                    adapterTransaksiProduk.notifyDataSetChanged();
+//                    adapterTransaksiProduk.notifyDataSetChanged();
                     //Toast.makeText(getActivity(), "Sukses ", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -157,7 +144,7 @@ public class TransaksiProdukFragment extends Fragment {
                 ListJenisHewan.addAll(response.body().getListDataJenisHewan());
                 if(!ListJenisHewan.isEmpty()){
                     System.out.println(ListJenisHewan.get(0).getNama());
-                    adapterTransaksiProduk.notifyDataSetChanged();
+                    //adapterTransaksiProduk.notifyDataSetChanged();
                     //Toast.makeText(getActivity(), "Sukses ", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -179,7 +166,7 @@ public class TransaksiProdukFragment extends Fragment {
                 ListPelanggan.addAll(response.body().getListDataPelanggan());
                 if(!ListPelanggan.isEmpty()){
                     System.out.println(ListPelanggan.get(0).getNama());
-                    adapterTransaksiProduk.notifyDataSetChanged();
+                    //adapterTransaksiProduk.notifyDataSetChanged();
                     //Toast.makeText(getActivity(), "Sukses ", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -201,7 +188,7 @@ public class TransaksiProdukFragment extends Fragment {
                 ListPegawai.addAll(response.body().getListDataPegawai());
                 if(!ListPegawai.isEmpty()){
                     System.out.println(ListPegawai.get(0).getNama());
-                    adapterTransaksiProduk.notifyDataSetChanged();
+                    //adapterTransaksiProduk.notifyDataSetChanged();
                     //Toast.makeText(getActivity(), "Sukses ", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -213,25 +200,5 @@ public class TransaksiProdukFragment extends Fragment {
         });
     }
 
-    public void getProduk(){
-        ApiInterfaceAdmin apiService = ApiClient.getClient().create(ApiInterfaceAdmin.class);
-        Call<GetProduk> produkDAOCall = apiService.getAllProduk();
 
-        produkDAOCall.enqueue(new Callback<GetProduk>() {
-            @Override
-            public void onResponse(Call<GetProduk> call, Response<GetProduk> response) {
-                ListProduk.addAll(response.body().getListDataProduk());
-                if(!ListProduk.isEmpty()){
-                    System.out.println(ListProduk.get(0).getNama());
-                    adapterTransaksiProduk.notifyDataSetChanged();
-                    //Toast.makeText(getActivity(), "Sukses ", Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<GetProduk> call, Throwable t) {
-                //Toast.makeText(getContext(), "Gagal menampilkan hewan", Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
 }

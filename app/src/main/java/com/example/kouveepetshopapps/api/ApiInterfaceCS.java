@@ -100,6 +100,9 @@ public interface ApiInterfaceCS {
     @GET("pegawai/all")
     Call<GetPegawai> getAllPegawai();
 
+    @GET("pegawai/search/{id_pegawai}")
+    Call<SearchPegawai> searchPegawai(@Path("id_pegawai") String id_pegawai);
+
     //TRANSAKSI PRODUK
     @POST("transaksiProduk")
     @FormUrlEncoded
@@ -152,6 +155,14 @@ public interface ApiInterfaceCS {
                                                      @Field("total_harga") String total_harga,
                                                      @Field("modified_by") String modified_by);
 
+    @POST("detailTransaksiProduk/updateMultiple")
+    @FormUrlEncoded
+    Call<PostUpdateDelete> ubahDetailTransaksiProdukMultiple(@Field("detail_transaksi_produk") String detail_transaksi_produk);
+
     @DELETE("detailTransaksiProduk/{id_detail_transaksi_produk}")
     Call<PostUpdateDelete> hapusDetailTransaksiProduk(@Path("id_detail_transaksi_produk") String id_detail_transaksi_produk);
+
+    @POST("detailTransaksiProduk/deleteMultiple")
+    @FormUrlEncoded
+    Call<PostUpdateDelete> hapusDetailTransaksiProdukMultiple(@Field("id_detail_transaksi_produk") String id_detail_transaksi_produk);
 }

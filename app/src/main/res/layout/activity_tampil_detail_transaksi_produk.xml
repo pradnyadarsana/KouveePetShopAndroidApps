@@ -465,56 +465,22 @@
                     android:paddingVertical="20dp"
                     android:layout_marginBottom="1dp"
                     android:orientation="horizontal">
-                    <androidx.cardview.widget.CardView
-                        android:layout_height="wrap_content"
+                    <Button
                         android:layout_width="170dp"
-                        app:cardElevation="2dp"
-                        app:cardCornerRadius="5dp"
-                        android:layout_alignParentStart="true">
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:orientation="horizontal"
-                            android:padding="10dp"
-                            android:gravity="center">
-                            <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:tint="@color/colorPrimaryBrown"
-                                android:src="@drawable/ic_edit_black_24dp"/>
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="5dp"
-                                android:textColor="@color/colorPrimaryBrown"
-                                android:text="Ubah Transaksi"/>
-                        </LinearLayout>
-                    </androidx.cardview.widget.CardView>
-                    <androidx.cardview.widget.CardView
                         android:layout_height="wrap_content"
+                        android:background="@drawable/custom_smooth_rectangle_button"
+                        android:layout_alignParentStart="true"
+                        android:text="Ubah Transaksi"
+                        android:textAllCaps="false"
+                        android:textColor="@color/colorPrimaryOrange"/>
+                    <Button
                         android:layout_width="170dp"
-                        app:cardElevation="2dp"
-                        app:cardCornerRadius="5dp"
-                        android:layout_alignParentEnd="true">
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:orientation="horizontal"
-                            android:padding="10dp"
-                            android:gravity="center">
-                            <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:tint="@color/colorPrimaryBrown"
-                                android:src="@drawable/ic_delete_black_24dp"/>
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="5dp"
-                                android:textColor="@color/colorPrimaryBrown"
-                                android:text="Hapus Transaksi"/>
-                        </LinearLayout>
-                    </androidx.cardview.widget.CardView>
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/custom_smooth_rectangle_button"
+                        android:layout_alignParentEnd="true"
+                        android:text="Hapus Transaksi"
+                        android:textAllCaps="false"
+                        android:textColor="@color/colorPrimaryOrange"/>
                 </RelativeLayout>
                 <LinearLayout
                     android:layout_width="match_parent"

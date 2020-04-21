@@ -15,23 +15,30 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.kouveepetshopapps.R;
+import com.example.kouveepetshopapps.api.ApiClient;
+import com.example.kouveepetshopapps.api.ApiInterfaceAdmin;
+import com.example.kouveepetshopapps.api.ApiInterfaceCS;
 import com.example.kouveepetshopapps.databinding.AdapterDetailTransaksiProdukBinding;
 import com.example.kouveepetshopapps.model.DetailTransaksiProdukDAO;
 import com.example.kouveepetshopapps.model.HargaLayananDAO;
 import com.example.kouveepetshopapps.model.ProdukDAO;
+import com.example.kouveepetshopapps.response.SearchHewan;
+import com.example.kouveepetshopapps.response.SearchProduk;
 
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class DetailTransaksiProdukAdapter extends RecyclerView.Adapter<DetailTransaksiProdukAdapter.MyViewHolder> {
     AdapterDetailTransaksiProdukBinding adapterDetailTransaksiProdukBinding;
     private Context context;
     private List<DetailTransaksiProdukDAO> result;
-    private List<ProdukDAO> listProduk;
 
-    public DetailTransaksiProdukAdapter(Context context, List<DetailTransaksiProdukDAO> result, List<ProdukDAO> listProduk) {
+    public DetailTransaksiProdukAdapter(Context context, List<DetailTransaksiProdukDAO> result) {
         this.context = context;
         this.result = result;
-        this.listProduk = listProduk;
     }
 
     @NonNull
@@ -40,7 +47,6 @@ public class DetailTransaksiProdukAdapter extends RecyclerView.Adapter<DetailTra
         adapterDetailTransaksiProdukBinding = DataBindingUtil.inflate(LayoutInflater.from(context),
                 R.layout.adapter_detail_transaksi_produk, parent, false);
 
-        //View v = LayoutInflater.from(context).inflate(R.layout.adapter_detail_transaksi_produk, parent, false);
         final MyViewHolder holder = new MyViewHolder(adapterDetailTransaksiProdukBinding);
 
         return holder;
@@ -49,27 +55,9 @@ public class DetailTransaksiProdukAdapter extends RecyclerView.Adapter<DetailTra
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, final int position) {
         final DetailTransaksiProdukDAO detail_transaksi_produk = result.get(position);
-        final ProdukDAO produk = findProduk(detail_transaksi_produk.getId_produk());
 
         holder.binding.setDetailTransaksiProduk(detail_transaksi_produk);
-        holder.binding.setProduk(produk);
-//        System.out.println(result.get(position).getHarga() + " " + position);
-//
-//        setNamaUkuran(holder, harga_layanan.getId_ukuran_hewan());
-//        holder.harga.setText(Integer.toString(harga_layanan.getHarga()));
-////        holder.parent.setOnClickListener(new View.OnClickListener() {
-////            @Override
-////            public void onClick(View v) {
-////                startIntent(layanan, TampilDetailLayananActivity.class);
-////            }
-////        });
-//        holder.parent.setOnLongClickListener(new View.OnLongClickListener() {
-//            @Override
-//            public boolean onLongClick(View view) {
-//                showDialog(harga_layanan, position);
-//                return false;
-//            }
-//        });
+        setProduk(holder, detail_transaksi_produk.getId_produk());
     }
 
     @Override
@@ -80,16 +68,10 @@ public class DetailTransaksiProdukAdapter extends RecyclerView.Adapter<DetailTra
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private AdapterDetailTransaksiProdukBinding binding;
 
-//        private TextView nama_ukuran_hewan, harga;
-//        private CardView parent;
-
         public MyViewHolder(@NonNull AdapterDetailTransaksiProdukBinding binding) {
             super(binding.getRoot());
 
             this.binding = binding;
-//            nama_ukuran_hewan = itemView.findViewById(R.id.tvNamaUkuranLayanan);
-//            harga = itemView.findViewById(R.id.tvHargaLayanan);
-//            parent = itemView.findViewById(R.id.ParentHargaLayanan);
         }
 
         public void onClick(View view) {
@@ -97,13 +79,20 @@ public class DetailTransaksiProdukAdapter extends RecyclerView.Adapter<DetailTra
         }
     }
 
-    public ProdukDAO findProduk(int id_produk){
-        for (ProdukDAO produk: listProduk
-             ) {
-            if(produk.getId_produk()==id_produk){
-                return produk;
+    public void setProduk(final MyViewHolder holder, int id_produk){
+        ApiInterfaceAdmin apiService = ApiClient.getClient().create(ApiInterfaceAdmin.class);
+        Call<SearchProduk> produkDAOCall = apiService.searchProduk(Integer.toString(id_produk));
+        produkDAOCall.enqueue(new Callback<SearchProduk>() {
+            @Override
+            public void onResponse(Call<SearchProduk> call, Response<SearchProduk> response) {
+                ProdukDAO produk = response.body().getProduk();
+                holder.binding.setProduk(produk);
             }
-        }
-        return null;
+
+            @Override
+            public void onFailure(Call<SearchProduk> call, Throwable t) {
+            }
+        });
+
     }
 }

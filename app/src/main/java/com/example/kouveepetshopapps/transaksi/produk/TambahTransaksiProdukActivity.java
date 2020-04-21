@@ -452,12 +452,24 @@ public class TambahTransaksiProdukActivity extends AppCompatActivity {
     }
 
     public void tambahDetailTransaksiProduk(final String id_transaksi_produk){
-        for(int i=0;i<ListDetailTransaksiProduk.size();i++){
-            ListDetailTransaksiProduk.get(i).setId_transaksi_produk(id_transaksi_produk);
+        List<DetailTransaksiProdukDAO> detail_temp = new ArrayList<>();
+
+        if(isAnyWrongProduct()){
+            for (DetailTransaksiProdukDAO item: ListDetailTransaksiProduk) {
+                if(item.getId_produk()!=0){
+                    detail_temp.add(item);
+                }
+            }
+        }else{
+            detail_temp = ListDetailTransaksiProduk;
+        }
+
+        for(int i=0;i<detail_temp.size();i++){
+            detail_temp.get(i).setId_transaksi_produk(id_transaksi_produk);
         }
 
         Gson gson = new Gson();
-        String detail_transaksi_produk = gson.toJson(ListDetailTransaksiProduk);
+        String detail_transaksi_produk = gson.toJson(detail_temp);
 
         ApiInterfaceCS apiService = ApiClient.getClient().create(ApiInterfaceCS.class);
         Call<PostUpdateDelete> transaksiProdukDAOCall = apiService.tambahDetailTransaksiProdukMultiple(detail_transaksi_produk);

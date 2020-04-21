@@ -13,7 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".adapter.DetailTransaksiProdukAdapter"></activity>
+        <activity android:name=".adapter.EditTransaksiProdukAdapter"></activity>
+        <activity android:name=".transaksi.produk.EditTransaksiProdukActivity" />
+        <activity android:name=".adapter.DetailTransaksiProdukAdapter" />
         <activity android:name=".transaksi.produk.TampilDetailTransaksiProdukActivity" />
         <activity android:name=".adapter.TambahTransaksiProdukAdapter" />
         <activity android:name=".transaksi.produk.TambahTransaksiProdukActivity" />
@@ -21,7 +23,7 @@
         <activity android:name=".transaksi.layanan.TransaksiLayananDiprosesFragment" />
         <activity android:name=".transaksi.layanan.TransaksiLayananSelesaiFragment" />
         <activity android:name=".transaksi.layanan.TransaksiLayananFragment" />
-        <activity android:name=".transaksi.produk.TransaksiProdukFragment" />
+        <activity android:name=".transaksi.produk.ListTransaksiProdukFragment" />
         <activity android:name=".navigation.ProfilCsFragment" />
         <activity android:name=".adapter.HewanAdapter" />
         <activity android:name=".hewan.ListHewanFragment">
