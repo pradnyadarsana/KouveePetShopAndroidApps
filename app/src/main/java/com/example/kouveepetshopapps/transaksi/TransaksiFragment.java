@@ -31,7 +31,7 @@ public class TransaksiFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_transaksi, container, false);
 
-        loadFragment(new ListTransaksiProdukFragment());
+        //loadFragment(new ListTransaksiProdukFragment());
 
         toolbar = view.findViewById(R.id.searchTransaksiToolbar);
         toolbar.setBackgroundResource(R.color.colorAccentOrange);
@@ -39,6 +39,25 @@ public class TransaksiFragment extends Fragment {
         // toolbar fancy stuff
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Transaksi Produk");
+
+        Bundle bundle = this.getArguments();
+        String firstView = null;
+        if (bundle != null) {
+            firstView = bundle.getString("firstView", "produk");
+        }
+        if (firstView!=null){
+            if(firstView.equalsIgnoreCase("produk"))
+            {
+                loadFragment(new ListTransaksiProdukFragment());
+                toolbar.setTitle("Transaksi Produk");
+            }else if(firstView.equalsIgnoreCase("transaksi"))
+            {
+                loadFragment(new TransaksiLayananFragment());
+                toolbar.setTitle("Transaksi Layanan");
+            }
+        }else{
+            loadFragment(new ListTransaksiProdukFragment());
+        }
 
         return view;
     }

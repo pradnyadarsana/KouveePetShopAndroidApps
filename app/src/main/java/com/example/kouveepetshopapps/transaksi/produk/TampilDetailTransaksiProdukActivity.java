@@ -6,7 +6,13 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.kouveepetshopapps.R;
@@ -25,9 +31,11 @@ import com.example.kouveepetshopapps.model.PegawaiDAO;
 import com.example.kouveepetshopapps.model.PelangganDAO;
 import com.example.kouveepetshopapps.model.ProdukDAO;
 import com.example.kouveepetshopapps.model.TransaksiProdukDAO;
+import com.example.kouveepetshopapps.navigation.CsMainMenu;
 import com.example.kouveepetshopapps.response.GetDetailTransaksiProduk;
 import com.example.kouveepetshopapps.response.GetHargaLayanan;
 import com.example.kouveepetshopapps.response.GetProduk;
+import com.example.kouveepetshopapps.response.PostUpdateDelete;
 import com.example.kouveepetshopapps.response.SearchHewan;
 import com.example.kouveepetshopapps.response.SearchJenisHewan;
 import com.example.kouveepetshopapps.response.SearchPegawai;
@@ -45,6 +53,7 @@ import retrofit2.Response;
 
 public class TampilDetailTransaksiProdukActivity extends AppCompatActivity {
     ActivityTampilDetailTransaksiProdukBinding detailTransaksiBinding;
+    private Button btnEditTransaksi, btnDeleteTransaksi, btnTambahTransaksi;
 
     private TransaksiProdukDAO transaksi_produk;
     private HewanDAO hewan;
@@ -60,12 +69,25 @@ public class TampilDetailTransaksiProdukActivity extends AppCompatActivity {
     private DetailTransaksiProdukAdapter adapterDetailTransaksiProduk;
     private RecyclerView.LayoutManager mLayoutManager;
 
+    SharedPreferences loggedUser;
+    PegawaiDAO pegawai;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         detailTransaksiBinding = DataBindingUtil.setContentView(this, R.layout.activity_tampil_detail_transaksi_produk);
+        btnEditTransaksi = findViewById(R.id.btnEditTransaksiProdukFromDetail);
+        btnDeleteTransaksi = findViewById(R.id.btnDeleteTransaksiProdukFromDetail);
+        btnTambahTransaksi = findViewById(R.id.btnAddTransaksiProdukFromDetail);
 
+        //get logged user
+        loggedUser = getSharedPreferences("logged_user", Context.MODE_PRIVATE);
         Gson gson = new Gson();
+        String json = loggedUser.getString("user", "missing");
+        pegawai = gson.fromJson(json, PegawaiDAO.class);
+        System.out.println(json);
+
+        //Gson gson = new Gson();
         transaksi_produk = gson.fromJson(getIntent().getStringExtra("transaksi_produk"), TransaksiProdukDAO.class);
 
         detailTransaksiBinding.setTempVar(tempVar);
@@ -86,6 +108,33 @@ public class TampilDetailTransaksiProdukActivity extends AppCompatActivity {
         recyclerDetailTransaksiProduk.setItemAnimator(new DefaultItemAnimator());
         recyclerDetailTransaksiProduk.setAdapter(adapterDetailTransaksiProduk);
         setRecycleView(transaksi_produk);
+
+        btnEditTransaksi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent edit = new Intent(TampilDetailTransaksiProdukActivity.this, EditTransaksiProdukActivity.class);
+                Gson gson = new Gson();
+                String data = gson.toJson(transaksi_produk);
+                edit.putExtra("transaksi_produk",data);
+                startActivity(edit);
+            }
+        });
+
+        btnDeleteTransaksi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                deleteTransaksiProduk(transaksi_produk.getId_transaksi_produk(), pegawai.getUsername());
+            }
+        });
+
+        btnTambahTransaksi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent tambah = new Intent(TampilDetailTransaksiProdukActivity.this, TambahTransaksiProdukActivity.class);
+                //tambah.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(tambah);
+            }
+        });
     }
 
     public void setRecycleView(TransaksiProdukDAO transaksi_produk){
@@ -202,5 +251,39 @@ public class TampilDetailTransaksiProdukActivity extends AppCompatActivity {
                 //holder.nama_pemilik.setText(Integer.toString(id_pelanggan));
             }
         });
+    }
+
+    private void deleteTransaksiProduk(String id, String delete_by){
+        ApiInterfaceCS apiService = ApiClient.getClient().create(ApiInterfaceCS.class);
+        Call<PostUpdateDelete> transaksiProdukDAOCall = apiService.hapusTransaksiProduk(id);
+
+        transaksiProdukDAOCall.enqueue(new Callback<PostUpdateDelete>() {
+            @Override
+            public void onResponse(Call<PostUpdateDelete> call, Response<PostUpdateDelete> response) {
+                //reverse close
+                System.out.println(response.body().getMessage());
+                Toast.makeText(TampilDetailTransaksiProdukActivity.this, "Sukses menghapus data transaksi", Toast.LENGTH_SHORT).show();
+                Intent back = new Intent(TampilDetailTransaksiProdukActivity.this, CsMainMenu.class);
+                back.putExtra("from","transaksi");
+                back.putExtra("firstView","produk");
+                back.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(back);
+            }
+            @Override
+            public void onFailure(Call<PostUpdateDelete> call, Throwable t) {
+                System.out.println(t.getMessage());
+                Toast.makeText(TampilDetailTransaksiProdukActivity.this, "Gagal menghapus data transaksi", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent back = new Intent(TampilDetailTransaksiProdukActivity.this, CsMainMenu.class);
+        back.putExtra("from","transaksi");
+        back.putExtra("firstView","produk");
+        back.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(back);
     }
 }

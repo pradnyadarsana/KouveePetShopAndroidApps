@@ -30,8 +30,18 @@ public class CsMainMenu extends AppCompatActivity {
         if (getIntent().getStringExtra("from")!=null){
             if(getIntent().getStringExtra("from").equalsIgnoreCase("transaksi"))
             {
-                loadFragment(new TransaksiFragment());
+                Fragment fragment = new TransaksiFragment();
+                Bundle bundle = new Bundle();
+
                 csBottomNavigationView.setSelectedItemId(R.id.cs_transaksi);
+                if(getIntent().getStringExtra("firstView").equalsIgnoreCase("produk")){
+                    bundle.putString("firstView", "produk");
+                }else if(getIntent().getStringExtra("firstView").equalsIgnoreCase("layanan")){
+                    bundle.putString("firstView", "layanan");
+                }
+                fragment.setArguments(bundle);
+                loadFragment(fragment);
+
             }else if(getIntent().getStringExtra("from").equalsIgnoreCase("hewan"))
             {
                 loadFragment(new ListHewanFragment());

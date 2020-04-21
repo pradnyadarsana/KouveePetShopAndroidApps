@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
@@ -32,9 +33,11 @@ import com.example.kouveepetshopapps.model.HewanDAO;
 import com.example.kouveepetshopapps.model.PegawaiDAO;
 import com.example.kouveepetshopapps.model.ProdukDAO;
 import com.example.kouveepetshopapps.model.TransaksiProdukDAO;
+import com.example.kouveepetshopapps.navigation.CsMainMenu;
 import com.example.kouveepetshopapps.response.GetHewan;
 import com.example.kouveepetshopapps.response.GetProduk;
 import com.example.kouveepetshopapps.response.PostUpdateDelete;
+import com.example.kouveepetshopapps.response.SearchTransaksiProduk;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
@@ -65,8 +68,6 @@ public class TambahTransaksiProdukActivity extends AppCompatActivity {
 
     SharedPreferences loggedUser;
     PegawaiDAO pegawai;
-
-    int formCheckCount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -212,11 +213,16 @@ public class TambahTransaksiProdukActivity extends AppCompatActivity {
         });
     }
 
-//    private void startIntent(){
-//        Intent back = new Intent(TambahLayananActivity.this, ListLayananActivity.class);
-//        back.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//        startActivity(back);
-//    }
+
+    private void startIntent(TransaksiProdukDAO transaksi){
+        Intent viewDetail = new Intent(TambahTransaksiProdukActivity.this, TampilDetailTransaksiProdukActivity.class);
+
+        Gson gson = new Gson();
+        String transaksi_produk = gson.toJson(transaksi);
+        viewDetail.putExtra("transaksi_produk",transaksi_produk);
+        viewDetail.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(viewDetail);
+    }
 
     public void getListHewan(){
         ApiInterfaceCS apiService = ApiClient.getClient().create(ApiInterfaceCS.class);
@@ -432,26 +438,26 @@ public class TambahTransaksiProdukActivity extends AppCompatActivity {
             diskon = null;
         }
         ApiInterfaceCS apiService = ApiClient.getClient().create(ApiInterfaceCS.class);
-        Call<PostUpdateDelete> transaksiProdukDAOCall = apiService.tambahTransaksiProduk(String.valueOf(pegawai.getId_pegawai()),
+        Call<SearchTransaksiProduk> transaksiProdukDAOCall = apiService.tambahTransaksiProduk(String.valueOf(pegawai.getId_pegawai()),
                 id_hewan,transaksiProdukData.getStringSubtotal(), diskon, transaksiProdukData.getStringTotal(),
                 pegawai.getUsername());
 
-        transaksiProdukDAOCall.enqueue(new Callback<PostUpdateDelete>() {
+        transaksiProdukDAOCall.enqueue(new Callback<SearchTransaksiProduk>() {
             @Override
-            public void onResponse(Call<PostUpdateDelete> call, Response<PostUpdateDelete> response) {
-                String id_transaksi_produk = response.body().getMessage();
-                System.out.println(id_transaksi_produk);
-                tambahDetailTransaksiProduk(id_transaksi_produk);
+            public void onResponse(Call<SearchTransaksiProduk> call, Response<SearchTransaksiProduk> response) {
+                TransaksiProdukDAO transaksi_produk = response.body().getTransaksi_produk();
+                System.out.println(transaksi_produk.getId_transaksi_produk());
+                tambahDetailTransaksiProduk(transaksi_produk);
             }
 
             @Override
-            public void onFailure(Call<PostUpdateDelete> call, Throwable t) {
+            public void onFailure(Call<SearchTransaksiProduk> call, Throwable t) {
                 Toast.makeText(TambahTransaksiProdukActivity.this, "Transaksi Produk Gagal", Toast.LENGTH_SHORT).show();
             }
         });
     }
 
-    public void tambahDetailTransaksiProduk(final String id_transaksi_produk){
+    public void tambahDetailTransaksiProduk(final TransaksiProdukDAO transaksi_produk){
         List<DetailTransaksiProdukDAO> detail_temp = new ArrayList<>();
 
         if(isAnyWrongProduct()){
@@ -465,7 +471,7 @@ public class TambahTransaksiProdukActivity extends AppCompatActivity {
         }
 
         for(int i=0;i<detail_temp.size();i++){
-            detail_temp.get(i).setId_transaksi_produk(id_transaksi_produk);
+            detail_temp.get(i).setId_transaksi_produk(transaksi_produk.getId_transaksi_produk());
         }
 
         Gson gson = new Gson();
@@ -479,11 +485,12 @@ public class TambahTransaksiProdukActivity extends AppCompatActivity {
             public void onResponse(Call<PostUpdateDelete> call, Response<PostUpdateDelete> response) {
                 System.out.println(response.body().getMessage());
                 Toast.makeText(TambahTransaksiProdukActivity.this, "Transaksi Produk Berhasil Ditambahkan", Toast.LENGTH_SHORT).show();
+                startIntent(transaksi_produk);
             }
 
             @Override
             public void onFailure(Call<PostUpdateDelete> call, Throwable t) {
-                hapusTransaksiProduk(id_transaksi_produk);
+                hapusTransaksiProduk(transaksi_produk.getId_transaksi_produk());
                 Toast.makeText(TambahTransaksiProdukActivity.this, "Transaksi Produk Gagal", Toast.LENGTH_SHORT).show();
 
             }

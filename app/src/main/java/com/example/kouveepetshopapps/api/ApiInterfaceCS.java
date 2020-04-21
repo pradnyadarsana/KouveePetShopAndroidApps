@@ -13,6 +13,7 @@ import com.example.kouveepetshopapps.response.PostUpdateDelete;
 import com.example.kouveepetshopapps.response.SearchHewan;
 import com.example.kouveepetshopapps.response.SearchPegawai;
 import com.example.kouveepetshopapps.response.SearchPelanggan;
+import com.example.kouveepetshopapps.response.SearchTransaksiProduk;
 
 import java.util.List;
 
@@ -104,14 +105,14 @@ public interface ApiInterfaceCS {
     Call<SearchPegawai> searchPegawai(@Path("id_pegawai") String id_pegawai);
 
     //TRANSAKSI PRODUK
-    @POST("transaksiProduk")
+    @POST("transaksiProduk/insertAndGet")
     @FormUrlEncoded
-    Call<PostUpdateDelete> tambahTransaksiProduk(@Field("id_customer_service") String id_customer_service,
-                                                 @Field("id_hewan") String id_hewan,
-                                                 @Field("subtotal") String subtotal,
-                                                 @Field("diskon") String diskon,
-                                                 @Field("total")String total,
-                                                 @Field("created_by") String created_by);
+    Call<SearchTransaksiProduk> tambahTransaksiProduk(@Field("id_customer_service") String id_customer_service,
+                                                      @Field("id_hewan") String id_hewan,
+                                                      @Field("subtotal") String subtotal,
+                                                      @Field("diskon") String diskon,
+                                                      @Field("total")String total,
+                                                      @Field("created_by") String created_by);
 
     @GET("transaksiProduk/waitingPayment")
     Call<GetTransaksiProduk> getTransaksiProdukMenungguPembayaran();

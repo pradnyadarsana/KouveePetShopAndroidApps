@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
@@ -32,6 +33,7 @@ import com.example.kouveepetshopapps.model.HewanDAO;
 import com.example.kouveepetshopapps.model.PegawaiDAO;
 import com.example.kouveepetshopapps.model.ProdukDAO;
 import com.example.kouveepetshopapps.model.TransaksiProdukDAO;
+import com.example.kouveepetshopapps.navigation.CsMainMenu;
 import com.example.kouveepetshopapps.response.GetDetailTransaksiProduk;
 import com.example.kouveepetshopapps.response.GetHewan;
 import com.example.kouveepetshopapps.response.GetProduk;
@@ -73,6 +75,10 @@ public class EditTransaksiProdukActivity extends AppCompatActivity {
 
     SharedPreferences loggedUser;
     PegawaiDAO pegawai;
+
+    public boolean edited_transaksi=false, added_detail=false, edited_detail=false, deleted_detail=false;
+    public int countEditTransaksi=0, countEditDetail=0, countAddDetail=0, countDeleteDetail=0;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -201,6 +207,9 @@ public class EditTransaksiProdukActivity extends AppCompatActivity {
                 }
                 System.out.println("==========================");
 
+                edited_transaksi=false; added_detail=false; edited_detail=false; deleted_detail=false;
+                countEditTransaksi=0; countEditDetail=0; countAddDetail=0; countDeleteDetail=0;
+
                 if(isEmptyCart()){
                     showStandardDialog("Tidak ada produk yang terdaftar pada transaksi ini, mohon tambahkan produk terlebih dahulu");
                 }else{
@@ -220,11 +229,13 @@ public class EditTransaksiProdukActivity extends AppCompatActivity {
     }
 
 
-//    private void startIntent(){
-//        Intent back = new Intent(TambahLayananActivity.this, ListLayananActivity.class);
-//        back.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//        startActivity(back);
-//    }
+    private void startIntent(){
+        Intent back = new Intent(EditTransaksiProdukActivity.this, CsMainMenu.class);
+        back.putExtra("from","transaksi");
+        back.putExtra("firstView","produk");
+        back.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(back);
+    }
 
     public void getListProduk(){
         ApiInterfaceAdmin apiService = ApiClient.getClient().create(ApiInterfaceAdmin.class);
@@ -516,22 +527,40 @@ public class EditTransaksiProdukActivity extends AppCompatActivity {
                 id_hewan,editTransaksiProdukData.getStringSubtotal(), diskon, editTransaksiProdukData.getStringTotal(),
                 pegawai.getUsername());
 
+        System.out.println("(isExecuted) Sebelum edit transaksi produk: "+transaksiProdukDAOCall.isExecuted());
         transaksiProdukDAOCall.enqueue(new Callback<PostUpdateDelete>() {
             @Override
             public void onResponse(Call<PostUpdateDelete> call, Response<PostUpdateDelete> response) {
+                countEditTransaksi=1;
                 String id_transaksi_produk = response.body().getMessage();
                 System.out.println(id_transaksi_produk);
                 Toast.makeText(EditTransaksiProdukActivity.this, "Transaksi Produk Berhasil Diubah", Toast.LENGTH_SHORT).show();
                 tambahDetailTransaksiProduk(editTransaksiProdukData.getId_transaksi_produk());
                 editDetailTransaksiProduk(ListDetailTransaksiProduk);
                 hapusDetailTransaksiProduk();
+                if(countEditTransaksi==1){
+                    System.out.println("==== after editTrans ====");
+                    System.out.println("editTrans: "+countEditTransaksi+", addDetail: "+countAddDetail+", editDetail: "+countEditDetail+", deleteDetail: "+countDeleteDetail);
+                    if(countAddDetail==1 && countEditDetail==1 && countDeleteDetail==1){
+                        startIntent();
+                    }
+                }
             }
 
             @Override
             public void onFailure(Call<PostUpdateDelete> call, Throwable t) {
+                countEditTransaksi=-1;
                 Toast.makeText(EditTransaksiProdukActivity.this, "Transaksi Produk Gagal Diubah", Toast.LENGTH_SHORT).show();
             }
         });
+        System.out.println("(isExecuted) Setelah edit transaksi produk: "+transaksiProdukDAOCall.isExecuted());
+        if(countEditTransaksi==1 && transaksiProdukDAOCall.isExecuted()){
+            System.out.println("==== after editTrans ====");
+            System.out.println("editTrans: "+countEditTransaksi+", addDetail: "+countAddDetail+", editDetail: "+countEditDetail+", deleteDetail: "+countDeleteDetail);
+            if(countAddDetail==1 && countEditDetail==1 && countDeleteDetail==1){
+                startIntent();
+            }
+        }
     }
 
     public void tambahDetailTransaksiProduk(String id_transaksi_produk){
@@ -545,7 +574,9 @@ public class EditTransaksiProdukActivity extends AppCompatActivity {
             }
         }
 
-        if(!added_list.isEmpty()){
+        if(added_list.isEmpty()){
+            countAddDetail=1;
+        }else{
             List<DetailTransaksiProdukDAO> detail_temp = new ArrayList<>();
             for (DetailTransaksiProdukDAO item: added_list) {
                 if(item.getId_produk()!=0){
@@ -566,16 +597,38 @@ public class EditTransaksiProdukActivity extends AppCompatActivity {
                 @Override
                 public void onResponse(Call<PostUpdateDelete> call, Response<PostUpdateDelete> response) {
                     System.out.println(response.body().getMessage());
+                    countAddDetail=1;
                     Toast.makeText(EditTransaksiProdukActivity.this, "Transaksi Produk Berhasil Ditambahkan", Toast.LENGTH_SHORT).show();
+                    if (countAddDetail==1){
+                        System.out.println("==== after addDetail ====");
+                        System.out.println("editTrans: "+countEditTransaksi+", addDetail: "+countAddDetail+", editDetail: "+countEditDetail+", deleteDetail: "+countDeleteDetail);
+
+                        if(countEditTransaksi==1 && countEditDetail==1 && countDeleteDetail==1){
+                            startIntent();
+                        }
+
+                    }
                 }
 
                 @Override
                 public void onFailure(Call<PostUpdateDelete> call, Throwable t) {
                     //hapusTransaksiProduk(id_transaksi_produk);
+                    countAddDetail=-1;
                     Toast.makeText(EditTransaksiProdukActivity.this, "Transaksi Produk Gagal Ditambahkan", Toast.LENGTH_SHORT).show();
 
                 }
             });
+            added_detail=transaksiProdukDAOCall.isExecuted();
+        }
+
+        if (countAddDetail==1){
+            System.out.println("==== after addDetail ====");
+            System.out.println("editTrans: "+countEditTransaksi+", addDetail: "+countAddDetail+", editDetail: "+countEditDetail+", deleteDetail: "+countDeleteDetail);
+
+            if(countEditTransaksi==1 && countEditDetail==1 && countDeleteDetail==1){
+                startIntent();
+            }
+
         }
 
     }
@@ -610,7 +663,9 @@ public class EditTransaksiProdukActivity extends AppCompatActivity {
             }
         }
 
-        if (!detail_edited.isEmpty()){
+        if (detail_edited.isEmpty()){
+            countEditDetail=1;
+        }else{
             System.out.println("DETAIL TRANSAKSI DIUBAH");
             Gson gson = new Gson();
             String detail_transaksi_produk = gson.toJson(detail_edited);
@@ -623,18 +678,35 @@ public class EditTransaksiProdukActivity extends AppCompatActivity {
                 @Override
                 public void onResponse(Call<PostUpdateDelete> call, Response<PostUpdateDelete> response) {
                     System.out.println(response.body().getMessage());
+                    countEditDetail=1;
                     Toast.makeText(EditTransaksiProdukActivity.this, "Detail Transaksi Produk Berhasil Diubah", Toast.LENGTH_SHORT).show();
+                    if(countEditDetail==1){
+                        System.out.println("==== after editDetail ====");
+                        System.out.println("editTrans: "+countEditTransaksi+", addDetail: "+countAddDetail+", editDetail: "+countEditDetail+", deleteDetail: "+countDeleteDetail);
+
+                        if(countEditTransaksi==1 && countAddDetail==1 && countDeleteDetail==1){
+                            startIntent();
+                        }
+                    }
                 }
 
                 @Override
                 public void onFailure(Call<PostUpdateDelete> call, Throwable t) {
                     System.out.println(t.getMessage());
+                    countEditDetail=-1;
                     Toast.makeText(EditTransaksiProdukActivity.this, "Detail Transaksi Produk Gagal Diubah", Toast.LENGTH_SHORT).show();
 
                 }
             });
         }
+        if(countEditDetail==1){
+            System.out.println("==== after editDetail ====");
+            System.out.println("editTrans: "+countEditTransaksi+", addDetail: "+countAddDetail+", editDetail: "+countEditDetail+", deleteDetail: "+countDeleteDetail);
 
+            if(countEditTransaksi==1 && countAddDetail==1 && countDeleteDetail==1){
+                startIntent();
+            }
+        }
     }
 
     public void hapusTransaksiProduk(String id_transaksi_produk){
@@ -654,10 +726,11 @@ public class EditTransaksiProdukActivity extends AppCompatActivity {
         });
     }
 
-
-
     private void hapusDetailTransaksiProduk(){
-        if(!deleted_id_detail_transaksi.isEmpty()){
+        if(deleted_id_detail_transaksi.isEmpty()){
+            countDeleteDetail=1;
+
+        }else{
             String[] deleted_id = new String[deleted_id_detail_transaksi.size()];
             int i = 0;
             for (Integer id_detail: deleted_id_detail_transaksi
@@ -678,18 +751,36 @@ public class EditTransaksiProdukActivity extends AppCompatActivity {
                 public void onResponse(Call<PostUpdateDelete> call, Response<PostUpdateDelete> response) {
                     //reverse close
                     System.out.println(response.body().getMessage());
+                    countDeleteDetail=1;
                     Toast.makeText(EditTransaksiProdukActivity.this, "Detail Transaksi Produk Berhasil Dihapus", Toast.LENGTH_SHORT).show();
-//                delete(position);
+                    if(countDeleteDetail==1){
+                        System.out.println("==== after deleteDetail ====");
+                        System.out.println("editTrans: "+countEditTransaksi+", addDetail: "+countAddDetail+", editDetail: "+countEditDetail+", deleteDetail: "+countDeleteDetail);
+
+                        if(countEditTransaksi==1 && countAddDetail==1 && countEditDetail==1){
+                            startIntent();
+                        }
+                    }
+                    //                delete(position);
                 }
                 @Override
                 public void onFailure(Call<PostUpdateDelete> call, Throwable t) {
                     System.out.println(t.getMessage());
+                    countDeleteDetail=-1;
                     Toast.makeText(EditTransaksiProdukActivity.this, "Detail Transaksi Produk Gagal Dihapus", Toast.LENGTH_SHORT).show();
                     //Toast.makeText(context, "Gagal menghapus data hewan", Toast.LENGTH_SHORT).show();
                 }
             });
         }
 
+        if(countDeleteDetail==1){
+            System.out.println("==== after deleteDetail ====");
+            System.out.println("editTrans: "+countEditTransaksi+", addDetail: "+countAddDetail+", editDetail: "+countEditDetail+", deleteDetail: "+countDeleteDetail);
+
+            if(countEditTransaksi==1 && countAddDetail==1 && countEditDetail==1){
+                startIntent();
+            }
+        }
     }
 
     public HewanDAO findHewan(int id_hewan){
