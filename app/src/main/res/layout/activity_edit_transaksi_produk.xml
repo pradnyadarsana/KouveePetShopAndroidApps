@@ -218,8 +218,6 @@
                             android:id="@+id/etDiskonEditTransaksiProduk"
                             android:layout_width="100dp"
                             android:layout_height="wrap_content"
-                            android:layout_centerHorizontal="true"
-                            android:layout_below="@+id/btnTambahItemProduk"
                             android:textAlignment="textEnd"
                             android:textSize="20dp"
                             android:inputType="number"

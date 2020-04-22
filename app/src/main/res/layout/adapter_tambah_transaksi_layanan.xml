@@ -6,32 +6,32 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="3dp"
-    tools:context=".adapter.TambahTransaksiProdukAdapter"
-    android:id="@+id/ParentTambahItemTransaksiProduk">
+    tools:context=".adapter.TambahTransaksiLayananAdapter"
+    android:id="@+id/ParentTambahItemTransaksiLayanan">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_margin="10dp">
         <AutoCompleteTextView
-            android:id="@+id/etNamaProdukTransaksi"
+            android:id="@+id/etNamaLayananTransaksi"
             android:layout_width="265dp"
             android:layout_height="37dp"
             android:ems="10"
-            android:hint="Nama Produk"
+            android:hint="Nama Layanan"
             android:textSize="15dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
 
         <LinearLayout
-            android:id="@+id/layoutCounterProduk"
+            android:id="@+id/layoutCounterLayanan"
             android:layout_width="wrap_content"
             android:layout_height="35dp"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:orientation="horizontal">
             <Button
-                android:id="@+id/btnKurangJumlahProdukTransaksi"
+                android:id="@+id/btnKurangJumlahLayananTransaksi"
                 android:layout_width="30dp"
                 android:layout_height="35dp"
                 android:textSize="13dp"
@@ -42,14 +42,14 @@
                 android:elevation="10dp">
             </Button>
             <TextView
-                android:id="@+id/tvJumlahProdukTransaksi"
+                android:id="@+id/tvJumlahLayananTransaksi"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:textSize="16dp"
                 android:textStyle="bold"
                 android:textAlignment="center"/>
             <Button
-                android:id="@+id/btnTambahJumlahProdukTransaksi"
+                android:id="@+id/btnTambahJumlahLayananTransaksi"
                 android:layout_width="30dp"
                 android:layout_height="35dp"
                 android:textSize="13dp"
@@ -63,16 +63,16 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/etNamaProdukTransaksi"
+            app:layout_constraintTop_toBottomOf="@id/etNamaLayananTransaksi"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/layoutHargaSatuanProduk"
+            app:layout_constraintBottom_toTopOf="@id/layoutHargaSatuanLayanan"
             android:layout_marginTop="7dp"
-            android:text="HARGA SATUAN PRODUK"
+            android:text="HARGA SATUAN LAYANAN"
             android:textSize="10dp"
             android:textStyle="bold">
         </TextView>
         <LinearLayout
-            android:id="@+id/layoutHargaSatuanProduk"
+            android:id="@+id/layoutHargaSatuanLayanan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -85,7 +85,7 @@
                 android:text="Rp. "
                 android:textSize="15dp"/>
             <TextView
-                android:id="@+id/tvHargaProdukTransaksi"
+                android:id="@+id/tvHargaLayananTransaksi"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="15dp"/>
@@ -93,9 +93,9 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/layoutCounterProduk"
+            app:layout_constraintTop_toBottomOf="@id/layoutCounterLayanan"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/layoutTotalHargaProduk"
+            app:layout_constraintBottom_toTopOf="@id/layoutTotalHargaLayanan"
             android:layout_marginTop="7dp"
             android:text="TOTAL HARGA"
             android:textSize="10dp"
@@ -103,7 +103,7 @@
         </TextView>
 
         <LinearLayout
-            android:id="@+id/layoutTotalHargaProduk"
+            android:id="@+id/layoutTotalHargaLayanan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintRight_toRightOf="parent"
@@ -116,7 +116,7 @@
                 android:text="Rp. "
                 android:textSize="15dp"/>
             <TextView
-                android:id="@+id/tvTotalHargaProdukTransaksi"
+                android:id="@+id/tvTotalHargaLayananTransaksi"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="15dp"/>

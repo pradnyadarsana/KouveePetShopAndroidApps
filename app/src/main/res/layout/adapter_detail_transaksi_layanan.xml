@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data>
+        <variable
+            name="harga_layanan"
+            type="com.example.kouveepetshopapps.model.HargaLayananDAO" />
+        <variable
+            name="layanan"
+            type="com.example.kouveepetshopapps.model.LayananDAO" />
+        <variable
+            name="ukuran"
+            type="com.example.kouveepetshopapps.model.UkuranHewanDAO" />
+        <variable
+            name="detail_transaksi_layanan"
+            type="com.example.kouveepetshopapps.model.DetailTransaksiLayananDAO" />
+    </data>
+    <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="1dp"
+        android:id="@+id/ParentDetailTransaksiLayanan">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="20dp"
+            android:paddingVertical="12dp"
+            android:background="#F3F3F3">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:text="@{layanan.nama+' '+ukuran.nama}"
+                android:textSize="16sp"
+                android:textColor="@color/colorAccentBlack"
+                android:id="@+id/viewNamaLayananTransaksiLayanan"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="3dp"
+                android:layout_below="@id/viewNamaLayananTransaksiLayanan"
+                android:text="Rp. "
+                android:id="@+id/textRp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:layout_below="@id/viewNamaLayananTransaksiLayanan"
+                android:layout_toRightOf="@+id/textRp"
+                android:text="@{String.valueOf(harga_layanan.harga)}"
+                android:id="@+id/viewHargaLayananTransaksiLayanan"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@id/viewJumlahTransaksiLayanan"
+                android:layout_above="@+id/textRp"
+                android:text="x "/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_above="@+id/textRp"
+                android:text="@{detail_transaksi_layanan.stringJumlah}"
+                android:id="@+id/viewJumlahTransaksiLayanan"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:layout_toLeftOf="@id/viewTotalHargaTransaksiLayanan"
+                android:layout_below="@id/viewJumlahTransaksiLayanan"
+                android:text="Rp. "/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:layout_alignParentEnd="true"
+                android:layout_below="@id/viewJumlahTransaksiLayanan"
+                android:text="@{detail_transaksi_layanan.stringTotal_harga}"
+                android:id="@+id/viewTotalHargaTransaksiLayanan"/>
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+</layout>

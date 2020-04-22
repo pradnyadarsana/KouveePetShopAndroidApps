@@ -5,8 +5,8 @@
             name="pegawai"
             type="com.example.kouveepetshopapps.model.PegawaiDAO" />
         <variable
-            name="transaksi_produk"
-            type="com.example.kouveepetshopapps.model.TransaksiProdukDAO" />
+            name="transaksi_layanan"
+            type="com.example.kouveepetshopapps.model.TransaksiLayananDAO" />
         <variable
             name="nama_hewan_bind"
             type="com.example.kouveepetshopapps.model.HewanDAO" />
@@ -16,7 +16,7 @@
         android:layout_height="match_parent"
         android:layout_width="match_parent"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        tools:context=".transaksi.produk.TambahTransaksiProdukActivity">
+        tools:context=".transaksi.layanan.TambahTransaksiLayananActivity">
 
         <androidx.core.widget.NestedScrollView
             android:layout_height="match_parent"
@@ -68,7 +68,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="start"
-                                android:text="PRODUK"
+                                android:text="LAYANAN"
                                 android:textStyle="bold"
                                 android:textSize="16dp">
                             </TextView>
@@ -88,7 +88,7 @@
                                 android:textSize="15dp">
                             </TextView>
                             <TextView
-                                android:id="@+id/tvNamaPegawaiTransaksiProduk"
+                                android:id="@+id/tvNamaPegawaiTransaksiLayanan"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="end"
@@ -104,9 +104,9 @@
                     android:layout_centerHorizontal="true"
                     android:layout_below="@+id/layoutTitle"
                     android:layout_marginTop="25dp"
-                    android:id="@+id/etNamaHewanTransaksiProdukLayout">
+                    android:id="@+id/etNamaHewanTransaksiLayananLayout">
                     <AutoCompleteTextView
-                        android:id="@+id/etNamaHewanTransaksiProduk"
+                        android:id="@+id/etNamaHewanTransaksiLayanan"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:hint="Nama Hewan"
@@ -120,12 +120,12 @@
                     xmlns:tools="http://schemas.android.com/tools"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/etNamaHewanTransaksiProdukLayout"
+                    android:layout_below="@+id/etNamaHewanTransaksiLayananLayout"
                     android:layout_marginTop="30dp"
-                    android:id="@+id/tambahTransaksiProdukLayout"
-                    tools:context=".transaksi.produk.TambahTransaksiProdukActivity">
+                    android:id="@+id/tambahTransaksiLayananLayout"
+                    tools:context=".transaksi.layanan.TambahTransaksiLayananActivity">
                     <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/recycler_view_tambah_produk_transaksi"
+                        android:id="@+id/recycler_view_tambah_layanan_transaksi"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -136,22 +136,22 @@
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_centerHorizontal="true"
-                    android:layout_below="@+id/tambahTransaksiProdukLayout"
+                    android:layout_below="@+id/tambahTransaksiLayananLayout"
                     android:layout_marginTop="20dp"
                     android:background="@drawable/custom_round_button"
                     android:backgroundTint="@color/colorPrimaryWhite"
                     android:text="+"
                     android:textSize="25sp"
                     android:textColor="@color/colorPrimaryOrange"
-                    android:id="@+id/btnTambahItemTransaksiProduk" />
+                    android:id="@+id/btnTambahItemTransaksiLayanan" />
                 <LinearLayout
-                    android:id="@+id/detailHargaTransaksiProduk"
+                    android:id="@+id/detailHargaTransaksiLayanan"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="50dp"
                     android:gravity="end"
                     android:layout_alignParentRight="true"
-                    android:layout_below="@+id/btnTambahItemTransaksiProduk"
+                    android:layout_below="@+id/btnTambahItemTransaksiLayanan"
                     android:orientation="vertical">
                     <TextView
                         android:layout_width="wrap_content"
@@ -173,13 +173,13 @@
                             android:hint="Rp. ">
                         </TextView>
                         <TextView
-                            android:id="@+id/etSubtotalTransaksiProduk"
+                            android:id="@+id/etSubtotalTransaksiLayanan"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textAllCaps="true"
                             android:textSize="20dp"
                             android:hint="0"
-                            android:text="@={transaksi_produk.stringSubtotal}">
+                            android:text="@={transaksi_layanan.stringSubtotal}">
                         </TextView>
                     </LinearLayout>
 
@@ -204,15 +204,15 @@
                             android:hint="Rp. ">
                         </TextView>
                         <EditText
-                            android:id="@+id/etDiskonTransaksiProduk"
+                            android:id="@+id/etDiskonTransaksiLayanan"
                             android:layout_width="100dp"
                             android:layout_height="wrap_content"
                             android:textAlignment="textEnd"
                             android:textSize="20dp"
                             android:inputType="number"
-                            android:enabled="@{transaksi_produk.haveDiskon}"
+                            android:enabled="@{transaksi_layanan.haveDiskon}"
                             android:hint="0"
-                            android:text="@={transaksi_produk.stringDiskon}">
+                            android:text="@={transaksi_layanan.stringDiskon}">
                         </EditText>
                     </LinearLayout>
                     <TextView
@@ -236,13 +236,13 @@
                             android:hint="Rp. ">
                         </TextView>
                         <TextView
-                            android:id="@+id/etTotalTransaksiProduk"
+                            android:id="@+id/etTotalTransaksiLayanan"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textAllCaps="true"
                             android:textSize="20dp"
                             android:hint="0"
-                            android:text="@={transaksi_produk.stringTotal}">
+                            android:text="@={transaksi_layanan.stringTotal}">
                         </TextView>
                     </LinearLayout>
                 </LinearLayout>
@@ -251,7 +251,7 @@
                     android:layout_width="200dp"
                     android:layout_height="50dp"
                     android:layout_centerHorizontal="true"
-                    android:layout_below="@+id/detailHargaTransaksiProduk"
+                    android:layout_below="@+id/detailHargaTransaksiLayanan"
                     android:layout_marginTop="50dp"
                     android:layout_marginBottom="70dp"
                     android:background="@drawable/custom_round_button"
@@ -259,7 +259,7 @@
                     android:textAllCaps="false"
                     android:text="Selesai"
                     android:textSize="17sp"
-                    android:id="@+id/btnTambahTransaksiProduk" />
+                    android:id="@+id/btnTambahTransaksiLayanan" />
             </RelativeLayout>
         </androidx.core.widget.NestedScrollView>
     </RelativeLayout>

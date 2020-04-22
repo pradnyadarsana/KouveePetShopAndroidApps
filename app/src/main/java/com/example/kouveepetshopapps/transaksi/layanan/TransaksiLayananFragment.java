@@ -2,21 +2,15 @@ package com.example.kouveepetshopapps.transaksi.layanan;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentStatePagerAdapter;
-import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.SearchView;
 
 import com.example.kouveepetshopapps.R;
-import com.example.kouveepetshopapps.transaksi.TransaksiFragment;
 import com.google.android.material.tabs.TabLayout;
 
 public class TransaksiLayananFragment extends Fragment {
@@ -24,7 +18,7 @@ public class TransaksiLayananFragment extends Fragment {
     private TabLayout tabLayout;
 //    View view;
 //    Adapter adapter;
-    TransaksiFragment transaksiFragment;
+    //TransaksiFragment transaksiFragment;
     Toolbar toolbar;
 
     @Nullable
@@ -32,7 +26,7 @@ public class TransaksiLayananFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_transaksi_layanan, container, false);
 
-        transaksiFragment = new TransaksiFragment();
+        //transaksiFragment = new TransaksiFragment();
         //toolbar = transaksiFragment.toolbar;
         //transaksiFragment.toolbar.setTitle("Transaksi Layanan");
 
@@ -48,10 +42,12 @@ public class TransaksiLayananFragment extends Fragment {
                 System.out.println(tab.getText());
                 switch (tab.getPosition()){
                     case 0://diproses
-                        transaksiFragment.ID=1;
+                        loadFragment(new ListTransaksiLayananDiprosesFragment());
+                        //transaksiFragment.ID=1;
                         break;
                     case 1://selesai
-                        transaksiFragment.ID=2;
+                        loadFragment(new ListTransaksiLayananSelesaiFragment());
+                        //transaksiFragment.ID=2;
                         break;
                 }
             }

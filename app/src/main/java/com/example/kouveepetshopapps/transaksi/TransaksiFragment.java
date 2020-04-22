@@ -52,7 +52,9 @@ public class TransaksiFragment extends Fragment {
                 toolbar.setTitle("Transaksi Produk");
             }else if(firstView.equalsIgnoreCase("transaksi"))
             {
-                loadFragment(new TransaksiLayananFragment());
+                Fragment layanan = new TransaksiLayananFragment();
+                layanan.setArguments(bundle);
+                loadFragment(layanan);
                 toolbar.setTitle("Transaksi Layanan");
             }
         }else{

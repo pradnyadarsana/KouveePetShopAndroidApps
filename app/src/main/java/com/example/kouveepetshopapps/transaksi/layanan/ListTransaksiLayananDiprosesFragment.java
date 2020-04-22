@@ -2,7 +2,6 @@ package com.example.kouveepetshopapps.transaksi.layanan;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import android.os.Bundle;
@@ -12,9 +11,9 @@ import android.view.ViewGroup;
 
 import com.example.kouveepetshopapps.R;
 
-public class TransaksiLayananSelesaiFragment extends Fragment {
+public class ListTransaksiLayananDiprosesFragment extends Fragment {
 
-    public TransaksiLayananSelesaiFragment () {
+    public ListTransaksiLayananDiprosesFragment() {
         // Required empty public constructor
     }
 
@@ -23,11 +22,10 @@ public class TransaksiLayananSelesaiFragment extends Fragment {
         super.onCreate(savedInstanceState);
     }
 
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_transaksi_layanan_selesai, container, false);
+        View view = inflater.inflate(R.layout.fragment_list_transaksi_layanan_diproses, container, false);
         return view;
     }
 }
