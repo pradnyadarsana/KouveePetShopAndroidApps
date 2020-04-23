@@ -3,16 +3,19 @@ package com.example.kouveepetshopapps.api;
 import com.example.kouveepetshopapps.model.DetailTransaksiProdukDAO;
 import com.example.kouveepetshopapps.model.HewanDAO;
 import com.example.kouveepetshopapps.model.UkuranHewanDAO;
+import com.example.kouveepetshopapps.response.GetDetailTransaksiLayanan;
 import com.example.kouveepetshopapps.response.GetDetailTransaksiProduk;
 import com.example.kouveepetshopapps.response.GetHewan;
 import com.example.kouveepetshopapps.response.GetJenisHewan;
 import com.example.kouveepetshopapps.response.GetPegawai;
 import com.example.kouveepetshopapps.response.GetPelanggan;
+import com.example.kouveepetshopapps.response.GetTransaksiLayanan;
 import com.example.kouveepetshopapps.response.GetTransaksiProduk;
 import com.example.kouveepetshopapps.response.PostUpdateDelete;
 import com.example.kouveepetshopapps.response.SearchHewan;
 import com.example.kouveepetshopapps.response.SearchPegawai;
 import com.example.kouveepetshopapps.response.SearchPelanggan;
+import com.example.kouveepetshopapps.response.SearchTransaksiLayanan;
 import com.example.kouveepetshopapps.response.SearchTransaksiProduk;
 
 import java.util.List;
@@ -166,4 +169,79 @@ public interface ApiInterfaceCS {
     @POST("detailTransaksiProduk/deleteMultiple")
     @FormUrlEncoded
     Call<PostUpdateDelete> hapusDetailTransaksiProdukMultiple(@Field("id_detail_transaksi_produk") String id_detail_transaksi_produk);
+
+    //TRANSAKSI LAYANAN
+    @POST("transaksiLayanan/insertAndGet")
+    @FormUrlEncoded
+    Call<SearchTransaksiLayanan> tambahTransaksiLayanan(@Field("id_customer_service") String id_customer_service,
+                                                        @Field("id_hewan") String id_hewan,
+                                                        @Field("subtotal") String subtotal,
+                                                        @Field("diskon") String diskon,
+                                                        @Field("total")String total,
+                                                        @Field("created_by") String created_by);
+
+    @GET("transaksiLayanan/waitingPayment")
+    Call<GetTransaksiLayanan> getTransaksiLayananMenungguPembayaran();
+
+    @GET("transaksiLayanan/onProgress")
+    Call<GetTransaksiLayanan> getTransaksiLayananSedangDiproses();
+
+    @GET("transaksiLayanan/progressDoneAndWaitingPayment")
+    Call<GetTransaksiLayanan> getTransaksiLayananSelesaiDiproses();
+
+    @POST("transaksiLayanan/update/{id_transaksi_layanan}")
+    @FormUrlEncoded
+    Call<PostUpdateDelete> ubahTransaksiLayanan(@Path("id_transaksi_layanan") String id_transaksi_layanan,
+                                                @Field("id_hewan") String id_hewan,
+                                                @Field("subtotal") String subtotal,
+                                                @Field("diskon") String diskon,
+                                                @Field("total")String total,
+                                                @Field("modified_by") String modified_by);
+
+    @POST("transaksiLayanan/updateProgress/{id_transaksi_layanan}")
+    @FormUrlEncoded
+    Call<PostUpdateDelete> ubahProgressTransaksiLayanan(@Path("id_transaksi_layanan") String id_transaksi_layanan,
+                                                        @Field("modified_by") String modified_by);
+
+    @DELETE("transaksiLayanan/{id_transaksi_layanan}")
+    Call<PostUpdateDelete> hapusTransaksiLayanan(@Path("id_transaksi_layanan") String id_transaksi_layanan);
+
+
+    //DETAIL TRANSAKSI LAYANAN
+    @POST("detailTransaksiLayanan")
+    @FormUrlEncoded
+    Call<PostUpdateDelete> tambahDetailTransaksiLayanan(@Field("id_transaksi_layanan") String id_transaksi_layanan,
+                                                        @Field("id_harga_layanan") String id_harga_layanan,
+                                                        @Field("jumlah") String jumlah,
+                                                        @Field("total_harga") String total_harga,
+                                                        @Field("created_by") String created_by);
+
+    @POST("detailTransaksiLayanan/insertMultiple")
+    @FormUrlEncoded
+    Call<PostUpdateDelete> tambahDetailTransaksiLayananMultiple(@Field("detail_transaksi_layanan") String detail_transaksi_layanan);
+
+    @GET("detailTransaksiLayanan")
+    Call<GetDetailTransaksiLayanan> getAllDetailTransaksiLayanan();
+
+    @GET("detailTransaksiLayanan/getByTransactionId/{id_transaksi_layanan}")
+    Call<GetDetailTransaksiLayanan> getDetailTransaksiLayananByIdTransaksi(@Path("id_transaksi_layanan") String id_transaksi_layanan);
+
+    @POST("detailTransaksiLayanan/update/{id_detail_transaksi_layanan}")
+    @FormUrlEncoded
+    Call<PostUpdateDelete> ubahDetailTransaksiLayanan(@Path("id_detail_transaksi_layanan") String id_detail_transaksi_layanan,
+                                                      @Field("id_harga_layanan") String id_harga_layanan,
+                                                      @Field("jumlah") String jumlah,
+                                                      @Field("total_harga") String total_harga,
+                                                      @Field("modified_by") String modified_by);
+
+    @POST("detailTransaksiLayanan/updateMultiple")
+    @FormUrlEncoded
+    Call<PostUpdateDelete> ubahDetailTransaksiLayananMultiple(@Field("detail_transaksi_layanan") String detail_transaksi_layanan);
+
+    @DELETE("detailTransaksiLayanan/{id_detail_transaksi_layanan}")
+    Call<PostUpdateDelete> hapusDetailTransaksiLayanan(@Path("id_detail_transaksi_layanan") String id_detail_transaksi_layanan);
+
+    @POST("detailTransaksiLayanan/deleteMultiple")
+    @FormUrlEncoded
+    Call<PostUpdateDelete> hapusDetailTransaksiLayananMultiple(@Field("id_detail_transaksi_layanan") String id_detail_transaksi_layanan);
 }

@@ -8,7 +8,9 @@ import com.example.kouveepetshopapps.response.GetProduk;
 import com.example.kouveepetshopapps.response.GetSupplier;
 import com.example.kouveepetshopapps.response.GetUkuranHewan;
 import com.example.kouveepetshopapps.response.PostUpdateDelete;
+import com.example.kouveepetshopapps.response.SearchHargaLayanan;
 import com.example.kouveepetshopapps.response.SearchJenisHewan;
+import com.example.kouveepetshopapps.response.SearchLayanan;
 import com.example.kouveepetshopapps.response.SearchProduk;
 import com.example.kouveepetshopapps.response.SearchUkuranHewan;
 
@@ -166,6 +168,9 @@ public interface ApiInterfaceAdmin {
     @GET("layanan")
     Call<GetLayanan> getAllLayananAktif();
 
+    @GET("layanan/search/{id_layanan}")
+    Call<SearchLayanan> searchLayanan(@Path("id_layanan") String id_layanan);
+
     @POST("layanan/update/{id_layanan}")
     @FormUrlEncoded
     Call<PostUpdateDelete> ubahLayanan(@Path("id_layanan") String id_layanan,
@@ -193,6 +198,9 @@ public interface ApiInterfaceAdmin {
 
     @GET("hargaLayanan")
     Call<GetHargaLayanan> getAllHargaLayananAktif();
+
+    @GET("hargaLayanan/search/{id_harga_layanan}")
+    Call<SearchHargaLayanan> searchHargaLayanan(@Path("id_harga_layanan") String id_harga_layanan);
 
     @GET("hargaLayanan/searchByIdLayanan/{id_layanan}")
     Call<GetHargaLayanan> searchHargaLayananByIdLayanan(@Path("id_layanan")String id_layanan);

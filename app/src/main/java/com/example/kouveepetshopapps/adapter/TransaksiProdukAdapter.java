@@ -215,7 +215,7 @@ public class TransaksiProdukAdapter extends RecyclerView.Adapter<TransaksiProduk
                         break;
                     case 1:
                         //delete report
-                        deleteTransaksiProduk(hasil.getId_transaksi_produk(), pegawai.getUsername(), position);
+                        deleteTransaksiProduk(hasil.getId_transaksi_produk(), position);
                         break;
                     case 2:
                         dialog.cancel();
@@ -273,7 +273,7 @@ public class TransaksiProdukAdapter extends RecyclerView.Adapter<TransaksiProduk
 
 
 
-    private void deleteTransaksiProduk(String id, String delete_by, final int position){
+    private void deleteTransaksiProduk(String id, final int position){
         ApiInterfaceCS apiService = ApiClient.getClient().create(ApiInterfaceCS.class);
         Call<PostUpdateDelete> transaksiProdukDAOCall = apiService.hapusTransaksiProduk(id);
 

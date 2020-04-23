@@ -47,10 +47,10 @@ public class ListTransaksiProdukFragment extends Fragment {
     private RecyclerView.LayoutManager mLayoutManager;
     private FloatingActionButton addTransaksiProdukBtn;
 
-    public List<HewanDAO> ListHewan;
-    public List<JenisHewanDAO> ListJenisHewan;
-    public List<PelangganDAO> ListPelanggan;
-    public List<PegawaiDAO> ListPegawai;
+//    public List<HewanDAO> ListHewan;
+//    public List<JenisHewanDAO> ListJenisHewan;
+//    public List<PelangganDAO> ListPelanggan;
+//    public List<PegawaiDAO> ListPegawai;
 
     @Nullable
     @Override
@@ -73,10 +73,10 @@ public class ListTransaksiProdukFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        ListHewan = new ArrayList<>();
-        ListJenisHewan = new ArrayList<>();
-        ListPelanggan = new ArrayList<>();
-        ListPegawai = new ArrayList<>();
+//        ListHewan = new ArrayList<>();
+//        ListJenisHewan = new ArrayList<>();
+//        ListPelanggan = new ArrayList<>();
+//        ListPegawai = new ArrayList<>();
 
         ListTransaksiProduk = new ArrayList<>();
         adapterTransaksiProduk = new TransaksiProdukAdapter(getContext(), ListTransaksiProduk);
@@ -112,93 +112,93 @@ public class ListTransaksiProdukFragment extends Fragment {
         });
     }
 
-    public void getHewan(){
-        ApiInterfaceCS apiService = ApiClient.getClient().create(ApiInterfaceCS.class);
-        Call<GetHewan> hewanDAOCall = apiService.getAllHewan();
-
-        hewanDAOCall.enqueue(new Callback<GetHewan>() {
-            @Override
-            public void onResponse(Call<GetHewan> call, Response<GetHewan> response) {
-                ListHewan.addAll(response.body().getListDataHewan());
-                if(!ListHewan.isEmpty()){
-                    System.out.println(ListHewan.get(0).getNama());
-//                    adapterTransaksiProduk.notifyDataSetChanged();
-                    //Toast.makeText(getActivity(), "Sukses ", Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<GetHewan> call, Throwable t) {
-                //Toast.makeText(getContext(), "Gagal menampilkan hewan", Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-
-    public void getJenisHewan(){
-        ApiInterfaceAdmin apiService = ApiClient.getClient().create(ApiInterfaceAdmin.class);
-        Call<GetJenisHewan> jenishewanDAOCall = apiService.getAllJenisHewan();
-
-        jenishewanDAOCall.enqueue(new Callback<GetJenisHewan>() {
-            @Override
-            public void onResponse(Call<GetJenisHewan> call, Response<GetJenisHewan> response) {
-                ListJenisHewan.addAll(response.body().getListDataJenisHewan());
-                if(!ListJenisHewan.isEmpty()){
-                    System.out.println(ListJenisHewan.get(0).getNama());
-                    //adapterTransaksiProduk.notifyDataSetChanged();
-                    //Toast.makeText(getActivity(), "Sukses ", Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<GetJenisHewan> call, Throwable t) {
-                //Toast.makeText(getContext(), "Gagal menampilkan hewan", Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-
-    public void getPelanggan(){
-        ApiInterfaceCS apiService = ApiClient.getClient().create(ApiInterfaceCS.class);
-        Call<GetPelanggan> pelangganDAOCall = apiService.getAllPelanggan();
-
-        pelangganDAOCall.enqueue(new Callback<GetPelanggan>() {
-            @Override
-            public void onResponse(Call<GetPelanggan> call, Response<GetPelanggan> response) {
-                ListPelanggan.addAll(response.body().getListDataPelanggan());
-                if(!ListPelanggan.isEmpty()){
-                    System.out.println(ListPelanggan.get(0).getNama());
-                    //adapterTransaksiProduk.notifyDataSetChanged();
-                    //Toast.makeText(getActivity(), "Sukses ", Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<GetPelanggan> call, Throwable t) {
-                //Toast.makeText(getContext(), "Gagal menampilkan hewan", Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-
-    public void getPegawai(){
-        ApiInterfaceCS apiService = ApiClient.getClient().create(ApiInterfaceCS.class);
-        Call<GetPegawai> pegawaiDAOCall = apiService.getAllPegawai();
-
-        pegawaiDAOCall.enqueue(new Callback<GetPegawai>() {
-            @Override
-            public void onResponse(Call<GetPegawai> call, Response<GetPegawai> response) {
-                ListPegawai.addAll(response.body().getListDataPegawai());
-                if(!ListPegawai.isEmpty()){
-                    System.out.println(ListPegawai.get(0).getNama());
-                    //adapterTransaksiProduk.notifyDataSetChanged();
-                    //Toast.makeText(getActivity(), "Sukses ", Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<GetPegawai> call, Throwable t) {
-                //Toast.makeText(getContext(), "Gagal menampilkan hewan", Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
+//    public void getHewan(){
+//        ApiInterfaceCS apiService = ApiClient.getClient().create(ApiInterfaceCS.class);
+//        Call<GetHewan> hewanDAOCall = apiService.getAllHewan();
+//
+//        hewanDAOCall.enqueue(new Callback<GetHewan>() {
+//            @Override
+//            public void onResponse(Call<GetHewan> call, Response<GetHewan> response) {
+//                ListHewan.addAll(response.body().getListDataHewan());
+//                if(!ListHewan.isEmpty()){
+//                    System.out.println(ListHewan.get(0).getNama());
+////                    adapterTransaksiProduk.notifyDataSetChanged();
+//                    //Toast.makeText(getActivity(), "Sukses ", Toast.LENGTH_SHORT).show();
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<GetHewan> call, Throwable t) {
+//                //Toast.makeText(getContext(), "Gagal menampilkan hewan", Toast.LENGTH_SHORT).show();
+//            }
+//        });
+//    }
+//
+//    public void getJenisHewan(){
+//        ApiInterfaceAdmin apiService = ApiClient.getClient().create(ApiInterfaceAdmin.class);
+//        Call<GetJenisHewan> jenishewanDAOCall = apiService.getAllJenisHewan();
+//
+//        jenishewanDAOCall.enqueue(new Callback<GetJenisHewan>() {
+//            @Override
+//            public void onResponse(Call<GetJenisHewan> call, Response<GetJenisHewan> response) {
+//                ListJenisHewan.addAll(response.body().getListDataJenisHewan());
+//                if(!ListJenisHewan.isEmpty()){
+//                    System.out.println(ListJenisHewan.get(0).getNama());
+//                    //adapterTransaksiProduk.notifyDataSetChanged();
+//                    //Toast.makeText(getActivity(), "Sukses ", Toast.LENGTH_SHORT).show();
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<GetJenisHewan> call, Throwable t) {
+//                //Toast.makeText(getContext(), "Gagal menampilkan hewan", Toast.LENGTH_SHORT).show();
+//            }
+//        });
+//    }
+//
+//    public void getPelanggan(){
+//        ApiInterfaceCS apiService = ApiClient.getClient().create(ApiInterfaceCS.class);
+//        Call<GetPelanggan> pelangganDAOCall = apiService.getAllPelanggan();
+//
+//        pelangganDAOCall.enqueue(new Callback<GetPelanggan>() {
+//            @Override
+//            public void onResponse(Call<GetPelanggan> call, Response<GetPelanggan> response) {
+//                ListPelanggan.addAll(response.body().getListDataPelanggan());
+//                if(!ListPelanggan.isEmpty()){
+//                    System.out.println(ListPelanggan.get(0).getNama());
+//                    //adapterTransaksiProduk.notifyDataSetChanged();
+//                    //Toast.makeText(getActivity(), "Sukses ", Toast.LENGTH_SHORT).show();
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<GetPelanggan> call, Throwable t) {
+//                //Toast.makeText(getContext(), "Gagal menampilkan hewan", Toast.LENGTH_SHORT).show();
+//            }
+//        });
+//    }
+//
+//    public void getPegawai(){
+//        ApiInterfaceCS apiService = ApiClient.getClient().create(ApiInterfaceCS.class);
+//        Call<GetPegawai> pegawaiDAOCall = apiService.getAllPegawai();
+//
+//        pegawaiDAOCall.enqueue(new Callback<GetPegawai>() {
+//            @Override
+//            public void onResponse(Call<GetPegawai> call, Response<GetPegawai> response) {
+//                ListPegawai.addAll(response.body().getListDataPegawai());
+//                if(!ListPegawai.isEmpty()){
+//                    System.out.println(ListPegawai.get(0).getNama());
+//                    //adapterTransaksiProduk.notifyDataSetChanged();
+//                    //Toast.makeText(getActivity(), "Sukses ", Toast.LENGTH_SHORT).show();
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<GetPegawai> call, Throwable t) {
+//                //Toast.makeText(getContext(), "Gagal menampilkan hewan", Toast.LENGTH_SHORT).show();
+//            }
+//        });
+//    }
 
 
 }

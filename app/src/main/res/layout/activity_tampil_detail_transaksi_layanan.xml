@@ -91,7 +91,7 @@
                         android:layout_marginLeft="13dp"
                         android:layout_toRightOf="@+id/logo_status"
                         android:layout_below="@id/viewStatusTransaksiLayanan"
-                        android:text="@{transaksi_layanan.layananSelesai ? textHintStatus[0] : textHintStatus[1]}"
+                        android:text="@{transaksi_layanan.layananSelesai ? textHintStatus[1] : textHintStatus[0]}"
                         android:textColor="@color/colorPrimaryBrown"
                         android:id="@+id/txtKetStatusTransaksiLayanan"/>
                     <TextView
@@ -496,6 +496,23 @@
                     android:background="@color/colorPrimaryWhite"
                     android:layout_marginBottom="3dp"
                     android:visibility="@{transaksi_layanan.layananSelesai ? View.GONE : View.VISIBLE}">
+                    <Button
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/custom_smooth_rectangle_button"
+                        android:text="Layanan Selesai"
+                        android:textAllCaps="false"
+                        android:textColor="@color/colorPrimaryOrange"
+                        android:id="@+id/btnUpdateProgressTransaksiLayananFromDetail"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="20dp"
+                    android:paddingVertical="15dp"
+                    android:background="@color/colorPrimaryWhite"
+                    android:layout_marginBottom="3dp">
                     <Button
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

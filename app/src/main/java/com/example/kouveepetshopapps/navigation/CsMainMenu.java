@@ -38,6 +38,7 @@ public class CsMainMenu extends AppCompatActivity {
                     bundle.putString("firstView", "produk");
                 }else if(getIntent().getStringExtra("firstView").equalsIgnoreCase("layanan")){
                     bundle.putString("firstView", "layanan");
+                    bundle.putString("tab_layanan",getIntent().getStringExtra("tab_layanan"));
                 }
                 fragment.setArguments(bundle);
                 loadFragment(fragment);

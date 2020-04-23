@@ -34,6 +34,25 @@ public class TransaksiLayananFragment extends Fragment {
         tabLayout.addTab(tabLayout.newTab().setText("Diproses"));
         tabLayout.addTab(tabLayout.newTab().setText("Selesai"));
 
+        Bundle bundle = this.getArguments();
+        String tab_layanan = null;
+        if(bundle!=null){
+            tab_layanan = bundle.getString("tab_layanan","diproses");
+        }
+        System.out.println("TransaksiLayananFragment tab_layanan: "+tab_layanan);
+        if(tab_layanan!=null){
+            if(tab_layanan.equalsIgnoreCase("selesai")){
+                tabLayout.selectTab(tabLayout.getTabAt(1));
+                loadFragment(new ListTransaksiLayananSelesaiFragment());
+            }else{
+                tabLayout.selectTab(tabLayout.getTabAt(0));
+                loadFragment(new ListTransaksiLayananDiprosesFragment());
+            }
+        }else{
+            tabLayout.selectTab(tabLayout.getTabAt(0));
+            loadFragment(new ListTransaksiLayananDiprosesFragment());
+        }
+
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
@@ -72,8 +91,10 @@ public class TransaksiLayananFragment extends Fragment {
                 System.out.println(tab.getText());
                 switch (tab.getPosition()){
                     case 0://diproses
+                        loadFragment(new ListTransaksiLayananDiprosesFragment());
                         break;
                     case 1://selesai
+                        loadFragment(new ListTransaksiLayananSelesaiFragment());
                         break;
                 }
             }

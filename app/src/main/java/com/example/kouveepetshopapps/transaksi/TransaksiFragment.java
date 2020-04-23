@@ -45,12 +45,13 @@ public class TransaksiFragment extends Fragment {
         if (bundle != null) {
             firstView = bundle.getString("firstView", "produk");
         }
+
         if (firstView!=null){
             if(firstView.equalsIgnoreCase("produk"))
             {
                 loadFragment(new ListTransaksiProdukFragment());
                 toolbar.setTitle("Transaksi Produk");
-            }else if(firstView.equalsIgnoreCase("transaksi"))
+            }else if(firstView.equalsIgnoreCase("layanan"))
             {
                 Fragment layanan = new TransaksiLayananFragment();
                 layanan.setArguments(bundle);
@@ -59,6 +60,7 @@ public class TransaksiFragment extends Fragment {
             }
         }else{
             loadFragment(new ListTransaksiProdukFragment());
+            toolbar.setTitle("Transaksi Produk");
         }
 
         return view;

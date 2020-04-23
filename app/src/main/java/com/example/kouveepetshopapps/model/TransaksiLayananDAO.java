@@ -67,7 +67,7 @@ public class TransaksiLayananDAO extends BaseObservable {
     }
 
     public boolean isLayananSelesai(){
-        if(progress.equalsIgnoreCase("Layanan Diproses")){
+        if(progress.equalsIgnoreCase("sedang Diproses")){
             return false;
         }
         return true;

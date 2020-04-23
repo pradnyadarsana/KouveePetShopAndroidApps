@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -11,7 +11,7 @@
         android:id="@+id/tabLayananLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
+        android:layout_alignParentTop="true"
         android:elevation="2dp"
         android:background="@color/colorPrimaryOrange"
         android:minHeight="?android:attr/actionBarSize"
@@ -22,15 +22,15 @@
     <FrameLayout
         android:id="@+id/transaksi_layanan_container"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/tabLayananLayout">
+        android:layout_height="match_parent"
+        android:layout_below="@id/tabLayananLayout">
     </FrameLayout>
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"
-        app:layout_constraintBottom_toBottomOf="@id/transaksiLayananLayout"
-        app:layout_constraintRight_toRightOf="@+id/transaksiLayananLayout"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
         android:layout_margin="15dp"
         app:fabSize="normal"
         app:borderWidth="0dp"
@@ -39,4 +39,4 @@
         android:src="@drawable/ic_add_black_24dp"
         android:id="@+id/addTransaksiLayananButton"
         tools:ignore="MissingConstraints" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>

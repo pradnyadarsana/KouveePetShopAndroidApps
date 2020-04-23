@@ -25,6 +25,6 @@
         app:elevation="6dp"
         android:backgroundTint="@color/colorPrimaryBeige"
         android:src="@drawable/ic_add_black_24dp"
-        android:id="@+id/addTransaksiProdukButton"
+        android:id="@+id/addTransaksiLayananDiprosesButton"
         tools:ignore="MissingConstraints" />
 </androidx.constraintlayout.widget.ConstraintLayout>
