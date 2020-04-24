@@ -189,6 +189,9 @@ public interface ApiInterfaceCS {
     @GET("transaksiLayanan/progressDoneAndWaitingPayment")
     Call<GetTransaksiLayanan> getTransaksiLayananSelesaiDiproses();
 
+    @GET("transaksiLayanan/search/{id_transaksi_layanan}")
+    Call<SearchTransaksiLayanan> searchTransaksiLayanan(@Path("id_transaksi_layanan") String id_transaksi_layanan);
+
     @POST("transaksiLayanan/update/{id_transaksi_layanan}")
     @FormUrlEncoded
     Call<PostUpdateDelete> ubahTransaksiLayanan(@Path("id_transaksi_layanan") String id_transaksi_layanan,

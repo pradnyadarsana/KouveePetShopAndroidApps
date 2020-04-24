@@ -100,6 +100,9 @@ public interface ApiInterfaceAdmin {
     @GET("UkuranHewan")
     Call<GetUkuranHewan> getAllUkuranHewanAktif();
 
+    @GET("UkuranHewan/all")
+    Call<GetUkuranHewan> getAllUkuranHewan();
+
     @GET("UkuranHewan/search/{id_ukuran_hewan}")
     Call<SearchUkuranHewan> searchUkuran(@Path("id_ukuran_hewan")String id_ukuran_hewan);
 
@@ -167,6 +170,9 @@ public interface ApiInterfaceAdmin {
 
     @GET("layanan")
     Call<GetLayanan> getAllLayananAktif();
+
+    @GET("layanan/all")
+    Call<GetLayanan> getAllLayanan();
 
     @GET("layanan/search/{id_layanan}")
     Call<SearchLayanan> searchLayanan(@Path("id_layanan") String id_layanan);
