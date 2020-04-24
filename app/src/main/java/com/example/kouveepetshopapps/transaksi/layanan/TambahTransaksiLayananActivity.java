@@ -189,7 +189,7 @@ public class TambahTransaksiLayananActivity extends AppCompatActivity {
                 adapterTambahLayanan.notifyItemInserted(ListDetailTransaksiLayanan.size());
 
                 for(int i=0; i<ListDetailTransaksiLayanan.size();i++){
-                    System.out.println("id produk detail: "+ListDetailTransaksiLayanan.get(i).getId_harga_layanan()+", id produk produk: "+ListHargaLayananPilihan.get(i).getId_harga_layanan());
+                    System.out.println("id layanan detail: "+ListDetailTransaksiLayanan.get(i).getId_harga_layanan()+", id layanan list: "+ListHargaLayananPilihan.get(i).getId_harga_layanan());
                 }
 
                 hitungTotal();
@@ -203,14 +203,14 @@ public class TambahTransaksiLayananActivity extends AppCompatActivity {
             public void onClick(View v) {
                 hitungTotal();
                 //tambahLayanan();
-                System.out.println("====== Data transaksi produk ======");
+                System.out.println("====== Data transaksi layanan ======");
                 System.out.println("id_customer_service: "+transaksiLayananData.getId_customer_service());
                 System.out.println("id_hewan: "+transaksiLayananData.getId_hewan());
                 System.out.println("subtotal: "+transaksiLayananData.getSubtotal());
                 System.out.println("diskon: "+transaksiLayananData.getDiskon());
                 System.out.println("total: "+transaksiLayananData.getTotal());
                 System.out.println("");
-                System.out.println("====== Data detail transaksi produk ======");
+                System.out.println("====== Data detail transaksi layanan ======");
                 for (DetailTransaksiLayananDAO detail: ListDetailTransaksiLayanan
                 ) {
                     System.out.println("id harga layanan: "+detail.getId_harga_layanan());

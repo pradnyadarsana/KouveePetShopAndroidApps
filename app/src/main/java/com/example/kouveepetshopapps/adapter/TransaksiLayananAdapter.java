@@ -31,6 +31,7 @@ import com.example.kouveepetshopapps.model.TransaksiProdukDAO;
 import com.example.kouveepetshopapps.response.PostUpdateDelete;
 import com.example.kouveepetshopapps.response.SearchHewan;
 import com.example.kouveepetshopapps.response.SearchPelanggan;
+import com.example.kouveepetshopapps.transaksi.layanan.EditTransaksiLayananActivity;
 import com.example.kouveepetshopapps.transaksi.layanan.TampilDetailTransaksiLayananActivity;
 import com.example.kouveepetshopapps.transaksi.produk.EditTransaksiProdukActivity;
 import com.example.kouveepetshopapps.transaksi.produk.TampilDetailTransaksiProdukActivity;
@@ -182,16 +183,12 @@ public class TransaksiLayananAdapter extends RecyclerView.Adapter<TransaksiLayan
     }
 
     private void startIntentEdit(TransaksiLayananDAO hasil){
-//        Gson gson = new Gson();
-//        String jsonResult = gson.toJson(hasil);
-//        //String jsonCust_Service = gson.toJson(cs);
-//        //String jsonHewan = gson.toJson(listHewan);
-//
-//        Intent edit = new Intent(context, EditTransaksiProdukActivity.class);
-//        edit.putExtra("transaksi_produk",jsonResult);
-//        //edit.putExtra("cust_service", jsonCust_Service);
-//        //edit.putExtra("hewan", jsonHewan);
-//        context.startActivity(edit);
+        Gson gson = new Gson();
+        String jsonResult = gson.toJson(hasil);
+
+        Intent edit = new Intent(context, EditTransaksiLayananActivity.class);
+        edit.putExtra("transaksi_layanan",jsonResult);
+        context.startActivity(edit);
     }
 
     private void showDialog(final TransaksiLayananDAO hasil, final int position){
