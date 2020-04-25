@@ -26,20 +26,26 @@
                 android:layout_centerHorizontal="true"
                 android:src="@mipmap/kind_logo_foreground"/>
 
-            <EditText
-                android:id="@+id/etNamaJenisHewanUpdate"
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="300dp"
-                android:layout_height="50dp"
+                android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:layout_below="@+id/logo_jenis_hewan"
                 android:layout_marginTop="25dp"
-                android:hint="Nama jenis hewan"/>
+                android:layout_below="@+id/logo_jenis_hewan"
+                android:id="@+id/etNamaJenisHewanLayout">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etNamaJenisHewanUpdate"
+                    android:layout_width="300dp"
+                    android:layout_height="50dp"
+                    android:layout_centerHorizontal="true"
+                    android:hint="Nama Jenis Hewan"/>
+            </com.google.android.material.textfield.TextInputLayout>
 
             <Button
                 android:layout_width="200dp"
                 android:layout_height="50dp"
                 android:layout_centerHorizontal="true"
-                android:layout_below="@+id/etNamaJenisHewanUpdate"
+                android:layout_below="@+id/etNamaJenisHewanLayout"
                 android:layout_marginTop="50dp"
                 android:layout_marginBottom="70dp"
                 android:background="@drawable/custom_round_button"
@@ -48,7 +54,6 @@
                 android:textSize="17sp"
                 android:text="Update"
                 android:id="@+id/btnUpdateJenisHewan" />
-
         </RelativeLayout>
     </androidx.core.widget.NestedScrollView>
 </RelativeLayout>

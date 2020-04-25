@@ -144,12 +144,15 @@ public interface ApiInterfaceAdmin {
     Call<SearchProduk> searchProduk(@Path("id_produk") String id_produk);
 
     @POST("produk/update/{id_produk}")
-    @FormUrlEncoded
-    Call<PostUpdateDelete> ubahProduk(@Path("id_supplier") String id_supplier,
-                                        @Field("nama")String nama,
-                                        @Field("alamat")String alamat,
-                                        @Field("telp")String telp,
-                                        @Field("modified_by")String modified_by);
+    @Multipart
+    Call<PostUpdateDelete> ubahProduk(@Path("id_produk") String id_produk,
+                                      @Part("nama") RequestBody nama,
+                                      @Part("satuan")RequestBody satuan,
+                                      @Part("jumlah_stok")RequestBody jumlah_stok,
+                                      @Part("harga")RequestBody harga,
+                                      @Part("min_stok") RequestBody min_stok,
+                                      @Part MultipartBody.Part gambar,
+                                      @Part("modified_by")RequestBody modified_by);
 
     @POST("produk/delete/{id_produk}")
     @FormUrlEncoded

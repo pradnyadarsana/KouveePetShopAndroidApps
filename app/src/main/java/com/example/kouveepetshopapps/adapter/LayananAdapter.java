@@ -22,6 +22,7 @@ import android.widget.Toast;
 import com.example.kouveepetshopapps.R;
 import com.example.kouveepetshopapps.api.ApiClient;
 import com.example.kouveepetshopapps.api.ApiInterfaceAdmin;
+import com.example.kouveepetshopapps.layanan.EditLayananActivity;
 import com.example.kouveepetshopapps.layanan.TampilDetailLayananActivity;
 import com.example.kouveepetshopapps.model.LayananDAO;
 import com.example.kouveepetshopapps.model.PegawaiDAO;
@@ -158,6 +159,7 @@ public class LayananAdapter extends RecyclerView.Adapter<LayananAdapter.MyViewHo
                     case 0:
                         // update report
                         //startIntent(hasil);
+                        startIntent(hasil, EditLayananActivity.class);
                         break;
                     case 1:
                         //delete report

@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -23,13 +24,12 @@ import com.example.kouveepetshopapps.R;
 import com.example.kouveepetshopapps.api.ApiClient;
 import com.example.kouveepetshopapps.api.ApiInterfaceAdmin;
 import com.example.kouveepetshopapps.api.ApiInterfaceCS;
+import com.example.kouveepetshopapps.hewan.EditHewanActivity;
 import com.example.kouveepetshopapps.hewan.TampilDetailHewanFragment;
 import com.example.kouveepetshopapps.model.HewanDAO;
 import com.example.kouveepetshopapps.model.JenisHewanDAO;
 import com.example.kouveepetshopapps.model.PegawaiDAO;
 import com.example.kouveepetshopapps.model.PelangganDAO;
-import com.example.kouveepetshopapps.model.ProdukDAO;
-import com.example.kouveepetshopapps.model.UkuranHewanDAO;
 import com.example.kouveepetshopapps.response.GetJenisHewan;
 import com.example.kouveepetshopapps.response.GetPelanggan;
 import com.example.kouveepetshopapps.response.GetUkuranHewan;
@@ -191,6 +191,7 @@ public class HewanAdapter extends RecyclerView.Adapter<HewanAdapter.MyViewHolder
                     case 0:
                         // update report
                         //startIntent(hasil);
+                        startIntent(hasil, EditHewanActivity.class);
                         break;
                     case 1:
                         //delete report
@@ -208,6 +209,15 @@ public class HewanAdapter extends RecyclerView.Adapter<HewanAdapter.MyViewHolder
 
         // menampilkan alert dialog
         alertDialog.show();
+    }
+
+    private void startIntent(HewanDAO hasil, Class nextView){
+        Intent view = new Intent(context, nextView);
+        Gson gson = new Gson();
+        String json = gson.toJson(hasil);
+        view.putExtra("hewan", json);
+        view.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(view);
     }
 
     public void setNamaJenisHewan(final HewanAdapter.MyViewHolder holder, final int id_jenis_hewan){

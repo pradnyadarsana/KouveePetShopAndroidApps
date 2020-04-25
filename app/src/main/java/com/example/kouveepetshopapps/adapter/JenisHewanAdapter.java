@@ -194,14 +194,14 @@ public class JenisHewanAdapter extends RecyclerView.Adapter<JenisHewanAdapter.My
             public void onResponse(Call<PostUpdateDelete> call, Response<PostUpdateDelete> response) {
                 //reverse close
                 System.out.println(response.body().getMessage());
-                Toast.makeText(context, "Sukses menghapus supplier", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Sukses menghapus jenis hewan", Toast.LENGTH_SHORT).show();
                 delete(position);
             }
 
             @Override
             public void onFailure(Call<PostUpdateDelete> call, Throwable t) {
 
-                Toast.makeText(context, "Gagal menghapus supplier", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Gagal menghapus jenis hewan", Toast.LENGTH_SHORT).show();
             }
         });
     }

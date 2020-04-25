@@ -65,7 +65,7 @@ public class EditUkuranHewanActivity extends AppCompatActivity {
         });
     }
 
-    public void sharedPreferences(){
+    private void sharedPreferences(){
         loggedUser = getSharedPreferences("logged_user", Context.MODE_PRIVATE);
         Gson gson = new Gson();
         String json = loggedUser.getString("user", "missing");
@@ -73,11 +73,11 @@ public class EditUkuranHewanActivity extends AppCompatActivity {
         System.out.println(json);
     }
 
-    public void setAtribut(){
+    private void setAtribut(){
         ukuranUpdate = (EditText) findViewById(R.id.etNamaUkuranHewanUpdate);
     }
 
-    public void setText(){
+    private void setText(){
         ukuranUpdate.setText(getIntent().getStringExtra("nama"));
     }
 

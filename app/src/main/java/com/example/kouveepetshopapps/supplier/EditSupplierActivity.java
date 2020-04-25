@@ -74,7 +74,7 @@ public class EditSupplierActivity extends AppCompatActivity {
         });
     }
 
-    public void sharedPreferences(){
+    private void sharedPreferences(){
         loggedUser = getSharedPreferences("logged_user", Context.MODE_PRIVATE);
         Gson gson = new Gson();
         String json = loggedUser.getString("user", "missing");
@@ -82,19 +82,16 @@ public class EditSupplierActivity extends AppCompatActivity {
         System.out.println(json);
     }
 
-    public void setAtribut(){
+    private void setAtribut(){
         namaUpdate = (EditText) findViewById(R.id.etNamaSupplierUpdate);
         tlpUpdate = (EditText) findViewById(R.id.etTelpSupplierUpdate);
         alamatUpdate = (EditText) findViewById(R.id.etAlamatSupplierUpdate);
     }
 
-    public void setText(){
+    private void setText(){
         namaUpdate.setText(getIntent().getStringExtra("nama"));
         tlpUpdate.setText(getIntent().getStringExtra("telp"));
         alamatUpdate.setText(getIntent().getStringExtra("alamat"));
-        //id = getIntent().getStringExtra("id_jenis_hewan");
-        //id = getIntent().getExtras().getInt("id_jenis_hewan");
-        //idj = String.valueOf(id);
     }
 
     private void startIntent(){

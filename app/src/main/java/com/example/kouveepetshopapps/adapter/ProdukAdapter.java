@@ -25,6 +25,7 @@ import com.example.kouveepetshopapps.api.ApiClient;
 import com.example.kouveepetshopapps.api.ApiInterfaceAdmin;
 import com.example.kouveepetshopapps.model.PegawaiDAO;
 import com.example.kouveepetshopapps.model.ProdukDAO;
+import com.example.kouveepetshopapps.produk.EditProdukActivity;
 import com.example.kouveepetshopapps.produk.TampilDetailProdukActivity;
 import com.example.kouveepetshopapps.response.PostUpdateDelete;
 import com.example.kouveepetshopapps.supplier.TampilDetailSupplierActivity;
@@ -171,6 +172,7 @@ public class ProdukAdapter extends RecyclerView.Adapter<ProdukAdapter.MyViewHold
                     case 0:
                         // update report
                         //startIntent(hasil);
+                        startIntent(hasil, EditProdukActivity.class);
                         break;
                     case 1:
                         //delete report

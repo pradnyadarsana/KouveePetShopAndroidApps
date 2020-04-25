@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -26,6 +27,7 @@ import com.example.kouveepetshopapps.hewan.TampilDetailHewanFragment;
 import com.example.kouveepetshopapps.model.PegawaiDAO;
 import com.example.kouveepetshopapps.model.PelangganDAO;
 import com.example.kouveepetshopapps.model.ProdukDAO;
+import com.example.kouveepetshopapps.pelanggan.EditPelangganActivity;
 import com.example.kouveepetshopapps.pelanggan.TampilDetailPelangganFragment;
 import com.example.kouveepetshopapps.response.PostUpdateDelete;
 import com.google.gson.Gson;
@@ -179,6 +181,7 @@ public class PelangganAdapter extends RecyclerView.Adapter<PelangganAdapter.MyVi
                     case 0:
                         // update report
                         //startIntent(hasil);
+                        startIntent(hasil, EditPelangganActivity.class);
                         break;
                     case 1:
                         //delete report
@@ -196,6 +199,15 @@ public class PelangganAdapter extends RecyclerView.Adapter<PelangganAdapter.MyVi
 
         // menampilkan alert dialog
         alertDialog.show();
+    }
+
+    private void startIntent(PelangganDAO hasil, Class nextView){
+        Intent view = new Intent(context, nextView);
+        Gson gson = new Gson();
+        String json = gson.toJson(hasil);
+        view.putExtra("pelanggan", json);
+        view.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(view);
     }
 
 

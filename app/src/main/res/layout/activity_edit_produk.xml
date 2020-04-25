@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".produk.TambahProdukActivity">
+    tools:context=".produk.EditProdukActivity">
 
     <androidx.core.widget.NestedScrollView
         android:layout_height="match_parent"
@@ -27,18 +27,18 @@
                 android:src="@mipmap/product_logo_foreground"/>
 
             <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="25dp"
-            android:layout_below="@+id/logo"
-            android:id="@+id/etNamaProdukLayout">
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etNamaProduk"
                 android:layout_width="300dp"
-                android:layout_height="50dp"
+                android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:hint="Nama Produk"/>
+                android:layout_marginTop="25dp"
+                android:layout_below="@+id/logo"
+                android:id="@+id/etNamaProdukLayout">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etNamaProdukUpdate"
+                    android:layout_width="300dp"
+                    android:layout_height="50dp"
+                    android:layout_centerHorizontal="true"
+                    android:hint="Nama Produk"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -49,7 +49,7 @@
                 android:layout_below="@+id/etNamaProdukLayout"
                 android:id="@+id/etSatuanProdukLayout">
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etSatuanProduk"
+                    android:id="@+id/etSatuanProdukUpdate"
                     android:layout_width="300dp"
                     android:layout_height="50dp"
                     android:layout_centerHorizontal="true"
@@ -65,7 +65,7 @@
                 android:layout_below="@+id/etSatuanProdukLayout"
                 android:id="@+id/etHargaProdukLayout">
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etHargaProduk"
+                    android:id="@+id/etHargaProdukUpdate"
                     android:layout_width="300dp"
                     android:layout_height="50dp"
                     android:layout_centerHorizontal="true"
@@ -90,7 +90,7 @@
                     android:layout_centerHorizontal="true">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/etJumlahStokProduk"
+                        android:id="@+id/etJumlahStokProdukUpdate"
                         android:layout_width="140dp"
                         android:layout_height="50dp"
                         android:layout_marginRight="10dp"
@@ -106,7 +106,7 @@
                     android:layout_centerHorizontal="true">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/etMinStokProduk"
+                        android:id="@+id/etMinStokProdukUpdate"
                         android:layout_width="140dp"
                         android:layout_height="50dp"
                         android:hint="Min Stok"
@@ -122,49 +122,50 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="25dp"
                 android:orientation="horizontal"
-                android:id="@+id/layoutgambar">
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="#EEEEEE"
-                        android:elevation="1dp"
-                        android:padding="10dp">
-                        <TextView
-                            android:id="@+id/etGambar"
-                            android:layout_width="190dp"
-                            android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
-                            android:layout_marginRight="5dp"
-                            android:textSize="17dp"
-                            android:inputType="textMultiLine"
-                            android:text="Ketuk untuk mengambil gambar!">
-                        </TextView>
-                        <ImageView
-                            android:id="@+id/addGambarProduk"
-                            android:layout_width="100dp"
-                            android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
-                            android:layout_toRightOf="@+id/etGambar"
-                            android:maxHeight="100dp"
-                            android:layout_marginLeft="5dp"
-                            android:src="@drawable/default_image_foreground">
-                        </ImageView>
-                    </RelativeLayout>
+                android:id="@+id/layoutgambarUpdate">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#EEEEEE"
+                    android:elevation="1dp"
+                    android:padding="10dp">
+                    <TextView
+                        android:id="@+id/etGambarUpdate"
+                        android:layout_width="190dp"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="5dp"
+                        android:textSize="17dp"
+                        android:inputType="textMultiLine"
+                        android:text="Ketuk untuk mengambil gambar!">
+                    </TextView>
+                    <ImageView
+                        android:id="@+id/addGambarProdukUpdate"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@+id/etGambarUpdate"
+                        android:maxHeight="100dp"
+                        android:layout_marginLeft="5dp"
+                        android:src="@drawable/default_image_foreground">
+                    </ImageView>
+                </RelativeLayout>
             </LinearLayout>
 
             <Button
                 android:layout_width="200dp"
                 android:layout_height="50dp"
                 android:layout_centerHorizontal="true"
-                android:layout_below="@+id/layoutgambar"
+                android:layout_below="@+id/layoutgambarUpdate"
                 android:layout_marginTop="50dp"
                 android:layout_marginBottom="70dp"
                 android:background="@drawable/custom_round_button"
                 android:backgroundTint="@color/colorAccentBeige"
-                android:text="Tambah"
+                android:text="Update"
                 android:textSize="17sp"
-                android:id="@+id/btnTambahProduk"
+                android:id="@+id/btnUpdateProduk"
                 android:textAllCaps="false"/>
+
         </RelativeLayout>
     </androidx.core.widget.NestedScrollView>
 

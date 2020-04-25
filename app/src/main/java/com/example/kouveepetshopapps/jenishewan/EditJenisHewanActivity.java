@@ -65,7 +65,7 @@ public class EditJenisHewanActivity extends AppCompatActivity {
         });
     }
 
-    public void sharedPreferences(){
+    private void sharedPreferences(){
         loggedUser = getSharedPreferences("logged_user", Context.MODE_PRIVATE);
         Gson gson = new Gson();
         String json = loggedUser.getString("user", "missing");
@@ -73,11 +73,11 @@ public class EditJenisHewanActivity extends AppCompatActivity {
         System.out.println(json);
     }
 
-    public void setAtribut(){
+    private void setAtribut(){
         namaUpdate = (EditText) findViewById(R.id.etNamaJenisHewanUpdate);
     }
 
-    public void setText(){
+    private void setText(){
         namaUpdate.setText(getIntent().getStringExtra("nama"));
         //id = getIntent().getStringExtra("id_jenis_hewan");
         //id = getIntent().getExtras().getInt("id_jenis_hewan");

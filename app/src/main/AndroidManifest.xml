@@ -45,6 +45,7 @@
         </activity>
         <activity android:name=".adapter.TambahLayananAdapter" />
         <activity android:name=".layanan.TambahLayananActivity" />
+        <activity android:name=".layanan.EditLayananActivity" />
         <activity android:name=".adapter.HargaLayananAdapter" />
         <activity android:name=".layanan.TampilDetailLayananActivity" />
         <activity android:name=".adapter.LayananAdapter" />
@@ -58,6 +59,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".produk.TambahProdukActivity" />
+        <activity android:name=".produk.EditProdukActivity" />
         <activity android:name=".produk.TampilDetailProdukActivity" />
         <activity android:name=".produk.ListProdukActivity">
             <meta-data
@@ -69,6 +71,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".hewan.TambahHewanActivity" />
+        <activity android:name=".hewan.EditHewanActivity" />
         <activity android:name=".hewan.TampilDetailHewanFragment" />
         <activity android:name=".jenishewan.ListJenisHewanActivity">
             <meta-data
@@ -109,6 +112,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".pelanggan.TambahPelangganActivity" />
+        <activity android:name=".pelanggan.EditPelangganActivity" />
         <activity android:name=".pelanggan.TampilDetailPelangganFragment" />
         <activity android:name=".adapter.PelangganAdapter" />
         <activity android:name=".pelanggan.ListPelangganFragment" />
