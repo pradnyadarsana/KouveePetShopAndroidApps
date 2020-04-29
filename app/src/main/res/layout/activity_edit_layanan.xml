@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".produk.TambahProdukActivity">
+    tools:context=".layanan.EditLayananActivity">
 
     <androidx.core.widget.NestedScrollView
         android:layout_height="match_parent"
@@ -63,7 +63,7 @@
                 android:id="@+id/updateLayananLayout"
                 tools:context=".layanan.EditLayananActivity">
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recycler_view_tambah_layanan"
+                    android:id="@+id/recycler_view_edit_layanan"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:layout_constraintEnd_toEndOf="parent"

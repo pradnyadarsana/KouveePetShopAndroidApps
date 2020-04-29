@@ -60,10 +60,13 @@ public class EditHewanActivity extends AppCompatActivity{
     String TAG = "EditHewanActivity";
     private Button btnUpdate;
     String tanggal_lahir_temp;
+    String nama_jenis_hewan;
+    String nama_pelanggan;
+
+    private HewanDAO hewan;
 
     SharedPreferences loggedUser;
     PegawaiDAO pegawai;
-    JenisHewanDAO jenis;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,12 +81,10 @@ public class EditHewanActivity extends AppCompatActivity{
         Gson gson = new Gson();
         String json = getIntent().getStringExtra("hewan");
         System.out.println(json);
-        final HewanDAO hewan = gson.fromJson(json, HewanDAO.class);
+        hewan = gson.fromJson(json, HewanDAO.class);
 
-        Gson gs = new Gson();
-        String js = getIntent().getStringExtra("nama_jenis_hewan");
-        System.out.println(js);
-        final HewanDAO jenisH = gs.fromJson(js, HewanDAO.class);
+        nama_jenis_hewan = getIntent().getStringExtra("nama_jenis_hewan");
+        nama_pelanggan = getIntent().getStringExtra("nama_pelanggan");
 
         setAtribut();
         setText(hewan);
@@ -149,9 +150,13 @@ public class EditHewanActivity extends AppCompatActivity{
                 ListJenisHewan.addAll(response.body().getListDataJenisHewan());
                 System.out.println(ListJenisHewan.get(0).getNama());
                 String[] arrName = new String[ListJenisHewan.size()];
+                int pos = 0;
                 int i = 0;
                 for (JenisHewanDAO jenis: ListJenisHewan
                 ) {
+                    if(jenis.getId_jenis_hewan()==hewan.getId_jenis_hewan()){
+                        pos=i;
+                    }
                     arrName[i] = jenis.getNama();
                     i++;
                 }
@@ -160,7 +165,7 @@ public class EditHewanActivity extends AppCompatActivity{
                 ArrayAdapter<String> adapter = new ArrayAdapter<>
                         (EditHewanActivity.this, android.R.layout.simple_spinner_dropdown_item, arrName);
                 jenis_hewan.setAdapter(adapter);//setting the adapter data into the AutoCompleteTextView
-
+                jenis_hewan.setSelection(pos);
                 //Toast.makeText(getActivity(), "Sukses ", Toast.LENGTH_SHORT).show();
             }
 
@@ -194,7 +199,7 @@ public class EditHewanActivity extends AppCompatActivity{
                         (EditHewanActivity.this, android.R.layout.select_dialog_item, arrName);
 
                 nama_pemilik.setAdapter(adapter);//setting the adapter data into the AutoCompleteTextView
-
+                nama_pemilik.setText(nama_pelanggan);
                 //Toast.makeText(getActivity(), "Sukses ", Toast.LENGTH_SHORT).show();
             }
 

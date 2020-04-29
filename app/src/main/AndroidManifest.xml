@@ -13,7 +13,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".adapter.AutoCompleteHargaLayananAdapter"></activity>
+        <activity android:name=".adapter.EditLayananAdapter"></activity>
+        <activity android:name=".adapter.AutoCompleteHargaLayananAdapter" />
         <activity android:name=".adapter.EditTransaksiLayananAdapter" />
         <activity android:name=".adapter.DetailTransaksiLayananAdapter" />
         <activity android:name=".adapter.TambahTransaksiLayananAdapter" />

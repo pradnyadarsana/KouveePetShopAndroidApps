@@ -36,6 +36,10 @@ import com.example.kouveepetshopapps.response.PostUpdateDelete;
 import com.google.gson.Gson;
 
 import java.io.File;
+import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -68,6 +72,9 @@ public class EditProdukActivity extends AppCompatActivity {
 
     SharedPreferences loggedUser;
     PegawaiDAO admin;
+
+    public boolean isOnlineImage=true;
+    URL url = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -149,6 +156,19 @@ public class EditProdukActivity extends AppCompatActivity {
         hargaUpdate.setText(String.valueOf(produk.getHarga()));
         jumlah_stokUpdate.setText(String.valueOf(produk.getJumlah_stok()));
         min_stokUpdate.setText(String.valueOf(produk.getMin_stok()));
+
+        String photo_url = "http://kouveepetshopapi.smithdev.xyz/upload/produk/"+produk.getGambar();
+        System.out.println(photo_url);
+        Glide.with(EditProdukActivity.this).load(photo_url).into(gambarUpdate);
+
+        try {
+            url = new URL(photo_url);
+            System.out.println("URL : "+url);
+            imageUriUpdate = url.getPath();
+            isOnlineImage=true;
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
     }
 
     // Function to check and request permission
@@ -221,6 +241,7 @@ public class EditProdukActivity extends AppCompatActivity {
                                 int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
                                 String picturePath = cursor.getString(columnIndex);
                                 imageUriUpdate = picturePath;
+                                isOnlineImage=false;
                                 System.out.println(imageUriUpdate);
                                 gambarUpdate.setImageBitmap(BitmapFactory.decodeFile(picturePath));
                                 cursor.close();
@@ -241,7 +262,13 @@ public class EditProdukActivity extends AppCompatActivity {
 
     public void updateProduk(ProdukDAO hasil){
         //Create a file object using file path
-        File file = new File(imageUriUpdate);
+        File file;
+        if (isOnlineImage){
+            file = new File(url.getFile());
+        }else{
+            file = new File(imageUriUpdate);
+        }
+
         // Create a request body with file and image media type
         RequestBody fileReqBody = RequestBody.create(MediaType.parse("image/*"), file);
         // Create MultipartBody.Part using file request-body,file name and part name

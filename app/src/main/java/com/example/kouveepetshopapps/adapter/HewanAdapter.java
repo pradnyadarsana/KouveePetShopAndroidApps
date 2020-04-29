@@ -89,7 +89,7 @@ public class HewanAdapter extends RecyclerView.Adapter<HewanAdapter.MyViewHolder
         holder.parent.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
-                showDialog(hewan, position);
+                showDialog(hewan, holder, position);
                 return false;
             }
         });
@@ -175,7 +175,7 @@ public class HewanAdapter extends RecyclerView.Adapter<HewanAdapter.MyViewHolder
         }
     }
 
-    private void showDialog(final HewanDAO hasil, final int position){
+    private void showDialog(final HewanDAO hasil, final MyViewHolder holder, final int position){
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
 
         // set title dialog
@@ -191,7 +191,7 @@ public class HewanAdapter extends RecyclerView.Adapter<HewanAdapter.MyViewHolder
                     case 0:
                         // update report
                         //startIntent(hasil);
-                        startIntent(hasil, EditHewanActivity.class);
+                        startIntent(hasil, EditHewanActivity.class, holder);
                         break;
                     case 1:
                         //delete report
@@ -211,11 +211,13 @@ public class HewanAdapter extends RecyclerView.Adapter<HewanAdapter.MyViewHolder
         alertDialog.show();
     }
 
-    private void startIntent(HewanDAO hasil, Class nextView){
+    private void startIntent(HewanDAO hasil, Class nextView, MyViewHolder holder){
         Intent view = new Intent(context, nextView);
         Gson gson = new Gson();
         String json = gson.toJson(hasil);
         view.putExtra("hewan", json);
+        view.putExtra("nama_jenis_hewan",holder.nama_jenis_hewan.getText().toString());
+        view.putExtra("nama_pelanggan",holder.nama_pemilik.getText().toString());
         view.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(view);
     }

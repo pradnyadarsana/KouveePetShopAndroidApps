@@ -214,11 +214,13 @@ public interface ApiInterfaceAdmin {
     @GET("hargaLayanan/searchByIdLayanan/{id_layanan}")
     Call<GetHargaLayanan> searchHargaLayananByIdLayanan(@Path("id_layanan")String id_layanan);
 
-    @POST("hargaLayanan/update/{id_layanan}")
+    @POST("hargaLayanan/update/{id_harga_layanan}")
     @FormUrlEncoded
     Call<PostUpdateDelete> ubahHargaLayanan(@Path("id_harga_layanan") String id_harga_layanan,
-                                       @Field("harga")String harga,
-                                       @Field("modified_by")String modified_by);
+                                            @Field("id_layanan")String id_layanan,
+                                            @Field("id_ukuran_hewan")String id_ukuran_hewan,
+                                            @Field("harga")String harga,
+                                            @Field("modified_by")String modified_by);
 
     @POST("hargaLayanan/delete/{id_layanan}")
     @FormUrlEncoded

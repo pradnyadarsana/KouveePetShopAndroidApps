@@ -89,8 +89,10 @@ public class DetailTransaksiLayananAdapter extends RecyclerView.Adapter<DetailTr
             @Override
             public void onResponse(Call<SearchHargaLayanan> call, Response<SearchHargaLayanan> response) {
                 HargaLayananDAO harga_layanan = response.body().getHarga_layanan();
-                searchLayanan(holder,harga_layanan.getId_layanan());
-                searchUkuranHewan(holder,harga_layanan.getId_ukuran_hewan());
+                if(harga_layanan!=null){
+                    searchLayanan(holder,harga_layanan.getId_layanan());
+                    searchUkuranHewan(holder,harga_layanan.getId_ukuran_hewan());
+                }
                 holder.binding.setHargaLayanan(harga_layanan);
             }
             @Override

@@ -283,7 +283,8 @@ public class TampilDetailTransaksiLayananActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<PostUpdateDelete> call, Throwable t) {
-
+                t.printStackTrace();
+                System.out.println("gagal update");
             }
         });
     }

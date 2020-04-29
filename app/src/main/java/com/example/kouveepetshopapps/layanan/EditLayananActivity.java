@@ -18,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.kouveepetshopapps.R;
+import com.example.kouveepetshopapps.adapter.EditLayananAdapter;
 import com.example.kouveepetshopapps.adapter.TambahLayananAdapter;
 import com.example.kouveepetshopapps.adapter.UkuranHewanAdapter;
 import com.example.kouveepetshopapps.api.ApiClient;
@@ -26,8 +27,10 @@ import com.example.kouveepetshopapps.model.HargaLayananDAO;
 import com.example.kouveepetshopapps.model.LayananDAO;
 import com.example.kouveepetshopapps.model.PegawaiDAO;
 import com.example.kouveepetshopapps.model.UkuranHewanDAO;
+import com.example.kouveepetshopapps.response.GetHargaLayanan;
 import com.example.kouveepetshopapps.response.GetUkuranHewan;
 import com.example.kouveepetshopapps.response.PostUpdateDelete;
+import com.example.kouveepetshopapps.response.SearchHargaLayanan;
 import com.example.kouveepetshopapps.ukuran_hewan.ListUkuranHewanActivity;
 import com.example.kouveepetshopapps.ukuran_hewan.TambahUkuranHewanActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -48,13 +51,15 @@ public class EditLayananActivity extends AppCompatActivity{
     private TextInputEditText namaUpdate;
     private Button btnUpdateLayanan;
 
-    private List<UkuranHewanDAO> ListUkuranHewan;
+    private List<HargaLayananDAO> ListHargaLayanan;
     private RecyclerView recyclerUkuranHewan;
-    private TambahLayananAdapter adapterUkuranHewan;
+    private EditLayananAdapter adapterUkuranHewan;
     private RecyclerView.LayoutManager mLayoutManager;
 
     SharedPreferences loggedUser;
     PegawaiDAO admin;
+
+    LayananDAO layanan;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,7 +71,7 @@ public class EditLayananActivity extends AppCompatActivity{
         Gson gson = new Gson();
         String json = getIntent().getStringExtra("layanan");
         System.out.println(json);
-        final LayananDAO layanan = gson.fromJson(json, LayananDAO.class);
+        layanan = gson.fromJson(json, LayananDAO.class);
 
         setAtribut();
         setText(layanan);
@@ -98,9 +103,9 @@ public class EditLayananActivity extends AppCompatActivity{
         btnUpdateLayanan = findViewById(R.id.btnUpdateLayanan);
 
         //recyclerview
-        recyclerUkuranHewan = findViewById(R.id.recycler_view_tambah_layanan);
-        ListUkuranHewan = new ArrayList<>();
-        adapterUkuranHewan = new TambahLayananAdapter(EditLayananActivity.this, ListUkuranHewan);
+        recyclerUkuranHewan = findViewById(R.id.recycler_view_edit_layanan);
+        ListHargaLayanan = new ArrayList<>();
+        adapterUkuranHewan = new EditLayananAdapter(EditLayananActivity.this, ListHargaLayanan);
         mLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerUkuranHewan.setLayoutManager(mLayoutManager);
         recyclerUkuranHewan.setItemAnimator(new DefaultItemAnimator());
@@ -115,19 +120,19 @@ public class EditLayananActivity extends AppCompatActivity{
 
     public void setRecycleView(){
         ApiInterfaceAdmin apiService = ApiClient.getClient().create(ApiInterfaceAdmin.class);
-        Call<GetUkuranHewan> ukuranHewanDAOCall = apiService.getAllUkuranHewanAktif();
+        Call<GetHargaLayanan> hargaLayananDAOCall = apiService.searchHargaLayananByIdLayanan(String.valueOf(layanan.getId_layanan()));
 
-        ukuranHewanDAOCall.enqueue(new Callback<GetUkuranHewan>() {
+        hargaLayananDAOCall.enqueue(new Callback<GetHargaLayanan>() {
             @Override
-            public void onResponse(Call<GetUkuranHewan> call, Response<GetUkuranHewan> response) {
-                ListUkuranHewan.addAll(response.body().getListDataUkuranHewan());
-                System.out.println(ListUkuranHewan.get(0).getNama());
+            public void onResponse(Call<GetHargaLayanan> call, Response<GetHargaLayanan> response) {
+                ListHargaLayanan.addAll(response.body().getListDataHargaLayanan());
+                System.out.println(ListHargaLayanan.get(0).getHarga());
                 adapterUkuranHewan.notifyDataSetChanged();
 //                Toast.makeText(getActivity(), "Welcome", Toast.LENGTH_SHORT).show();
             }
 
             @Override
-            public void onFailure(Call<GetUkuranHewan> call, Throwable t) {
+            public void onFailure(Call<GetHargaLayanan> call, Throwable t) {
                 Toast.makeText(EditLayananActivity.this, "Gagal menampilkan Ukuran Hewan", Toast.LENGTH_SHORT).show();
             }
         });
@@ -149,10 +154,10 @@ public class EditLayananActivity extends AppCompatActivity{
             public void onResponse(Call<PostUpdateDelete> call, Response<PostUpdateDelete> response) {
                 final String id_layanan = response.body().getMessage();
 
-                Gson gson = new Gson();
-                String json = getIntent().getStringExtra("layanan");
-                System.out.println(json);
-                final LayananDAO layanan = gson.fromJson(json, LayananDAO.class);
+//                Gson gson = new Gson();
+//                String json = getIntent().getStringExtra("layanan");
+//                System.out.println(json);
+//                final LayananDAO layanan = gson.fromJson(json, LayananDAO.class);
 
                 System.out.println("response message: "+id_layanan);
                 System.out.println("child count: "+recyclerUkuranHewan.getChildCount());
@@ -161,27 +166,29 @@ public class EditLayananActivity extends AppCompatActivity{
                 //get text from adapter
                 for(int i=0;i<recyclerUkuranHewan.getChildCount();i++)
                 {
-                    final TextView id_ukuran_hewan = recyclerUkuranHewan.findViewHolderForAdapterPosition(i).itemView.findViewById(R.id.tvIdTambahLayanan);
-                    final EditText harga = recyclerUkuranHewan.findViewHolderForAdapterPosition(i).itemView.findViewById(R.id.etHargaLayanan);
+                    final TextView id_harga_layanan = recyclerUkuranHewan.findViewHolderForAdapterPosition(i).itemView.findViewById(R.id.tvIdEditLayanan);
+                    final TextView id_layanan_edit = recyclerUkuranHewan.findViewHolderForAdapterPosition(i).itemView.findViewById(R.id.tvIdLayananEditLayanan);
+                    final TextView id_ukuran = recyclerUkuranHewan.findViewHolderForAdapterPosition(i).itemView.findViewById(R.id.tvIdUkuranEditLayanan);
+                    final EditText harga = recyclerUkuranHewan.findViewHolderForAdapterPosition(i).itemView.findViewById(R.id.etEditHargaLayanan);
 
+                    System.out.println(id_harga_layanan +"harga: "+harga);
                     ApiInterfaceAdmin apiService = ApiClient.getClient().create(ApiInterfaceAdmin.class);
-                    Call<PostUpdateDelete> hargalayananDAOCall = apiService.tambahHargaLayanan(Integer.toString(hasil.getId_layanan()),
-                            id_ukuran_hewan.getText().toString(), harga.getText().toString(), admin.getUsername());
+                    Call<PostUpdateDelete> hargalayananDAOCall = apiService.ubahHargaLayanan(String.valueOf(id_harga_layanan),
+                            id_layanan_edit.getText().toString(), id_ukuran.getText().toString(), harga.getText().toString(), admin.getUsername());
                     hargalayananDAOCall.enqueue(new Callback<PostUpdateDelete>() {
                         @Override
                         public void onResponse(Call<PostUpdateDelete> call, Response<PostUpdateDelete> response) {
                             //Toast.makeText(TambahLayananActivity.this, "Sukses menambahkan harga layanan", Toast.LENGTH_SHORT).show();
                             System.out.println("sukses update harga layanan id ukuran: "+
-                                    id_ukuran_hewan.getText().toString()+" "+harga.getText().toString());
+                                    id_harga_layanan.getText().toString()+" "+harga.getText().toString());
+
                         }
 
                         @Override
                         public void onFailure(Call<PostUpdateDelete> call, Throwable t) {
                             //Toast.makeText(TambahLayananActivity.this, "Gagal menambahkan harga layanan", Toast.LENGTH_SHORT).show();
                             System.out.println("gagal update harga layanan id ukuran: "+
-                                    id_ukuran_hewan.getText().toString()+" "+harga.getText().toString());
-                            deletePermanentLayanan(layanan);
-                            deletePermanentHargaLayanan(layanan);
+                                    id_harga_layanan.getText().toString()+" "+harga.getText().toString());
                         }
                     });
                 }
@@ -220,43 +227,5 @@ public class EditLayananActivity extends AppCompatActivity{
 
         // menampilkan alert dialog
         alertDialog.show();
-    }
-
-    private void deletePermanentLayanan(LayananDAO hasil) {
-        ApiInterfaceAdmin apiService = ApiClient.getClient().create(ApiInterfaceAdmin.class);
-        Call<PostUpdateDelete> layananDAOCall = apiService.hapusPermanentLayanan(Integer.toString(hasil.getId_layanan()));
-
-        layananDAOCall.enqueue(new Callback<PostUpdateDelete>() {
-            @Override
-            public void onResponse(Call<PostUpdateDelete> call, Response<PostUpdateDelete> response) {
-                //reverse close
-                System.out.println(response.body().getMessage());
-                System.out.println("sukses menghapus layanan");
-            }
-
-            @Override
-            public void onFailure(Call<PostUpdateDelete> call, Throwable t) {
-                System.out.println("gagal menghapus layanan");
-            }
-        });
-    }
-
-    private void deletePermanentHargaLayanan(LayananDAO hasil) {
-        ApiInterfaceAdmin apiService = ApiClient.getClient().create(ApiInterfaceAdmin.class);
-        Call<PostUpdateDelete> hargalayananDAOCall = apiService.hapusPermanentHargaLayanan(Integer.toString(hasil.getId_layanan()));
-
-        hargalayananDAOCall.enqueue(new Callback<PostUpdateDelete>() {
-            @Override
-            public void onResponse(Call<PostUpdateDelete> call, Response<PostUpdateDelete> response) {
-                //reverse close
-                System.out.println(response.body().getMessage());
-                System.out.println("sukses menghapus harga layanan");
-            }
-
-            @Override
-            public void onFailure(Call<PostUpdateDelete> call, Throwable t) {
-                System.out.println("gagal menghapus harga layanan");
-            }
-        });
     }
 }
