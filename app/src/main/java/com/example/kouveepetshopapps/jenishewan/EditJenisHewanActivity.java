@@ -6,9 +6,12 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -48,9 +51,8 @@ public class EditJenisHewanActivity extends AppCompatActivity {
         final JenisHewanDAO jenis_hewan = gson.fromJson(json, JenisHewanDAO.class);
 
         setAtribut();
-        setText();
+        setText(jenis_hewan);
 
-        btnUpdate = (Button) findViewById(R.id.btnUpdateJenisHewan);
         btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -75,13 +77,12 @@ public class EditJenisHewanActivity extends AppCompatActivity {
 
     private void setAtribut(){
         namaUpdate = (EditText) findViewById(R.id.etNamaJenisHewanUpdate);
+        btnUpdate = (Button) findViewById(R.id.btnUpdateJenisHewan);
     }
 
-    private void setText(){
+    private void setText(JenisHewanDAO jenis_hewan){
         namaUpdate.setText(getIntent().getStringExtra("nama"));
-        //id = getIntent().getStringExtra("id_jenis_hewan");
-        //id = getIntent().getExtras().getInt("id_jenis_hewan");
-        //idj = String.valueOf(id);
+        namaUpdate.setText(jenis_hewan.getNama());
     }
 
     private void startIntent(){

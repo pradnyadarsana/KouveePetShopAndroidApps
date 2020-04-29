@@ -60,7 +60,7 @@ public class EditPelangganActivity extends AppCompatActivity{
         final PelangganDAO pelanggan = gson.fromJson(json, PelangganDAO.class);
 
         setAtribut();
-        setText();
+        setText(pelanggan);
 
         btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,10 +100,16 @@ public class EditPelangganActivity extends AppCompatActivity{
         btnUpdate = (Button) findViewById(R.id.btnUpdatePelanggan);
     }
 
-    private void setText(){
+    private void setText(PelangganDAO pelanggan){
         namaUpdate.setText(getIntent().getStringExtra("nama"));
         telpUpdate.setText(getIntent().getStringExtra("telp"));
         alamatUpdate.setText(getIntent().getStringExtra("alamat"));
+        tanggal_lahir.setText(getIntent().getStringExtra("tanggal_lahir"));
+
+        namaUpdate.setText(pelanggan.getNama());
+        telpUpdate.setText(pelanggan.getTelp());
+        alamatUpdate.setText(pelanggan.getAlamat());
+        tanggal_lahir.setText(pelanggan.getTanggal_lahir());
     }
 
     public void datepicker()

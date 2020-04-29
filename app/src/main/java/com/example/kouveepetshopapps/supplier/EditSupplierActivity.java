@@ -50,8 +50,8 @@ public class EditSupplierActivity extends AppCompatActivity {
         System.out.println(json);
         final SupplierDAO supplier = gson.fromJson(json, SupplierDAO.class);
 
-        setAtribut();
-        setText();
+        setAtribut(supplier);
+        setText(supplier);
 
         btnUpdate = (Button) findViewById(R.id.btnUpdateSupplier);
         btnUpdate.setOnClickListener(new View.OnClickListener() {
@@ -82,16 +82,20 @@ public class EditSupplierActivity extends AppCompatActivity {
         System.out.println(json);
     }
 
-    private void setAtribut(){
+    private void setAtribut(SupplierDAO supplier){
         namaUpdate = (EditText) findViewById(R.id.etNamaSupplierUpdate);
         tlpUpdate = (EditText) findViewById(R.id.etTelpSupplierUpdate);
         alamatUpdate = (EditText) findViewById(R.id.etAlamatSupplierUpdate);
     }
 
-    private void setText(){
+    private void setText(SupplierDAO supplier){
         namaUpdate.setText(getIntent().getStringExtra("nama"));
         tlpUpdate.setText(getIntent().getStringExtra("telp"));
         alamatUpdate.setText(getIntent().getStringExtra("alamat"));
+
+        namaUpdate.setText(supplier.getNama());
+        tlpUpdate.setText(supplier.getTelp());
+        alamatUpdate.setText(supplier.getAlamat());
     }
 
     private void startIntent(){

@@ -1,4 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<layout>
+    <data>
+        <variable
+            name="supplier"
+            type="com.example.kouveepetshopapps.model.SupplierDAO" />
+    </data>
+
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
@@ -96,3 +104,4 @@
         </RelativeLayout>
     </androidx.core.widget.NestedScrollView>
 </RelativeLayout>
+</layout>

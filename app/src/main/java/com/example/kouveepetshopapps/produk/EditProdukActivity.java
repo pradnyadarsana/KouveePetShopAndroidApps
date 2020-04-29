@@ -82,7 +82,7 @@ public class EditProdukActivity extends AppCompatActivity {
         final ProdukDAO produk = gson.fromJson(json, ProdukDAO.class);
 
         setAtribut();
-        setText();
+        setText(produk);
 
         btnAmbilGambar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -136,17 +136,19 @@ public class EditProdukActivity extends AppCompatActivity {
         desc_gambarUpdate = findViewById(R.id.etGambarUpdate);
         gambarUpdate = findViewById(R.id.addGambarProdukUpdate);
         btnAmbilGambar = findViewById(R.id.layoutgambarUpdate);
-
         btnUpdateProduk = findViewById(R.id.btnUpdateProduk);
     }
 
-    private void setText(){
+    private void setText(ProdukDAO produk){
         namaUpdate.setText(getIntent().getStringExtra("nama"));
         satuanUpdate.setText(getIntent().getStringExtra("satuan"));
-        jumlah_stokUpdate.setText(getIntent().getStringExtra("jumlah_stok"));
-        hargaUpdate.setText(getIntent().getStringExtra("harga"));
-        min_stokUpdate.setText(getIntent().getStringExtra("min_stok"));
 
+
+        namaUpdate.setText(produk.getNama());
+        satuanUpdate.setText(produk.getSatuan());
+        hargaUpdate.setText(String.valueOf(produk.getHarga()));
+        jumlah_stokUpdate.setText(String.valueOf(produk.getJumlah_stok()));
+        min_stokUpdate.setText(String.valueOf(produk.getMin_stok()));
     }
 
     // Function to check and request permission

@@ -48,7 +48,7 @@ public class EditUkuranHewanActivity extends AppCompatActivity {
         final UkuranHewanDAO ukuran_hewan = gson.fromJson(json, UkuranHewanDAO.class);
 
         setAtribut();
-        setText();
+        setText(ukuran_hewan);
 
         btnUpdate = (Button) findViewById(R.id.btnUpdateUkuranHewan);
         btnUpdate.setOnClickListener(new View.OnClickListener() {
@@ -77,8 +77,9 @@ public class EditUkuranHewanActivity extends AppCompatActivity {
         ukuranUpdate = (EditText) findViewById(R.id.etNamaUkuranHewanUpdate);
     }
 
-    private void setText(){
+    private void setText(UkuranHewanDAO ukuran_hewan){
         ukuranUpdate.setText(getIntent().getStringExtra("nama"));
+        ukuranUpdate.setText(ukuran_hewan.getNama());
     }
 
     private void startIntent(){

@@ -69,7 +69,7 @@ public class EditLayananActivity extends AppCompatActivity{
         final LayananDAO layanan = gson.fromJson(json, LayananDAO.class);
 
         setAtribut();
-        setText();
+        setText(layanan);
 
         btnUpdateLayanan.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -108,8 +108,9 @@ public class EditLayananActivity extends AppCompatActivity{
         setRecycleView();
     }
 
-    private void setText(){
+    private void setText(LayananDAO layanan){
         namaUpdate.setText(getIntent().getStringExtra("nama"));
+        namaUpdate.setText(layanan.getNama());
     }
 
     public void setRecycleView(){

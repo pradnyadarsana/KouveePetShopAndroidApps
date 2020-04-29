@@ -26,6 +26,7 @@ import com.example.kouveepetshopapps.R;
 import com.example.kouveepetshopapps.api.ApiClient;
 import com.example.kouveepetshopapps.api.ApiInterfaceAdmin;
 import com.example.kouveepetshopapps.api.ApiInterfaceCS;
+import com.example.kouveepetshopapps.jenishewan.ListJenisHewanActivity;
 import com.example.kouveepetshopapps.model.HewanDAO;
 import com.example.kouveepetshopapps.model.JenisHewanDAO;
 import com.example.kouveepetshopapps.model.PegawaiDAO;
@@ -62,6 +63,7 @@ public class EditHewanActivity extends AppCompatActivity{
 
     SharedPreferences loggedUser;
     PegawaiDAO pegawai;
+    JenisHewanDAO jenis;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,13 +80,18 @@ public class EditHewanActivity extends AppCompatActivity{
         System.out.println(json);
         final HewanDAO hewan = gson.fromJson(json, HewanDAO.class);
 
+        Gson gs = new Gson();
+        String js = getIntent().getStringExtra("nama_jenis_hewan");
+        System.out.println(js);
+        final HewanDAO jenisH = gs.fromJson(js, HewanDAO.class);
+
         setAtribut();
-        setText();
+        setText(hewan);
 
         getListJenisHewan();
         getListPelanggan();
 
-        tanggal_lahir = (TextView) findViewById(R.id.etTanggalLahirHewan);
+
         datepicker();
         btnUpdate = (Button) findViewById(R.id.btnUpdateHewan);
 
@@ -119,13 +126,17 @@ public class EditHewanActivity extends AppCompatActivity{
     private void setAtribut(){
         namaUpdate = findViewById(R.id.etNamaHewanUpdate);
         jenis_hewan = findViewById(R.id.spinJenisHewan);
+        tanggal_lahir = (TextView) findViewById(R.id.etTanggalLahirHewan);
         //Getting the instance of AutoCompleteTextView
         nama_pemilik = (AutoCompleteTextView) findViewById(R.id.etNamaPemilik);
         nama_pemilik.setThreshold(1);//will start working from first character
     }
 
-    private void setText(){
+    public void setText(HewanDAO hewan){
         namaUpdate.setText(getIntent().getStringExtra("nama"));
+        tanggal_lahir.setText(getIntent().getStringExtra("tanggal_lahir"));
+        namaUpdate.setText(hewan.getNama());
+        tanggal_lahir.setText(hewan.getTanggal_lahir());
     }
 
     public void getListJenisHewan(){
@@ -159,6 +170,7 @@ public class EditHewanActivity extends AppCompatActivity{
             }
         });
     }
+
 
     public void getListPelanggan(){
         ApiInterfaceCS apiService = ApiClient.getClient().create(ApiInterfaceCS.class);
