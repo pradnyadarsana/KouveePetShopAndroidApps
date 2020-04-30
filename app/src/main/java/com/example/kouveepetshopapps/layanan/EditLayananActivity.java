@@ -148,20 +148,10 @@ public class EditLayananActivity extends AppCompatActivity{
         ApiInterfaceAdmin apiService = ApiClient.getClient().create(ApiInterfaceAdmin.class);
         Call<PostUpdateDelete> layananDAOCall = apiService.ubahLayanan(Integer.toString(hasil.getId_layanan()),namaUpdate.getText().toString(),
                 admin.getUsername());
-
         layananDAOCall.enqueue(new Callback<PostUpdateDelete>() {
             @Override
             public void onResponse(Call<PostUpdateDelete> call, Response<PostUpdateDelete> response) {
-                final String id_layanan = response.body().getMessage();
-
-//                Gson gson = new Gson();
-//                String json = getIntent().getStringExtra("layanan");
-//                System.out.println(json);
-//                final LayananDAO layanan = gson.fromJson(json, LayananDAO.class);
-
-                System.out.println("response message: "+id_layanan);
                 System.out.println("child count: "+recyclerUkuranHewan.getChildCount());
-
 
                 //get text from adapter
                 for(int i=0;i<recyclerUkuranHewan.getChildCount();i++)
@@ -171,22 +161,18 @@ public class EditLayananActivity extends AppCompatActivity{
                     final TextView id_ukuran = recyclerUkuranHewan.findViewHolderForAdapterPosition(i).itemView.findViewById(R.id.tvIdUkuranEditLayanan);
                     final EditText harga = recyclerUkuranHewan.findViewHolderForAdapterPosition(i).itemView.findViewById(R.id.etEditHargaLayanan);
 
-                    System.out.println(id_harga_layanan +"harga: "+harga);
                     ApiInterfaceAdmin apiService = ApiClient.getClient().create(ApiInterfaceAdmin.class);
-                    Call<PostUpdateDelete> hargalayananDAOCall = apiService.ubahHargaLayanan(String.valueOf(id_harga_layanan),
+                    Call<PostUpdateDelete> hargalayananDAOCall = apiService.ubahHargaLayanan(id_harga_layanan.getText().toString(),
                             id_layanan_edit.getText().toString(), id_ukuran.getText().toString(), harga.getText().toString(), admin.getUsername());
                     hargalayananDAOCall.enqueue(new Callback<PostUpdateDelete>() {
                         @Override
                         public void onResponse(Call<PostUpdateDelete> call, Response<PostUpdateDelete> response) {
-                            //Toast.makeText(TambahLayananActivity.this, "Sukses menambahkan harga layanan", Toast.LENGTH_SHORT).show();
                             System.out.println("sukses update harga layanan id ukuran: "+
                                     id_harga_layanan.getText().toString()+" "+harga.getText().toString());
-
                         }
 
                         @Override
                         public void onFailure(Call<PostUpdateDelete> call, Throwable t) {
-                            //Toast.makeText(TambahLayananActivity.this, "Gagal menambahkan harga layanan", Toast.LENGTH_SHORT).show();
                             System.out.println("gagal update harga layanan id ukuran: "+
                                     id_harga_layanan.getText().toString()+" "+harga.getText().toString());
                         }
