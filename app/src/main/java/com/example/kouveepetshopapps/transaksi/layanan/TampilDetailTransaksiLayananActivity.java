@@ -271,7 +271,7 @@ public class TampilDetailTransaksiLayananActivity extends AppCompatActivity {
         transaksiLayananDAOCall.enqueue(new Callback<PostUpdateDelete>() {
             @Override
             public void onResponse(Call<PostUpdateDelete> call, Response<PostUpdateDelete> response) {
-                System.out.println(response.body().getMessage());
+                //System.out.println(response.body().getMessage());
                 Toast.makeText(TampilDetailTransaksiLayananActivity.this, "Progress berhasil diperbaharui", Toast.LENGTH_SHORT).show();
                 Intent back = new Intent(TampilDetailTransaksiLayananActivity.this, CsMainMenu.class);
                 back.putExtra("from","transaksi");

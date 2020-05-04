@@ -106,7 +106,7 @@ public class ListLayananActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<GetLayanan> call, Response<GetLayanan> response) {
                 ListLayanan.addAll(response.body().getListDataLayanan());
-                System.out.println(ListLayanan.get(0).getNama());
+//                System.out.println(ListLayanan.get(0).getNama());
                 adapterLayanan.notifyDataSetChanged();
 
 //                Toast.makeText(getActivity(), "Welcome", Toast.LENGTH_SHORT).show();

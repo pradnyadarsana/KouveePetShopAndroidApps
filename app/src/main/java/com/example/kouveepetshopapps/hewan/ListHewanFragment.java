@@ -105,7 +105,7 @@ public class ListHewanFragment extends Fragment {
             @Override
             public void onResponse(Call<GetHewan> call, Response<GetHewan> response) {
                 ListHewan.addAll(response.body().getListDataHewan());
-                System.out.println(ListHewan.get(0).getNama());
+                //System.out.println(ListHewan.get(0).getNama());
                 adapterHewan.notifyDataSetChanged();
                 //Toast.makeText(getActivity(), "Sukses ", Toast.LENGTH_SHORT).show();
             }

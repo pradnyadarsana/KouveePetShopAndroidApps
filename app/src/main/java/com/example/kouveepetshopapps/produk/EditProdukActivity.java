@@ -27,6 +27,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.model.GlideUrl;
 import com.example.kouveepetshopapps.R;
 import com.example.kouveepetshopapps.api.ApiClient;
 import com.example.kouveepetshopapps.api.ApiInterfaceAdmin;
@@ -73,8 +74,8 @@ public class EditProdukActivity extends AppCompatActivity {
     SharedPreferences loggedUser;
     PegawaiDAO admin;
 
-    public boolean isOnlineImage=true;
-    URL url = null;
+    public boolean isImageChanged=false;
+    File file;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -161,6 +162,7 @@ public class EditProdukActivity extends AppCompatActivity {
         System.out.println(photo_url);
         Glide.with(EditProdukActivity.this).load(photo_url).into(gambarUpdate);
         imageUriUpdate = photo_url;
+        file = Glide.getPhotoCacheDir(this).getParentFile();
     }
 
     // Function to check and request permission
@@ -229,7 +231,7 @@ public class EditProdukActivity extends AppCompatActivity {
                                     filePathColumn, null, null, null);
                             if (cursor != null) {
                                 cursor.moveToFirst();
-
+                                isImageChanged=true;
                                 int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
                                 String picturePath = cursor.getString(columnIndex);
                                 imageUriUpdate = picturePath;
@@ -253,7 +255,9 @@ public class EditProdukActivity extends AppCompatActivity {
 
     public void updateProduk(ProdukDAO hasil){
         //Create a file object using file path
-        File file = new File(imageUriUpdate);
+        if(isImageChanged){
+            file = new File(imageUriUpdate);
+        }
 
         System.out.println("FILE: "+file);
 
@@ -288,7 +292,7 @@ public class EditProdukActivity extends AppCompatActivity {
                 Toast.makeText(EditProdukActivity.this, "Gagal update produk", Toast.LENGTH_SHORT).show();
             }
         });
-}
+    }
 
     private void showDialog(String rules){
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(EditProdukActivity.this);

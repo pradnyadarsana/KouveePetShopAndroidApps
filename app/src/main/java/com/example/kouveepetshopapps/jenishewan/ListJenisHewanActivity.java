@@ -107,7 +107,7 @@ public class ListJenisHewanActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<GetJenisHewan> call, Response<GetJenisHewan> response) {
                 ListJenisHewan.addAll(response.body().getListDataJenisHewan());
-                System.out.println(ListJenisHewan.get(0).getNama());
+                //System.out.println(ListJenisHewan.get(0).getNama());
                 adapterJenisHewan.notifyDataSetChanged();
 //                Toast.makeText(getActivity(), "Welcome", Toast.LENGTH_SHORT).show();
             }

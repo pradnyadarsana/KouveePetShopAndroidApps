@@ -97,11 +97,11 @@ public class ListTransaksiProdukFragment extends Fragment {
             public void onResponse(Call<GetTransaksiProduk> call, Response<GetTransaksiProduk> response) {
                 ListTransaksiProduk.addAll(response.body().getListDataTransaksiProduk());
                 if(!ListTransaksiProduk.isEmpty()){
-                    System.out.println(ListTransaksiProduk.get(0).getId_transaksi_produk());
+                    //System.out.println(ListTransaksiProduk.get(0).getId_transaksi_produk());
                     adapterTransaksiProduk.notifyDataSetChanged();
                     //Toast.makeText(getActivity(), "Sukses ", Toast.LENGTH_SHORT).show();
                 }else{
-                    Toast.makeText(getContext(), "Tidak ada transaksi produk", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getContext(), "Tidak ada transaksi produk", Toast.LENGTH_SHORT).show();
                 }
             }
 

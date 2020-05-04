@@ -97,7 +97,7 @@ public class ListPelangganFragment extends Fragment {
             @Override
             public void onResponse(Call<GetPelanggan> call, Response<GetPelanggan> response) {
                 ListPelanggan.addAll(response.body().getListDataPelanggan());
-                System.out.println(ListPelanggan.get(0).getNama());
+                //System.out.println(ListPelanggan.get(0).getNama());
                 adapterPelanggan.notifyDataSetChanged();
                 //Toast.makeText(getActivity(), "Sukses ", Toast.LENGTH_SHORT).show();
             }

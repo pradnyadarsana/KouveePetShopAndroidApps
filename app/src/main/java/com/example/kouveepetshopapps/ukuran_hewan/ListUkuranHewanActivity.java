@@ -105,7 +105,7 @@ public class ListUkuranHewanActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<GetUkuranHewan> call, Response<GetUkuranHewan> response) {
                 ListUkuranHewan.addAll(response.body().getListDataUkuranHewan());
-                System.out.println(ListUkuranHewan.get(0).getNama());
+                //System.out.println(ListUkuranHewan.get(0).getNama());
                 adapterUkuranHewan.notifyDataSetChanged();
 //                Toast.makeText(getActivity(), "Welcome", Toast.LENGTH_SHORT).show();
             }

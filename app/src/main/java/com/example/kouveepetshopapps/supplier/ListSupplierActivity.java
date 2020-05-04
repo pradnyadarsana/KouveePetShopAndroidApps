@@ -105,7 +105,7 @@ public class ListSupplierActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<GetSupplier> call, Response<GetSupplier> response) {
                 ListSupplier.addAll(response.body().getListDataSupplier());
-                System.out.println(ListSupplier.get(0).getNama());
+                //System.out.println(ListSupplier.get(0).getNama());
                 adapterSupplier.notifyDataSetChanged();
 //                Toast.makeText(getActivity(), "Welcome", Toast.LENGTH_SHORT).show();
             }

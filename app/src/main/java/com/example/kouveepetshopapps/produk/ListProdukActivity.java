@@ -106,7 +106,7 @@ public class ListProdukActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<GetProduk> call, Response<GetProduk> response) {
                 ListProduk.addAll(response.body().getListDataProduk());
-                System.out.println(ListProduk.get(0).getNama());
+                //System.out.println(ListProduk.get(0).getNama());
                 adapterProduk.notifyDataSetChanged();
 //                Toast.makeText(getActivity(), "Welcome", Toast.LENGTH_SHORT).show();
             }

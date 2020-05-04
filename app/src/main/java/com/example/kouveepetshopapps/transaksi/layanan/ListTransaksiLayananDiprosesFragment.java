@@ -83,11 +83,11 @@ public class ListTransaksiLayananDiprosesFragment extends Fragment {
             public void onResponse(Call<GetTransaksiLayanan> call, Response<GetTransaksiLayanan> response) {
                 ListTransaksiLayanan.addAll(response.body().getListDataTransaksiLayanan());
                 if(!ListTransaksiLayanan.isEmpty()){
-                    System.out.println(ListTransaksiLayanan.get(0).getId_transaksi_layanan());
+                    //System.out.println(ListTransaksiLayanan.get(0).getId_transaksi_layanan());
                     adapterTransaksiLayanan.notifyDataSetChanged();
                     //Toast.makeText(getActivity(), "Sukses ", Toast.LENGTH_SHORT).show();
                 }else{
-                    Toast.makeText(getContext(), "Tidak ada transaksi layanan diproses", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getContext(), "Tidak ada transaksi layanan diproses", Toast.LENGTH_SHORT).show();
                 }
             }
 
