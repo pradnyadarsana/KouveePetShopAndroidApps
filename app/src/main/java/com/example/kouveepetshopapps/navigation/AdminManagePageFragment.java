@@ -25,6 +25,7 @@ import com.example.kouveepetshopapps.jenishewan.ListJenisHewanActivity;
 import com.example.kouveepetshopapps.layanan.ListLayananActivity;
 import com.example.kouveepetshopapps.model.PegawaiDAO;
 import com.example.kouveepetshopapps.model.PelangganDAO;
+import com.example.kouveepetshopapps.pengadaan.PengadaanActivity;
 import com.example.kouveepetshopapps.produk.ListProdukActivity;
 import com.example.kouveepetshopapps.supplier.ListSupplierActivity;
 import com.example.kouveepetshopapps.ukuran_hewan.ListUkuranHewanActivity;
@@ -90,7 +91,7 @@ public class AdminManagePageFragment extends Fragment {
         pengadaan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                startIntent(PengadaanActivity.class);
             }
         });
 

@@ -13,7 +13,16 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".adapter.EditLayananAdapter"></activity>
+        <activity android:name=".pengadaan.EditPengadaanProdukActivity"></activity>
+        <activity android:name=".pengadaan.TambahPengadaanProdukActivity" />
+        <activity android:name=".adapter.DetailPengadaanAdapter" />
+        <activity android:name=".pengadaan.TampilDetailPengadaanActivity" />
+        <activity android:name=".adapter.PengadaanProdukAdapter" />
+        <activity android:name=".pengadaan.pesanan_selesai.ListPengadaanPesananSelesaiFragment" />
+        <activity android:name=".pengadaan.pesanan_diproses.ListPengadaanPesananDiprosesFragment" />
+        <activity android:name=".pengadaan.menunggu_konfirmasi.ListPengadaanMenungguKonfirmasiFragment" />
+        <activity android:name=".pengadaan.PengadaanActivity" />
+        <activity android:name=".adapter.EditLayananAdapter" />
         <activity android:name=".adapter.AutoCompleteHargaLayananAdapter" />
         <activity android:name=".adapter.EditTransaksiLayananAdapter" />
         <activity android:name=".adapter.DetailTransaksiLayananAdapter" />

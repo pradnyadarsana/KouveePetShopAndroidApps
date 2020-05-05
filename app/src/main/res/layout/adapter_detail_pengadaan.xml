@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data>
+        <variable
+            name="produk"
+            type="com.example.kouveepetshopapps.model.ProdukDAO" />
+        <variable
+            name="detail_pengadaan"
+            type="com.example.kouveepetshopapps.model.DetailPengadaanDAO" />
+    </data>
+    <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="1dp"
+        android:id="@+id/ParentDetailPengadaanProduk">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="20dp"
+            android:paddingVertical="12dp"
+            android:background="#F3F3F3">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:text="@{produk.nama}"
+                android:textSize="16sp"
+                android:textColor="@color/colorAccentBlack"
+                android:id="@+id/viewNamaProdukPengadaanProduk"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="3dp"
+                android:layout_below="@id/viewNamaProdukPengadaanProduk"
+                android:text="Rp. "
+                android:id="@+id/textRp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:layout_below="@id/viewNamaProdukPengadaanProduk"
+                android:layout_toRightOf="@+id/textRp"
+                android:text="@{String.valueOf(detail_pengadaan.harga)}"
+                android:id="@+id/viewHargaProdukPengadaanProduk"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:layout_below="@id/viewNamaProdukPengadaanProduk"
+                android:layout_toRightOf="@+id/viewHargaProdukPengadaanProduk"
+                android:text=" / "
+                android:id="@+id/textSlash"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:layout_below="@id/viewNamaProdukPengadaanProduk"
+                android:layout_toRightOf="@+id/textSlash"
+                android:text="@{produk.satuan}"
+                android:id="@+id/viewSatuanProdukPengadaanProduk"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@id/viewJumlahPengadaanProduk"
+                android:layout_above="@+id/textRp"
+                android:text="x "/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_above="@+id/textRp"
+                android:text="@{String.valueOf(detail_pengadaan.jumlah)}"
+                android:id="@+id/viewJumlahPengadaanProduk"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:layout_toLeftOf="@id/viewTotalHargaPengadaanProduk"
+                android:layout_below="@id/viewJumlahPengadaanProduk"
+                android:text="Rp. "/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:layout_alignParentEnd="true"
+                android:layout_below="@id/viewJumlahPengadaanProduk"
+                android:text="@{String.valueOf(detail_pengadaan.total_harga)}"
+                android:id="@+id/viewTotalHargaPengadaanProduk"/>
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+</layout>

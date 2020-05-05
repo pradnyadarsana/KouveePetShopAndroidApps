@@ -1,17 +1,22 @@
 package com.example.kouveepetshopapps.api;
 
 import com.example.kouveepetshopapps.model.HargaLayananDAO;
+import com.example.kouveepetshopapps.response.GetDetailPengadaan;
 import com.example.kouveepetshopapps.response.GetHargaLayanan;
 import com.example.kouveepetshopapps.response.GetJenisHewan;
 import com.example.kouveepetshopapps.response.GetLayanan;
+import com.example.kouveepetshopapps.response.GetPengadaanProduk;
 import com.example.kouveepetshopapps.response.GetProduk;
 import com.example.kouveepetshopapps.response.GetSupplier;
+import com.example.kouveepetshopapps.response.GetTransaksiProduk;
 import com.example.kouveepetshopapps.response.GetUkuranHewan;
 import com.example.kouveepetshopapps.response.PostUpdateDelete;
 import com.example.kouveepetshopapps.response.SearchHargaLayanan;
 import com.example.kouveepetshopapps.response.SearchJenisHewan;
 import com.example.kouveepetshopapps.response.SearchLayanan;
+import com.example.kouveepetshopapps.response.SearchPengadaanProduk;
 import com.example.kouveepetshopapps.response.SearchProduk;
+import com.example.kouveepetshopapps.response.SearchSupplier;
 import com.example.kouveepetshopapps.response.SearchUkuranHewan;
 
 import java.util.ArrayList;
@@ -37,6 +42,9 @@ public interface ApiInterfaceAdmin {
 
     @GET("supplier")
     Call<GetSupplier> getAllSupplierAktif();
+
+    @GET("supplier/search/{id_supplier}")
+    Call<SearchSupplier> searchSupplier(@Path("id_supplier") String id_supplier);
 
     @POST("supplier/update/{id_supplier}")
     @FormUrlEncoded
@@ -229,6 +237,87 @@ public interface ApiInterfaceAdmin {
 
     @DELETE("hargaLayanan/{id}")
     Call<PostUpdateDelete> hapusPermanentHargaLayanan(@Path("id_layanan") String id_layanan);
+
+
+    //PENGADAAN PRODUK
+    @POST("pengadaanProduk/insertAndGet")
+    @FormUrlEncoded
+    Call<SearchPengadaanProduk> tambahPengadaanProduk(@Field("id_supplier") String id_supplier,
+                                                      @Field("total")String total,
+                                                      @Field("created_by") String created_by);
+
+    @GET("PengadaanProduk/unconfirmed")
+    Call<GetPengadaanProduk> getPengadaanProdukMenungguKonfirmasi();
+
+    @GET("pengadaanProduk/processed")
+    Call<GetPengadaanProduk> getPengadaanProdukPesananDiproses();
+
+    @GET("pengadaanProduk/completed")
+    Call<GetPengadaanProduk> getPengadaanProdukPesananSelesai();
+
+    @GET("pengadaanProduk/search/{id_pengadaan_produk}")
+    Call<SearchPengadaanProduk> searchPengadaanProduk(@Path("id_pengadaan_produk") String id_pengadaan_produk);
+
+    @POST("pengadaanProduk/update/{id_pengadaan_produk}")
+    @FormUrlEncoded
+    Call<PostUpdateDelete> ubahPengadaanProduk(@Path("id_pengadaan_produk") String id_pengadaan_produk,
+                                                @Field("id_supplier") String id_supplier,
+                                                @Field("total")String total,
+                                                @Field("modified_by") String modified_by);
+
+    @POST("pengadaanProduk/updateStatusToProses/{id_pengadaan_produk}")
+    @FormUrlEncoded
+    Call<PostUpdateDelete> ubahStatusPengadaanToProses(@Path("id_pengadaan_produk") String id_pengadaan_produk,
+                                                       @Field("modified_by") String modified_by);
+
+    @POST("pengadaanProduk/updateStatusToSelesai/{id_pengadaan_produk}")
+    @FormUrlEncoded
+    Call<PostUpdateDelete> ubahStatusPengadaanToSelesai(@Path("id_pengadaan_produk") String id_pengadaan_produk,
+                                                       @Field("modified_by") String modified_by);
+
+    @DELETE("pengadaanProduk/{id_pengadaan_produk}")
+    Call<PostUpdateDelete> hapusPengadaanProduk(@Path("id_pengadaan_produk") String id_pengadaan_produk);
+
+
+    //DETAIL PENGADAAN RODUK
+    @POST("detailPengadaan")
+    @FormUrlEncoded
+    Call<PostUpdateDelete> tambahDetailPengadaan(@Field("id_pengadaan_produk") String id_pengadaan_produk,
+                                                 @Field("id_produk") String id_produk,
+                                                 @Field("jumlah") String jumlah,
+                                                 @Field("harga") String harga,
+                                                 @Field("total_harga") String total_harga,
+                                                 @Field("created_by") String created_by);
+
+    @POST("detailPengadaan/insertMultiple")
+    @FormUrlEncoded
+    Call<PostUpdateDelete> tambahDetailPengadaanMultiple(@Field("detail_pengadaan") String detail_pengadaan);
+
+    @GET("detailPengadaan")
+    Call<GetDetailPengadaan> getAllDetailPengadaan();
+
+    @GET("detailPengadaan/getByIdPengadaan/{id_pengadaan_produk}")
+    Call<GetDetailPengadaan> getDetailPengadaanByIdPengadaan(@Path("id_pengadaan_produk") String id_pengadaan_produk);
+
+    @POST("detailPengadaan/update/{id_detail_pengadaan}")
+    @FormUrlEncoded
+    Call<PostUpdateDelete> ubahDetailPengadaan(@Path("id_detail_pengadaan") String id_detail_pengadaan,
+                                               @Field("id_produk") String id_produk,
+                                               @Field("jumlah") String jumlah,
+                                               @Field("harga") String harga,
+                                               @Field("total_harga") String total_harga,
+                                               @Field("modified_by") String modified_by);
+
+    @POST("detailPengadaan/updateMultiple")
+    @FormUrlEncoded
+    Call<PostUpdateDelete> ubahDetailPengadaanMultiple(@Field("detail_pengadaan") String detail_pengadaan);
+
+    @DELETE("detailPengadaan/{id_detail_pengadaan}")
+    Call<PostUpdateDelete> hapusDetailPengadaan(@Path("id_detail_pengadaan") String id_detail_pengadaan);
+
+    @POST("detailPengadaan/deleteMultiple")
+    @FormUrlEncoded
+    Call<PostUpdateDelete> hapusDetailPengadaanMultiple(@Field("id_detail_pengadaan") String id_detail_pengadaan);
 
 
 }
