@@ -13,7 +13,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".pengadaan.EditPengadaanProdukActivity"></activity>
+        <activity android:name=".adapter.TambahPengadaanProdukAdapter"></activity>
+        <activity android:name=".pengadaan.EditPengadaanProdukActivity" />
         <activity android:name=".pengadaan.TambahPengadaanProdukActivity" />
         <activity android:name=".adapter.DetailPengadaanAdapter" />
         <activity android:name=".pengadaan.TampilDetailPengadaanActivity" />
