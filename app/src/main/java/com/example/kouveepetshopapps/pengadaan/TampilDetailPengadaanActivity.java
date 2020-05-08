@@ -11,7 +11,11 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -32,9 +36,17 @@ import com.example.kouveepetshopapps.response.SearchSupplier;
 import com.google.android.gms.common.api.Api;
 import com.google.gson.Gson;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -170,7 +182,7 @@ public class TampilDetailPengadaanActivity extends AppCompatActivity {
 
     }
 
-    private void updateStatusToProsesPengadaanProduk(String id){
+    private void updateStatusToProsesPengadaanProduk(final String id){
         ApiInterfaceAdmin apiService = ApiClient.getClient().create(ApiInterfaceAdmin.class);
         Call<PostUpdateDelete> pengadaanProdukDAOCall = apiService.ubahStatusPengadaanToProses(id, pegawai.getUsername());
 
@@ -180,10 +192,8 @@ public class TampilDetailPengadaanActivity extends AppCompatActivity {
                 //reverse close
                 System.out.println(response.body().getMessage());
                 Toast.makeText(TampilDetailPengadaanActivity.this, "Sukses memperbaharui status pengadaan", Toast.LENGTH_SHORT).show();
-                Intent back = new Intent(TampilDetailPengadaanActivity.this, PengadaanActivity.class);
-                back.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                back.putExtra("firstView", "pesanan diproses");
-                startActivity(back);
+                cetakPengadaanProduk(id);
+
             }
             @Override
             public void onFailure(Call<PostUpdateDelete> call, Throwable t) {
@@ -266,6 +276,12 @@ public class TampilDetailPengadaanActivity extends AppCompatActivity {
                 Toast.makeText(TampilDetailPengadaanActivity.this, "Gagal menghapus data pengadaan produk", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    private void cetakPengadaanProduk(final String id){
+        Intent struk = new Intent(TampilDetailPengadaanActivity.this, StrukPengadaanWebView.class);
+        struk.putExtra("id_pengadaan_produk",id);
+        startActivity(struk);
     }
 
     @Override

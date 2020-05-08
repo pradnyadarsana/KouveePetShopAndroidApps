@@ -24,6 +24,7 @@ import java.util.List;
 
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.*;
 
@@ -258,6 +259,10 @@ public interface ApiInterfaceAdmin {
     @GET("pengadaanProduk/search/{id_pengadaan_produk}")
     Call<SearchPengadaanProduk> searchPengadaanProduk(@Path("id_pengadaan_produk") String id_pengadaan_produk);
 
+    @GET("pengadaanProduk/cetakStruk/{id_pengadaan_produk}")
+    @Streaming
+    Call<ResponseBody> cetakPengadaanProduk(@Path("id_pengadaan_produk") String id_pengadaan_produk);
+
     @POST("pengadaanProduk/update/{id_pengadaan_produk}")
     @FormUrlEncoded
     Call<PostUpdateDelete> ubahPengadaanProduk(@Path("id_pengadaan_produk") String id_pengadaan_produk,
@@ -279,7 +284,7 @@ public interface ApiInterfaceAdmin {
     Call<PostUpdateDelete> hapusPengadaanProduk(@Path("id_pengadaan_produk") String id_pengadaan_produk);
 
 
-    //DETAIL PENGADAAN RODUK
+    //DETAIL PENGADAAN PRODUK
     @POST("detailPengadaan")
     @FormUrlEncoded
     Call<PostUpdateDelete> tambahDetailPengadaan(@Field("id_pengadaan_produk") String id_pengadaan_produk,
