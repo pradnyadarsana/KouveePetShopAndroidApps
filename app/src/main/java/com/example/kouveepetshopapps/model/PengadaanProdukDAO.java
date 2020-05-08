@@ -43,6 +43,19 @@ public class PengadaanProdukDAO extends BaseObservable {
         return this.status.equalsIgnoreCase("Menunggu Konfirmasi");
     }
 
+    public boolean isPesananSelesai(){
+        return this.status.equalsIgnoreCase("Pesanan Selesai");
+    }
+
+    public String updateStatusButtonText(){
+        if(this.status.equalsIgnoreCase("Menunggu Konfirmasi")){
+            return "Cetak Struk dan Proses Pesanan";
+        }else if(this.status.equalsIgnoreCase("Pesanan Diproses")){
+            return "Pesanan Sudah Sampai";
+        }
+        return "";
+    }
+
     public String keteranganStatus(){
         if(this.status.equalsIgnoreCase("Menunggu Konfirmasi")){
             return "Struk pengadaan ini belum dicetak untuk melakukan pemesanan.";

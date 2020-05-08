@@ -6,7 +6,9 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -39,7 +41,7 @@ import retrofit2.Response;
 
 public class TampilDetailPengadaanActivity extends AppCompatActivity {
     ActivityTampilDetailPengadaanBinding tampilDetailPengadaanBinding;
-    private Button btnEditPengadaan, btnDeletePengadaan, btnTambahPengadaan;
+    private Button btnEditPengadaan, btnDeletePengadaan, btnUpdateProgressPengadaan, btnTambahPengadaan;
 
     private PengadaanProdukDAO pengadaan_produk;
     private SupplierDAO supplier;
@@ -59,6 +61,7 @@ public class TampilDetailPengadaanActivity extends AppCompatActivity {
         tampilDetailPengadaanBinding = DataBindingUtil.setContentView(this, R.layout.activity_tampil_detail_pengadaan);
         btnEditPengadaan = findViewById(R.id.btnEditPengadaanProdukFromDetail);
         btnDeletePengadaan = findViewById(R.id.btnDeletePengadaanProdukFromDetail);
+        btnUpdateProgressPengadaan = findViewById(R.id.btnUbahStatusPengadaanProdukFromDetail);
         btnTambahPengadaan = findViewById(R.id.btnAddPengadaanProdukFromDetail);
 
         //get logged user
@@ -99,7 +102,18 @@ public class TampilDetailPengadaanActivity extends AppCompatActivity {
         btnDeletePengadaan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                deletePengadaanProduk(pengadaan_produk.getId_pengadaan_produk());
+                showDialog(pengadaan_produk.getId_pengadaan_produk());
+            }
+        });
+
+        btnUpdateProgressPengadaan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(pengadaan_produk.getStatus().equalsIgnoreCase("Menunggu Konfirmasi")){
+                    updateStatusToProsesPengadaanProduk(pengadaan_produk.getId_pengadaan_produk());
+                }else if(pengadaan_produk.getStatus().equalsIgnoreCase("Pesanan Diproses")){
+                    updateStatusToSelesaiPengadaanProduk(pengadaan_produk.getId_pengadaan_produk());
+                }
             }
         });
 
@@ -154,6 +168,82 @@ public class TampilDetailPengadaanActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void updateStatusToProsesPengadaanProduk(String id){
+        ApiInterfaceAdmin apiService = ApiClient.getClient().create(ApiInterfaceAdmin.class);
+        Call<PostUpdateDelete> pengadaanProdukDAOCall = apiService.ubahStatusPengadaanToProses(id, pegawai.getUsername());
+
+        pengadaanProdukDAOCall.enqueue(new Callback<PostUpdateDelete>() {
+            @Override
+            public void onResponse(Call<PostUpdateDelete> call, Response<PostUpdateDelete> response) {
+                //reverse close
+                System.out.println(response.body().getMessage());
+                Toast.makeText(TampilDetailPengadaanActivity.this, "Sukses memperbaharui status pengadaan", Toast.LENGTH_SHORT).show();
+                Intent back = new Intent(TampilDetailPengadaanActivity.this, PengadaanActivity.class);
+                back.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                back.putExtra("firstView", "pesanan diproses");
+                startActivity(back);
+            }
+            @Override
+            public void onFailure(Call<PostUpdateDelete> call, Throwable t) {
+                System.out.println(t.getMessage());
+                Toast.makeText(TampilDetailPengadaanActivity.this, "Gagal memperbaharui status pengadaan", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void updateStatusToSelesaiPengadaanProduk(String id){
+        ApiInterfaceAdmin apiService = ApiClient.getClient().create(ApiInterfaceAdmin.class);
+        Call<PostUpdateDelete> pengadaanProdukDAOCall = apiService.ubahStatusPengadaanToSelesai(id, pegawai.getUsername());
+
+        pengadaanProdukDAOCall.enqueue(new Callback<PostUpdateDelete>() {
+            @Override
+            public void onResponse(Call<PostUpdateDelete> call, Response<PostUpdateDelete> response) {
+                //reverse close
+                System.out.println(response.body().getMessage());
+                Toast.makeText(TampilDetailPengadaanActivity.this, "Sukses memperbaharui status pengadaan", Toast.LENGTH_SHORT).show();
+                Intent back = new Intent(TampilDetailPengadaanActivity.this, PengadaanActivity.class);
+                back.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                back.putExtra("firstView", "pesanan selesai");
+                startActivity(back);
+            }
+            @Override
+            public void onFailure(Call<PostUpdateDelete> call, Throwable t) {
+                System.out.println(t.getMessage());
+                Toast.makeText(TampilDetailPengadaanActivity.this, "Gagal memperbaharui status pengadaan", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void showDialog(final String id_pengadaan_produk){
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(TampilDetailPengadaanActivity.this);
+
+        // set title dialog
+        alertDialogBuilder.setTitle("Hapus pengadaan produk?");
+        alertDialogBuilder.setMessage(id_pengadaan_produk);
+
+        // set pesan dari dialog
+        alertDialogBuilder
+                .setIcon(R.drawable.ic_delete_black_24dp)
+                .setCancelable(false)
+                .setPositiveButton("Hapus", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog,int id) {
+                        deletePengadaanProduk(id_pengadaan_produk);
+                    }
+                }).setNeutralButton("Batal", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // close dialog
+                dialog.cancel();
+            }
+        });
+
+        // membuat alert dialog dari builder
+        AlertDialog alertDialog = alertDialogBuilder.create();
+
+        // menampilkan alert dialog
+        alertDialog.show();
     }
 
     private void deletePengadaanProduk(String id){

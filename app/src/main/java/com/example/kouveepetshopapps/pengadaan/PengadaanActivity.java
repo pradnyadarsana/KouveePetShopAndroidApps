@@ -36,28 +36,28 @@ public class PengadaanActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("Pengadaan Produk");
         getSupportActionBar().setSubtitle("Menunggu Konfirmasi");
 
-//        Bundle bundle = this.getArguments();
-//        String firstView = null;
-//        if (bundle != null) {
-//            firstView = bundle.getString("firstView", "produk");
-//        }
-//
-//        if (firstView!=null){
-//            if(firstView.equalsIgnoreCase("produk"))
-//            {
-//                loadFragment(new ListTransaksiProdukFragment());
-//                toolbar.setTitle("Transaksi Produk");
-//            }else if(firstView.equalsIgnoreCase("layanan"))
-//            {
-//                Fragment layanan = new TransaksiLayananFragment();
-//                layanan.setArguments(bundle);
-//                loadFragment(layanan);
-//                toolbar.setTitle("Transaksi Layanan");
-//            }
-//        }else{
+        String firstView = null;
+        if (getIntent().getStringExtra("firstView") != null) {
+            firstView = getIntent().getStringExtra("firstView");
+        }
+
+        if (firstView!=null){
+            if(firstView.equalsIgnoreCase("menunggu konfirmasi"))
+            {
+                loadFragment(new ListPengadaanMenungguKonfirmasiFragment());
+                getSupportActionBar().setSubtitle("Menunggu Konfirmasi");
+            }else if(firstView.equalsIgnoreCase("pesanan diproses"))
+            {
+                loadFragment(new ListPengadaanPesananDiprosesFragment());
+                getSupportActionBar().setSubtitle("Pesanan Diproses");
+            }else if(firstView.equalsIgnoreCase("pesanan selesai")){
+                loadFragment(new ListPengadaanPesananSelesaiFragment());
+                getSupportActionBar().setSubtitle("Pesanan Selesai");
+            }
+        }else{
             loadFragment(new ListPengadaanMenungguKonfirmasiFragment());
             toolbar.setSubtitle("Menunggu Konfirmasi");
-//        }
+        }
     }
 
 

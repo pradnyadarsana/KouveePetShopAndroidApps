@@ -395,6 +395,26 @@
                         android:textColor="@color/colorPrimaryOrange"
                         android:id="@+id/btnDeletePengadaanProdukFromDetail"/>
                 </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorPrimaryWhite"
+                    android:paddingHorizontal="20dp"
+                    android:paddingVertical="20dp"
+                    android:layout_marginBottom="1dp"
+                    android:visibility="@{!pengadaan_produk.pesananSelesai ? View.VISIBLE : View.GONE}">
+                    android:orientation="horizontal">
+                    <Button
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/custom_smooth_rectangle_button"
+                        android:layout_centerVertical="true"
+                        android:layout_centerHorizontal="true"
+                        android:text="@{pengadaan_produk.updateStatusButtonText()}"
+                        android:textAllCaps="false"
+                        android:textColor="@color/colorPrimaryOrange"
+                        android:id="@+id/btnUbahStatusPengadaanProdukFromDetail"/>
+                </RelativeLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
