@@ -63,7 +63,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="start"
-                                android:text="Hari"
+                                android:text="Hari ini"
                                 android:textAlignment="textStart"
                                 android:textSize="15dp">
                             </TextView>

@@ -196,14 +196,14 @@ public class TambahPengadaanProdukActivity extends AppCompatActivity {
                         showStandardDialog("Mohon masukan nama supplier terlebih dahulu.");
                     }
                 }else if(isEmptyCart()) {
-                    showStandardDialog("Tidak ada produk yang terdaftar pada transaksi ini, " +
+                    showStandardDialog("Tidak ada produk yang terdaftar pada pengadaan ini, " +
                             "mohon tambahkan produk terlebih dahulu");
                 }else{
                     if(isAnyWrongProduct()){
                         showDialogAnyWrongProduct();
                     }else{
                         //fungsi tambah transaksi
-                        System.out.println("TRANSAKSI DITAMBAHKAN");
+                        System.out.println("PENGADAAN DITAMBAHKAN");
                         tambahPengadaanProduk();
                     }
                 }
