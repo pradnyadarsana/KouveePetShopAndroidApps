@@ -53,7 +53,7 @@ import retrofit2.Response;
 
 public class TampilDetailPengadaanActivity extends AppCompatActivity {
     ActivityTampilDetailPengadaanBinding tampilDetailPengadaanBinding;
-    private Button btnEditPengadaan, btnDeletePengadaan, btnUpdateProgressPengadaan, btnTambahPengadaan;
+    private Button btnEditPengadaan, btnDeletePengadaan, btnUpdateProgressPengadaan, btnCetakStrukPengadaan, btnTambahPengadaan;
 
     private PengadaanProdukDAO pengadaan_produk;
     private SupplierDAO supplier;
@@ -74,6 +74,7 @@ public class TampilDetailPengadaanActivity extends AppCompatActivity {
         btnEditPengadaan = findViewById(R.id.btnEditPengadaanProdukFromDetail);
         btnDeletePengadaan = findViewById(R.id.btnDeletePengadaanProdukFromDetail);
         btnUpdateProgressPengadaan = findViewById(R.id.btnUbahStatusPengadaanProdukFromDetail);
+        btnCetakStrukPengadaan = findViewById(R.id.btnCetakPengadaanProdukFromDetail);
         btnTambahPengadaan = findViewById(R.id.btnAddPengadaanProdukFromDetail);
 
         //get logged user
@@ -126,6 +127,13 @@ public class TampilDetailPengadaanActivity extends AppCompatActivity {
                 }else if(pengadaan_produk.getStatus().equalsIgnoreCase("Pesanan Diproses")){
                     updateStatusToSelesaiPengadaanProduk(pengadaan_produk.getId_pengadaan_produk());
                 }
+            }
+        });
+
+        btnCetakStrukPengadaan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                cetakPengadaanProduk(pengadaan_produk);
             }
         });
 
@@ -192,7 +200,7 @@ public class TampilDetailPengadaanActivity extends AppCompatActivity {
                 //reverse close
                 System.out.println(response.body().getMessage());
                 Toast.makeText(TampilDetailPengadaanActivity.this, "Sukses memperbaharui status pengadaan", Toast.LENGTH_SHORT).show();
-                cetakPengadaanProduk(id);
+                cetakPengadaanProduk(pengadaan_produk);
 
             }
             @Override
@@ -278,9 +286,10 @@ public class TampilDetailPengadaanActivity extends AppCompatActivity {
         });
     }
 
-    private void cetakPengadaanProduk(final String id){
+    private void cetakPengadaanProduk(final PengadaanProdukDAO pengadaan_produk){
         Intent struk = new Intent(TampilDetailPengadaanActivity.this, StrukPengadaanWebView.class);
-        struk.putExtra("id_pengadaan_produk",id);
+        struk.putExtra("id_pengadaan_produk",pengadaan_produk.getId_pengadaan_produk());
+        struk.putExtra("status",pengadaan_produk.getStatus());
         startActivity(struk);
     }
 

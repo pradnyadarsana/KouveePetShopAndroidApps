@@ -28,6 +28,7 @@ import java.io.File;
 
 public class StrukPengadaanWebView extends AppCompatActivity {
     private String id_pengadaan_produk=null;
+    private String status;
     WebView webView;
 
     @Override
@@ -36,6 +37,7 @@ public class StrukPengadaanWebView extends AppCompatActivity {
         setContentView(R.layout.web_view_struk_pengadaan);
 
         id_pengadaan_produk = getIntent().getStringExtra("id_pengadaan_produk");
+        status = getIntent().getStringExtra("status");
 
         webView = findViewById(R.id.webViewStrukPengadaan);
 
@@ -103,10 +105,12 @@ public class StrukPengadaanWebView extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Intent back = new Intent(StrukPengadaanWebView.this, PengadaanActivity.class);
-        back.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        back.putExtra("firstView", "pesanan diproses");
-        startActivity(back);
+        if(!status.equalsIgnoreCase("Pesanan Diproses")){
+            Intent back = new Intent(StrukPengadaanWebView.this, PengadaanActivity.class);
+            back.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            back.putExtra("firstView", "pesanan diproses");
+            startActivity(back);
+        }
         super.onBackPressed();
     }
 

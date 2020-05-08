@@ -43,6 +43,10 @@ public class PengadaanProdukDAO extends BaseObservable {
         return this.status.equalsIgnoreCase("Menunggu Konfirmasi");
     }
 
+    public boolean isPesananDiproses(){
+        return this.status.equalsIgnoreCase("Pesanan Diproses");
+    }
+
     public boolean isPesananSelesai(){
         return this.status.equalsIgnoreCase("Pesanan Selesai");
     }
