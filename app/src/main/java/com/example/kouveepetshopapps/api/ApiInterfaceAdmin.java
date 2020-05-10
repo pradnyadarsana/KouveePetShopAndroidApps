@@ -149,6 +149,9 @@ public interface ApiInterfaceAdmin {
     @GET("produk/all")
     Call<GetProduk> getAllProduk();
 
+    @GET("produk/underMinStok")
+    Call<GetProduk> getProdukUnderMinStok();
+
     @GET("produk/search/{id_produk}")
     Call<SearchProduk> searchProduk(@Path("id_produk") String id_produk);
 

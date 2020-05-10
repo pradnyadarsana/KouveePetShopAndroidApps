@@ -10,12 +10,13 @@
         android:allowBackup="true"
         android:icon="@drawable/kouveepetshoplogo"
         android:label="@string/app_name"
+        android:requestLegacyExternalStorage="true"
         android:roundIcon="@drawable/kouveepetshoplogo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:usesCleartextTraffic="true"
-        android:requestLegacyExternalStorage="true">
-        <activity android:name=".pengadaan.StrukPengadaanWebView"></activity>
+        android:usesCleartextTraffic="true">
+        <activity android:name=".adapter.StokProdukAdapter" />
+        <activity android:name=".pengadaan.StrukPengadaanWebView" />
         <activity android:name=".adapter.EditPengadaanProdukAdapter" />
         <activity android:name=".adapter.TambahPengadaanProdukAdapter" />
         <activity android:name=".pengadaan.EditPengadaanProdukActivity" />
@@ -134,7 +135,7 @@
         <activity android:name=".transaksi.TransaksiFragment" />
         <activity android:name=".navigation.CsMainMenu" />
         <activity android:name=".NotificationFragment" />
-        <activity android:name=".StockUpdateFragment" />
+        <activity android:name=".stok_produk_update.ListStokProdukFragment" />
         <activity android:name=".navigation.AdminMainMenu" />
         <activity android:name=".navigation.AdminManagePageFragment" />
         <activity android:name=".LoginActivity">
@@ -144,6 +145,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.provider"
@@ -151,7 +153,7 @@
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/provider_paths"/>
+                android:resource="@xml/provider_paths" />
         </provider>
     </application>
 

@@ -11,7 +11,7 @@ import android.widget.Toast;
 
 import com.example.kouveepetshopapps.NotificationFragment;
 import com.example.kouveepetshopapps.R;
-import com.example.kouveepetshopapps.StockUpdateFragment;
+import com.example.kouveepetshopapps.stok_produk_update.ListStokProdukFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class AdminMainMenu extends AppCompatActivity {
@@ -27,11 +27,11 @@ public class AdminMainMenu extends AppCompatActivity {
 
         adminBottomNavigationView = (BottomNavigationView) findViewById(R.id.bn_main_admin);
 
-        loadFragment(new StockUpdateFragment());
+        loadFragment(new ListStokProdukFragment());
         if (getIntent().getStringExtra("from")!=null){
             if(getIntent().getStringExtra("from").equalsIgnoreCase("stok"))
             {
-                loadFragment(new StockUpdateFragment());
+                loadFragment(new ListStokProdukFragment());
                 adminBottomNavigationView.setSelectedItemId(R.id.admin_stock);
             }else if(getIntent().getStringExtra("from").equalsIgnoreCase("notifikasi"))
             {
@@ -50,7 +50,7 @@ public class AdminMainMenu extends AppCompatActivity {
                 Fragment fragment = null;
                 switch (item.getItemId()) {
                     case R.id.admin_stock:
-                        fragment = new StockUpdateFragment();
+                        fragment = new ListStokProdukFragment();
                         break;
                     case R.id.admin_notification:
                         fragment = new NotificationFragment();
