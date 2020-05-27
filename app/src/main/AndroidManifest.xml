@@ -7,6 +7,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
+        android:name=".App"
         android:allowBackup="true"
         android:icon="@drawable/kouveepetshoplogo"
         android:label="@string/app_name"
@@ -15,6 +16,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <activity android:name=".adapter.NotifikasiAdapter"></activity>
+        <activity android:name=".notifikasi.ListNotifikasiFragment" />
         <activity android:name=".adapter.StokProdukAdapter" />
         <activity android:name=".pengadaan.StrukPengadaanWebView" />
         <activity android:name=".adapter.EditPengadaanProdukAdapter" />
@@ -134,7 +137,6 @@
         <activity android:name=".pelanggan.ListPelangganFragment" />
         <activity android:name=".transaksi.TransaksiFragment" />
         <activity android:name=".navigation.CsMainMenu" />
-        <activity android:name=".NotificationFragment" />
         <activity android:name=".stok_produk_update.ListStokProdukFragment" />
         <activity android:name=".navigation.AdminMainMenu" />
         <activity android:name=".navigation.AdminManagePageFragment" />

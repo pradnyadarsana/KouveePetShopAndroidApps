@@ -5,6 +5,7 @@ import com.example.kouveepetshopapps.response.GetDetailPengadaan;
 import com.example.kouveepetshopapps.response.GetHargaLayanan;
 import com.example.kouveepetshopapps.response.GetJenisHewan;
 import com.example.kouveepetshopapps.response.GetLayanan;
+import com.example.kouveepetshopapps.response.GetNotifikasi;
 import com.example.kouveepetshopapps.response.GetPengadaanProduk;
 import com.example.kouveepetshopapps.response.GetProduk;
 import com.example.kouveepetshopapps.response.GetSupplier;
@@ -103,9 +104,6 @@ public interface ApiInterfaceAdmin {
     Call<PostUpdateDelete> tambahUkuranHewan(@Field("nama")String nama,
                                           @Field("created_by")String created_by);
 
-//    @GET("viewProfile.php/{email}")
-    //   Call<UserDAO> getUser(@Path("email") String email);
-
     @GET("UkuranHewan")
     Call<GetUkuranHewan> getAllUkuranHewanAktif();
 
@@ -125,8 +123,6 @@ public interface ApiInterfaceAdmin {
     @FormUrlEncoded
     Call<PostUpdateDelete> hapusUkuranHewan(@Path("id_ukuran_hewan") String id_ukuran_hewan,
                                          @Field("delete_by")String delete_by);
-//    @DELETE("Profile/deleteProfile/{id}")
-//    Call<String> deleteUser(@Path("id") String id);
 
 
     //KELOLA PRODUK
@@ -327,5 +323,19 @@ public interface ApiInterfaceAdmin {
     @FormUrlEncoded
     Call<PostUpdateDelete> hapusDetailPengadaanMultiple(@Field("id_detail_pengadaan") String id_detail_pengadaan);
 
+    //KELOLA NOTIFIKASI
+    @GET("Notifikasi/newOrderAsc")
+    Call<GetNotifikasi> getAllNotifikasiBelumTerbacaAsc();
 
+    @GET("Notifikasi/opened")
+    Call<GetNotifikasi> getAllNotifikasiTerbaca();
+
+    @GET("Notifikasi/allOrderDesc")
+    Call<GetNotifikasi> getAllNotifikasiDesc();
+
+//    @GET("Notifikasi/search/{id_notifikasi}")
+//    Call<SearchUkuranHewan> searchUkuran(@Path("id_ukuran_hewan")String id_ukuran_hewan);
+
+    @POST("Notifikasi/updateStatus/{id_notifikasi}")
+    Call<PostUpdateDelete> ubahStatusNotifTerbaca(@Path("id_notifikasi") String id_notifikasi);
 }

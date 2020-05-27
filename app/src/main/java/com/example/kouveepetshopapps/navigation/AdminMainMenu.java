@@ -9,8 +9,8 @@ import android.os.Handler;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.example.kouveepetshopapps.NotificationFragment;
 import com.example.kouveepetshopapps.R;
+import com.example.kouveepetshopapps.notifikasi.ListNotifikasiFragment;
 import com.example.kouveepetshopapps.stok_produk_update.ListStokProdukFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -35,7 +35,7 @@ public class AdminMainMenu extends AppCompatActivity {
                 adminBottomNavigationView.setSelectedItemId(R.id.admin_stock);
             }else if(getIntent().getStringExtra("from").equalsIgnoreCase("notifikasi"))
             {
-                loadFragment(new NotificationFragment());
+                loadFragment(new ListNotifikasiFragment());
                 adminBottomNavigationView.setSelectedItemId(R.id.admin_notification);
             } else if(getIntent().getStringExtra("from").equalsIgnoreCase("kelola_data"))
             {
@@ -53,7 +53,7 @@ public class AdminMainMenu extends AppCompatActivity {
                         fragment = new ListStokProdukFragment();
                         break;
                     case R.id.admin_notification:
-                        fragment = new NotificationFragment();
+                        fragment = new ListNotifikasiFragment();
                         break;
                     case R.id.admin_manage:
                         fragment = new AdminManagePageFragment();

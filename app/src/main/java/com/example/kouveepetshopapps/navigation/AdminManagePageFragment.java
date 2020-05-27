@@ -21,15 +21,26 @@ import android.widget.TextView;
 
 import com.example.kouveepetshopapps.LoginActivity;
 import com.example.kouveepetshopapps.R;
+import com.example.kouveepetshopapps.api.ApiClient;
+import com.example.kouveepetshopapps.api.ApiInterfaceAdmin;
 import com.example.kouveepetshopapps.jenishewan.ListJenisHewanActivity;
 import com.example.kouveepetshopapps.layanan.ListLayananActivity;
+import com.example.kouveepetshopapps.model.NotifikasiDAO;
 import com.example.kouveepetshopapps.model.PegawaiDAO;
 import com.example.kouveepetshopapps.model.PelangganDAO;
 import com.example.kouveepetshopapps.pengadaan.PengadaanActivity;
 import com.example.kouveepetshopapps.produk.ListProdukActivity;
+import com.example.kouveepetshopapps.response.GetNotifikasi;
 import com.example.kouveepetshopapps.supplier.ListSupplierActivity;
 import com.example.kouveepetshopapps.ukuran_hewan.ListUkuranHewanActivity;
 import com.google.gson.Gson;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class AdminManagePageFragment extends Fragment {
     private CardView produk, layanan, supplier, pengadaan, jenis_hewan, ukuran_hewan;
@@ -37,6 +48,8 @@ public class AdminManagePageFragment extends Fragment {
     private ImageView btnLogoutAdmin;
     SharedPreferences loggedUser;
     PegawaiDAO admin;
+
+    private List<NotifikasiDAO> ListNotifikasi;
 
     @Nullable
     @Override
@@ -48,6 +61,9 @@ public class AdminManagePageFragment extends Fragment {
         String json = loggedUser.getString("user", "missing");
         admin = gson.fromJson(json, PegawaiDAO.class);
         System.out.println(json);
+
+        ListNotifikasi = new ArrayList<>();
+        getNewNotifications();
 
         nama_admin = view.findViewById(R.id.viewNamaAdmin);
         nama_admin.setText(admin.getNama());
@@ -156,5 +172,24 @@ public class AdminManagePageFragment extends Fragment {
 
         // menampilkan alert dialog
         alertDialog.show();
+    }
+
+    public void getNewNotifications(){
+        ApiInterfaceAdmin apiService = ApiClient.getClient().create(ApiInterfaceAdmin.class);
+        Call<GetNotifikasi> notifDAOCall = apiService.getAllNotifikasiBelumTerbacaAsc();
+
+        notifDAOCall.enqueue(new Callback<GetNotifikasi>() {
+            @Override
+            public void onResponse(Call<GetNotifikasi> call, Response<GetNotifikasi> response) {
+                if(!response.body().getListDataNotifikasi().isEmpty()){
+                    ListNotifikasi.addAll(response.body().getListDataNotifikasi());
+                    System.out.println(ListNotifikasi.get(0).getId_notifikasi());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<GetNotifikasi> call, Throwable t) {
+            }
+        });
     }
 }
